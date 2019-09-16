@@ -1,3 +1,10 @@
+"========== Plugins ==========
+call plug#begin('~/.vim/plugged')
+    Plug 'valloric/youcompleteme'
+    let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+call plug#end()
+
+
 "========== Init ==========
 
 set nocompatible                    "Set compatibility to Vim only
@@ -58,11 +65,11 @@ filetype indent on                  "Enable filetype specific indenting
 filetype plugin on                  "Enable filetype specific plugins
 
 
-"========== Turn Off Swap Files ==========
+"========== Backup ==========
 
-set noswapfile
-set nobackup
-set nowb
+set noswapfile                      "Disable swap files
+set nobackup                        "Disable backups
+set nowb                            "Disable writing to backups
 
 
 "========== Persistent Undo ==========
