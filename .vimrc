@@ -1,7 +1,7 @@
 "========== Plugins ==========
 call plug#begin('~/.vim/plugged')
     Plug 'valloric/youcompleteme'
-    let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
 call plug#end()
 
 
