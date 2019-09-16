@@ -30,6 +30,10 @@ set wildmode=longest:list,full      "Display all results of tab-completion
 set splitbelow splitright           "Split screens add to the right or bottom
 match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 
+"Copy and paste to system clipboard
+vnoremap <C-c> "*y :let @+=@*<CR>
+map <C-v> "+P
+
 
 "========== Indentation ==========
 
