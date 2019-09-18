@@ -32,6 +32,7 @@ set clipboard=unnamedplus           "Set default register to system clipboard
 set belloff=all                     "Disable all error notifications
 set lazyredraw                      "Disable screen redraw when executing macros
 set ttyfast                         "Send more characters when screen redrawing
+set t_Co=256                        "Enable 256 colours
 match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 
 
