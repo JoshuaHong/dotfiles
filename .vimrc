@@ -29,6 +29,7 @@ set wildignorecase                  "Case-insensitive wildmenu search
 set wildmode=longest:list,full      "Display all results of tab-completion
 set splitbelow splitright           "Split screens add to the right or bottom
 set clipboard=unnamedplus           "Set default register to system clipboard
+set belloff=all                     "Disable all error notifications
 match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 
 
