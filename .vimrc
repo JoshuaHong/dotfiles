@@ -30,6 +30,8 @@ set wildmode=longest:list,full      "Display all results of tab-completion
 set splitbelow splitright           "Split screens add to the right or bottom
 set clipboard=unnamedplus           "Set default register to system clipboard
 set belloff=all                     "Disable all error notifications
+set lazyredraw                      "Disable screen redraw when executing macros
+set ttyfast                         "Send more characters when screen redrawing
 match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 
 
