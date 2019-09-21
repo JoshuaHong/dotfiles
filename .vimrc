@@ -25,19 +25,25 @@ set lazyredraw                      "Disable screen redraw when executing macros
 set ttyfast                         "Send more characters when screen redrawing
 set clipboard=unnamedplus           "Set default register to system clipboard
 set belloff=all                     "Disable all error notifications
-
-
-"========== Display ==========
-
-syntax on                           "Enable syntax highlighting
 set number                          "Show line numbers
 set ruler                           "Show current line and column
 set showcmd                         "Show partial commands
 set showmode                        "Show current mode
 set linebreak                       "Wrap lines at convenient points
-set t_Co=256                        "Enable 256 colours
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
 match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
+
+"Allow cursor to move one past end of line
+set virtualedit=onemore
+nnoremap $ $l
+
+"Colorscheme
+syntax on                           "Enable syntax highlighting
+set background=dark                 "Use dark background
+set t_Co=256                        "Enable 256 colours
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized               "Use solarized colorscheme
 
 
 "========== Folds ==========
