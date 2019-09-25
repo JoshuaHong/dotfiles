@@ -1,7 +1,7 @@
 "========== Plugins =========={{{
 call plug#begin('~/.vim/plugged')
-  Plug 'valloric/youcompleteme'
-  let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
+Plug 'valloric/youcompleteme'
+let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
 call plug#end()
 "}}}
 
@@ -75,7 +75,7 @@ set nowb                            "Disable writing to backups
 
 "========== Persistent Undo =========={{{
 if !isdirectory("/tmp/.vim-undo-dir")
-  call mkdir("/tmp/.vim-undo-dir", "", 0700)
+    call mkdir("/tmp/.vim-undo-dir", "", 0700)
 endif
 
 set undodir=/tmp/.vim-undo-dir
@@ -97,12 +97,12 @@ vnoremap p "_d"+P=']
 nnoremap p "+P=']
 
 "Comment lines (replace "\/\/" with any string to use as comment)
-nnoremap <C-_> :s/^/\/\/<CR>
-vnoremap <C-_> :s/^/\/\/<CR>
+nnoremap <silent> <C-_> :s/^/\/\/<CR>:noh<CR>
+vnoremap <silent> <C-_> :s/^/\/\/<CR>:noh<CR>
 
 "Uncomment lines (replace "\/\/" with any string to use as comment)
-nnoremap <C-?> :s/^\/\//<CR>
-vnoremap <C-?> :s/^\/\//<CR>
+nnoremap <silent> <C-?> :s/^\/\//<CR>
+vnoremap <silent> <C-?> :s/^\/\//<CR>
 
 "Unset search pattern upon pressing Enter
 nnoremap <silent> <CR> :noh<CR><CR>
