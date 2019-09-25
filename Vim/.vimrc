@@ -1,7 +1,7 @@
 "========== Plugins =========={{{
 call plug#begin('~/.vim/plugged')
-Plug 'valloric/youcompleteme'
-let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
+  Plug 'valloric/youcompleteme'
+  let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
 call plug#end()
 "}}}
 
@@ -37,7 +37,7 @@ set virtualedit=onemore             "Allow cursor to move one past end of line
 set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
-match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
+"match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 "}}}
 
 "========== Colorscheme =========={{{
@@ -75,7 +75,7 @@ set nowb                            "Disable writing to backups
 
 "========== Persistent Undo =========={{{
 if !isdirectory("/tmp/.vim-undo-dir")
-    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+  call mkdir("/tmp/.vim-undo-dir", "", 0700)
 endif
 
 set undodir=/tmp/.vim-undo-dir
