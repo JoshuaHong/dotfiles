@@ -37,7 +37,7 @@ set virtualedit=onemore             "Allow cursor to move one past end of line
 set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
-"match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
+match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
 "}}}
 
 "========== Colorscheme =========={{{
@@ -53,9 +53,9 @@ colorscheme solarized               "Use colorscheme solarized
 set autoindent                      "New line keeps same indent as previous line
 set copyindent                      "Autoindent line copies previous indentation
 set expandtab                       "Convert tab to spaces
-set tabstop=4                       "Set spaces to use per tab
-set softtabstop=4                   "Set spaces to use per tab on paste
-set shiftwidth=4                    "Set spaces to use per tab on autoindent
+set tabstop=2                       "Set spaces to use per tab
+set softtabstop=2                   "Set spaces to use per tab on paste
+set shiftwidth=2                    "Set spaces to use per tab on autoindent
 set shiftround                      "Use shiftwidth on indent with '<' and '>'
 set smarttab                        "Use shiftwidth to indent on line start
 "}}}
