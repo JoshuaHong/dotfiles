@@ -83,6 +83,23 @@ set undofile
 "}}}
 
 "========== Mappings =========={{{
+"Remap Escape key
+imap <C-Space> <Esc>
+vmap <Space> <Esc>gV
+
+"Remap escape commands
+nnoremap <C-w> :w<CR>
+nnoremap <C-c> :q<CR>
+
+"Insert a single character
+nnoremap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
+
+"Add Newline in normal mode
+nnoremap <CR> i<CR><Esc>^
+
+"Add Backspace in normal mode
+nnoremap <BS> i<BS><Esc>`^
+
 "Move one past end of line
 nnoremap $ $l
 
@@ -96,16 +113,29 @@ vnoremap <Del> "_x
 vnoremap p "_d"+P=']
 nnoremap p "+P=']
 
-"Comment lines (replace "\/\/" with any string to use as comment)
-nnoremap <silent> <C-_> :s/^/\/\/<CR>:noh<CR>
-vnoremap <silent> <C-_> :s/^/\/\/<CR>:noh<CR>
+"Unset search pattern
+nnoremap <silent> <C-n> :noh<CR>
 
-"Uncomment lines (replace "\/\/" with any string to use as comment)
-nnoremap <silent> <C-?> :s/^\/\//<CR>:noh<CR>
-vnoremap <silent> <C-?> :s/^\/\//<CR>:noh<CR>
-
-"Unset search pattern upon pressing Enter
-nnoremap <silent> <CR> :noh<CR><CR>
+"Toggle commenting lines
+let b:commentChar='// '
+autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
+autocmd BufNewFile,BufReadPost *.(c|h|cc|hh|cpp|hpp) let b:commentChar='// '
+autocmd BufNewFile,BufReadPost *.(py|sh) let b:commentChar='# '
+function! Docomment ()
+  execute '''<,''>s/^\s*/&'.escape(b:commentChar, '\/').'/e'
+endfunction
+function! Uncomment ()
+  execute '''<,''>s/\v(^\s*)'.escape(b:commentChar, '\/').'\v\s*/\1/e'
+endfunction
+function! Comment ()
+  if match(getline(getpos("'<")[1]), '^\s*'.b:commentChar)>-1
+    call Uncomment()
+  else
+    call Docomment()
+  endif
+endfunction
+vnoremap <silent> <C-_> :<C-u>call Comment()<cr>
+nnoremap <silent> <C-_> v:<C-u>call Comment()<cr>
 
 "Escape key stays on current character
 let CursorColumnI = 0
