@@ -92,7 +92,7 @@ nnoremap <C-w> :w<CR>
 nnoremap <C-c> :q<CR>
 
 "Insert a single character
-nnoremap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap <Space> :exec "normal i".nr2char(getchar())."\el"<CR>
 
 "Add Newline in normal mode
 nnoremap <CR> i<CR><Esc>^
