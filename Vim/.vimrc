@@ -116,11 +116,10 @@ nnoremap p "+P=']
 "Unset search pattern
 nnoremap <silent> <C-n> :noh<CR>
 
-"Toggle commenting lines
+"Toggle commented lines
 let b:commentChar='// '
 autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
-autocmd BufNewFile,BufReadPost *.(c|h|cc|hh|cpp|hpp) let b:commentChar='// '
-autocmd BufNewFile,BufReadPost *.(py|sh) let b:commentChar='# '
+autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
 function! Docomment ()
   execute '''<,''>s/^\s*/&'.escape(b:commentChar, '\/').'/e'
 endfunction
