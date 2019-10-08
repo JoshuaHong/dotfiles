@@ -87,6 +87,10 @@ set undofile
 imap <C-Space> <Esc>
 vmap <Space> <Esc>gV
 
+"Write and quit file
+nnoremap <C-w> :w<CR>
+nnoremap <C-c> :q<CR>
+
 "Insert a single character
 nnoremap <Space> :exec "normal i".nr2char(getchar())."\el"<CR>
 
