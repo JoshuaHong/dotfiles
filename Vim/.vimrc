@@ -95,7 +95,7 @@ nnoremap <C-c> :q<CR>
 nnoremap <Space> :exec "normal i".nr2char(getchar())."\el"<CR>
 
 "Add Newline in normal mode
-nnoremap <CR> i<CR><Esc>^
+nnoremap <CR> i<CR><Space><BS><Esc>`^
 
 "Add Backspace in normal mode
 nnoremap <BS> i<BS><Esc>`^
