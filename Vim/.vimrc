@@ -87,10 +87,6 @@ set undofile
 imap <C-Space> <Esc>
 vmap <Space> <Esc>gV
 
-"Remap escape commands
-nnoremap <C-w> :w<CR>
-nnoremap <C-c> :q<CR>
-
 "Insert a single character
 nnoremap <Space> :exec "normal i".nr2char(getchar())."\el"<CR>
 
@@ -112,6 +108,7 @@ vnoremap <Del> "_x
 "Autoindent and paste before cursor without yanking
 vnoremap p "_d"+P=']
 nnoremap p "+P=']
+inoremap <C-v> <C-r>+
 
 "Unset search pattern
 nnoremap <silent> <C-n> :noh<CR>
