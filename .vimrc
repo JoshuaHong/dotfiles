@@ -37,7 +37,7 @@ set virtualedit=onemore             "Allow cursor to move one past end of line
 set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
-match ErrorMsg '\%>80v.\+'          "Highlights characters over 80 column limit
+set colorcolumn=81                  "Highlights the column limit
 "}}}
 
 "========== Colorscheme =========={{{
