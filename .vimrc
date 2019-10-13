@@ -1,7 +1,20 @@
 "========== Plugins =========={{{
 call plug#begin('~/.vim/plugged')
-Plug 'valloric/youcompleteme'
-let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
+  Plug 'scrooloose/nerdtree'
+  "Open NERDTree on startup when file specified
+  autocmd vimenter * NERDTree
+  autocmd StdinReadPre * let s:std_in=1
+  "Open NERDTree on startup when no file specified
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  "Open NERDTree on startup when opening a directory
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+  "Switch to main window after opening NERDTree
+  autocmd VimEnter * wincmd p
+  "Close vim if only window open is NERDTree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+  Plug 'valloric/youcompleteme'
+  let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
 call plug#end()
 "}}}
 
@@ -87,8 +100,8 @@ set undofile
 imap <C-Space> <Esc>
 vmap <Space> <Esc>gV
 
-"Write and quit file
-nnoremap <C-w> :w<CR>
+"Update and close file
+nnoremap <C-u> :update<CR>
 nnoremap <C-c> :q<CR>
 
 "Insert a single character
