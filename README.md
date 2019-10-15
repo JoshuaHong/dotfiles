@@ -2,7 +2,7 @@
 A collection of personal customizations.
 ## Setup
 1. Copy all files to the home directory:
-`rsync -av * ~ --exclude=README.md`
+`rsync -av ./ ~ --exclude={README.md,.git}`
 2. Upgrade vim-plug in vim:
 `:PlugUpgrade`
 3. Install plugins in vim:
