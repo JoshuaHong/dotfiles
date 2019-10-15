@@ -12,5 +12,4 @@ A collection of personal customizations.
 5. Install necessary tools:
 `sudo apt install build-essential cmake python3-dev`
 6. Install YouCompleteMe:
-`cd ~/.vim/plugged/youcompleteme
-python3 install.py --clang-completer`
+`cd ~/.vim/plugged/youcompleteme && python3 install.py --clang-completer`
