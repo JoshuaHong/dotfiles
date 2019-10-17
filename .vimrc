@@ -2,7 +2,7 @@
 call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   "Open NERDTree on startup when file specified
-  autocmd vimenter * NERDTree
+  autocmd VimEnter * NERDTree
   autocmd StdinReadPre * let s:std_in=1
   "Open NERDTree on startup when no file specified
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -11,7 +11,9 @@ call plug#begin('~/.vim/plugged')
   "Switch to main window after opening NERDTree
   autocmd VimEnter * wincmd p
   "Close vim if only window open is NERDTree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  "Update current buffer directory
+  autocmd BufEnter * if argc() != 0 || exists("s:std_in") | NERDTree % | wincmd p | endif
 
   Plug 'valloric/youcompleteme'
   let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
@@ -179,7 +181,6 @@ nnoremap <Leader>d dd
 "Paste from clipboard without yanking and leave cursor after pasted text
 nnoremap <Leader>p gP
 vnoremap <Leader>p "_d"+gP
-inoremap <Leader>p <C-r>+
 "}}}
 
 "========== Toggle Comments =========={{{
