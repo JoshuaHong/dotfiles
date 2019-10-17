@@ -46,6 +46,7 @@ set ruler                           "Show current line and column
 set showcmd                         "Show partial commands
 set showmode                        "Show current mode
 set linebreak                       "Wrap lines at convenient points
+set hidden                          "Allow switching between unsaved buffers
 set virtualedit=onemore             "Allow cursor to move one past end of line
 set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
@@ -60,6 +61,12 @@ set t_Co=256                        "Enable 256 colours
 let g:solarized_termcolors=256      "Enable 256 colours on terminal
 let g:solarized_termtrans=1         "Enable transparent background of terminal
 colorscheme solarized               "Use colorscheme solarized
+
+let g:cpp_class_scope_highlight = 1                   "Highlight class scopes
+let g:cpp_member_variable_highlight = 1               "Highlight member variables
+let g:cpp_class_decl_highlight = 1                    "Highlight class names in declarations
+let g:cpp_experimental_simple_template_highlight = 1  "Highlight template functions
+let g:cpp_concepts_highlight = 1                      "Highlight library concepts
 "}}}
 
 "========== Indentation =========={{{
@@ -96,21 +103,35 @@ set undofile
 "}}}
 
 "========== Mappings =========={{{
-"Remap Escape key
-imap <C-Space> <Esc>
-vmap <Space> <Esc>gV
+"Set mapleader
+let mapleader = "\<Space>"
 
-"Update and close file
-nnoremap <C-u> :update<CR>
-nnoremap <C-c> :q<CR>
+"Remap Escape key
+nmap <Leader><Space> :
+imap <Leader><Space> <Esc>
+vmap <Leader><Space> <Esc>
+
+"Update buffers
+nnoremap <Leader>u :up<CR>
+nnoremap <Leader>w :wa<CR>
+
+"List and change buffers
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>e :e<Space>
+
+"Close buffers
+nnoremap <Leader>c :bd<CR>
+nnoremap <Leader>q :q<CR>
+
+"Open splits
+nnoremap <Leader>v :vsplit<Space>
+nnoremap <Leader>h :split<Space>
 
 "Insert a single character
-nnoremap <Space> :exec "normal i".nr2char(getchar())."\el"<CR>
+nnoremap <Leader>i :exec "normal i".nr2char(getchar())."\el"<CR>
 
-"Add Newline in normal mode
+"Add Newline and Backspace in normal mode
 nnoremap <CR> i<CR><Esc>`^
-
-"Add Backspace in normal mode
 nnoremap <BS> i<BS><Esc>`^
 
 "Move one past end of line
@@ -122,13 +143,16 @@ vnoremap d "_d
 nnoremap <Del> "_x
 vnoremap <Del> "_x
 
-"Autoindent and paste before cursor without yanking
-vnoremap p "_d"+P=']
-nnoremap p "+P=']
-inoremap <C-v> <C-r>+
+"Cut line
+nnoremap <Leader>d dd
+
+"Paste from clipboard without yanking and leave cursor after pasted text
+nnoremap <Leader>p gP
+vnoremap <Leader>p "_d"+gP
+inoremap <Leader>p <C-r>+
 
 "Unset search pattern
-nnoremap <silent> <C-n> :noh<CR>
+nnoremap <silent> <Leader>n :noh<CR>
 
 "Toggle commented lines
 let b:commentChar='// '
@@ -147,8 +171,8 @@ function! Comment ()
     call Docomment()
   endif
 endfunction
-vnoremap <silent> <C-_> :<C-u>call Comment()<cr>
-nnoremap <silent> <C-_> v:<C-u>call Comment()<cr>
+vnoremap <silent> <Leader>/ :<C-u>call Comment()<cr>
+nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
 
 "Escape key stays on current character
 let CursorColumnI = 0
