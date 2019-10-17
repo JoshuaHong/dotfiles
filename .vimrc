@@ -11,11 +11,11 @@ call plug#begin('~/.vim/plugged')
   "Switch to main window after opening NERDTree
   autocmd VimEnter * wincmd p
   "Close vim if only window open is NERDTree
-  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  "Update current buffer directory
-  autocmd BufEnter * lcd %:p:h
-  "Refresh NERDTree
-  autocmd BufEnter * if &filetype !=# 'nerdtree' | noautocmd NERDTreeFind | noautocmd wincmd p | endif
+  autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
+  "Update current buffer directory if file specified
+  autocmd BufEnter * if @% != "" | lcd %:p:h | endif
+  "Refresh NERDTree and switch back to main window
+  autocmd BufEnter * if &filetype !=# 'nerdtree' && @% != "" | noautocmd NERDTreeFind | noautocmd wincmd p | endif
 
   Plug 'valloric/youcompleteme'
   let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
@@ -115,9 +115,9 @@ set undofile
 let mapleader = "\<Space>"
 
 "Remap Escape key
-nmap <Leader><Space> :
-imap <Leader><Space> <Esc>
-vmap <Leader><Space> <Esc>
+nnoremap <Leader><Space> :
+inoremap <Leader><Space> <Esc>
+vnoremap <Leader><Space> <Esc>
 
 "Update buffers
 nnoremap <Leader>u :up<CR>
