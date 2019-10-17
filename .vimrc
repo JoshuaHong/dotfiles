@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   "Update current buffer directory
   autocmd BufEnter * silent! lcd %:p:h
-  autocmd BufEnter * if argc() != 0 || exists("s:std_in") | NERDTree % | wincmd p | endif
+  autocmd BufEnter * silent! NERDTree % | wincmd p
 
   Plug 'valloric/youcompleteme'
   let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
