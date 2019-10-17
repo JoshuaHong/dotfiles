@@ -15,6 +15,9 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'valloric/youcompleteme'
   let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
+
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 call plug#end()
 "}}}
 
@@ -103,6 +106,7 @@ set undofile
 "}}}
 
 "========== Mappings =========={{{
+"========== General =========={{{
 "Set mapleader
 let mapleader = "\<Space>"
 
@@ -115,27 +119,53 @@ vmap <Leader><Space> <Esc>
 nnoremap <Leader>u :up<CR>
 nnoremap <Leader>w :wa<CR>
 
-"List and change buffers
-nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <Leader>e :e<Space>
-
 "Close buffers
 nnoremap <Leader>c :bd<CR>
 nnoremap <Leader>q :q<CR>
 
-"Open splits
-nnoremap <Leader>v :vsplit<Space>
-nnoremap <Leader>h :split<Space>
+"Unset search pattern
+nnoremap <silent> <Leader>n :noh<CR>
 
+"Move one past end of line
+nnoremap $ $l
+
+"Escape key stays on current character
+let CursorColumnI = 0
+autocmd InsertEnter * let CursorColumnI = col('.')
+autocmd CursorMovedI * let CursorColumnI = col('.')
+autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
+"}}}
+
+"========== fzf =========={{{
+"Find buffers
+nnoremap <Leader>b :Buffers<CR>
+
+"Find files
+nnoremap <Leader>f :Files<CR>
+
+"Find tags
+nnoremap <Leader>t :Tags<CR>
+
+"Find marks
+nnoremap <Leader>m :Marks<CR>
+
+"Find lines in open buffers
+nnoremap <Leader>l :Lines<CR>
+
+"Find lines in project
+nnoremap <Leader>s :Ag<CR>
+
+"Find command history
+nnoremap <Leader>h :History:<CR>
+"}}}
+
+"========== Editing =========={{{
 "Insert a single character
 nnoremap <Leader>i :exec "normal i".nr2char(getchar())."\el"<CR>
 
 "Add Newline and Backspace in normal mode
 nnoremap <CR> i<CR><Esc>`^
 nnoremap <BS> i<BS><Esc>`^
-
-"Move one past end of line
-nnoremap $ $l
 
 "Delete without yanking
 nnoremap d "_d
@@ -150,11 +180,9 @@ nnoremap <Leader>d dd
 nnoremap <Leader>p gP
 vnoremap <Leader>p "_d"+gP
 inoremap <Leader>p <C-r>+
+"}}}
 
-"Unset search pattern
-nnoremap <silent> <Leader>n :noh<CR>
-
-"Toggle commented lines
+"========== Toggle Comments =========={{{
 let b:commentChar='// '
 autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
 autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
@@ -173,10 +201,5 @@ function! Comment ()
 endfunction
 vnoremap <silent> <Leader>/ :<C-u>call Comment()<cr>
 nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
-
-"Escape key stays on current character
-let CursorColumnI = 0
-autocmd InsertEnter * let CursorColumnI = col('.')
-autocmd CursorMovedI * let CursorColumnI = col('.')
-autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
+"}}}
 "}}}

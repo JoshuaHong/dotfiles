@@ -10,6 +10,8 @@ A collection of personal customizations.
 4. Update plugins in vim:
 `:PlugUpdate`
 5. Install necessary tools:
-`sudo apt install build-essential cmake python3-dev`
+`sudo apt install build-essential cmake python3-dev silversearcher-ag`
 6. Install YouCompleteMe:
 `cd ~/.vim/plugged/youcompleteme && python3 install.py --clang-completer`
+7. Reload source
+`source ~/.bashrc`
