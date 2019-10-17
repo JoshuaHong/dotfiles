@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
   "Update current buffer directory
   autocmd BufEnter * lcd %:p:h
   "Refresh NERDTree
-  autocmd BufEnter * if &filetype !=# 'nerdtree'  | noautocmd NERDTreeFind | noautocmd wincmd p | endif
+  autocmd BufEnter * if &filetype !=# 'nerdtree' | noautocmd NERDTreeFind | noautocmd wincmd p | endif
 
   Plug 'valloric/youcompleteme'
   let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
