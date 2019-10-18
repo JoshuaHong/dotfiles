@@ -138,7 +138,7 @@ nnoremap <Del> "_x
 vnoremap <Del> "_x
 
 "Cut line
-nnoremap <Leader>c dd
+nnoremap <Leader>x dd
 
 "Paste from clipboard without yanking and leave cursor after pasted text
 nnoremap p gP
