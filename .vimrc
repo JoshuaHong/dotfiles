@@ -107,7 +107,7 @@ vnoremap <Leader><Space> <Esc>
 nnoremap <Leader>e :e<Space>
 nnoremap <Leader>u :up<CR>
 nnoremap <Leader>w :wa<CR>
-nnoremap <Leader>c :bd<CR>
+nnoremap <Leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <Leader>q :q<CR>
 
 "Unset search pattern
@@ -138,7 +138,7 @@ nnoremap <Del> "_x
 vnoremap <Del> "_x
 
 "Cut line
-nnoremap <Leader>d dd
+nnoremap <Leader>c dd
 
 "Paste from clipboard without yanking and leave cursor after pasted text
 nnoremap p gP
