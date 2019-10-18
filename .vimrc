@@ -1,27 +1,11 @@
 "========== Plugins =========={{{
 call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
-  "Open NERDTree on startup when file specified
-  autocmd VimEnter * NERDTree
-  autocmd StdinReadPre * let s:std_in=1
-  "Open NERDTree on startup when no file specified
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-  "Open NERDTree on startup when opening a directory
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-  "Switch to main window after opening NERDTree
-  autocmd VimEnter * wincmd p
-  "Close vim if only window open is NERDTree
-  autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
-  "Update current buffer directory if file specified
-  autocmd BufEnter * if @% != "" | lcd %:p:h | endif
-  "Refresh NERDTree and switch back to main window
-  autocmd BufEnter * if &filetype !=# 'nerdtree' && @% != "" | noautocmd NERDTreeFind | noautocmd wincmd p | endif
-
   Plug 'valloric/youcompleteme'
-  let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/goyo.vim'
+  Plug 'itchyny/lightline.vim'
 call plug#end()
 "}}}
 
@@ -119,11 +103,10 @@ nnoremap <Leader><Space> :
 inoremap <Leader><Space> <Esc>
 vnoremap <Leader><Space> <Esc>
 
-"Update buffers
+"Buffers
+nnoremap <Leader>e :e<Space>
 nnoremap <Leader>u :up<CR>
 nnoremap <Leader>w :wa<CR>
-
-"Close buffers
 nnoremap <Leader>c :bd<CR>
 nnoremap <Leader>q :q<CR>
 
@@ -140,7 +123,80 @@ autocmd CursorMovedI * let CursorColumnI = col('.')
 autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 "}}}
 
-"========== fzf =========={{{
+"========== Editing =========={{{
+"Insert a single character
+nnoremap <Leader>i :exec "normal i".nr2char(getchar())."\el"<CR>
+
+"Add Newline and Backspace in normal mode
+nnoremap <CR> i<CR><Esc>`^
+nnoremap <BS> i<BS><Esc>`^
+
+"Delete without yanking
+nnoremap d "_d
+vnoremap d "_d
+nnoremap <Del> "_x
+vnoremap <Del> "_x
+
+"Cut line
+nnoremap <Leader>d dd
+
+"Paste from clipboard without yanking and leave cursor after pasted text
+nnoremap p gP
+vnoremap p "_d"+gP
+"}}}
+
+"========== Toggle Comments =========={{{
+let b:commentChar='// '
+autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
+autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
+function! Docomment ()
+  execute '''<,''>s/^\s*/&'.escape(b:commentChar, '\/').'/e'
+endfunction
+function! Uncomment ()
+  execute '''<,''>s/\v(^\s*)'.escape(b:commentChar, '\/').'\v\s*/\1/e'
+endfunction
+function! Comment ()
+  if match(getline(getpos("'<")[1]), '^\s*'.b:commentChar)>-1
+    call Uncomment()
+  else
+    call Docomment()
+  endif
+endfunction
+vnoremap <silent> <Leader>/ :<C-u>call Comment()<cr>
+nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
+"}}}
+
+"========== Plugins =========={{{
+"========== NERDTree =========={{{
+"Open NERDTree on startup when file specified
+autocmd VimEnter * NERDTree
+
+autocmd StdinReadPre * let s:std_in=1
+
+"Open NERDTree on startup when no file specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"Open NERDTree on startup when opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+"Switch to main window after opening NERDTree
+autocmd VimEnter * wincmd p
+
+"Close vim if only window open is NERDTree
+autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
+
+"Update current buffer directory if file specified
+autocmd BufEnter * if @% != "" | lcd %:p:h | endif
+
+"Refresh NERDTree and switch back to main window
+autocmd BufEnter * if &filetype !=# 'nerdtree' && @% != "" | noautocmd NERDTreeFind | noautocmd wincmd p | endif
+"}}}
+
+"========== YouCompleteMe =========={{{
+let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
+"}}}
+
+"========== FZF =========={{{
 "Find buffers
 nnoremap <Leader>b :Buffers<CR>
 
@@ -163,46 +219,10 @@ nnoremap <Leader>s :Ag<CR>
 nnoremap <Leader>h :History:<CR>
 "}}}
 
-"========== Editing =========={{{
-"Insert a single character
-nnoremap <Leader>i :exec "normal i".nr2char(getchar())."\el"<CR>
-
-"Add Newline and Backspace in normal mode
-nnoremap <CR> i<CR><Esc>`^
-nnoremap <BS> i<BS><Esc>`^
-
-"Delete without yanking
-nnoremap d "_d
-vnoremap d "_d
-nnoremap <Del> "_x
-vnoremap <Del> "_x
-
-"Cut line
-nnoremap <Leader>d dd
-
-"Paste from clipboard without yanking and leave cursor after pasted text
-nnoremap <Leader>p gP
-vnoremap <Leader>p "_d"+gP
+"========== Goyo =========={{{
+nnoremap <Leader>g :Goyo <bar> highlight StatusLineNC ctermfg=white <CR>
+autocmd! User GoyoEnter if @% != "" | NERDTreeToggle | endif
+autocmd! User GoyoLeave NERDTree | wincmd p
 "}}}
-
-"========== Toggle Comments =========={{{
-let b:commentChar='// '
-autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
-autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
-function! Docomment ()
-  execute '''<,''>s/^\s*/&'.escape(b:commentChar, '\/').'/e'
-endfunction
-function! Uncomment ()
-  execute '''<,''>s/\v(^\s*)'.escape(b:commentChar, '\/').'\v\s*/\1/e'
-endfunction
-function! Comment ()
-  if match(getline(getpos("'<")[1]), '^\s*'.b:commentChar)>-1
-    call Uncomment()
-  else
-    call Docomment()
-  endif
-endfunction
-vnoremap <silent> <Leader>/ :<C-u>call Comment()<cr>
-nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
 "}}}
 "}}}
