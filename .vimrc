@@ -89,13 +89,19 @@ set nowb                            "Disable writing to backups
 "Set mapleader
 let mapleader = "\<Space>"
 
+"Remap movement
+noremap <C-n> <left>
+noremap <C-e> <down>
+noremap <C-i> <right>
+noremap <C-u> <up>
+
 "Remap Escape key
 nnoremap <Leader> za
 nnoremap <Leader><Space> :
 inoremap <C-Space> <Esc>
 vnoremap <Space> <Esc>
 
-"Buffers
+"Remap Buffers
 nnoremap <Leader>e :e<Space>
 nnoremap <Leader>u :up<CR>
 nnoremap <Leader>w :wa<CR>
