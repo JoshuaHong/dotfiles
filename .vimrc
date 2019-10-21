@@ -94,6 +94,7 @@ noremap <C-n> <left>
 noremap <C-e> <down>
 noremap <C-i> <right>
 noremap <C-u> <up>
+nnoremap <C-p> <C-i>
 
 "Remap Escape key
 nnoremap <Leader> za
