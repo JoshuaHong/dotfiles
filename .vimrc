@@ -84,24 +84,16 @@ set nobackup                        "Disable backups
 set nowb                            "Disable writing to backups
 "}}}
 
-"========== Persistent Undo =========={{{
-if !isdirectory("/tmp/.vim-undo-dir")
-  call mkdir("/tmp/.vim-undo-dir", "", 0700)
-endif
-
-set undodir=/tmp/.vim-undo-dir
-set undofile
-"}}}
-
 "========== Mappings =========={{{
 "========== General =========={{{
 "Set mapleader
 let mapleader = "\<Space>"
 
 "Remap Escape key
+nnoremap <Leader> za
 nnoremap <Leader><Space> :
-inoremap <Leader><Space> <Esc>
-vnoremap <Leader><Space> <Esc>
+inoremap <C-Space> <Esc>
+vnoremap <Space> <Esc>
 
 "Buffers
 nnoremap <Leader>e :e<Space>
@@ -143,6 +135,15 @@ nnoremap <Leader>x dd
 "Paste from clipboard without yanking and leave cursor after pasted text
 nnoremap p gP
 vnoremap p "_d"+gP
+"}}}
+
+"========== Persistent Undo =========={{{
+if !isdirectory("/tmp/.vim-undo-dir")
+  call mkdir("/tmp/.vim-undo-dir", "", 0700)
+endif
+
+set undodir=/tmp/.vim-undo-dir
+set undofile
 "}}}
 
 "========== Toggle Comments =========={{{
