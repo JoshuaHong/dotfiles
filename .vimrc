@@ -96,6 +96,12 @@ noremap <C-i> <right>
 noremap <C-u> <up>
 nnoremap <C-p> <C-i>
 
+"Remap split movement
+nnoremap <Leader>n <C-w>h
+nnoremap <Leader>e <C-w>j
+nnoremap <Leader>i <C-w>l
+nnoremap <Leader>u <c-w>k
+
 "Remap Escape key
 nnoremap <Leader> za
 nnoremap <Leader><Space> :
@@ -103,14 +109,14 @@ inoremap <C-Space> <Esc>
 vnoremap <Space> <Esc>
 
 "Remap Buffers
-nnoremap <Leader>e :e<Space>
-nnoremap <Leader>u :up<CR>
-nnoremap <Leader>w :wa<CR>
-nnoremap <Leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <Leader>w :up<CR>
+nnoremap <Leader>a :wa<CR>
 nnoremap <Leader>q :q<CR>
 
+nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
+
 "Unset search pattern
-nnoremap <silent> <Leader>n :noh<CR>
+nnoremap <silent> <Leader>c :noh<CR>
 
 "Move one past end of line
 nnoremap $ $l
@@ -124,7 +130,7 @@ autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) 
 
 "========== Editing =========={{{
 "Insert a single character
-nnoremap <Leader>i :exec "normal i".nr2char(getchar())."\el"<CR>
+nnoremap <Leader>' :exec "normal i".nr2char(getchar())."\el"<CR>
 
 "Add Newline and Backspace in normal mode
 nnoremap <CR> i<CR><Esc>`^
