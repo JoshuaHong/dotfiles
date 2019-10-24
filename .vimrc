@@ -97,10 +97,10 @@ noremap <C-u> <up>
 nnoremap <C-p> <C-i>
 
 "Remap split movement
-nnoremap <Leader>n <C-w>h
-nnoremap <Leader>e <C-w>j
-nnoremap <Leader>i <C-w>l
-nnoremap <Leader>u <c-w>k
+nnoremap <C-w><C-n> <C-w>h
+nnoremap <C-w><C-e> <C-w>j
+nnoremap <C-w><C-i> <C-w>l
+nnoremap <C-w><C-u> <c-w>k
 
 "Remap Escape key
 nnoremap <Leader> za
@@ -116,7 +116,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
 "Unset search pattern
-nnoremap <silent> <Leader>c :noh<CR>
+nnoremap <silent> <Leader>n :noh<CR>
 
 "Move one past end of line
 nnoremap $ $l
