@@ -1,5 +1,5 @@
-# Customizations
-A collection of personal customizations.
+# dotfiles
+A collection of personal configurations and customizations.
 ## Setup
 1. Copy all files to the home directory:
 `rsync -av ./ ~ --exclude={README.md,.git}`
