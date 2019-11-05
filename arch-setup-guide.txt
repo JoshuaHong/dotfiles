@@ -1,0 +1,51 @@
+Setup (to be updated):
+use wifi-menu/cfdisk/ext4 instead:
+  1. // Commands and steps here
+Create new user:
+  1. useradd -m -g wheel josh
+  2. passwd josh
+  3. Edit /etc/sudoers by uncommenting: %wheel ALL=(ALL) ALL
+Disable local and ssh root login:
+  1. Run: passwd -l root 
+  2. Edit PermitRootLogin in /etc/ssh/sshd_config to: PermitRootLogin no
+Optimize compression and compilation threads:
+  1. Edit COMPRESSXYZ in /etc/makegkg.conf to: COMPRESSXZ=(xz -c -z - --threads=0)
+  2. Edit MAKEFLAGS in /etc/makepkg.conf to: MAKEFLAGS="-j$(nproc)"
+Fix Firefox graphics:
+  1. Open Firefox about:config page
+  2. Set layers.acceleration.force-enabled true
+Firefox CA Certificate issue: ?
+
+Useful commands:
+pacman -Syu                     // Update and upgrade installed packages
+pacman -Qtt                     // List installed non-required packages
+pacman -Rns $(pacman -Qtdq)     // Remove orphans
+pacman -Sc                      // Remove uninstalled package caches
+
+Packages (26):
+alsa-utils                      // Audio controls                             // To control volume
+base                            // Base packages                              // To install arch
+dmenu                           // Menu bar                                   // To search programs
+feh                             // Image viewer                               // To set wallpaper
+firefox                         // Browser                                    // To browse internet
+grub                            // Bootloader                                 // To load linux kernel 
+gvim                            // Text editor                                // To edit text
+i3-gaps                         // Window manager                             // To manage windows
+i3lock                          // Lock screen                                // To lock screen
+i3status                        // Status bar                                 // To show status
+imagemagick                     // Image editor                               // To edit lockscreen
+linux                           // linux kernel                               // To run linux
+linux-firmware                  // linux firmware                             // To run linux
+man-db                          // Man pages                                  // To read program manuals
+net-tools                       // Networking tools                           // To run Pia Vpn
+network-manager-applet          // System tray for NetworkManager             // To show network applet
+openssh                         // Ssh                                        // To ssh
+rxvt-unicode                    // Terminal emulator                          // To run terminal
+scrot                           // Screen capture                             // To take screenshots
+xf86-video-intel                // XOrg video driver                          // To display graphics
+xorg-server                     // XOrg package                               // To run XOrg
+xorg-xbacklight                 // Screen brightness                          // To control brightness
+xorg-xinit                      // XOrg initialisation                        // To startx
+xorg-xset                       // Set lock timeout                           // To set dim and lock screen timeouts
+xss-lock                        // Use external locker                        // To lock screen after timeouts
+yay                             // AUR package manager                        // To install AUR packages
