@@ -1,12 +1,4 @@
 "========== Plugins =========={{{
-call plug#begin('~/.vim/plugged')
-  Plug 'scrooloose/nerdtree'
-  Plug 'valloric/youcompleteme'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
-  Plug 'itchyny/lightline.vim'
-call plug#end()
 "}}}
 
 "========== Init =========={{{
@@ -34,11 +26,11 @@ set clipboard=unnamedplus           "Set default register to system clipboard
 set belloff=all                     "Disable all error notifications
 set number                          "Show line numbers
 set ruler                           "Show current line and column
+set relativenumber                  "Show relative line number
 set showcmd                         "Show partial commands
 set showmode                        "Show current mode
 set linebreak                       "Wrap lines at convenient points
 set hidden                          "Allow switching between unsaved buffers
-set virtualedit=onemore             "Allow cursor to move one past end of line
 set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
@@ -49,15 +41,6 @@ set colorcolumn=81                  "Highlights the column limit
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colours
-let g:solarized_termcolors=256      "Enable 256 colours on terminal
-let g:solarized_termtrans=1         "Enable transparent background of terminal
-colorscheme solarized               "Use colorscheme solarized
-
-let g:cpp_class_scope_highlight = 1                   "Highlight class scopes
-let g:cpp_member_variable_highlight = 1               "Highlight member variables
-let g:cpp_class_decl_highlight = 1                    "Highlight class names in declarations
-let g:cpp_experimental_simple_template_highlight = 1  "Highlight template functions
-let g:cpp_concepts_highlight = 1                      "Highlight library concepts
 "}}}
 
 "========== Indentation =========={{{
@@ -89,37 +72,37 @@ set nowb                            "Disable writing to backups
 "Set mapleader
 let mapleader = "\<Space>"
 
-"Remap movement
-noremap <C-n> <left>
-noremap <C-e> <down>
-noremap <C-i> <right>
-noremap <C-u> <up>
-nnoremap <C-p> <C-i>
-
-"Remap split movement
-nnoremap <C-w><C-n> <C-w>h
-nnoremap <C-w><C-e> <C-w>j
-nnoremap <C-w><C-i> <C-w>l
-nnoremap <C-w><C-u> <c-w>k
-
 "Remap Escape key
 nnoremap <Leader> za
 nnoremap <Leader><Space> :
-inoremap <C-Space> <Esc>
-vnoremap <Space> <Esc>
+inoremap <C-c> <Esc>
 
-"Remap Buffers
+"Remap movement
+noremap <C-i> <up>
+noremap <C-k> <down>
+noremap <C-j> <left>
+noremap <C-l> <right>
+nnoremap <C-p> <C-i>
+
+"Remap movement between splits
+nnoremap <C-w><C-i> <c-w>k
+nnoremap <C-w><C-k> <C-w>j
+nnoremap <C-w><C-j> <C-w>h
+nnoremap <C-w><C-l> <C-w>l
+
+"Remap write and quit
 nnoremap <Leader>w :up<CR>
 nnoremap <Leader>a :wa<CR>
 nnoremap <Leader>q :q<CR>
 
+"Close current buffer
 nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
 "Unset search pattern
 nnoremap <silent> <Leader>n :noh<CR>
 
-"Move one past end of line
-nnoremap $ $l
+"Toggle spellcheck
+nnoremap <Leader>s :set spell! spelllang=en_ca<CR>
 
 "Escape key stays on current character
 let CursorColumnI = 0
@@ -132,22 +115,28 @@ autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) 
 "Insert a single character
 nnoremap <Leader>' :exec "normal i".nr2char(getchar())."\el"<CR>
 
-"Add Newline and Backspace in normal mode
-nnoremap <CR> i<CR><Esc>`^
-nnoremap <BS> i<BS><Esc>`^
-
 "Delete without yanking
 nnoremap d "_d
 vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
 nnoremap <Del> "_x
 vnoremap <Del> "_x
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
 
 "Cut line
 nnoremap <Leader>x dd
 
-"Paste from clipboard without yanking and leave cursor after pasted text
+"Paste from clipboard before cursor without yanking
 nnoremap p gP
 vnoremap p "_d"+gP
+
+"Paste from clipboard after cursor without yanking
+nnoremap P gp
+vnoremap P "_d"+gp
 "}}}
 
 "========== Persistent Undo =========={{{
@@ -181,62 +170,4 @@ nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
 "}}}
 
 "========== Plugins =========={{{
-"========== NERDTree =========={{{
-"Open NERDTree on startup when file specified
-autocmd VimEnter * NERDTree
-
-autocmd StdinReadPre * let s:std_in=1
-
-"Open NERDTree on startup when no file specified
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-"Open NERDTree on startup when opening a directory
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-"Switch to main window after opening NERDTree
-autocmd VimEnter * wincmd p
-
-"Close vim if only window open is NERDTree
-autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | q | endif
-
-"Update current buffer directory if file specified
-autocmd BufEnter * if @% != "" | lcd %:p:h | endif
-
-"Refresh NERDTree and switch back to main window
-autocmd BufEnter * if &filetype !=# 'nerdtree' && @% != "" | noautocmd NERDTreeFind | noautocmd wincmd p | endif
-"}}}
-
-"========== YouCompleteMe =========={{{
-let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/third_party/ycmd/.ycm_extra_conf.py"
-"}}}
-
-"========== FZF =========={{{
-"Find buffers
-nnoremap <Leader>b :Buffers<CR>
-
-"Find files
-nnoremap <Leader>f :Files<CR>
-
-"Find tags
-nnoremap <Leader>t :Tags<CR>
-
-"Find marks
-nnoremap <Leader>m :Marks<CR>
-
-"Find lines in open buffers
-nnoremap <Leader>l :Lines<CR>
-
-"Find lines in project
-nnoremap <Leader>s :Ag<CR>
-
-"Find command history
-nnoremap <Leader>h :History:<CR>
-"}}}
-
-"========== Goyo =========={{{
-nnoremap <Leader>g :Goyo <bar> highlight StatusLineNC ctermfg=white <CR>
-autocmd! User GoyoEnter if @% != "" | NERDTreeToggle | endif
-autocmd! User GoyoLeave NERDTree | wincmd p
-"}}}
-"}}}
 "}}}
