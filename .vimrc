@@ -1,4 +1,9 @@
 "========== Plugins =========={{{
+call plug#begin('~/.vim/plugged')
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+call plug#end()
 "}}}
 
 "========== Init =========={{{
@@ -41,6 +46,9 @@ set colorcolumn=81                  "Highlights the column limit
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colours
+let g:solarized_termcolors=256      "Enable 256 colors on terminal
+let g:solarized_termtrans=1         "Enable transparent background of terminal
+colorscheme solarized               "Use solarized colorscheme
 "}}}
 
 "========== Indentation =========={{{
@@ -103,6 +111,9 @@ nnoremap <silent> <Leader>n :noh<CR>
 
 "Toggle spellcheck
 nnoremap <Leader>s :set spell! spelllang=en_ca<CR>
+
+"Open file explorer
+nnoremap <Leader>e :Explore<CR>
 
 "Escape key stays on current character
 let CursorColumnI = 0
@@ -170,4 +181,17 @@ nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
 "}}}
 
 "========== Plugins =========={{{
+"========== FZF =========={{{
+"Find buffers
+nnoremap <Leader>b :Buffers<CR>
+"Find files
+nnoremap <Leader>f :Files<CR>
+"Find marks
+nnoremap <Leader>m :Marks<CR>
+"Find lines in open buffers
+nnoremap <Leader>l :Lines<CR>
+"Find lines in project
+nnoremap <Leader>g :Rg<CR>
+"Find command history
+nnoremap <Leader>h :History:<CR>
 "}}}

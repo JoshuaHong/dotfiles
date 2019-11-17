@@ -17,6 +17,9 @@ Hide GRUB menu unless Shift key held down:
 Fix Firefox graphics:
   1. Open Firefox about:config page
   2. Set layers.acceleration.force-enabled true
+Vim setup:
+  1. Install vim plug
+  2. :PlugUpgrade && :PlugInstall
 
 Useful commands:
 pacman -Syu                     // Update and upgrade installed packages
@@ -55,6 +58,7 @@ noto-fonts-emoji                // Font for emoji symbols                     //
 openssh                         // Ssh                                        // For ssh
 patch                           // Patches files                              // For base-devel
 pkgconf                         // Package compiler and linker                // For base-devel
+ripgrep                         // Grep tool                                  // For searching files
 scrot                           // Screen capture                             // For taking screenshotr
 simple-mtpfs *                  // Media transfer protocol file system        // For mounting mobile phones
 ttf-symbola *                   // Font for unicode symbols                   // For rendering unicode on dmenu
