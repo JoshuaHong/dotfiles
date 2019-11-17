@@ -195,3 +195,4 @@ nnoremap <Leader>g :Rg<CR>
 "Find command history
 nnoremap <Leader>h :History:<CR>
 "}}}
+"}}}
