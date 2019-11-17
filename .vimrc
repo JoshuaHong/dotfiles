@@ -90,6 +90,10 @@ noremap <C-i> <up>
 noremap <C-k> <down>
 noremap <C-j> <left>
 noremap <C-l> <right>
+inoremap <C-i> <up>
+inoremap <C-k> <down>
+inoremap <C-j> <left>
+inoremap <C-l> <right>
 nnoremap <C-p> <C-i>
 
 "Remap movement between splits
