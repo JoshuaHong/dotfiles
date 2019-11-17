@@ -27,7 +27,7 @@ pacman -Qtt                     // List installed non-required packages
 pacman -Rns $(pacman -Qtdq)     // Remove orphans
 pacman -Sc                      // Remove uninstalled package caches
 
-Packages (42):
+Packages (43):
 alacritty                       // Terminal emulator                          // For running terminal
 alsa-utils                      // Audio controls                             // For volume controls
 autoconf                        // Automatically configures source code       // For base-devel
