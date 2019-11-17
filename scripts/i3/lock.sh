@@ -44,9 +44,9 @@ checklock() {
 lock() {
   local icon="$HOME/images/icons/lock.png"
   local tmpbg="/tmp/lockscreen.png"
-  
+
   # If transparent flag is used
-  if [ "$t" = true ]; then    
+  if [ "$t" = true ]; then
     # Take a screenshot
     scrot "$tmpbg" -o
     # Blur the screenshot by resizing and scaling back up

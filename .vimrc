@@ -40,6 +40,11 @@ set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
 set colorcolumn=81                  "Highlights the column limit
+
+"Change cursor shape based on mode
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 "}}}
 
 "========== Colorscheme =========={{{
@@ -118,12 +123,6 @@ nnoremap <Leader>s :set spell! spelllang=en_ca<CR>
 
 "Open file explorer
 nnoremap <Leader>e :Explore<CR>
-
-"Escape key stays on current character
-let CursorColumnI = 0
-autocmd InsertEnter * let CursorColumnI = col('.')
-autocmd CursorMovedI * let CursorColumnI = col('.')
-autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 "}}}
 
 "========== Editing =========={{{
@@ -182,6 +181,17 @@ function! Comment ()
 endfunction
 vnoremap <silent> <Leader>/ :<C-u>call Comment()<cr>
 nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
+"}}}
+
+"========== Autocmd =========={{{
+"Escape key stays on current character
+let CursorColumnI = 0
+autocmd InsertEnter * let CursorColumnI = col('.')
+autocmd CursorMovedI * let CursorColumnI = col('.')
+autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
+
+"Start vim with block cursor shape
+autocmd VimEnter * :execute "normal v\<Esc>"
 "}}}
 
 "========== Plugins =========={{{

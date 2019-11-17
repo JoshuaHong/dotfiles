@@ -36,7 +36,7 @@ for_window [class=".*"] border pixel 3
 floating_modifier $mod
 
 # Constrain floating window size
-floating_maximum_size 1856x990
+floating_maximum_size 1857x990
 # }}}
 
 # ========== Mappings ========== {{{
