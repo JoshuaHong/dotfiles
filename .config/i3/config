@@ -74,9 +74,9 @@ bindsym $mod+u exec --no-startup-id "$HOME/scripts/dmenu/unicode.sh"
 bindsym $mod+m exec --no-startup-id "sudo $HOME/scripts/dmenu/mount.sh"
 
 # Change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+i focus up
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
@@ -89,9 +89,9 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+i move up
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # Alternatively, you can use the cursor keys:
