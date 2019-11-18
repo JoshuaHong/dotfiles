@@ -40,10 +40,10 @@ case $BLOCK_BUTTON in
   1) # Left click
     if [ $status = "Discharging" ]; then
       notify "Time To Empty" "🕛 $(echo $chargenow $currentnow \
-        | awk '{printf "%dh %.0fm", $1/$2, (($1/$2)*60)%60}')"
+        | awk '{printf "%.0fh %dm", $1/$2, (($1/$2)*60+0.5)%60}')"
     elif [ $status = "Charging" ]; then
       notify "Time To Full" "🕛 $(echo $chargefull $chargenow $currentnow \
-        | awk '{printf "%dh %.0fm", ($1-$2)/$3, ((($1-$2)/$3)*60)%60}')"
+        | awk '{printf "%.0fh %dm", ($1-$2)/$3, ((($1-$2)/$3)*60+0.5)%60}')"
     elif [ $status = "Full" ]; then
       notify "✅ Fully Charged"
     else

@@ -17,6 +17,7 @@ Hide GRUB menu unless Shift key held down:
 Fix Firefox graphics:
   1. Open Firefox about:config page
   2. Set layers.acceleration.force-enabled true
+  3. Install ABP and Tabliss
 Vim setup:
   1. Install vim plug
   2. :PlugUpgrade && :PlugInstall

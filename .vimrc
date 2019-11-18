@@ -90,23 +90,6 @@ nnoremap <Leader> za
 nnoremap <Leader><Space> :
 inoremap <C-c> <Esc>
 
-"Remap movement
-noremap <C-i> <up>
-noremap <C-k> <down>
-noremap <C-j> <left>
-noremap <C-l> <right>
-inoremap <C-i> <up>
-inoremap <C-k> <down>
-inoremap <C-j> <left>
-inoremap <C-l> <right>
-nnoremap <C-p> <C-i>
-
-"Remap movement between splits
-nnoremap <C-w><C-i> <c-w>k
-nnoremap <C-w><C-k> <C-w>j
-nnoremap <C-w><C-j> <C-w>h
-nnoremap <C-w><C-l> <C-w>l
-
 "Remap write and quit
 nnoremap <Leader>w :up<CR>
 nnoremap <Leader>a :wa<CR>
