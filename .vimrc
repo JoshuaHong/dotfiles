@@ -90,6 +90,12 @@ nnoremap <Leader> za
 nnoremap <Leader><Space> :
 inoremap <C-c> <Esc>
 
+"Map movement in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
 "Remap write and quit
 nnoremap <Leader>w :up<CR>
 nnoremap <Leader>a :wa<CR>
