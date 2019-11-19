@@ -8,7 +8,7 @@
 # Uses the same parameters as the dunstify command
 notify() {
   local USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
-  $USER_HOME/scripts/notifications/dunstify-as-root.sh "$@"
+  $USER_HOME/scripts/misc/dunstify-as-root.sh "$@"
 }
 
 # Check for root access
