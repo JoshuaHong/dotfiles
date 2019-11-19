@@ -35,7 +35,6 @@ autoconf                        // Automatically configures source code       //
 automake                        // Automatically creating make files          // For base-devel
 base                            // Base packages                              // For arch install
 bison                           // Parser generator                           // For base-devel
-compton                         // Compositor                                 // For transparency
 dmenu                           // Menu bar                                   // For searching programs
 dunst                           // Notification daemon                        // For displaying notifications
 fakeroot                        // Simulating superuser privileges            // For base-devel
@@ -59,6 +58,7 @@ noto-fonts-emoji                // Font for emoji symbols                     //
 openssh                         // Ssh                                        // For ssh
 patch                           // Patches files                              // For base-devel
 pkgconf                         // Package compiler and linker                // For base-devel
+picom                           // Compositor                                 // For transparency
 ripgrep                         // Grep tool                                  // For searching files
 scrot                           // Screen capture                             // For taking screenshotr
 simple-mtpfs *                  // Media transfer protocol file system        // For mounting mobile phones
