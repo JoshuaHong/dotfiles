@@ -5,10 +5,10 @@
 brightness="$(xbacklight -get | cut -d "." -f 1)"
 
 # Full text
-echo "$brightness%"
+echo " $brightness%"
 
 # Short text
-echo "$brightness%"
+echo " $brightness%"
 
 # Notifications
 bar="$(seq -s "─" $(($brightness / 5 + 1)) | sed 's/[0-9]//g')"

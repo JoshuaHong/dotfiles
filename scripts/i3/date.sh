@@ -10,15 +10,15 @@ notify() {
 }
 
 # Full text
-date "+%a %b %d"
+date "+ %a %b %d"
 
 # Short text
-date "+%a %b %d"
+date "+ %a %b %d"
 
 # Mouse listener
 case $BLOCK_BUTTON in
   1) # Left click
-    notify "$(cal)"
+    notify -t 0 "$(cal)"
     ;;
   3) # Right click
     for i in {1..12}; do

@@ -24,7 +24,7 @@ else
 fi
 
 # Short text
-echo "$volume%"
+echo "$icon $volume%"
 
 # Color
 if [ ! -z "$muted" ]; then
