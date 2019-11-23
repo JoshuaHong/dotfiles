@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # An i3blocks date output script
 # Takes in a $BLOCK_BUTTON instance for mouse events
@@ -10,10 +10,10 @@ notify() {
 }
 
 # Full text
-date "+ %a %b %d"
+echo "📅 $(date "+%a %b %d")"
 
 # Short text
-date "+ %a %b %d"
+date "+%a %b %d"
 
 # Mouse listener
 case $BLOCK_BUTTON in

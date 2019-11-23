@@ -1,14 +1,5 @@
-! Set '-' key to '['
-keycode 20 = bracketleft braceleft bracketleft braceleft guillemotleft U2039 guillemotleft
-
-! Set '+' key to ']'
-keycode 21 = bracketright braceright bracketright braceright guillemotright U203A guillemotright
-
-! Set '[' key to ';'
-keycode 34 = semicolon colon semicolon colon semicolon colon semicolon colon
-
-! Set ']' key to '='
-keycode 35 = equal plus equal plus multiply division multiply
+! Set '-' key to ';'
+keycode 20 = semicolon colon semicolon colon semicolon colon semicolon colon
 
 ! Set ';' key to '''
 keycode 47 = apostrophe quotedbl apostrophe quotedbl otilde Otilde otilde

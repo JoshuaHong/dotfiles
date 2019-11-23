@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Allows dunstify notifications to display when running as root
 # Takes all original dunstify parameters
@@ -23,10 +23,10 @@
 display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
 
 # Detect the user using such display
-user=$((who | grep '('$display')' || who) | awk '{print $1}' | head -n 1)
+user="$((who | grep '('$display')' || who) | awk '{print $1}' | head -n 1)"
 
 # Detect the id of the user
-uid=$(id -u $user)
+uid="$(id -u $user)"
 
 sudo -u $user DISPLAY=$display \
   DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus dunstify "$@"

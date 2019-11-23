@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Locks the sceen using a custom lockscreen
 
@@ -10,17 +10,17 @@ usage() {
 }
 
 # Define flags
-f=false
-t=false
+f="false"
+t="false"
 
 # Check for flags
 while getopts "ft" flag; do
   case "${flag}" in
     f)
-      f=true
+      f="true"
       ;;
     t)
-      t=true
+      t="true"
       ;;
     *)
       echo "Error: Unexpected option"
@@ -34,8 +34,8 @@ done
 checklock() {
   sleep 300
 
-  local i3lockrunning=$(pgrep --exact --count i3lock)
-  if [ "$i3lockrunning" -gt "0" ]; then
+  local i3lockrunning="$(pgrep --exact --count i3lock)"
+  if [[ "$i3lockrunning" -gt "0" ]]; then
     systemctl suspend && checklock
   fi
 }
@@ -46,7 +46,7 @@ lock() {
   local tmpbg="/tmp/lockscreen.png"
 
   # If transparent flag is used
-  if [ "$t" = true ]; then
+  if [[ "$t" == "true" ]]; then
     # Take a screenshot
     scrot "$tmpbg" -o
     # Blur the screenshot by resizing and scaling back up
@@ -61,12 +61,12 @@ lock() {
 
   # Lock the screen and checklock - unmute and kill checklock on unlock
   checklock & i3lock --image="$tmpbg" --ignore-empty-password --nofork \
-    && amixer set Master,0 unmute && pkill -KILL lock.sh
+    && amixer set Master,0 unmute && pkill -SIGTERM lock.sh
 }
 
 # Don't lock screen if video is playing unless force enabled
 drivers="/proc/asound/card*/pcm*/sub*/status"
-if "$f" = true || ! cat $drivers | grep -q "state: RUNNING"; then
+if [[ "$f" == "true" ]] || ! cat $drivers | grep -q "state: RUNNING"; then
   # Mute audio
   amixer set Master,0 mute
 

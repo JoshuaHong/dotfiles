@@ -88,7 +88,6 @@ let mapleader = "\<Space>"
 "Remap Escape key
 nnoremap <Leader> za
 nnoremap <Leader><Space> :
-inoremap <C-c> <Esc>
 
 "Map movement in insert mode
 inoremap <C-h> <Left>
@@ -134,12 +133,12 @@ vnoremap C "_C
 nnoremap <Leader>x dd
 
 "Paste from clipboard before cursor without yanking
-nnoremap p gP
-vnoremap p "_d"+gP
+nnoremap p gp
+vnoremap p "_d"+gp
 
 "Paste from clipboard after cursor without yanking
-nnoremap P gp
-vnoremap P "_d"+gp
+nnoremap P gP
+vnoremap P "_d"+gP
 "}}}
 
 "========== Persistent Undo =========={{{

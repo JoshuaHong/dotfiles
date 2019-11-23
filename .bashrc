@@ -18,6 +18,7 @@ PS1="\[\e[91m\][\[\e[m\]\[\e[93m\]\u\[\e[m\]\[\e[92m\]@\[\e[m\]\[\e[94m\]\h\[\e[
 
 # Use ls with color
 alias ls="ls --color=auto"
+alias timer="$HOME/scripts/general/timer.sh"
 
 # Use vim bindings
 set -o vi

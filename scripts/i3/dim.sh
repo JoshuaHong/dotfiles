@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Example notifier script -- lowers screen brightness, then waits to be killed
 # and restores previous brightness on exit.
@@ -29,7 +29,7 @@ fade_step_time=0.05
 ###############################################################################
 
 get_brightness() {
-  if [[ -z $sysfs_path ]]; then
+  if [[ -z "$sysfs_path" ]]; then
       xbacklight -get
   else
       cat $sysfs_path
@@ -37,7 +37,7 @@ get_brightness() {
 }
 
 set_brightness() {
-  if [[ -z $sysfs_path ]]; then
+  if [[ -z "$sysfs_path" ]]; then
     xbacklight -steps 1 -set $1
   else
     echo $1 > $sysfs_path
@@ -45,9 +45,9 @@ set_brightness() {
 }
 
 fade_brightness() {
-  if [[ -z $sysfs_path ]]; then
+  if [[ -z "$sysfs_path" ]]; then
     xbacklight -time $fade_time -steps $fade_steps -set $1
-  elif [[ -z $fade_step_time ]]; then
+  elif [[ -z "$fade_step_time" ]]; then
     set_brightness $1
   else
     local level

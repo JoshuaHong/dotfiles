@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # A dmenu device mount script
 # Gives a dmenu prompt to mount or unmount loaded devices
@@ -7,13 +7,13 @@
 # Notifications
 # Uses the same parameters as the dunstify command
 notify() {
-  local USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
+  local USER_HOME="$(getent passwd $SUDO_USER | cut -d: -f6)"
   $USER_HOME/scripts/misc/dunstify-as-root.sh "$@"
 }
 
 # Check for root access
-if [[ $EUID -ne 0 ]]; then
-   echo "ERROR: This script must be run as root" 
+if [[ "$EUID" -ne 0 ]]; then
+   echo "ERROR: This script must be run as root"
    exit 1
 fi
 
@@ -49,14 +49,14 @@ action="$(echo -e $device | awk '{print $3}')"
 path="$(echo -e $device | awk '{print $4}')"
 name="${path##*/}"
 
-if [ "$action" = "Mount" ]; then
+if [[ "$action" == "Mount" ]]; then
   mkdir -p "/mnt/$name"
-  if [ "$type" = "💽" ]; then
+  if [[ "$type" == "💽" ]]; then
     mount "/dev/$name" "/mnt/$name" && notify "Mounted" "💽 $path"
-  elif [ "$type" = "📱" ]; then
+  elif [[ "$type" == "📱" ]]; then
     simple-mtpfs --device $number "/mnt/$name" && notify "Mounted" "📱 $path"
   fi
-elif [ "$action" = "Unmount" ]; then
+elif [[ "$action" == "Unmount" ]]; then
   fusermount -u "/mnt/$name" && notify "Unmounted" "📵 $path"
   rmdir "/mnt/$name"
 fi

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # An i3blocks volume output script
 
@@ -7,11 +7,11 @@ volume="$(amixer sget Master \
 muted="$(amixer sget Master | grep "off")"
 
 # Full text
-if [ -z "$muted" ]; then
-  if [ "$volume" -le 33 ]; then
+if [[ -z "$muted" ]]; then
+  if [[ "$volume" -le 33 ]]; then
     icon="🔈"
     echo "$icon $volume%"
-  elif [ "$volume" -le 66 ]; then
+  elif [[ "$volume" -le 66 ]]; then
     icon="🔉"
     echo "$icon $volume%"
   else
@@ -24,10 +24,10 @@ else
 fi
 
 # Short text
-echo "$icon $volume%"
+echo "$volume%"
 
 # Color
-if [ ! -z "$muted" ]; then
+if [[ ! -z "$muted" ]]; then
   echo "#ffff00"
 fi
 
