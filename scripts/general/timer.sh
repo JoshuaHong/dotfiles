@@ -6,7 +6,7 @@
 
 # Usage
 usage() {
-  echo "To specify a time: ./timer xx:xx:xx"
+  echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs"
   echo "Options:"
   echo "  -h|--help: show options"
   echo "  -q|--quiet: no notifications"
@@ -159,16 +159,19 @@ if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
   minutes="$(echo "$1" | cut -d ":" -f2)"
   seconds="$(echo "$1" | cut -d ":" -f3)"
 elif [[ "$@" =~ \
-  ^([0-9]*h[[:space:]]+)?([0-5]?[0-9]m[[:space:]]+)?(([0-5]?[0-9]s)?)$ ]]; then
-    for time in "$@"; do
-      if [[ "$time" == *h ]]; then
-        hours="${time::-1}"
-      elif [[ "$time" == *m ]]; then
-        minutes="${time::-1}"
-      elif [[ "$time" == *s ]]; then
-        seconds="${time::-1}"
-      fi
-    done
+  ^([0-9]*h)?[[:space:]]*([0-5]?[0-9]m)?[[:space:]]*(([0-5]?[0-9]s)?)$ ]]; then
+    remainder="$@"
+    if [[ "$remainder" == *h* ]]; then
+      hours="${remainder%%h*}"
+      remainder="${remainder#*h}"
+    fi
+    if [[ "$remainder" == *m* ]]; then
+      minutes="${remainder%%m*}"
+      remainder="${remainder#*m}"
+    fi
+    if [[ "$remainder" == *s ]]; then
+      seconds="${remainder%%s*}"
+    fi
 elif [[ "$#" -ne 0 && "$s" = "false" ]]; then
   echo "Invalid time"
   exit 1
@@ -176,7 +179,7 @@ fi
 
 # Check valid alert time
 if [[ "$t" == "true" && hours -ge 24 ]]; then
-  echo "Time must be in the range 00:00:00 - 23::59:59"
+  echo "Time must be in the range 00:00:00 - 23:59:59"
   exit 1
 fi
 
