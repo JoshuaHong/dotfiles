@@ -62,7 +62,7 @@ while getopts "hqst-:" flags; do
       ;;
   esac
 done
-shift $((OPTIND-1))
+shift "$((OPTIND-1))"
 
 # Stops processes on interrupt signal
 stop() {
@@ -97,14 +97,16 @@ notifyStopwatch() {
 # Converts miliseconds to days, hours, minutes, seconds, miliseconds
 # Takes time in miliseconds and returns expanded time as formatted string
 msConverter() {
-  printf "%02dd %02dh %02dm %02ds %03dms\n" $(($1/86400000)) \
-    $((($1/3600000)%24)) $((($1/60000)%60)) $((($1/1000)%60)) $(($1%1000))
+  printf "%02dd %02dh %02dm %02ds %03dms\n" "$(("$1"/86400000))" \
+    "$((("$1"/3600000)%24))" "$((("$1"/60000)%60))" "$((("$1"/1000)%60))" \
+    "$(("$1"%1000))"
 }
 
 # Converts seconds to hours, minutes, seconds
 # Takes time in seconds and returns expanded time as formatted string
 secConverter() {
-  printf "%02dh %02dm %02ds\n" $(($1/3600)) $((($1%3600)/60)) $(($1%60))
+  printf "%02dh %02dm %02ds\n" "$(("$1"/3600))" "$((("$1"%3600)/60))" \
+    "$(("$1"%60))"
 }
 
 # Start the stopwatch
@@ -112,7 +114,7 @@ stopwatch() {
   local start="$(date +%s%N)"
   while true; do
     # +500000 for rounding - num=num+den/2
-    local end="$(msConverter $((($(date +%s%N)-$start+500000)/1000000)))"
+    local end="$(msConverter "$((("$(date +%s%N)"-"$start"+500000)/1000000))")"
     if [[ "$q" == "false" ]]; then
       notifyStopwatch "Stopwatch" "🕛 $end"
     fi
@@ -124,12 +126,12 @@ stopwatch() {
 timer() {
   local start="$(date "+%s")"
   if [[ "$t" == "true" ]]; then
-    local end="$((($hours*3600+$minutes*60+$seconds) \
-      -($(date "+%H")*3600+$(date "+%M")*60+$(date "+%S"))))"
+    local end="$((("$hours"*3600+"$minutes"*60+"$seconds") \
+      -("$(date "+%H")"*3600+"$(date "+%M")"*60+"$(date "+%S")")))"
     if [[ "$end" -lt 0 ]]; then
-      local end="$(($end+86400))"
+      local end="$(("$end"+86400))"
     fi
-    local end="$(($end+$(date "+%s")))"
+    local end="$(("$end"+"$(date "+%s")"))"
   else
     local end="$(date -d "+$hours hours $minutes minutes $seconds seconds" \
       "+%s")"
@@ -139,7 +141,7 @@ timer() {
     if [[ "$start" == "$(date -d "+-1second" "+%s")" ]]; then
       start="$(date "+%s")"
       if [[ "$q" == "false" ]]; then
-        notify "Timer" "⏳ $(secConverter $(($end - $start)))"
+        notify "Timer" "⏳ $(secConverter "$(("$end" - "$start"))")"
       fi
     fi
     trap "stop Timer Stopped" SIGINT
@@ -153,9 +155,9 @@ minutes=0
 seconds=0
 
 if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
-  hours="$(echo $1 | cut -d ":" -f1)"
-  minutes="$(echo $1 | cut -d ":" -f2)"
-  seconds="$(echo $1 | cut -d ":" -f3)"
+  hours="$(echo "$1" | cut -d ":" -f1)"
+  minutes="$(echo "$1" | cut -d ":" -f2)"
+  seconds="$(echo "$1" | cut -d ":" -f3)"
 elif [[ "$@" =~ \
   ^([0-9]*h)?[[:space:]]*([0-5]?[0-9]m)?[[:space:]]*(([0-5]?[0-9]s)?)$ ]]; then
     for time in "$@"; do
@@ -180,7 +182,7 @@ fi
 
 # Start timer
 if [[ "$#" -ne 0 && "$t" == "true" \
-  || ($hours -ne 0 || $minutes -ne 0 || $seconds -ne 0) ]]; then
+  || ("$hours" -ne 0 || "$minutes" -ne 0 || "$seconds" -ne 0) ]]; then
     timer &
 elif [[ "$#" -ne 0 || "$s" == "false" || "$t" == "true" ]]; then
   echo "Cannot set timer for 0 seconds"
@@ -188,7 +190,7 @@ elif [[ "$#" -ne 0 || "$s" == "false" || "$t" == "true" ]]; then
 fi
 
 # Start stopwatch
-if [[ $s == "true" ]]; then
+if [[ "$s" == "true" ]]; then
   stopwatch &
 fi
 

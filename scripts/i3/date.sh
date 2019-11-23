@@ -16,7 +16,7 @@ echo "📅 $(date "+%a %b %d")"
 date "+%a %b %d"
 
 # Mouse listener
-case $BLOCK_BUTTON in
+case "$BLOCK_BUTTON" in
   1) # Left click
     notify -t 0 "$(cal)"
     ;;

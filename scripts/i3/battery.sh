@@ -36,13 +36,13 @@ fi
 chargefull="$(cat /sys/class/power_supply/BAT0/charge_full)"
 chargenow="$(cat /sys/class/power_supply/BAT0/charge_now)"
 currentnow="$(cat /sys/class/power_supply/BAT0/current_now)"
-case $BLOCK_BUTTON in
+case "$BLOCK_BUTTON" in
   1) # Left click
     if [[ "$status" == "Discharging" ]]; then
-      notify "Time To Empty" "🕛 $(echo $chargenow $currentnow \
+      notify "Time To Empty" "🕛 $(echo "$chargenow $currentnow" \
         | awk '{printf "%.0fh %dm", $1/$2, (($1/$2)*60+0.5)%60}')"
     elif [[ "$status" == "Charging" ]]; then
-      notify "Time To Full" "🕛 $(echo $chargefull $chargenow $currentnow \
+      notify "Time To Full" "🕛 $(echo "$chargefull $chargenow $currentnow" \
         | awk '{printf "%.0fh %dm", ($1-$2)/$3, ((($1-$2)/$3)*60+0.5)%60}')"
     elif [[ "$status" == "Full" ]]; then
       notify "Battery" "✅ Fully Charged"

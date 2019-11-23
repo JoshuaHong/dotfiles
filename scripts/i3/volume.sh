@@ -32,7 +32,7 @@ if [[ ! -z "$muted" ]]; then
 fi
 
 # Notifications
-bar="$(seq -s "─" $(($volume / 5 + 1)) | sed 's/[0-9]//g')"
+bar="$(seq -s "─" "$(("$volume" / 5 + 1))" | sed 's/[0-9]//g')"
 dunstify -h string:x-canonical-private-synchronous:"volume" "$icon   $bar"
 
 exit 0

@@ -7,7 +7,7 @@
 # Notifications
 # Uses the same parameters as the dunstify command
 notify() {
-  local USER_HOME="$(getent passwd $SUDO_USER | cut -d: -f6)"
+  local USER_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
   $USER_HOME/scripts/misc/dunstify-as-root.sh "$@"
 }
 
@@ -43,10 +43,10 @@ mobiledevices="$(simple-mtpfs -l | awk '{
 # 1: 💽 Mount /dev/sda (32G)
 device="$(echo -e "\n$storagedevices\n$mobiledevices" \
   | dmenu -i -p "Select device to mount or unmount")"
-number="$(echo -e $device | awk '{print $1}')"
-type="$(echo -e $device | awk '{print $2}')"
-action="$(echo -e $device | awk '{print $3}')"
-path="$(echo -e $device | awk '{print $4}')"
+number="$(echo -e "$device" | awk '{print $1}')"
+type="$(echo -e "$device" | awk '{print $2}')"
+action="$(echo -e "$device" | awk '{print $3}')"
+path="$(echo -e "$device" | awk '{print $4}')"
 name="${path##*/}"
 
 if [[ "$action" == "Mount" ]]; then
@@ -54,7 +54,7 @@ if [[ "$action" == "Mount" ]]; then
   if [[ "$type" == "💽" ]]; then
     mount "/dev/$name" "/mnt/$name" && notify "Mounted" "💽 $path"
   elif [[ "$type" == "📱" ]]; then
-    simple-mtpfs --device $number "/mnt/$name" && notify "Mounted" "📱 $path"
+    simple-mtpfs --device "$number" "/mnt/$name" && notify "Mounted" "📱 $path"
   fi
 elif [[ "$action" == "Unmount" ]]; then
   fusermount -u "/mnt/$name" && notify "Unmounted" "📵 $path"

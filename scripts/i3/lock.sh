@@ -53,7 +53,7 @@ lock() {
     convert "$tmpbg" -filter Gaussian -thumbnail 20% -sample 500% "$tmpbg"
   else
     # Use default lockscreen
-    cp $HOME/images/wallpapers/lockscreen.png /tmp/
+    cp "$HOME/images/wallpapers/lockscreen.png" "/tmp/"
   fi
 
   # Overlay the icon onto the screenshot
