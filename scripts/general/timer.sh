@@ -159,7 +159,7 @@ if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
   minutes="$(echo "$1" | cut -d ":" -f2)"
   seconds="$(echo "$1" | cut -d ":" -f3)"
 elif [[ "$@" =~ \
-  ^([0-9]*h)?[[:space:]]+([0-5]?[0-9]m)?[[:space:]]+(([0-5]?[0-9]s)?)$ ]]; then
+  ^([0-9]*h[[:space:]]+)?([0-5]?[0-9]m[[:space:]]+)?(([0-5]?[0-9]s)?)$ ]]; then
     for time in "$@"; do
       if [[ "$time" == *h ]]; then
         hours="${time::-1}"
