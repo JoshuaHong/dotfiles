@@ -51,9 +51,10 @@ let &t_EI = "\<Esc>[2 q"
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colours
-let g:solarized_termcolors=256      "Enable 256 colors on terminal
-let g:solarized_termtrans=1         "Enable transparent background of terminal
-colorscheme solarized               "Use solarized colorscheme
+colorscheme solarized               "Use Solarized color scheme
+
+"Enable transparent background
+hi Normal guibg=NONE ctermbg=NONE
 "}}}
 
 "========== Indentation =========={{{
