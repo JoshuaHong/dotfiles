@@ -88,6 +88,8 @@ let mapleader = "\<Space>"
 "Remap Escape key
 nnoremap <Leader> za
 nnoremap <Leader><Space> :
+noremap <C-_> <Esc>
+inoremap <C-_> <Esc>
 
 "Map movement in insert mode
 inoremap <C-h> <Left>
