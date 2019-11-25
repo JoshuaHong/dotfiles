@@ -51,11 +51,11 @@ let &t_EI = "\<Esc>[2 q"
 "========== Colorscheme =========={{{
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
-set t_Co=256                        "Enable 256 colours
-colorscheme solarized
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-hi Normal guibg=NONE ctermbg=NONE
+set t_Co=256                        "Enable 256 colors
+colorscheme solarized               "Use solarized colorscheme
+let g:solarized_termcolors=256      "Use 256 colors
+let g:solarized_termtrans=1         "Enable transparent background
+highlight ColorColumn guibg=lightgrey ctermbg=235
 "}}}
 
 "========== Indentation =========={{{
