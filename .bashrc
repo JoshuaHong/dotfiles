@@ -14,9 +14,9 @@ fi
 gitbranch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-PS1="\[\e[91m\][\[\e[m\]\[\e[93m\]\u\[\e[m\]\[\e[92m\]@\[\e[m\]\[\e[94m\]\h\[\e[m\]\[\e[95m\] \W\[\e[33m\]\$(gitbranch)\[\e[m\]\[\e[m\]\[\e[91m\]]\[\e[m\]\[\e[96m\]$\[\e[m\]\[\e[39m\] "
+PS1="\[\e[31m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\]\[\e[94m\] \W\[\e[32m\]\$(gitbranch)\[\e[m\]\[\e[m\]\[\e[31m\]]\[\e[m\]\[\e[36m\]$\[\e[m\]\[\e[39m\] "
 
-# Use ls with color
+# Aliases
 alias ls="ls --color=auto"
 alias timer="$HOME/scripts/general/timer.sh"
 

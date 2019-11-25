@@ -170,32 +170,39 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Molokai Dark)
+# Colors
 colors:
   # Default colors
   primary:
-    background: '0x1B1D1E'
-    foreground: '0xF8F8F2'
+    background: '0x002b36' # base03
+    foreground: '0x839496' # base0
+
+  # Cursor colors
+  cursor:
+    text:   '0x002b36' # base03
+    cursor: '0x839496' # base0
+
   # Normal colors
   normal:
-    black:   '0x333333'
-    red:     '0xC4265E'
-    green:   '0x86B42B'
-    yellow:  '0xB3B42B'
-    blue:    '0x6A7EC8'
-    magenta: '0x8C6BC8'
-    cyan:    '0x56ADBC'
-    white:   '0xE3E3DD'
+    black:   '0x002b36' # base02
+    red:     '0xdc322f' # red
+    green:   '0x859900' # green
+    yellow:  '0xb58900' # yellow
+    blue:    '0x268bd2' # blue
+    magenta: '0xd33682' # magenta
+    cyan:    '0x2aa198' # cyan
+    white:   '0xeee8d5' # base2
+
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xF92672'
-    green:   '0xA6E22E'
-    yellow:  '0xE2E22E'
-    blue:    '0x819AFF'
-    magenta: '0xAE81FF'
-    cyan:    '0x66D9EF'
-    white:   '0xF8F8F2'
+    black:   '0x002b36' # base03
+    red:     '0xcb4b16' # orange
+    green:   '0x586e75' # base01
+    yellow:  '0x657b83' # base00
+    blue:    '0x819AFF' # light blue
+    magenta: '0xd2265a' # pink
+    cyan:    '0x93a1a1' # base1
+    white:   '0xfdf6e3' # base3
 
 # Colors (Tomorrow Night Bright)
 # colors:

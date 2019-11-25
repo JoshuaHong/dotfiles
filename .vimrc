@@ -1,6 +1,7 @@
 "========== Plugins =========={{{
 call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
+  Plug 'bfrg/vim-cpp-modern'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 call plug#end()
@@ -51,9 +52,9 @@ let &t_EI = "\<Esc>[2 q"
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colours
-colorscheme solarized               "Use Solarized color scheme
-
-"Enable transparent background
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 hi Normal guibg=NONE ctermbg=NONE
 "}}}
 
