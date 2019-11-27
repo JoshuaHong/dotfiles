@@ -54,7 +54,11 @@ set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colors
 colorscheme solarized               "Use solarized colorscheme
 let g:solarized_termcolors=256      "Use 256 colors
-let g:solarized_termtrans=1         "Enable transparent background
+
+"Enable transparent backgroud
+highlight Normal guibg=NONE ctermbg=NONE
+
+"Set colorcolumn color
 highlight ColorColumn guibg=lightgrey ctermbg=235
 "}}}
 
