@@ -84,7 +84,7 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  # faux_multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -174,17 +174,17 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x002028' # base03
+    background: '0x002b36' # base03
     foreground: '0x839496' # base0
 
   # Cursor colors
   cursor:
-    text:   '0x002028' # base03
+    text:   '0x002b36' # base03
     cursor: '0x839496' # base0
 
   # Normal colors
   normal:
-    black:   '0x002028' # base02
+    black:   '0x002b36' # base03
     red:     '0xdc322f' # red
     green:   '0x859900' # green
     yellow:  '0xb58900' # yellow
@@ -312,7 +312,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
+background_opacity: 0.90
 
 # Mouse bindings
 #

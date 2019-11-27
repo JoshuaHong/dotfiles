@@ -123,7 +123,8 @@ nnoremap <Leader>e :Explore<CR>
 
 "========== Editing =========={{{
 "Insert a single character
-nnoremap <Leader>' :exec "normal i".nr2char(getchar())."\el"<CR>
+nnoremap <Leader>' :exec "normal i<C-l>".nr2char(getchar())."\e"<CR>
+nnoremap <Leader>" :exec "normal i".nr2char(getchar())."\el"<CR>
 
 "Delete without yanking
 nnoremap d "_d

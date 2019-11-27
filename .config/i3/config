@@ -195,6 +195,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # ========== i3 Bar ========== {{{
 bar {
-  status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+  status_command i3blocks
 }
 # }}}
