@@ -166,7 +166,7 @@
     max_icon_size = 32
 
     # Paths to default icons.
-    icon_path = $HOME/images/icons
+    icon_path = $HOME/images/icons/
 
     ### History ###
 

@@ -97,7 +97,7 @@ nnoremap <Leader><Space> :
 noremap <C-_> <Esc>
 inoremap <C-_> <Esc>
 
-"Map movement in insert mode
+"Map movement
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
@@ -142,24 +142,14 @@ vnoremap C "_C
 nnoremap <Leader>x dd
 
 "Paste from clipboard before cursor without yanking
-nnoremap p gp
-vnoremap p "_d"+gp
+nnoremap p p=<CR>`[
+vnoremap p "_d"+p=<CR>`[
 
 "Paste from clipboard after cursor without yanking
-nnoremap P gP
-vnoremap P "_d"+gP
-"}}}
+nnoremap P P=<CR>`[
+vnoremap P "_d"+P<CR>=`[
 
-"========== Persistent Undo =========={{{
-if !isdirectory("/tmp/.vim-undo-dir")
-  call mkdir("/tmp/.vim-undo-dir", "", 0700)
-endif
-
-set undodir=/tmp/.vim-undo-dir
-set undofile
-"}}}
-
-"========== Toggle Comments =========={{{
+"Toggle Comments
 let b:commentChar='// '
 autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
 autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
@@ -181,28 +171,40 @@ nnoremap <silent> <Leader>/ v:<C-u>call Comment()<cr>
 "}}}
 
 "========== Autocmd =========={{{
+"Start vim with block cursor shape
+autocmd VimEnter * :execute "normal v\<Esc>"
+
 "Escape key stays on current character
 let CursorColumnI = 0
 autocmd InsertEnter * let CursorColumnI = col('.')
 autocmd CursorMovedI * let CursorColumnI = col('.')
 autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 
-"Start vim with block cursor shape
-autocmd VimEnter * :execute "normal v\<Esc>"
+"Persistent Undo
+if !isdirectory("/tmp/.vim-undo-dir/")
+  call mkdir("/tmp/.vim-undo-dir/", "", 0700)
+endif
+set undodir=/tmp/.vim-undo-dir
+set undofile
 "}}}
 
 "========== Plugins =========={{{
 "========== FZF =========={{{
 "Find buffers
 nnoremap <Leader>b :Buffers<CR>
+
 "Find files
 nnoremap <Leader>f :Files<CR>
+
 "Find marks
 nnoremap <Leader>m :Marks<CR>
+
 "Find lines in open buffers
 nnoremap <Leader>l :Lines<CR>
+
 "Find lines in project
 nnoremap <Leader>g :Rg<CR>
+
 "Find command history
 nnoremap <Leader>h :History:<CR>
 "}}}

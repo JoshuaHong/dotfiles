@@ -1,4 +1,40 @@
+# Disable bell on tab-completion
+set bell-style none
+
+# Tab shows all results if ambiguous
+set show-all-if-ambiguous on
+
+# Color files by types
+set colored-stats On
+# Append char to indicate type
+set visible-stats On
+# Mark symlinked directories
+set mark-symlinked-directories On
+# Color the common prefix
+set colored-completion-prefix On
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On
+
 # Change cursor shape based on vi mode
 set show-mode-in-prompt on
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
+
+# Use vi bindings
+set editing-mode vi
+$if mode=vi
+  # In normal mode
+  set keymap vi-command
+  "\C-h": backward-char
+  "\C-l": forward-char
+  "\C-k": previous-history
+  "\C-j": next-history
+  # In insert mode
+  set keymap vi-insert
+  "\C-_": vi-movement-mode
+  "\C-h": backward-char
+  "\C-l": forward-char
+  "\C-k": previous-history
+  "\C-j": next-history
+  "\C-e": clear-screen
+$endif

@@ -21,6 +21,10 @@ Fix Firefox graphics:
 Vim setup:
   1. Install vim plug
   2. :PlugUpgrade && :PlugInstall
+Install programs:
+  1. Pacman -S ...
+  2. Yay
+  3. Yay -S ...
 
 Useful commands:
 pacman -Syu                     // Update and upgrade installed packages
@@ -42,6 +46,7 @@ feh                             // Image viewer                               //
 firefox                         // Browser                                    // For browsing internet
 flex                            // Generates text scanning programs           // For base-devel
 gcc                             // GNU compiler collection                    // For base-devel
+gdb                             // GNU debugger                               // For debugging
 grub                            // Bootloader                                 // For loading Linux kernel
 gvim                            // Text editor                                // For editing text
 i3-gaps                         // Window manager                             // For managing windows
@@ -57,8 +62,8 @@ network-manager-applet          // System tray for NetworkManager             //
 noto-fonts-emoji                // Font for emoji symbols                     // For rendering unicode symbols
 openssh                         // Ssh                                        // For ssh
 patch                           // Patches files                              // For base-devel
-pkgconf                         // Package compiler and linker                // For base-devel
 picom                           // Compositor                                 // For transparency
+pkgconf                         // Package compiler and linker                // For base-devel
 ripgrep                         // Grep tool                                  // For searching files
 scrot                           // Screen capture                             // For taking screenshotr
 simple-mtpfs *                  // Media transfer protocol file system        // For mounting mobile phones
@@ -70,6 +75,7 @@ xorg-server                     // XOrg package                               //
 xorg-xbacklight                 // Screen brightness                          // For brightness controls
 xorg-xinit                      // XOrg initialisation                        // For startx
 xorg-xset                       // Set lock timeout                           // For setting dim and lock screen timeouts
+valgrind                        // Memory management tool                     // For catching memory leaks
 xss-lock                        // Use external locker                        // For locking screen
 yay *                           // AUR package manager                        // For installing AUR packages
 
