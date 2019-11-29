@@ -36,10 +36,10 @@ export EDITOR=/usr/bin/vim
 
 # ========== Aliases ========== {{{
 # ========== General ========== {{{
-alias ..="cd ../"
-alias ...="cd ../../"
-alias ....="cd ../../../"
-alias .....="cd ../../../../"
+# Cd to previous directory for each "." added
+str-rep() { local s=`printf "%$2s"`; printf '%s' "${s// /$1}"; }
+for i in {1..8}; do alias `str-rep . $i`=cd\ `str-rep ../ $i`; done
+
 alias cp="cp -r"
 alias ls="ls --color=auto"
 alias update="sudo pacman -Syu"
