@@ -37,7 +37,7 @@ Setup for the Arch Linux environment
 | make                     | GNU make utility                     | For base-devel                           |
 | man-db                   | Man pages                            | For reading program manuals              |
 | net-tools                | Networking tools                     | For PIA VPN                              |
-| network-manager-applet   | System tray for NetworkManager       | For Network Manager applet               |
+| network-manager-applet       | System tray for NetworkManager       | For Network Manager applet               |
 | noto-fonts-emoji         | Font for emoji symbols               | For rendering unicode symbols            |
 | openssh                  | SSH                                  | For SSH                                  |
 | patch                    | Patches files                        | For base-devel                           |
