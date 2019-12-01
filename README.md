@@ -1,4 +1,4 @@
-# Env
+# env
 Setup for the Arch Linux environment
 
 ### Useful commands:
