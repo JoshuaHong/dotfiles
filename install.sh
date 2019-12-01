@@ -121,7 +121,7 @@ echo -e "DONE!\n"
 
 # User todos
 echo "TODO:"
-echo "  1. Install Firefox plugins: ABP, Tabliss"
+echo "  1. Install Firefox plugins: ABP, Tabliss, Vimium-FF"
 echo "  2. Install PIA VPN and enable \"Connect on Launch\""
 
 # Firefox setup

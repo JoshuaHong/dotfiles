@@ -105,8 +105,10 @@ inoremap <C-l> <Right>
 
 "Remap write and quit
 nnoremap <Leader>w :up<CR>
+nnoremap <Leader>W :w !sudo tee %<CR>
 nnoremap <Leader>a :wa<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
 
 "Close current buffer
 nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'

@@ -36,9 +36,18 @@ export EDITOR=/usr/bin/vim
 
 # ========== Aliases ========== {{{
 # ========== General ========== {{{
-# Cd to previous directory for each "." added
-str-rep() { local s=`printf "%$2s"`; printf '%s' "${s// /$1}"; }
-for i in {1..8}; do alias `str-rep . $i`=cd\ `str-rep ../ $i`; done
+# Cd to previous directory for each "."
+str-rep() {
+  local s=`printf "%$2s"`; printf '%s' "${s// /$1}"
+}
+for i in {1..8}; do
+  alias `str-rep . $i`=cd\ `str-rep ../ $i`
+done
+
+# Cd and ls
+cd() {
+  builtin cd "$@" && ls
+}
 
 alias cp="cp -r"
 alias ls="ls --color=auto"
