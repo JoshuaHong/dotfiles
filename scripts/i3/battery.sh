@@ -8,8 +8,8 @@ notify() {
   dunstify -h string:x-canonical-private-synchronous:"battery" "$@"
 }
 
-capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
-status="$(cat /sys/class/power_supply/BAT0/status)"
+capacity="$(cat < /sys/class/power_supply/BAT0/capacity)"
+status="$(cat < /sys/class/power_supply/BAT0/status)"
 
 # Full text
 if [[ "$status" == "Discharging" ]]; then
@@ -33,9 +33,9 @@ elif [[ "$capacity" -le 15 ]]; then
 fi
 
 # Mouse listener
-chargefull="$(cat /sys/class/power_supply/BAT0/charge_full)"
-chargenow="$(cat /sys/class/power_supply/BAT0/charge_now)"
-currentnow="$(cat /sys/class/power_supply/BAT0/current_now)"
+chargefull="$(cat < /sys/class/power_supply/BAT0/charge_full)"
+chargenow="$(cat < /sys/class/power_supply/BAT0/charge_now)"
+currentnow="$(cat < /sys/class/power_supply/BAT0/current_now)"
 case "$BLOCK_BUTTON" in
   1) # Left click
     if [[ "$status" == "Discharging" ]]; then

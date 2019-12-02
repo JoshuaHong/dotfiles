@@ -32,7 +32,7 @@ get_brightness() {
   if [[ -z "$sysfs_path" ]]; then
       xbacklight -get
   else
-      cat "$sysfs_path"
+      cat < "$sysfs_path"
   fi
 }
 
