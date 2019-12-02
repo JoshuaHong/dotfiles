@@ -46,7 +46,7 @@ done
 
 # Cd and ls
 cd() {
-  builtin cd "$@" && ls
+  builtin cd "$@" && ls --color=auto
 }
 
 alias cp="cp -r"
