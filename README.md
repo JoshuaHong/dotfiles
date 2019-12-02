@@ -4,10 +4,14 @@ Setup for the Arch Linux environment
 ### Useful commands:
 | Command        | Description                           |
 | -------------- | ------------------------------------- |
-| `pacman -Syu`  | Update and upgrade installed packages |
-| `pacman -Qtt`  | List installed non-required packages  |
+| `pacman -Qi`   | List installed packages with details  |
 | `pacman -Qtdq` | List orphans                          |
+| `pacman -Qtt`  | List installed non-required packages  |
+| `pacman -Rns`  | Uninstall package                     |
+| `pacman -S`    | Install package                       |
 | `pacman -Sc`   | Remove uninstalled package caches     |
+| `pacman -Ss`   | Search for packages in the repository |
+| `pacman -Syu`  | Update and upgrade installed packages |
 
 ### Packages (45):
 | Package                | Description                          | Function                                 |
