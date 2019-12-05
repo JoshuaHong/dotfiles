@@ -49,15 +49,15 @@ enableMultithreading() {
   echo -e "Parallel compilation and compression enabled!\n"
 }
 
-# Configure pacman options
+# Configure Pacman options
 configurePacman() {
-  echo "Enabling pacman color..."
+  echo "Enabling Pacman color..."
   sed -i "s/^#Color/Color/" "/etc/pacman.conf"
-  echo "Enabling pacman total download percentage..."
+  echo "Enabling Pacman total download percentage..."
   sed -i "s/^#TotalDownload/TotalDownload/" "/etc/pacman.conf"
-  echo "Enabling pacman disk space check before installing..."
+  echo "Enabling Pacman disk space check before installing..."
   sed -i "s/^#CheckSpace/CheckSpace/" "/etc/pacman.conf"
-  echo "Enabling pacman loading bar..."
+  echo "Enabling Pacman loading bar..."
   sed -i "s/^#ILoveCandy/ILoveCandy/" "/etc/pacman.conf"
   echo -e "Pacman options configured!\n"
 }
@@ -68,8 +68,8 @@ installPackages() {
     dmenu dunst fakeroot feh firefox flex gcc gdb grub gvim i3-gaps i3blocks \
     i3lock imagemagick linux linux-firmware make man-db net-tools \
     network-manager-applet noto-fonts-emoji openssh patch picom pkgconf \
-    ripgrep scrot which xclip xf86-video-intel xorg-server xorg-xbacklight \
-    xorg-xinit xorg-xset valgrind xss-lock"
+    reflector ripgrep scrot which xclip xf86-video-intel xorg-server \
+    xorg-xbacklight xorg-xinit xorg-xset valgrind xss-lock"
   local yayPackages="simple-mtpfs ttf-symbola"
 
   echo "Updating and installing packages..."
@@ -81,6 +81,25 @@ installPackages() {
   yay -Syu
   yay -S "$yayPackages"
   echo -e "Packages updated and installed!\n"
+}
+
+# Update Pacman mirror list
+updateMirrorList() {
+  hook="[Trigger]\nOperation = Upgrade\nType = Package\n\
+Target = pacman-mirrorlist\n\n[Action]\nDescription = \
+Updating pacman-mirrorlist with reflector and removing pacnew...\n\
+When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
+\"reflector --latest 200 --protocol http --protocol https --sort rate \
+--save /etc/pacman.d/mirrorlist; rm -f /etc/pacman.d/mirrorlist.pacnew\""
+  echo "Creating mirror list backup..."
+  cp -f "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.backup"
+  echo "Creating hook..."
+  mkdir "/etc/pacman.d/hooks/"
+  echo "$hook" >> "/etc/pacman.d/hooks/mirrorupgrade.hook"
+  echo "Updating mirror list..."
+  reflector --latest 200 --protocol "http" --protocol "https" --sort "rate" \
+    --save "/etc/pacman.d/mirrorlist"
+  echo -e "Mirror list updated!\n"
 }
 
 # Copy files from repo
@@ -115,6 +134,7 @@ disableRootLogin
 enableMultithreading
 configurePacman
 installPackages
+updateMirrorList
 copyRepo
 installVimPlugins
 echo -e "DONE!\n"

@@ -32,7 +32,6 @@ set clipboard=unnamedplus           "Set default register to system clipboard
 set belloff=all                     "Disable all error notifications
 set number                          "Show line numbers
 set ruler                           "Show current line and column
-set relativenumber                  "Show relative line number
 set showcmd                         "Show partial commands
 set showmode                        "Show current mode
 set linebreak                       "Wrap lines at convenient points
