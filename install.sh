@@ -151,3 +151,9 @@ enableMultithreading
 copyRepo
 installVimPlugins
 echo -e "DONE!\n"
+
+echo "TODO:"
+echo "  1. Install Firefox plugins: ABP, Tabliss, Vimium-FF"
+echo "  2. Download [PIA VPN](https://www.privateinternetaccess.com/installer/x/download_installer_linux) and enable \"Connect on Launch\""
+echo "  3. Reboot"
+
