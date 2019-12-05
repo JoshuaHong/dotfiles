@@ -6,47 +6,36 @@
 createUser() {
   echo "Setting up new user..."
   read -p "Enter username: " user
-  while ! sudo useradd -m -g wheel "$user";  do
+  while ! useradd -m -g wheel "$user";  do
     read -p "Enter username: " user
   done
-  passwd "$user"
-  sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" \
-    "/etc/sudoers"
+  while ! passwd "$user"; do
+    echo "Try again"
+  done
   echo -e "New user set up!\n"
 }
 
-# Hide GRUB menu unless Shift key held down
-hideGRUB() {
-  echo "Hiding GRUB menu unless Shift key held down..."
-  echo -e "\n# Hide GRUB menu unless Shift key held down\
-    \nGRUB_FORCE_HIDDEN_MENU=\"true\"" >> "/etc/default/grub"
-  curl "https://gist.githubusercontent.com/anonymous/8eb2019db2e278ba99be/raw/257f15100fd46aeeb8e33a7629b209d0a14b9975/gistfile1.sh" \
-    -o "/etc/grub.d/31_hold_shift"
-  chmod -v +x "/etc/grubd/31_hold_shift"
-  grub-mkconfig -o "/boot/grub/grub.cfg"
-  echo -e "GRUB menu hidden unless Shift key held down!\n"
-}
+# Install packages
+installPackages() {
+  local pacmanPackages="alacritty alsa-utils base base-devel dmenu dunst feh \
+    firefox gdb git grub gvim i3-gaps i3blocks i3lock imagemagick linux \
+    linux-firmware man-db net-tools network-manager-applet noto-fonts \
+    noto-fonts-emoji openssh picom reflector ripgrep scrot valgrind xclip \
+    xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset xss-lock"
+  local yayPackages="simple-mtpfs ttf-symbola"
 
-# Disable local and ssh root login
-disableRootLogin() {
-  echo "Disabling local root login..."
-  passwd -l "root"
-  echo "Disabling ssh root login..."
-  sed -i "s/^#PermitRootLogin Yes/PermitRootLogin No/" "/etc/ssh/sshd_config"
-  echo -e "Local and ssh root login disabled!\n"
-}
+  echo "Updating and installing packages..."
+  pacman -Syu
+  pacman -S $pacmanPackages
 
-# Enable parallel compilation and compression
-enableMultithreading() {
-  echo "Optimizing compilation..."
-  sed -i "s/^MAKEFLAGS="-j2"/MAKEFLAGS=\"-j$(nproc)\"/" "/etc/makepkg.conf"
-  echo "Optimizing XYZ compression..."
-  sed -i "s/^COMPRESSXYZ=(xz -c -z -)/COMPRESSXYZ=(xz -c -z - --threads=0)/" \
-    "/etc/makepkg.conf"
-  echo "Optimizing ZST compression..."
-  sed -i "s/^COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q - --threads=0)/"\
-    "/etc/makepkg.conf"
-  echo -e "Parallel compilation and compression enabled!\n"
+  sudo -u "$user" mkdir -v "/home/$user/programs/"
+  sudo -u "$user" git clone "https://aur.archlinux.org/yay.git" "/home/$user/programs/yay/"
+  cd "/home/$user/programs/yay/"
+  sudo -u "$user" makepkg -si
+  cd "/home/$user/"
+  sudo -u "$user" yay -Syu
+  sudo -u "$user" yay -S $yayPackages
+  echo -e "Packages updated and installed!\n"
 }
 
 # Configure Pacman options
@@ -58,29 +47,8 @@ configurePacman() {
   echo "Enabling Pacman disk space check before installing..."
   sed -i "s/^#CheckSpace/CheckSpace/" "/etc/pacman.conf"
   echo "Enabling Pacman loading bar..."
-  sed -i "s/^#ILoveCandy/ILoveCandy/" "/etc/pacman.conf"
+  sed -i "/^# Misc options/a ILoveCandy" "/etc/pacman.conf"
   echo -e "Pacman options configured!\n"
-}
-
-# Install packages
-installPackages() {
-  local pacmanPackages="alacritty alsa-utils autoconf automake base bison \
-    dmenu dunst fakeroot feh firefox flex gcc gdb grub gvim i3-gaps i3blocks \
-    i3lock imagemagick linux linux-firmware make man-db net-tools \
-    network-manager-applet noto-fonts-emoji openssh patch picom pkgconf \
-    reflector ripgrep scrot which xclip xf86-video-intel xorg-server \
-    xorg-xbacklight xorg-xinit xorg-xset valgrind xss-lock"
-  local yayPackages="simple-mtpfs ttf-symbola"
-
-  echo "Updating and installing packages..."
-  pacman -Syu
-  pacman -S "$pacmanPackages"
-  mkdir -v "/home/$user/programs/"
-  git clone "https://aur.archlinux.org/yay.git" "/home/$user/programs/"
-  /home/$user/programs/yay/makepkg -si
-  yay -Syu
-  yay -S "$yayPackages"
-  echo -e "Packages updated and installed!\n"
 }
 
 # Update Pacman mirror list
@@ -95,28 +63,73 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
   cp -fv "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.backup"
   echo "Creating hook..."
   mkdir -v "/etc/pacman.d/hooks/"
-  echo "$hook" >> "/etc/pacman.d/hooks/mirrorupgrade.hook"
+  echo -e "$hook" >> "/etc/pacman.d/hooks/mirrorupgrade.hook"
   echo "Updating mirror list..."
   reflector --latest 200 --protocol "http" --protocol "https" --sort "rate" \
     --save "/etc/pacman.d/mirrorlist"
   echo -e "Mirror list updated!\n"
 }
 
+# Update permissions
+updatePermissions() {
+  echo "Giving wheel group sudo access..."
+  sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" \
+    "/etc/sudoers"
+  echo "Disabling local root login..."
+  passwd -l "root"
+  echo "Disabling ssh root login..."
+  sed -i "s/^#PermitRootLogin prohibit-password/PermitRootLogin No/" \
+    "/etc/ssh/sshd_config"
+  echo -e "Local and ssh root login disabled!\n"
+}
+
+# Hide GRUB menu unless Shift key held down
+hideGRUB() {
+  echo "Installing GRUB..."
+  disk="DISK_NAME_HERE"
+  while ! fdisk -l | grep $disk >> /dev/null; do
+    read -p "Enter the disk where GRUB is to be installed (Ex. /dev/sda (NOT /dev/sda1)): " disk
+  done
+  grub-install --target=i386-pc "$disk"
+  echo "Hiding GRUB menu unless Shift key held down..."
+  echo -e "\n# Hide GRUB menu unless Shift key held down\
+    \nGRUB_FORCE_HIDDEN_MENU=\"true\"" >> "/etc/default/grub"
+  curl "https://gist.githubusercontent.com/anonymous/8eb2019db2e278ba99be/raw/257f15100fd46aeeb8e33a7629b209d0a14b9975/gistfile1.sh" \
+    -o "/etc/grub.d/31_hold_shift"
+  chmod -v +x "/etc/grub.d/31_hold_shift"
+  grub-mkconfig -o "/boot/grub/grub.cfg"
+  echo -e "GRUB menu hidden unless Shift key held down!\n"
+}
+
+# Enable parallel compilation and compression
+enableMultithreading() {
+  echo "Optimizing compilation..."
+  sed -i "s/^#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j\$(nproc)\"/" "/etc/makepkg.conf"
+  echo "Optimizing XZ compression..."
+  sed -i "s/^COMPRESSXZ=(xz -c -z -)/COMPRESSXYZ=(xz -c -z - --threads=0)/" \
+    "/etc/makepkg.conf"
+  echo "Optimizing ZST compression..."
+  sed -i "s/^COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q - --threads=0)/"\
+    "/etc/makepkg.conf"
+  echo -e "Parallel compilation and compression enabled!\n"
+}
+
 # Copy files from repo
 copyRepo() {
   echo "Copying files from repo..."
-  git clone "https://github.com/JoshuaHong/env.git" "/home/$user/"
-  rm -rfv "/home/$user/env/.git /home/$user/env/install.sh \
-    /home/$user/env/README.md"
-  cp -rv "/home/$user/env/." "/home/$user/"
-  rm -rfv "/home/$user/env/"
+  sudo -u "$user" git clone "https://github.com/JoshuaHong/env.git" "/home/$user/env/"
+  sudo -u "$user" cp -rv "/home/$user/env/." "/home/$user/"
+  rm -rfv "/home/$user/env/" "/home/$user/.git" "/home/$user/install.sh" \
+    "/home/$user/README.md" "/home/$user/.cache/*"
   echo -e "Files copied from repo!\n"
 }
 
 # Install vim plugins
 installVimPlugins() {
   echo "Installing vim plugins..."
-  vim +PlugUpgrade +PlugInstall +qall
+  sudo -u "$user" curl -fLo "/home/$user/.vim/autoload/plug.vim" --create-dirs \
+    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  sudo -u "$user" vim +PlugUpgrade +PlugInstall +qall
   echo -e "Installed vim plugins!\n"
 }
 
@@ -129,20 +142,12 @@ fi
 # Run installation
 echo -e "Starting installation...\n"
 createUser
-hideGRUB
-disableRootLogin
-enableMultithreading
-configurePacman
 installPackages
+configurePacman
 updateMirrorList
+updatePermissions
+hideGRUB
+enableMultithreading
 copyRepo
 installVimPlugins
 echo -e "DONE!\n"
-
-# User todos
-echo "TODO:"
-echo "  1. Install Firefox plugins: ABP, Tabliss, Vimium-FF"
-echo "  2. Install PIA VPN and enable \"Connect on Launch\""
-
-# Firefox setup
-firefox "https://www.privateinternetaccess.com/installer/x/download_installer_linux"
