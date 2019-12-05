@@ -145,4 +145,4 @@ echo "  1. Install Firefox plugins: ABP, Tabliss, Vimium-FF"
 echo "  2. Install PIA VPN and enable \"Connect on Launch\""
 
 # Firefox setup
-firefox "https://www.privateinternetaccess.com/pages/downloads"
+firefox "https://www.privateinternetaccess.com/installer/x/download_installer_linux"
