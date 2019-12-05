@@ -22,7 +22,7 @@ hideGRUB() {
     \nGRUB_FORCE_HIDDEN_MENU=\"true\"" >> "/etc/default/grub"
   curl "https://gist.githubusercontent.com/anonymous/8eb2019db2e278ba99be/raw/257f15100fd46aeeb8e33a7629b209d0a14b9975/gistfile1.sh" \
     -o "/etc/grub.d/31_hold_shift"
-  chmod +x "/etc/grubd/31_hold_shift"
+  chmod -v +x "/etc/grubd/31_hold_shift"
   grub-mkconfig -o "/boot/grub/grub.cfg"
   echo -e "GRUB menu hidden unless Shift key held down!\n"
 }
@@ -75,7 +75,7 @@ installPackages() {
   echo "Updating and installing packages..."
   pacman -Syu
   pacman -S "$pacmanPackages"
-  mkdir "/home/$user/programs/"
+  mkdir -v "/home/$user/programs/"
   git clone "https://aur.archlinux.org/yay.git" "/home/$user/programs/"
   /home/$user/programs/yay/makepkg -si
   yay -Syu
@@ -92,9 +92,9 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
 \"reflector --latest 200 --protocol http --protocol https --sort rate \
 --save /etc/pacman.d/mirrorlist; rm -f /etc/pacman.d/mirrorlist.pacnew\""
   echo "Creating mirror list backup..."
-  cp -f "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.backup"
+  cp -fv "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist.backup"
   echo "Creating hook..."
-  mkdir "/etc/pacman.d/hooks/"
+  mkdir -v "/etc/pacman.d/hooks/"
   echo "$hook" >> "/etc/pacman.d/hooks/mirrorupgrade.hook"
   echo "Updating mirror list..."
   reflector --latest 200 --protocol "http" --protocol "https" --sort "rate" \
@@ -106,10 +106,10 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
 copyRepo() {
   echo "Copying files from repo..."
   git clone "https://github.com/JoshuaHong/env.git" "/home/$user/"
-  rm -rf "/home/$user/env/.git /home/$user/env/install.sh \
+  rm -rfv "/home/$user/env/.git /home/$user/env/install.sh \
     /home/$user/env/README.md"
-  cp -r "/home/$user/env/." "/home/$user/"
-  rm -rf "/home/$user/env/"
+  cp -rv "/home/$user/env/." "/home/$user/"
+  rm -rfv "/home/$user/env/"
   echo -e "Files copied from repo!\n"
 }
 
