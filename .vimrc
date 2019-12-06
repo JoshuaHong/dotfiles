@@ -181,6 +181,9 @@ autocmd InsertEnter * let CursorColumnI = col('.')
 autocmd CursorMovedI * let CursorColumnI = col('.')
 autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 
+"Persist clipboard on exit
+autocmd VimLeave * call system("xclip -selection clipboard -i", getreg('+'))
+
 "Persistent Undo
 if !isdirectory("/tmp/.vim-undo-dir/")
   call mkdir("/tmp/.vim-undo-dir/", "", 0700)
