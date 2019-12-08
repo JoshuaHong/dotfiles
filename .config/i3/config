@@ -36,9 +36,6 @@ for_window [class=".*"] border pixel 3
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-# Constrain floating window size
-floating_maximum_size 1857x990
 # }}}
 
 # ========== Mappings ========== {{{
@@ -116,7 +113,8 @@ bindsym $mod+Shift+v split h
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+w layout toggle split
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle, resize set 890px 610px, \
+  move absolute position center
 bindsym $mod+f fullscreen toggle
 
 # Reload the configuration file
