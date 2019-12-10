@@ -27,11 +27,14 @@ set -o vi
 # }}}
 
 # ========== Exports ========== {{{
+# Set default editor
+export EDITOR=/usr/bin/vim
+
 # Enable fzf file previews
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
-# Set default editor
-export EDITOR=/usr/bin/vim
+# Enable colorized gcc output
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # }}}
 
 # ========== Aliases ========== {{{
