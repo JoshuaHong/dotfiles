@@ -64,7 +64,7 @@ chmod +x install.sh
 | ttf-symbola *          | Font for unicode symbols               | For rendering unicode on dmenu           |
 | valgrind               | Memory management tool                 | For catching memory leaks                |
 | which                  | Show full path of commands             | For yay (base-devel)                     |
-| xclip                  | Manipulates X11 clipboard              | For copying unicode to clipboard         |
+| xclip                  | Manipulates X11 clipboard              | For copying unicode, Vim copy on exit    |
 | xf86-video-intel       | XOrg video driver                      | For graphics display                     |
 | xorg-server            | XOrg package                           | For running X                            |
 | xorg-xbacklight        | Screen brightness                      | For brightness controls                  |
