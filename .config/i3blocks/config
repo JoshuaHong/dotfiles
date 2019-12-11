@@ -10,9 +10,10 @@
 separator=true
 separator_block_width=15
 
-[updates]
-command=$HOME/scripts/i3/updates.sh
+[update]
+command=$HOME/scripts/i3/update.sh
 interval=3600
+signal=12
 
 [volume]
 command=$HOME/scripts/i3/volume.sh

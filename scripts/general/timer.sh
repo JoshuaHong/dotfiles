@@ -11,6 +11,7 @@ usage() {
   echo "Options:"
   echo "  --help: show options"
   echo "  -h|--hidden: no notifications"
+  echo "  -n|--name: set name of timer"
   echo "  -q|--quiet: no output"
   echo "  -s|--stopwatch: stopwatch"
   echo "  -t|--time: alert at the specified time"
@@ -18,12 +19,13 @@ usage() {
 
 # Define flags
 h="false"
+n=""
 q="false"
 s="false"
 t="false"
 
 # Check for flags
-while getopts "hqst-:" flags; do
+while getopts "hn:qst-:" flags; do
   case "${flags}" in
     -)
       case "${OPTARG}" in
@@ -33,6 +35,10 @@ while getopts "hqst-:" flags; do
           ;;
         hidden)
           h="true"
+          ;;
+        name)
+          n="${!OPTIND} "
+          OPTIND="$(( $OPTIND + 1 ))"
           ;;
         quiet)
           q="true"
@@ -51,6 +57,9 @@ while getopts "hqst-:" flags; do
       ;;
     h)
       h="true"
+      ;;
+    n)
+      n="$OPTARG "
       ;;
     q)
       q="true"
@@ -74,51 +83,56 @@ stop() {
   if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
     rm -f "/tmp/timerIsPaused$$.txt"
   fi
-  dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
+  if [[ "$h" == "false" ]]; then
+    dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
+  fi
   exit 0
 }
 
 # Timer notifications
-# Uses the same parameters as the dunstify command
-# Click to pause or unpause timer
+# Takes the same parameters as the dunstify command
 notifyTimer() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "Timer (paused)" "$2"
+        "${n}Timer (paused)" "$2"
   else
     dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
-  if [[ "$q" == "false" && "$2" != "⌛ Complete" ]]; then
-    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
-      echo -n "Timer (paused): $2"
-      echo -ne "\r"
-    else
-      echo -n "Time remaining: $2"
-      echo -ne "\r"
-    fi
+}
+
+# Prints timer to console
+# Takes the current time as input
+printTimer() {
+  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+    echo -n "${n}Timer (paused): $1"
+    echo -ne "\r"
+  else
+    echo -n "${n}Time remaining: $1"
+    echo -ne "\r"
   fi
 }
 
 # Stopwatch notifications
-# Uses the same parameters as the dunstify command
-# Click to pause or unpause stopwatch
+# Takes the same parameters as the dunstify command
 notifyStopwatch() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "Stopwatch (paused)" "$2"
+        "${n}Stopwatch (paused)" "$2"
   else
     dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
-  if [[ "$q" == "false" ]]; then
-    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
-      echo -n "Stopwatch (paused): $2"
-      echo -ne "\r"
-    else
-      echo -n "Time elapsed      : $2"
-      echo -ne "\r"
-    fi
-  fi
+}
 
+# Prints stopwatch to console
+# Takes the current time as input
+printStopwatch() {
+  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+    echo -n "${n}Stopwatch (paused): $1"
+    echo -ne "\r"
+  else
+    echo -n "${n}Time elapsed      : $1"
+    echo -ne "\r"
+  fi
 }
 
 # Converts miliseconds to days, hours, minutes, seconds, miliseconds
@@ -149,7 +163,10 @@ stopwatch() {
         if [[ "$h" == "false" ]]; then
           local end="$(msConverter \
               "$(((("$pauseStart"-"$start")-"$timePaused"+500000)/1000000))")"
-          notifyStopwatch "Stopwatch (Paused)" "🕛 $end"
+          notifyStopwatch "${n}Stopwatch (Paused)" "🕛 $end"
+        fi
+        if [[ "$q" == "false" ]]; then
+          printStopwatch "$end"
         fi
       done
       ((timePaused+=("$pauseEnd"-"$pauseStart")))
@@ -158,9 +175,12 @@ stopwatch() {
     local end="$(msConverter \
         "$(((("$(date +%s%N)"-"$start")-"$timePaused"+500000)/1000000))")"
     if [[ "$h" == "false" ]]; then
-      notifyStopwatch "Stopwatch" "🕛 $end"
+      notifyStopwatch "${n}Stopwatch" "🕛 $end"
     fi
-    trap "stop \"Stopwatch (stopped)\" \"🕛 $end\"" SIGINT
+    if [[ "$q" == "false" ]]; then
+      printStopwatch "$end"
+    fi
+    trap "stop \"${n}Stopwatch (stopped)\" \"🕛 $end\"" SIGINT
   done
 }
 
@@ -190,6 +210,9 @@ timer() {
         if [[ "$h" == "false" ]]; then
           notifyTimer "Timer (Paused)" "⏳ $remaining"
         fi
+        if [[ "$q" == "false" ]]; then
+          printTimer "$remaining"
+        fi
       done
       ((end+=("$pauseEnd"-"$pauseStart")))
     fi
@@ -197,16 +220,19 @@ timer() {
       start="$(date "+%s")"
       local remaining=$(secConverter "$(("$end" - "$start"))")
       if [[ "$h" == "false" ]]; then
-        notifyTimer "Timer" "⏳ $remaining"
+        notifyTimer "${n}Timer" "⏳ $remaining"
+      fi
+      if [[ "$q" == "false" ]]; then
+        printTimer "$remaining"
       fi
     fi
-    trap "stop \"Timer (stopped)\" \"⌛ $remaining\"" SIGINT
+    trap "stop \"${n}Timer (stopped)\" \"⌛ $remaining\"" SIGINT
   done
   if [[ "$q" == "false" ]]; then
-    echo -n "Timer complete"
+    echo -n "${n}Timer complete"
     echo -ne "\r"
   fi
-  notifyTimer "Timer" "⌛ Complete" -u critical -t 0
+  notifyTimer "${n}Timer" "⌛ Complete" -u critical -t 0
   if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
     rm -f "/tmp/timerIsPaused$$.txt"
   fi
