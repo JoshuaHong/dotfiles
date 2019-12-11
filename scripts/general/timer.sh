@@ -283,7 +283,7 @@ elif [[ "$@" =~ \
     if [[ "$remainder" == *s ]]; then
       seconds="${remainder%%s*}"
     fi
-elif [[ "$q" == "false" ]]; then
+else
   echo "Invalid time format"
   exit 1
 fi
@@ -291,9 +291,7 @@ fi
 # Check valid alert time
 if [[ "$t" == "true" \
   && ("$hours" -ge 24 || "$minutes" -ge 60 || "$seconds" -ge 60) ]]; then
-    if [[ "$q" == "false" ]]; then
-      echo "Time must be in the range 00:00:00 - 23:59:59"
-    fi
+    echo "Time must be in the range 00:00:00 - 23:59:59"
     exit 1
 fi
 
@@ -304,7 +302,7 @@ if [[ "$t" == "true" \
     pauseUnpause
     exit 0
 else
-  if [[ "$#" -gt 0 && "$q" == "false" ]]; then
+  if [[ "$#" -gt 0 ]]; then
     echo "Cannot set timer for 0 seconds"
   else
     usage

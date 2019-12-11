@@ -31,7 +31,9 @@ case "$BLOCK_BUTTON" in
     done
     ;;
   3) # Right click
-    $HOME/scripts/general/timer.sh -s
+    for i in {0..5}; do
+      notify "Time" "🕛 $(date +%T)"
+    done
     ;;
 esac
 

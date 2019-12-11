@@ -10,10 +10,14 @@ notify() {
 
 updates=$(checkupdates 2>&1)
 if echo "$updates" | grep -q "ERROR"; then
+  # Full text
   echo "📥"
+  # Short text
   echo "📥"
 elif [[ ! -z "$updates" ]]; then
+  # Full text
   echo "📥 $(echo "$updates" | wc -l)"
+  # Short text
   echo "$updates" | wc -l
 fi
 
