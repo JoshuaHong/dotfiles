@@ -55,7 +55,6 @@ cd() {
 alias cp="cp -r"
 alias diff="diff --color"
 alias ls="ls --color=auto"
-alias update="sudo pacman -Syu"
 # }}}
 
 # ========== Git ========== {{{

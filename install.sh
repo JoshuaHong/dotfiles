@@ -32,7 +32,7 @@ installPackages() {
   sudo -u "$user" git clone "https://aur.archlinux.org/yay.git" "/home/$user/programs/yay/"
   cd "/home/$user/programs/yay/"
   sudo -u "$user" makepkg -si
-  cd "/home/$user/"
+  cd /root
   sudo -u "$user" yay -Syu
   sudo -u "$user" yay -S $yayPackages
   echo -e "Packages updated and installed!\n"
