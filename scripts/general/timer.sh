@@ -71,9 +71,10 @@ shift "$((OPTIND-1))"
 
 # Stops processes on interrupt signal
 stop() {
-  if [[ -f "/tmp/timerIsPaused.txt" ]]; then
-    rm -f "/tmp/timerIsPaused.txt"
+  if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
+    rm -f "/tmp/timerIsPaused$$.txt"
   fi
+  dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   exit 0
 }
 
@@ -81,22 +82,14 @@ stop() {
 # Uses the same parameters as the dunstify command
 # Click to pause or unpause timer
 notifyTimer() {
-  if [[ "$(dunstify -t 975 -h string:x-canonical-private-synchronous:"timer" \
-      -A Y,yes "$@")" == "2" ]]; then
-    if [[ "$2" != "⌛ Complete" ]]; then
-      if [[ "$(sed "1q;d" "/tmp/timerIsPaused.txt")"  == "true" ]]; then
-        dunstify -t 0 -h string:x-canonical-private-synchronous:"timer" \
-            "Timer" "$2"
-        sed -i "1s/.*/false/" "/tmp/timerIsPaused.txt"
-      else
-        dunstify -t 0 -h string:x-canonical-private-synchronous:"timer" \
-            "Timer (Paused)" "$2"
-        sed -i "1s/.*/true/" "/tmp/timerIsPaused.txt"
-      fi
-    fi
+  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+    dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
+        "Timer (paused)" "$2"
+  else
+    dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
   if [[ "$q" == "false" && "$2" != "⌛ Complete" ]]; then
-    if [[ "$(sed "1q;d" "/tmp/timerIsPaused.txt")" == "true" ]]; then
+    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
       echo -n "Timer (paused): $2"
       echo -ne "\r"
     else
@@ -110,21 +103,14 @@ notifyTimer() {
 # Uses the same parameters as the dunstify command
 # Click to pause or unpause stopwatch
 notifyStopwatch() {
-  if [[ "$(dunstify -t 50 \
-      -h string:x-canonical-private-synchronous:"stopwatch" -A Y,yes "$@")" \
-      == "2" ]]; then
-    if [[ "$(sed "2q;d" "/tmp/timerIsPaused.txt")" == "true" ]]; then
-      dunstify -t 0 -h string:x-canonical-private-synchronous:"stopwatch" \
-          "Stopwatch" "$2"
-      sed -i "2s/.*/false/" "/tmp/timerIsPaused.txt"
-    else
-      dunstify -t 0 -h string:x-canonical-private-synchronous:"stopwatch" \
-          "Stopwatch (Paused)" "$2"
-      sed -i "2s/.*/true/" "/tmp/timerIsPaused.txt"
-    fi
+  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+    dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
+        "Stopwatch (paused)" "$2"
+  else
+    dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
   if [[ "$q" == "false" ]]; then
-    if [[ "$(sed "2q;d" "/tmp/timerIsPaused.txt")" == "true" ]]; then
+    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
       echo -n "Stopwatch (paused): $2"
       echo -ne "\r"
     else
@@ -155,10 +141,10 @@ stopwatch() {
   local start="$(date +%s%N)"
   local timePaused=0
   while true; do
-    if [[ -f "/tmp/timerIsPaused.txt" ]]; then
+    if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
       local pauseStart="$(date +%s%N)"
       local pauseEnd="$pauseStart"
-      while [[ "$(sed "2q;d" "/tmp/timerIsPaused.txt")" == "true" ]]; do
+      while [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; do
         local pauseEnd="$(date +%s%N)"
         if [[ "$h" == "false" ]]; then
           local end="$(msConverter \
@@ -174,7 +160,7 @@ stopwatch() {
     if [[ "$h" == "false" ]]; then
       notifyStopwatch "Stopwatch" "🕛 $end"
     fi
-    trap "stop Time Elapsed:$'\n'$end" SIGINT
+    trap "stop \"Stopwatch (stopped)\" \"🕛 $end\"" SIGINT
   done
 }
 
@@ -195,10 +181,10 @@ timer() {
   local remaining="$(secConverter "$(("$end" - "$start"))")"
 
   while [[ "$start" != "$end" ]]; do
-    if [[ -f "/tmp/timerIsPaused.txt" ]]; then
+    if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
       local pauseStart="$(date +%s)"
       local pauseEnd="$pauseStart"
-      while [[ "$(sed "1q;d" "/tmp/timerIsPaused.txt")" == "true" ]]; do
+      while [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; do
         local pauseEnd="$(date +%s)"
         local remaining=$(secConverter "$(("$end" - "$start"))")
         if [[ "$h" == "false" ]]; then
@@ -214,36 +200,35 @@ timer() {
         notifyTimer "Timer" "⏳ $remaining"
       fi
     fi
-    trap "stop Timer Stopped:$'\n'$remaining" SIGINT
+    trap "stop \"Timer (stopped)\" \"⌛ $remaining\"" SIGINT
   done
   if [[ "$q" == "false" ]]; then
     echo -n "Timer complete"
     echo -ne "\r"
   fi
   notifyTimer "Timer" "⌛ Complete" -u critical -t 0
+  if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
+    rm -f "/tmp/timerIsPaused$$.txt"
+  fi
+  echo ""
+  kill -15 $$
   exit 0
 }
 
 # Pause or unpause
-# /tmp/timerIsPaused.txt - File containing pause information
+# /tmp/timerIsPaused$$.txt - File containing pause information
 # First line shows pause state of timer
 # Second line shows pause state of stopwatch
 pauseUnpause() {
-  echo -e "false\nfalse" > "/tmp/timerIsPaused.txt"
+  echo "false" > "/tmp/timerIsPaused$$.txt"
 
   while true; do
     read -n 1 -s -r
 
-    if [[ "$(sed "1q;d" "/tmp/timerIsPaused.txt")" == "false" ]]; then
-      sed -i "1s/.*/true/" "/tmp/timerIsPaused.txt"
+    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+      echo "false" > "/tmp/timerIsPaused$$.txt"
     else
-      sed -i "1s/.*/false/" "/tmp/timerIsPaused.txt"
-    fi
-
-    if [[ "$(sed "2q;d" "/tmp/timerIsPaused.txt")" == "false" ]]; then
-      sed -i "2s/.*/true/" "/tmp/timerIsPaused.txt"
-    else
-      sed -i "2s/.*/false/" "/tmp/timerIsPaused.txt"
+      echo "true" > "/tmp/timerIsPaused$$.txt"
     fi
   done
 }
