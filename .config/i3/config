@@ -5,7 +5,7 @@ exec --no-startup-id "xmodmap $HOME/.Xmodmap"
 # Dim and lock screen on inactivity (dim, lock) and disable X screensaver
 exec --no-startup-id "xset s 300 60 -dpms"
 exec --no-startup-id \
-  "xss-lock -n $HOME/scripts/i3/dim.sh -- $HOME/scripts/i3/lock.sh"
+    "xss-lock -n $HOME/scripts/i3/dim.sh -- $HOME/scripts/i3/lock.sh"
 
 # Start daemon processes (notifications, compositor)
 exec --no-startup-id "dunst"
@@ -13,7 +13,7 @@ exec --no-startup-id "compton"
 
 # Set background imaage
 exec --no-startup-id \
-  "feh --no-fehbg --bg-scale $HOME/images/wallpapers/wallpaper.png"
+    "feh --no-fehbg --bg-scale $HOME/images/wallpapers/wallpaper.png"
 
 # Start tray icons
 exec --no-startup-id "nm-applet"
@@ -55,22 +55,22 @@ bindsym $mod+Shift+e exec --no-startup-id "$HOME/scripts/i3/lock.sh -f -t"
 
 # Change volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id \
-  "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioLowerVolume exec --no-startup-id \
-  "amixer -q sset Master,0 2- unmute && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 2- unmute && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioMute exec --no-startup-id \
-  "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+10 i3blocks"
 
 # Change brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id \
-  "xbacklight -inc 5 && pkill -SIGRTMIN+11 i3blocks"
+    "xbacklight -inc 5 && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86MonBrightnessDown exec --no-startup-id \
-  "xbacklight -dec 5 && pkill -SIGRTMIN+11 i3blocks"
+    "xbacklight -dec 5 && pkill -SIGRTMIN+11 i3blocks"
 
 # Printscreen
 bindsym --release Print exec --no-startup-id "$HOME/scripts/i3/screenshot.sh"
 bindsym --release Shift+Print exec --no-startup-id \
-  "$HOME/scripts/i3/screenshot.sh -s"
+    "$HOME/scripts/i3/screenshot.sh -s"
 
 # List unicode characters
 bindsym $mod+u exec --no-startup-id "$HOME/scripts/dmenu/unicode.sh"
@@ -114,7 +114,7 @@ bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+w layout toggle split
 bindsym $mod+Shift+space floating toggle, resize set 890px 610px, \
-  move absolute position center
+    move absolute position center
 bindsym $mod+f fullscreen toggle
 
 # Reload the configuration file
@@ -128,7 +128,7 @@ bindsym $mod+Shift+Return kill
 
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec --no-startup-id "$HOME/scripts/dmenu/prompt.sh \
-  'Are you sure you want to exit i3?' 'i3-msg exit'"
+    'Are you sure you want to exit i3?' 'i3-msg exit'"
 
 # Resize Mode
 bindsym $mod+r mode "resize"

@@ -3,7 +3,7 @@
 # An i3blocks volume output script
 
 volume="$(amixer sget Master \
-  | awk -F"[][]" '/dB/ {print substr($2, 1, length($2) -1)}')"
+    | awk -F"[][]" '/dB/ {print substr($2, 1, length($2) -1)}')"
 muted="$(amixer sget Master | grep "off")"
 
 # Full text

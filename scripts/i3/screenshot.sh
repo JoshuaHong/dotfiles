@@ -35,9 +35,9 @@ notify() {
 # Capture screenshot
 if [[ "$s" == "true" ]]; then
   scrot -s "$HOME/images/screenshots/%F::%T.png" \
-    && notify "Screenshot Taken" "📸 $(date "+%F::%T.png")" \
-    & notify "Screenshot" "📷 Drag mouse to capture"
+      && notify "Screenshot Taken" "📸 $(date "+%F::%T.png")" \
+      & notify "Screenshot" "📷 Drag mouse to capture"
 else
   scrot "$HOME/images/screenshots/%F::%T.png" \
-    && notify "Screenshot Taken" "📸 $(date "+%F::%T.png")"
+      && notify "Screenshot Taken" "📸 $(date "+%F::%T.png")"
 fi

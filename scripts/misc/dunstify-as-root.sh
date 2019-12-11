@@ -17,7 +17,7 @@
 # # Execute dunstify-as-root.sh
 # USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 # $USER_HOME/scripts/misc/dunstify-as-root.sh --urgency=critical \
-#   --expire-time=1000 "Test notification:" "Hello World!"
+#     --expire-time=1000 "Test notification:" "Hello World!"
 
 # Detect the name of the display in use
 display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
@@ -29,4 +29,4 @@ user="$((who | grep '('$display')' || who) | awk '{print $1}' | head -n 1)"
 uid="$(id -u $user)"
 
 sudo -u $user DISPLAY=$display \
-  DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus dunstify "$@"
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus dunstify "$@"

@@ -13,8 +13,8 @@ stop() {
 # Click to kill script
 notify() {
   if [ "$(dunstify -t 975 -h string:x-canonical-private-synchronous:"time" \
-    -A Y,yes "$@")" -eq 2 ]; then
-      stop
+      -A Y,yes "$@")" -eq 2 ]; then
+    stop
   fi
 }
 
