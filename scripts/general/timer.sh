@@ -189,7 +189,7 @@ timer() {
     fi
     local end="$(("$end"+"$(date "+%s")"))"
   else
-    local end="$(date -d "+$hours hours $minutes minutes "$seconds" seconds" \
+    local end="$(date -d "+$hours hours $minutes minutes $seconds seconds" \
         "+%s")"
   fi
   local remaining="$(secConverter "$(("$end" - "$start"))")"
