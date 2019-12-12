@@ -60,7 +60,9 @@ if [[ "$action" == "Mount" ]]; then
   elif [[ "$type" == "📱" ]]; then
     simple-mtpfs --device "$number" "/mnt/$name" && notify "Mounted" "📱 $path"
   fi
+  pkill -SIGRTMIN+12 i3blocks
 elif [[ "$action" == "Unmount" ]]; then
   fusermount -u "/mnt/$name" && notify "Unmounted" "📵 $path"
   rmdir "/mnt/$name"
+  pkill -SIGRTMIN+12 i3blocks
 fi

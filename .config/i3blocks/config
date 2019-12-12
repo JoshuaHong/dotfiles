@@ -13,11 +13,12 @@ separator_block_width=15
 [update]
 command=$HOME/scripts/i3/update.sh
 interval=3600
-signal=12
+signal=13
 
 [mount]
 command=$HOME/scripts/i3/mount.sh
-interval=1
+interval=once
+signal=12
 
 [volume]
 command=$HOME/scripts/i3/volume.sh

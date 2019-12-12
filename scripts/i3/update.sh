@@ -20,7 +20,7 @@ fi
 case "$BLOCK_BUTTON" in
   1) # Left click
     alacritty -e bash -c "sudo pacman -Syu && echo \"Done!\" \
-        && pkill -SIGRTMIN+12 i3blocks && sleep infinity"
+        && pkill -SIGRTMIN+13 i3blocks && sleep infinity"
     ;;
   3) # Right click
     alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"

@@ -55,17 +55,17 @@ bindsym $mod+Shift+e exec --no-startup-id "$HOME/scripts/i3/lock.sh -f -t"
 
 # Change volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id \
-    "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86AudioLowerVolume exec --no-startup-id \
-    "amixer -q sset Master,0 2- unmute && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 2- unmute && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86AudioMute exec --no-startup-id \
-    "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+10 i3blocks"
+    "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+11 i3blocks"
 
 # Change brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id \
-    "xbacklight -inc 5 && pkill -SIGRTMIN+11 i3blocks"
+    "xbacklight -inc 5 && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec --no-startup-id \
-    "xbacklight -dec 5 && pkill -SIGRTMIN+11 i3blocks"
+    "xbacklight -dec 5 && pkill -SIGRTMIN+10 i3blocks"
 
 # Printscreen
 bindsym --release Print exec --no-startup-id "$HOME/scripts/i3/screenshot.sh"

@@ -31,9 +31,17 @@ mobileDevices="$(simple-mtpfs -l | awk '{
 # device =[#][type][action][path][(size)]. Ex.:
 # 1: 💽 Mount /dev/sda (32G)
 device="$(echo -e "$storageDevices\n$mobileDevices")"
+print="false"
 output="\n"
 
-if [[ ! -z "$device" ]]; then
+# If a device is mounted show icon
+while read -r line; do
+  if [[ "$(echo -e "$line" | awk '{print $1}')" == "Unmount" ]]; then
+    print="true"
+  fi
+done <<< "$device"
+
+if [[ ! -z "$device" && "$print" == "true" ]]; then
   # Long text
   echo "📱"
   # Short text
