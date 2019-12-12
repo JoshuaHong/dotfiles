@@ -17,7 +17,7 @@ if [[ "$EUID" -ne 0 ]]; then
    exit 1
 fi
 
-storagedevices="$(lsblk -o "NAME,SIZE,TYPE,TRAN" | grep "usb" | grep "disk" \
+storageDevices="$(lsblk -o "NAME,SIZE,TYPE,TRAN" | grep "usb" | grep "disk" \
     | awk '{
   printf NR ": 💽 "
   if (system("mount -l | grep -q /mnt/" $1)) {
@@ -28,7 +28,7 @@ storagedevices="$(lsblk -o "NAME,SIZE,TYPE,TRAN" | grep "usb" | grep "disk" \
   print "/dev/" $1 " (" $2 ")";
 }')"
 
-mobiledevices="$(simple-mtpfs -l | awk '{
+mobileDevices="$(simple-mtpfs -l | awk '{
   printf $1 " 📱 "
   if (system("mount -l | grep -q /mnt/" $2)) {
     printf "Mount "
@@ -38,10 +38,15 @@ mobiledevices="$(simple-mtpfs -l | awk '{
   print $2
 }')"
 
-# device =[#][type][action][path][(size)]. Ex.:
-# 1: 💽 Mount /dev/sda (32G)
-device="$(echo -e "\n$storagedevices\n$mobiledevices" \
+# device =[#][type][action][path][(size)]
+# Ex: 1: 💽 Mount /dev/sda (32G)
+if [[ -z "$storageDevices" ]]; then
+  device="$(echo -e "\n$mobileDevices" \
+      | dmenu -i -p "Select device to mount or unmount")"
+else
+  device="$(echo -e "\n$storageDevices\n$mobileDevices" \
     | dmenu -i -p "Select device to mount or unmount")"
+fi
 number="$(echo -e "$device" | awk '{print $1}')"
 type="$(echo -e "$device" | awk '{print $2}')"
 action="$(echo -e "$device" | awk '{print $3}')"

@@ -15,15 +15,19 @@ command=$HOME/scripts/i3/update.sh
 interval=3600
 signal=12
 
+[mount]
+command=$HOME/scripts/i3/mount.sh
+interval=1
+
 [volume]
 command=$HOME/scripts/i3/volume.sh
 interval=once
-signal=10
+signal=11
 
 [brightness]
 command=$HOME/scripts/i3/brightness.sh
 interval=once
-signal=11
+signal=10
 
 [battery]
 command=$HOME/scripts/i3/battery.sh
