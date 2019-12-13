@@ -3,6 +3,17 @@
 # An i3blocks update output script
 # Takes in a $BLOCK_BUTTON instance for mouse events
 
+# Mouse listener
+case "$BLOCK_BUTTON" in
+  1) # Left click
+    alacritty -e bash -c "sudo pacman -Syu && echo \"Done!\" \
+        && pkill -SIGRTMIN+13 i3blocks && sleep infinity"
+    ;;
+  3) # Right click
+    alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"
+    ;;
+esac
+
 updates=$(checkupdates 2>&1)
 if echo "$updates" | grep -q "ERROR"; then
   # Full text
@@ -15,16 +26,5 @@ elif [[ ! -z "$updates" ]]; then
   # Short text
   echo "$updates" | wc -l
 fi
-
-# Mouse listener
-case "$BLOCK_BUTTON" in
-  1) # Left click
-    alacritty -e bash -c "sudo pacman -Syu && echo \"Done!\" \
-        && pkill -SIGRTMIN+13 i3blocks && sleep infinity"
-    ;;
-  3) # Right click
-    alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"
-    ;;
-esac
 
 exit 0
