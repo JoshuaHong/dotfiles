@@ -6,7 +6,7 @@
 # Mouse listener
 case "$BLOCK_BUTTON" in
   1) # Left click
-    alacritty -e bash -c "sudo pacman -Syu && echo \"Done!\" \
+    alacritty -e bash -c "yay -Syu && echo \"Done!\" \
         && pkill -SIGRTMIN+13 i3blocks && sleep infinity"
     ;;
   3) # Right click
