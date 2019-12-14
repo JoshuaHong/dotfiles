@@ -61,7 +61,7 @@ lock() {
 
   # Lock the screen and checklock - unmute and kill checklock on unlock
   checklock & i3lock --image="$tmpbg" --ignore-empty-password --nofork \
-      && amixer set Master,0 unmute && kill -SIGTERM $!
+      && amixer set Master,0 unmute && pkill -15 lock.sh
 }
 
 # Don't lock screen if video is playing unless force enabled
