@@ -18,10 +18,11 @@ createUser() {
 # Install packages
 installPackages() {
   local pacmanPackages="alacritty alsa-utils base base-devel dmenu dunst feh \
-    firefox gdb git grub gvim i3-gaps i3blocks i3lock imagemagick linux \
-    linux-firmware man-db net-tools network-manager-applet noto-fonts \
-    noto-fonts-emoji openssh picom reflector ripgrep scrot valgrind xclip \
-    xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset xss-lock"
+      firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
+      linux-firmware man-db neovim net-tools network-manager-applet noto-fonts \
+      noto-fonts-emoji openssh picom reflector ripgrep scrot valgrind xclip \
+      xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset \
+      xss-lock"
   local yayPackages="simple-mtpfs ttf-symbola"
 
   echo "Updating and installing packages..."
@@ -66,7 +67,7 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
   echo -e "$hook" >> "/etc/pacman.d/hooks/mirrorupgrade.hook"
   echo "Updating mirror list..."
   reflector --latest 200 --protocol "http" --protocol "https" --sort "rate" \
-    --save "/etc/pacman.d/mirrorlist"
+      --save "/etc/pacman.d/mirrorlist"
   echo -e "Mirror list updated!\n"
 }
 
@@ -74,12 +75,12 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
 updatePermissions() {
   echo "Giving wheel group sudo access..."
   sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" \
-    "/etc/sudoers"
+      "/etc/sudoers"
   echo "Disabling local root login..."
   passwd -l "root"
   echo "Disabling ssh root login..."
   sed -i "s/^#PermitRootLogin prohibit-password/PermitRootLogin No/" \
-    "/etc/ssh/sshd_config"
+      "/etc/ssh/sshd_config"
   echo -e "Local and ssh root login disabled!\n"
 }
 
@@ -93,9 +94,9 @@ hideGRUB() {
   grub-install --target=i386-pc "$disk"
   echo "Hiding GRUB menu unless Shift key held down..."
   echo -e "\n# Hide GRUB menu unless Shift key held down\
-    \nGRUB_FORCE_HIDDEN_MENU=\"true\"" >> "/etc/default/grub"
+      \nGRUB_FORCE_HIDDEN_MENU=\"true\"" >> "/etc/default/grub"
   curl "https://gist.githubusercontent.com/anonymous/8eb2019db2e278ba99be/raw/257f15100fd46aeeb8e33a7629b209d0a14b9975/gistfile1.sh" \
-    -o "/etc/grub.d/31_hold_shift"
+      -o "/etc/grub.d/31_hold_shift"
   chmod -v +x "/etc/grub.d/31_hold_shift"
   grub-mkconfig -o "/boot/grub/grub.cfg"
   echo -e "GRUB menu hidden unless Shift key held down!\n"
@@ -107,30 +108,32 @@ enableMultithreading() {
   sed -i "s/^#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j\$(nproc)\"/" "/etc/makepkg.conf"
   echo "Optimizing XZ compression..."
   sed -i "s/^COMPRESSXZ=(xz -c -z -)/COMPRESSXYZ=(xz -c -z - --threads=0)/" \
-    "/etc/makepkg.conf"
+      "/etc/makepkg.conf"
   echo "Optimizing ZST compression..."
   sed -i "s/^COMPRESSZST=(zstd -c -z -q -)/COMPRESSZST=(zstd -c -z -q - --threads=0)/"\
-    "/etc/makepkg.conf"
+      "/etc/makepkg.conf"
   echo -e "Parallel compilation and compression enabled!\n"
 }
 
 # Copy files from repo
 copyRepo() {
   echo "Copying files from repo..."
-  sudo -u "$user" git clone "https://github.com/JoshuaHong/env.git" "/home/$user/env/"
+  sudo -u "$user" git clone "https://github.com/JoshuaHong/env.git" \
+      "/home/$user/env/"
   sudo -u "$user" cp -rv "/home/$user/env/." "/home/$user/"
   rm -rfv "/home/$user/env/" "/home/$user/.git" "/home/$user/install.sh" \
-    "/home/$user/README.md" "/home/$user/.cache/*"
+      "/home/$user/README.md" "/home/$user/.cache/*"
   echo -e "Files copied from repo!\n"
 }
 
-# Install vim plugins
-installVimPlugins() {
-  echo "Installing vim plugins..."
-  sudo -u "$user" curl -fLo "/home/$user/.vim/autoload/plug.vim" --create-dirs \
-    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  sudo -u "$user" vim +PlugUpgrade +PlugInstall +qall
-  echo -e "Installed vim plugins!\n"
+# Install neovim plugins
+installNeovimPlugins() {
+  echo "Installing neovim plugins..."
+  sudo -u "$user" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
+      --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  sudo -u "$user" nvim +PlugUpgrade +PlugInstall +qall
+  echo -e "Installed neovim plugins!\n"
 }
 
 # Check for root access
@@ -149,11 +152,10 @@ updatePermissions
 hideGRUB
 enableMultithreading
 copyRepo
-installVimPlugins
+installNeovimPlugins
 echo -e "DONE!\n"
 
 echo "TODO:"
 echo "  1. Install Firefox plugins: ABP, Tabliss, Vimium-FF"
 echo "  2. Download [PIA VPN](https://www.privateinternetaccess.com/installer/x/download_installer_linux) and enable \"Connect on Launch\""
 echo "  3. Reboot"
-

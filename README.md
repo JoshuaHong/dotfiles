@@ -40,7 +40,6 @@ chmod +x install.sh
 | gcc                    | GNU compiler collection                | For Yay (base-devel)                     |
 | gdb                    | GNU debugger                           | For debugging                            |
 | grub                   | Bootloader                             | For loading Linux kernel                 |
-| gvim                   | Text editor                            | For editing text                         |
 | i3-gaps                | Window manager                         | For managing windows                     |
 | i3blocks               | Status bar                             | For displaying status                    |
 | i3lock                 | Lock screen                            | For locking screen                       |
@@ -49,6 +48,7 @@ chmod +x install.sh
 | linux-firmware         | Linux firmware                         | For running Linux                        |
 | make                   | GNU make utility                       | For Yay (base-devel)                     |
 | man-db                 | Man pages                              | For reading program manuals              |
+| neovim                 | Text editor                            | For editing text                         |
 | net-tools              | Networking tools                       | For PIA VPN                              |
 | network-manager-applet | System tray for NetworkManager         | For Network Manager applet               |
 | noto-fonts-emoji       | Font for emoji symbols                 | For rendering unicode symbols            |
