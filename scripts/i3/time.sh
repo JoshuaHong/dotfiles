@@ -31,7 +31,7 @@ case "$BLOCK_BUTTON" in
     done
     ;;
   3) # Right click
-    for i in {0..5}; do
+    for i in {0..4}; do
       notify "Time" "🕛 $(date +%T)"
     done
     ;;

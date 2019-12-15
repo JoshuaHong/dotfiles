@@ -22,7 +22,7 @@ case "$BLOCK_BUTTON" in
     ;;
   3) # Right click
     for i in {1..12}; do
-      notify "$(cal $(date "+%m %Y" -d "$(date +%F) + $i month"))"
+      notify -t 5000 "$(cal $(date "+%m %Y" -d "$(date +%F) + $i month"))"
     done
     ;;
 esac
