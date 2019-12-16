@@ -153,7 +153,7 @@ vnoremap P "_d"+P<CR>=`[
 
 "Toggle Comments
 let b:commentChar='// '
-autocmd BufNewFile,BufReadPost *.vimrc let b:commentChar='" '
+autocmd BufNewFile,BufReadPost *.vim let b:commentChar='" '
 autocmd BufNewFile,BufReadPost *.\(sh\|py\) let b:commentChar='# '
 function! Docomment ()
   execute '''<,''>s/^\s*/&'.escape(b:commentChar, '\/').'/e'
@@ -238,5 +238,6 @@ nnoremap <Leader>c :YcmCompleter Format<CR>
 
 "Set extra configuration file
 let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+"}}}
 "}}}
 "}}}

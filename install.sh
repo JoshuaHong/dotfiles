@@ -134,6 +134,7 @@ installNeovimPlugins() {
       --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   sudo -u "$user" nvim +PlugUpgrade +PlugInstall +qall
+  cp -v "/home/$user/.ycm_extra_conf.py" "/home/$user/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
   echo -e "Installed Neovim plugins!\n"
 }
 
