@@ -17,12 +17,12 @@ createUser() {
 
 # Install packages
 installPackages() {
-  local pacmanPackages="alacritty alsa-utils base base-devel dmenu dunst feh \
-      firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
+  local pacmanPackages="alacritty alsa-utils base base-devel cmake dmenu dunst \
+      feh firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
       linux-firmware man-db neovim net-tools network-manager-applet noto-fonts \
-      noto-fonts-emoji openssh picom reflector ripgrep scrot valgrind xclip \
-      xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset \
-      xss-lock"
+      noto-fonts-emoji openssh picom python-pynvim reflector ripgrep scrot \
+      valgrind xclip xf86-video-intel xorg-server xorg-xbacklight xorg-xinit \
+      xorg-xset xss-lock"
   local yayPackages="simple-mtpfs ttf-symbola"
 
   echo "Updating and installing packages..."
@@ -30,7 +30,8 @@ installPackages() {
   pacman -S $pacmanPackages
 
   sudo -u "$user" mkdir -v "/home/$user/programs/"
-  sudo -u "$user" git clone "https://aur.archlinux.org/yay.git" "/home/$user/programs/yay/"
+  sudo -u "$user" git clone "https://aur.archlinux.org/yay.git" \
+      "/home/$user/programs/yay/"
   cd "/home/$user/programs/yay/"
   sudo -u "$user" makepkg -si
   cd /root
@@ -126,14 +127,14 @@ copyRepo() {
   echo -e "Files copied from repo!\n"
 }
 
-# Install neovim plugins
+# Install Neovim plugins
 installNeovimPlugins() {
-  echo "Installing neovim plugins..."
+  echo "Installing Neovim plugins..."
   sudo -u "$user" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
       --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   sudo -u "$user" nvim +PlugUpgrade +PlugInstall +qall
-  echo -e "Installed neovim plugins!\n"
+  echo -e "Installed Neovim plugins!\n"
 }
 
 # Check for root access

@@ -1,9 +1,10 @@
 "========== Plugins =========={{{
-call plug#begin('~/.vim/plugged')
+call plug#begin()
   Plug 'altercation/vim-colors-solarized'
   Plug 'bfrg/vim-cpp-modern'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
   Plug 'junegunn/fzf.vim'
+  Plug 'ycm-core/YouCompleteMe', {'do': 'python install.py --clangd-completer'}
 call plug#end()
 "}}}
 
@@ -194,23 +195,48 @@ set undofile
 
 "========== Plugins =========={{{
 "========== FZF =========={{{
-"Find buffers
+"Search buffers
 nnoremap <Leader>b :Buffers<CR>
 
-"Find files
+"Search files
 nnoremap <Leader>f :Files<CR>
 
-"Find marks
+"Search marks
 nnoremap <Leader>m :Marks<CR>
 
-"Find lines in open buffers
+"Search lines in open buffers
 nnoremap <Leader>l :Lines<CR>
 
-"Find lines in project
+"Search lines in project
 nnoremap <Leader>g :Rg<CR>
 
-"Find command history
+"Search command history
 nnoremap <Leader>h :History:<CR>
 "}}}
+
+"========== YouCompleteMe =========={{{
+"Go to declaration
+nnoremap <Leader>d :YcmCompleter GoToDeclaration<CR>
+
+"Go to definition
+nnoremap <Leader>D :YcmCompleter GoToDefinition<CR>
+
+"Find usage
+nnoremap <Leader>u :YcmCompleter GoToReferences<CR>
+
+"Get type
+nnoremap <Leader>t :YcmCompleter GetType<CR>
+
+"Fix it
+nnoremap <Leader>; :YcmCompleter FixIt<CR>
+
+"Rename
+nnoremap <Leader>r :YcmCompleter RefactorRename 
+
+"Format buffer
+nnoremap <Leader>c :YcmCompleter Format<CR>
+
+"Set extra configuration file
+let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 "}}}
 "}}}

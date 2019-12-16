@@ -23,7 +23,7 @@ chmod +x install.sh
 | `pacman -Ss`   | Search for packages in the repository |
 | `pacman -Syu`  | Update and upgrade installed packages |
 
-### Packages (46):
+### Packages (48):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -32,6 +32,7 @@ chmod +x install.sh
 | automake               | Automatically creating make files      | For Yay (base-devel)                     |
 | base                   | Base packages                          | For Arch install                         |
 | bison                  | Parser generator                       | For Yay (base-devel)                     |
+| cmake                  | Make system                            | For YouCompleteMe                        |
 | dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
 | feh                    | Image viewer                           | For setting wallpaper                    |
@@ -57,6 +58,7 @@ chmod +x install.sh
 | patch                  | Patches files                          | For Yay (base-devel)                     |
 | picom                  | Compositor                             | For transparency                         |
 | pkgconf                | Package compiler and linker            | For Yay (base-devel)                     |
+| python-pynvim          | Python client for Neovim               | For Neovim Python plugins                |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
 | scrot                  | Screen capture                         | For taking screenshots                   |
