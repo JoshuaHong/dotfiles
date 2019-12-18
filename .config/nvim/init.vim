@@ -5,6 +5,7 @@ call plug#begin()
   Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
   Plug 'junegunn/fzf.vim'
   Plug 'ycm-core/YouCompleteMe', {'do': 'python install.py --clangd-completer'}
+  Plug 'junegunn/goyo.vim'
 call plug#end()
 "}}}
 
@@ -41,6 +42,7 @@ set foldmethod=marker               "Use markers to indicate folds
 set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
 set colorcolumn=81                  "Highlights the column limit
+set laststatus=2                    "Show status line
 
 "Change cursor shape based on mode
 let &t_SI = "\<Esc>[6 q"
@@ -52,14 +54,26 @@ let &t_EI = "\<Esc>[2 q"
 syntax on                           "Enable syntax highlighting
 set background=dark                 "Use dark background
 set t_Co=256                        "Enable 256 colors
+
+function! s:colorscheme()
+  "Enable transparent backgroud
+  highlight Normal ctermbg=NONE
+
+  "Set colorcolumn color
+  highlight ColorColumn ctermbg=235
+
+  "Set statusline color
+  highlight StatusLine ctermfg=24
+
+  "YouCompleteMe diagnostic colors
+  highlight YcmErrorSign ctermfg=magenta
+  highlight YcmWarningSign ctermfg=blue
+  highlight YcmErrorSection ctermfg=lightyellow
+endfunction
+
+autocmd! ColorScheme solarized call s:colorscheme()
 colorscheme solarized               "Use solarized colorscheme
-let g:solarized_termcolors=256      "Use 256 colors
-
-"Enable transparent backgroud
-highlight Normal guibg=NONE ctermbg=NONE
-
-"Set colorcolumn color
-highlight ColorColumn guibg=lightgrey ctermbg=235
+" let g:solarized_termcolors=256      "Use 256 colors
 "}}}
 
 "========== Indentation =========={{{
@@ -115,9 +129,6 @@ nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
 "Unset search pattern
 nnoremap <silent> <Leader>n :noh<CR>
-
-"Toggle spellcheck
-nnoremap <Leader>s :set spell! spelllang=en_ca<CR>
 
 "Open file explorer
 nnoremap <Leader>e :Explore<CR>
@@ -185,6 +196,9 @@ autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) 
 "Persist clipboard on exit
 autocmd VimLeave * call system("xclip -selection clipboard -i", getreg('+'))
 
+"Persist spell check
+autocmd BufRead,BufNewFile * setlocal spell spelllang=en_ca
+
 "Persistent Undo
 if !isdirectory("/tmp/.vim-undo-dir/")
   call mkdir("/tmp/.vim-undo-dir/", "", 0700)
@@ -208,7 +222,7 @@ nnoremap <Leader>m :Marks<CR>
 nnoremap <Leader>l :Lines<CR>
 
 "Search lines in project
-nnoremap <Leader>g :Rg<CR>
+nnoremap <Leader>s :Rg<CR>
 
 "Search command history
 nnoremap <Leader>h :History:<CR>
@@ -250,10 +264,9 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 
 "Auto close completion preview window
 let g:ycm_autoclose_preview_window_after_insertion = 1
+"}}}
 
-"Diagnostic colors
-highlight YcmErrorSign ctermfg=magenta
-highlight YcmWarningSign ctermfg=blue
-highlight YcmErrorSection ctermfg=lightyellow
+"========== Goyo ========== {{{
+nnoremap <Leader>g :Goyo<CR>
 "}}}
 "}}}

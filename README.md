@@ -23,7 +23,7 @@ chmod +x install.sh
 | `pacman -Ss`   | Search for packages in the repository |
 | `pacman -Syu`  | Update and upgrade installed packages |
 
-### Packages (48):
+### Packages (49):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -31,6 +31,7 @@ chmod +x install.sh
 | autoconf               | Automatically configures source code   | For Yay dependency (base-devel)          |
 | automake               | Automatically creating make files      | For Yay dependency (base-devel)          |
 | base                   | Base packages                          | For Arch install                         |
+| bear                   | Clang compilation database generator   | For YouCompleteMe Makefile reader        |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
 | clang                  | C family compiler                      | For YouCompleteMe language server        |
 | cmake                  | Make system                            | For YouCompleteMe dependency             |

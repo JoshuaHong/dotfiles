@@ -6,7 +6,8 @@
 # Mouse listener
 case "$BLOCK_BUTTON" in
   1) # Left click
-    alacritty -e bash -c "yay -Syu && echo \"Done!\" && sleep infinity"
+    alacritty -e bash -c "yay -Syu && nvim +PlugUpgrade +PlugUpdate +qall && \
+        echo \"Done!\" && sleep infinity"
     ;;
   3) # Right click
     alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"

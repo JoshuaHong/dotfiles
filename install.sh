@@ -23,7 +23,7 @@ installPackages() {
       noto-fonts-emoji openssh picom python-pynvim reflector ripgrep scrot \
       valgrind xclip xf86-video-intel xorg-server xorg-xbacklight xorg-xinit \
       xorg-xset xss-lock"
-  local yayPackages="simple-mtpfs ttf-symbola"
+  local yayPackages="bear simple-mtpfs ttf-symbola"
 
   echo "Updating and installing packages..."
   pacman -Syu
