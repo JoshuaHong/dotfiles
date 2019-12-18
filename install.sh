@@ -17,8 +17,8 @@ createUser() {
 
 # Install packages
 installPackages() {
-  local pacmanPackages="alacritty alsa-utils base base-devel cmake dmenu dunst \
-      feh firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
+  local pacmanPackages="alacritty alsa-utils base base-devel clang cmake dmenu \
+      dunst feh firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
       linux-firmware man-db neovim net-tools network-manager-applet noto-fonts \
       noto-fonts-emoji openssh picom python-pynvim reflector ripgrep scrot \
       valgrind xclip xf86-video-intel xorg-server xorg-xbacklight xorg-xinit \

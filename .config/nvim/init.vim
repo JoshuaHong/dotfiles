@@ -227,17 +227,33 @@ nnoremap <Leader>u :YcmCompleter GoToReferences<CR>
 "Get type
 nnoremap <Leader>t :YcmCompleter GetType<CR>
 
+"Get full diagnostics information
+nnoremap <Leader>i :YcmDiags<CR>
+
 "Fix it
 nnoremap <Leader>; :YcmCompleter FixIt<CR>
 
 "Rename
 nnoremap <Leader>r :YcmCompleter RefactorRename 
 
-"Format buffer
+"Clean format buffer
 nnoremap <Leader>c :YcmCompleter Format<CR>
 
-"Set extra configuration file
+"Set default extra configuration file
 let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-"}}}
+
+"Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
+
+"Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+
+"Auto close completion preview window
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+"Diagnostic colors
+highlight YcmErrorSign ctermfg=magenta
+highlight YcmWarningSign ctermfg=blue
+highlight YcmErrorSection ctermfg=lightyellow
 "}}}
 "}}}
