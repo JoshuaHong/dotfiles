@@ -10,7 +10,14 @@ case "$BLOCK_BUTTON" in
         echo \"Done!\" && sleep infinity"
     ;;
   3) # Right click
-    alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"
+    updates=$(checkupdates 2>&1)
+    if echo "$updates" | grep -q "ERROR"; then
+      alacritty -e bash -c "echo \"Error: Try again.\" && sleep infinity"
+    elif [[ -z "$updates" ]]; then
+      alacritty -e bash -c "echo \"No updates.\" && sleep infinity"
+    else
+      alacritty -e bash -c "echo \"Updates:\" && checkupdates && sleep infinity"
+    fi
     ;;
 esac
 
