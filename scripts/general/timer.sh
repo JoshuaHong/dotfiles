@@ -135,12 +135,11 @@ printStopwatch() {
   fi
 }
 
-# Converts miliseconds to days, hours, minutes, seconds, miliseconds
+# Converts miliseconds to hours, minutes, seconds, miliseconds
 # Takes time in miliseconds and returns expanded time as formatted string
 msConverter() {
-  printf "%02dd %02dh %02dm %02ds %03dms\n" "$(("$1"/86400000))" \
-      "$((("$1"/3600000)%24))" "$((("$1"/60000)%60))" "$((("$1"/1000)%60))" \
-      "$(("$1"%1000))"
+  printf "%02dh %02dm %02ds %03dms\n" "$((("$1"/3600000)%24))" \
+      "$((("$1"/60000)%60))" "$((("$1"/1000)%60))" "$(("$1"%1000))"
 }
 
 # Converts seconds to hours, minutes, seconds
