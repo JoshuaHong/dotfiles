@@ -296,6 +296,9 @@ nmap <Leader>u <Plug>(coc-references)
 "}}}
 
 "========== Auto-Pairs =========={{{
+"Set matching pairs
+let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
+
 "Disable <C-h> mapping which deletes pairs
 let g:AutoPairsMapCh = 0
 "}}}
