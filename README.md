@@ -31,10 +31,9 @@ chmod +x install.sh
 | autoconf               | Automatically configures source code   | For Yay dependency (base-devel)          |
 | automake               | Automatically creating make files      | For Yay dependency (base-devel)          |
 | base                   | Base packages                          | For Arch install                         |
-| bear                   | Clang compilation database generator   | For YouCompleteMe Makefile reader        |
+| bear *                 | Clang compilation database generator   | For ALE and COC Makefile reader          |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
-| clang                  | C family compiler                      | For YouCompleteMe language server        |
-| cmake                  | Make system                            | For YouCompleteMe dependency             |
+| clang                  | C family compiler                      | For ALE and COC language server          |
 | dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
 | feh                    | Image viewer                           | For setting wallpaper                    |
@@ -53,16 +52,17 @@ chmod +x install.sh
 | neovim                 | Text editor                            | For editing text                         |
 | net-tools              | Networking tools                       | For PIA VPN dependency                   |
 | network-manager-applet | System tray for NetworkManager         | For Network Manager applet               |
+| nodejs                 | Javascript runtime environment         | For COC dependency                       |
 | noto-fonts-emoji       | Font for emoji symbols                 | For rendering unicode symbols            |
 | openssh                | SSH                                    | For SSH                                  |
 | pacman-contrib         | Scripts and tools for Pacman systems   | For checkupdates                         |
 | patch                  | Patches files                          | For Yay dependency (base-devel)          |
 | picom                  | Compositor                             | For transparency                         |
 | pkgconf                | Package compiler and linker            | For Yay dependency (base-devel)          |
-| python-pynvim          | Python client for Neovim               | For Neovim Python plugins                |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
 | scrot                  | Screen capture                         | For taking screenshots                   |
+| shellcheck             | Shell script analysis tool             | For ALE shell linting                    |
 | simple-mtpfs *         | Media transfer protocol file system    | For mounting mobile phones               |
 | ttf-symbola *          | Font for unicode symbols               | For rendering unicode on Dmenu           |
 | valgrind               | Memory management tool                 | For catching memory leaks                |

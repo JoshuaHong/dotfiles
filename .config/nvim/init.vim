@@ -2,10 +2,12 @@
 call plug#begin()
   Plug 'altercation/vim-colors-solarized'
   Plug 'bfrg/vim-cpp-modern'
-  Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'ycm-core/YouCompleteMe', {'do': 'python install.py --clangd-completer'}
   Plug 'junegunn/goyo.vim'
+  Plug 'dense-analysis/ale'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
 "}}}
 
@@ -43,6 +45,7 @@ set foldmarker={{{,}}}              "Set start and end markers for folds
 set list listchars=tab:\ \ ,trail:· "Display trailing tabs and spaces
 set colorcolumn=81                  "Highlights the column limit
 set laststatus=2                    "Show status line
+set updatetime=30                   "Set time before triggering event on idle
 
 "Change cursor shape based on mode
 let &t_SI = "\<Esc>[6 q"
@@ -65,15 +68,17 @@ function! s:colorscheme()
   "Set statusline color
   highlight StatusLine ctermfg=24
 
-  "YouCompleteMe diagnostic colors
-  highlight YcmErrorSign ctermfg=magenta
-  highlight YcmWarningSign ctermfg=blue
-  highlight YcmErrorSection ctermfg=lightyellow
+  "ALE diagnostic colors
+  highlight ALEErrorSign ctermfg=magenta
+  highlight ALEWarningSign ctermfg=darkyellow
+  highlight ALEError ctermfg=lightyellow
+
+  "COC text highlight colors
+  highlight CocHighlightText ctermbg=24
 endfunction
 
 autocmd! ColorScheme solarized call s:colorscheme()
 colorscheme solarized               "Use solarized colorscheme
-" let g:solarized_termcolors=256      "Use 256 colors
 "}}}
 
 "========== Indentation =========={{{
@@ -106,10 +111,10 @@ set nowb                            "Disable writing to backups
 let mapleader = "\<Space>"
 
 "Remap Escape key
-nnoremap <Leader> za
 nnoremap <Leader><Space> :
 noremap <C-_> <Esc>
 inoremap <C-_> <Esc>
+snoremap <C-_> <Esc>
 
 "Map movement
 inoremap <C-h> <Left>
@@ -127,11 +132,11 @@ nnoremap <Leader>Q :q!<CR>
 "Close current buffer
 nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
+"Toggle folds
+nnoremap <Leader>z za
+
 "Unset search pattern
 nnoremap <silent> <Leader>n :noh<CR>
-
-"Open file explorer
-nnoremap <Leader>e :Explore<CR>
 "}}}
 
 "========== Editing =========={{{
@@ -228,45 +233,71 @@ nnoremap <Leader>s :Rg<CR>
 nnoremap <Leader>h :History:<CR>
 "}}}
 
-"========== YouCompleteMe =========={{{
-"Go to declaration
-nnoremap <Leader>d :YcmCompleter GoToDeclaration<CR>
-
-"Go to definition
-nnoremap <Leader>D :YcmCompleter GoToDefinition<CR>
-
-"Find usage
-nnoremap <Leader>u :YcmCompleter GoToReferences<CR>
-
-"Get type
-nnoremap <Leader>t :YcmCompleter GetType<CR>
-
-"Get full diagnostics information
-nnoremap <Leader>i :YcmDiags<CR>
-
-"Fix it
-nnoremap <Leader>; :YcmCompleter FixIt<CR>
-
-"Rename
-nnoremap <Leader>r :YcmCompleter RefactorRename 
-
-"Clean format buffer
-nnoremap <Leader>c :YcmCompleter Format<CR>
-
-"Set default extra configuration file
-let g:ycm_global_ycm_extra_conf = '$HOME/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-
-"Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-let g:ycm_clangd_binary_path = exepath("clangd")
-
-"Let clangd fully control code completion
-let g:ycm_clangd_uses_ycmd_caching = 0
-
-"Auto close completion preview window
-let g:ycm_autoclose_preview_window_after_insertion = 1
-"}}}
-
 "========== Goyo ========== {{{
 nnoremap <Leader>g :Goyo<CR>
+"}}}
+
+"========== ALE =========={{{
+"Set linters to ignore
+let g:ale_linters_ignore = {
+  \ 'cpp': ['clang', 'gcc']
+\}
+
+"Set fixers to use
+let g:ale_fixers = {
+  \ 'cpp': ['clang-format', 'clangtidy', 'remove_trailing_lines',
+  \         'trim_whitespace', 'uncrustify']
+\}
+
+"Set warning signs
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠'
+
+"Format buffer
+nnoremap <Leader>c :ALEFix<CR>
+
+"Go to next error or warning
+nnoremap <Leader>e :ALENextWrap<CR>
+
+"Go to definition
+nnoremap <Leader>j :ALEGoToDefinition<CR>
+
+"Rename
+nnoremap <Leader>r :ALERename<CR>
+"}}}
+
+"========== COC =========={{{
+"Navigate completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+"Get information
+nnoremap <Leader>i :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+"Highlight symbol under cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"Find references
+nmap <Leader>u <Plug>(coc-references)
+"}}}
+
+"========== Auto-Pairs =========={{{
+"Disable <C-h> mapping which deletes pairs
+let g:AutoPairsMapCh = 0
+"}}}
 "}}}
 "}}}
