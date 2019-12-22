@@ -9,15 +9,17 @@ usage() {
   echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs"
   echo "Press any key to pause or unpause"
   echo "Options:"
-  echo "  --help: show options"
-  echo "  -h|--hidden: no notifications"
-  echo "  -n|--name: set name of timer"
-  echo "  -q|--quiet: no output"
-  echo "  -s|--stopwatch: stopwatch"
-  echo "  -t|--time: alert at the specified time"
+  echo "  --help: Show options"
+  echo "  -a|--alert: Hide alert notifications"
+  echo "  -h|--hidden: Hide notifications"
+  echo "  -n|--name: Set name of timer"
+  echo "  -q|--quiet: Suppress standard output"
+  echo "  -s|--stopwatch: Use stopwatch"
+  echo "  -t|--time: Alert at the specified time"
 }
 
 # Define flags
+a="false"
 h="false"
 n=""
 q="false"
@@ -25,13 +27,16 @@ s="false"
 t="false"
 
 # Check for flags
-while getopts "hn:qst-:" flags; do
+while getopts "ahn:qst-:" flags; do
   case "${flags}" in
     -)
       case "${OPTARG}" in
         help)
           usage
           exit 0
+          ;;
+        alert)
+          a="true"
           ;;
         hidden)
           h="true"
@@ -54,6 +59,9 @@ while getopts "hn:qst-:" flags; do
           exit 1
           ;;
       esac
+      ;;
+    a)
+      a="true"
       ;;
     h)
       h="true"
@@ -94,7 +102,7 @@ stop() {
 notifyTimer() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "${n}Timer (paused)" "$2"
+        "${n}Timer (Paused)" "$2"
   else
     dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
@@ -104,7 +112,7 @@ notifyTimer() {
 # Takes the current time as input
 printTimer() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
-    echo -n "${n}Timer (paused): $1"
+    echo -n "${n}Timer (Paused): $1"
     echo -ne "\r"
   else
     echo -n "${n}Time remaining: $1"
@@ -117,7 +125,7 @@ printTimer() {
 notifyStopwatch() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "${n}Stopwatch (paused)" "$2"
+        "${n}Stopwatch (Paused)" "$2"
   else
     dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
   fi
@@ -127,7 +135,7 @@ notifyStopwatch() {
 # Takes the current time as input
 printStopwatch() {
   if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
-    echo -n "${n}Stopwatch (paused): $1"
+    echo -n "${n}Stopwatch (Paused): $1"
     echo -ne "\r"
   else
     echo -n "${n}Time elapsed      : $1"
@@ -179,7 +187,7 @@ stopwatch() {
     if [[ "$q" == "false" ]]; then
       printStopwatch "$end"
     fi
-    trap "stop \"${n}Stopwatch (stopped)\" \"🕛 $end\"" SIGINT
+    trap "stop \"${n}Stopwatch (Stopped)\" \"🕛 $end\"" SIGINT
   done
 }
 
@@ -225,13 +233,17 @@ timer() {
         printTimer "$remaining"
       fi
     fi
-    trap "stop \"${n}Timer (stopped)\" \"⌛ $remaining\"" SIGINT
+    trap "stop \"${n}Timer (Stopped)\" \"⌛ $remaining\"" SIGINT
   done
   if [[ "$q" == "false" ]]; then
     echo -n "${n}Timer complete"
     echo -ne "\r"
   fi
-  notifyTimer "${n}Timer" "⌛ Complete" -u critical -t 0
+  if [[ "$a" == "false" ]]; then
+    notifyTimer "${n}Timer" "⌛ Complete" -u critical
+  elif [[ "$h" == "false" ]]; then
+    notifyTimer "${n}Timer" "⌛ Complete"
+  fi
   if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
     rm -f "/tmp/timerIsPaused$$.txt"
   fi
