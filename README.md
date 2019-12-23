@@ -52,8 +52,8 @@ chmod +x install.sh
 | neovim                 | Text editor                            | For editing text                         |
 | net-tools              | Networking tools                       | For PIA VPN dependency                   |
 | network-manager-applet | System tray for NetworkManager         | For Network Manager applet               |
-| nodejs                 | Javascript runtime environment         | For COC dependency                       |
 | noto-fonts-emoji       | Font for emoji symbols                 | For rendering unicode symbols            |
+| npm                    | JavaScript package manager             | For COC dependency                       |
 | openssh                | SSH                                    | For SSH                                  |
 | pacman-contrib         | Scripts and tools for Pacman systems   | For checkupdates                         |
 | patch                  | Patches files                          | For Yay dependency (base-devel)          |

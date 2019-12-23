@@ -34,7 +34,8 @@ done
 checklock() {
   sleep 300
 
-  local i3lockrunning="$(pgrep --exact --count i3lock)"
+  local i3lockrunning
+  i3lockrunning="$(pgrep --exact --count i3lock)"
   if [[ "$i3lockrunning" -gt "0" ]]; then
     systemctl suspend && checklock
   fi

@@ -7,8 +7,9 @@
 # Notifications
 # Uses the same parameters as the dunstify command
 notify() {
-  local USER_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
-  $USER_HOME/scripts/misc/dunstify-as-root.sh "$@"
+  local USER_HOME
+  USER_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
+  "$USER_HOME/scripts/misc/dunstify-as-root.sh" "$@"
 }
 
 # Check for root access
@@ -56,13 +57,26 @@ name="${path##*/}"
 if [[ "$action" == "Mount" ]]; then
   mkdir -p "/mnt/$name"
   if [[ "$type" == "💽" ]]; then
-    mount "/dev/$name" "/mnt/$name" && notify "Mounted" "💽 $path"
+    if mount "/dev/$name" "/mnt/$name"; then
+      notify "Mounted" "💽 $path"
+      pkill -SIGRTMIN+12 i3blocks
+    else
+      notify "Mounting Failed" "❌ $path"
+    fi
   elif [[ "$type" == "📱" ]]; then
-    simple-mtpfs --device "$number" "/mnt/$name" && notify "Mounted" "📱 $path"
+    if simple-mtpfs --device "$number" "/mnt/$name"; then
+      notify "Mounted" "📱 $path"
+      pkill -SIGRTMIN+12 i3blocks
+    else 
+      notify "Mounting Failed" "❌ $path"
+    fi
   fi
-  pkill -SIGRTMIN+12 i3blocks
 elif [[ "$action" == "Unmount" ]]; then
-  fusermount -u "/mnt/$name" && notify "Unmounted" "📵 $path"
-  rmdir "/mnt/$name"
-  pkill -SIGRTMIN+12 i3blocks
+  if fusermount -u "/mnt/$name"; then
+    notify "Unmounted" "📵 $path";
+    rmdir "/mnt/$name"
+    pkill -SIGRTMIN+12 i3blocks
+  else
+    notify "Unmounting Failed" "❌ $path"
+  fi
 fi

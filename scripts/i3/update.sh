@@ -27,7 +27,7 @@ if echo "$updates" | grep -q "ERROR"; then
   echo "📥"
   # Short text
   echo "📥"
-elif [[ ! -z "$updates" ]]; then
+elif [[ -n "$updates" ]]; then
   # Full text
   echo "📥 $(echo "$updates" | wc -l)"
   # Short text

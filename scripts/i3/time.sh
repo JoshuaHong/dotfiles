@@ -26,7 +26,7 @@ date "+%R"
 
 case "$BLOCK_BUTTON" in
   1) # Left click
-    while [ true ]; do
+    while true; do
       notify "Time" "🕛 $(date +%T)"
     done
     ;;

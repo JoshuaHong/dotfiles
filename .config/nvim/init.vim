@@ -130,7 +130,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 
 "Close current buffer
-nnoremap <expr> <Leader>d &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
+nnoremap <expr> <Leader>c &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
 "Toggle folds
 nnoremap <Leader>z za
@@ -254,13 +254,13 @@ let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠'
 
 "Format buffer
-nnoremap <Leader>c :ALEFix<CR>
+nnoremap <Leader>; :ALEFix<CR>
 
 "Go to next error or warning
 nnoremap <Leader>e :ALENextWrap<CR>
 
 "Go to definition
-nnoremap <Leader>j :ALEGoToDefinition<CR>
+nnoremap <Leader>d :ALEGoToDefinition<CR>
 
 "Rename
 nnoremap <Leader>r :ALERename<CR>
@@ -301,6 +301,9 @@ let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 
 "Disable <C-h> mapping which deletes pairs
 let g:AutoPairsMapCh = 0
+
+"Toggle Auto-Pairs
+let g:AutoPairsShortcutToggle = "<C-p>"
 "}}}
 "}}}
 "}}}

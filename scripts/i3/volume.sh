@@ -27,7 +27,7 @@ fi
 echo "$volume%"
 
 # Color
-if [[ ! -z "$muted" ]]; then
+if [[ -n "$muted" ]]; then
   echo "#ffff00"
 fi
 

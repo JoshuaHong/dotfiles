@@ -43,7 +43,7 @@ while getopts "ahn:qst-:" flags; do
           ;;
         name)
           n="${!OPTIND} "
-          OPTIND="$(( $OPTIND + 1 ))"
+          OPTIND="$(( OPTIND + 1 ))"
           ;;
         quiet)
           q="true"
@@ -100,7 +100,7 @@ stop() {
 # Timer notifications
 # Takes the same parameters as the dunstify command
 notifyTimer() {
-  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
         "${n}Timer (Paused)" "$2"
   else
@@ -111,7 +111,7 @@ notifyTimer() {
 # Prints timer to console
 # Takes the current time as input
 printTimer() {
-  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
     echo -n "${n}Timer (Paused): $1"
     echo -ne "\r"
   else
@@ -123,7 +123,7 @@ printTimer() {
 # Stopwatch notifications
 # Takes the same parameters as the dunstify command
 notifyStopwatch() {
-  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
     dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
         "${n}Stopwatch (Paused)" "$2"
   else
@@ -134,7 +134,7 @@ notifyStopwatch() {
 # Prints stopwatch to console
 # Takes the current time as input
 printStopwatch() {
-  if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
     echo -n "${n}Stopwatch (Paused): $1"
     echo -ne "\r"
   else
@@ -159,16 +159,22 @@ secConverter() {
 
 # Start the stopwatch
 stopwatch() {
-  local start="$(date +%s%N)"
-  local timePaused=0
+  local start
+  local timePaused
+  local pauseStart
+  local pauseEnd
+  local end
+
+  timePaused=0
+  start="$(date +%s%N)"
   while true; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
-      local pauseStart="$(date +%s%N)"
-      local pauseEnd="$pauseStart"
-      while [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; do
-        local pauseEnd="$(date +%s%N)"
+      pauseStart="$(date +%s%N)"
+      pauseEnd="$pauseStart"
+      while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
+        pauseEnd="$(date +%s%N)"
         if [[ "$h" == "false" ]]; then
-          local end="$(msConverter \
+          end="$(msConverter \
               "$(((("$pauseStart"-"$start")-"$timePaused"+500000)/1000000))")"
           notifyStopwatch "${n}Stopwatch (Paused)" "🕛 $end"
         fi
@@ -179,7 +185,7 @@ stopwatch() {
       ((timePaused+=("$pauseEnd"-"$pauseStart")))
     fi
     # +500000 for rounding (num=num+den/2)
-    local end="$(msConverter \
+    end="$(msConverter \
         "$(((("$(date +%s%N)"-"$start")-"$timePaused"+500000)/1000000))")"
     if [[ "$h" == "false" ]]; then
       notifyStopwatch "${n}Stopwatch" "🕛 $end"
@@ -187,33 +193,38 @@ stopwatch() {
     if [[ "$q" == "false" ]]; then
       printStopwatch "$end"
     fi
-    trap "stop \"${n}Stopwatch (Stopped)\" \"🕛 $end\"" SIGINT
+    trap 'stop "${n}Stopwatch (Stopped)" "🕛 $end"' SIGINT
   done
 }
 
 # Start the timer
 timer() {
-  local start="$(date "+%s")"
+  local start
+  local end
+  local remaining
+  local pauseStart
+  local pauseEnd
+
+  start="$(date "+%s")"
   if [[ "$t" == "true" ]]; then
-    local end="$((("$hours"*3600+"$minutes"*60+"$seconds") \
+    end="$((("$hours"*3600+"$minutes"*60+"$seconds") \
         -("$(date "+%H")"*3600+"$(date "+%M")"*60+"$(date "+%S")")))"
     if [[ "$end" -lt 0 ]]; then
-      local end="$(("$end"+86400))"
+      end="$(("$end"+86400))"
     fi
-    local end="$(("$end"+"$(date "+%s")"))"
+    end="$(("$end"+"$(date "+%s")"))"
   else
-    local end="$(date -d "+$hours hours $minutes minutes $seconds seconds" \
-        "+%s")"
+    end="$(date -d "+$hours hours $minutes minutes $seconds seconds" "+%s")"
   fi
-  local remaining="$(secConverter "$(("$end" - "$start"))")"
+  remaining="$(secConverter "$(("$end" - "$start"))")"
 
   while [[ "$start" != "$end" ]]; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
-      local pauseStart="$(date +%s)"
-      local pauseEnd="$pauseStart"
-      while [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; do
-        local pauseEnd="$(date +%s)"
-        local remaining=$(secConverter "$(("$end" - "$start"))")
+      pauseStart="$(date +%s)"
+      pauseEnd="$pauseStart"
+      while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
+        pauseEnd="$(date +%s)"
+        remaining=$(secConverter "$(("$end" - "$start"))")
         if [[ "$h" == "false" ]]; then
           notifyTimer "Timer (Paused)" "⏳ $remaining"
         fi
@@ -225,7 +236,7 @@ timer() {
     fi
     if [[ "$start" -le "$(date -d "+-1second" "+%s")" ]]; then
       start="$(date "+%s")"
-      local remaining=$(secConverter "$(("$end" - "$start"))")
+      remaining=$(secConverter "$(("$end" - "$start"))")
       if [[ "$h" == "false" ]]; then
         notifyTimer "${n}Timer" "⏳ $remaining"
       fi
@@ -233,7 +244,7 @@ timer() {
         printTimer "$remaining"
       fi
     fi
-    trap "stop \"${n}Timer (Stopped)\" \"⌛ $remaining\"" SIGINT
+    trap 'stop "${n}Timer (Stopped)" "⌛ $remaining"' SIGINT
   done
   if [[ "$q" == "false" ]]; then
     echo -n "${n}Timer complete"
@@ -262,7 +273,7 @@ pauseUnpause() {
   while true; do
     read -n 1 -s -r
 
-    if [[ "$(echo "$(< "/tmp/timerIsPaused$$.txt")")"  == "true" ]]; then
+    if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
       echo "false" > "/tmp/timerIsPaused$$.txt"
     else
       echo "true" > "/tmp/timerIsPaused$$.txt"
@@ -291,9 +302,9 @@ if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
   hours="$(echo "$1" | cut -d ":" -f1)"
   minutes="$(echo "$1" | cut -d ":" -f2)"
   seconds="$(echo "$1" | cut -d ":" -f3)"
-elif [[ "$@" =~ \
+elif [[ "$*" =~ \
     ^([0-9]*h)?[[:space:]]*([0-9]*m)?[[:space:]]*(([0-9]*s)?)$ ]]; then
-  remainder="$@"
+  remainder="$*"
   if [[ "$remainder" == *h* ]]; then
     hours="${remainder%%h*}"
     remainder="${remainder#*h}"

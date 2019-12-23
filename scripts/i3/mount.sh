@@ -41,7 +41,7 @@ while read -r line; do
   fi
 done <<< "$device"
 
-if [[ ! -z "$device" && "$print" == "true" ]]; then
+if [[ -n "$device" && "$print" == "true" ]]; then
   # Long text
   echo "📱"
   # Short text
@@ -50,21 +50,26 @@ if [[ ! -z "$device" && "$print" == "true" ]]; then
   # Mouse listener
   case "$BLOCK_BUTTON" in
     1) # Left click
-      sudo "$HOME/scripts/dmenu/mount.sh"
+      sudo "$HOME/scripts/dmenu/mount.sh" &
+      kill $$
       ;;
     3) # Right click
-      output+="Mounted:\n"
       while read -r line; do
         if [[ "$(echo -e "$line" | awk '{print $1}')" == "Unmount" ]]; then
-          output+="$(echo "$line\n" | cut -d " " -f 2-)"
+          mounted+="$(echo "$line\n" | cut -d " " -f 2-)"
         fi
       done <<< "$device"
-      output+="\nUnmounted:\n"
       while read -r line; do
         if [[ "$(echo -e "$line" | awk '{print $1}')" == "Mount" ]]; then
-          output+="$(echo "$line\n" | cut -d " " -f 2-)"
+          unmounted+="$(echo "$line\n" | cut -d " " -f 2-)"
         fi
       done <<< "$device"
+      if [[ -n "$mounted" ]]; then
+        output+="Mounted:\n$mounted"
+      fi
+      if [[ -n "$unmounted" ]]; then
+        output+="\nUnmounted:\n$unmounted"
+      fi
       notify "Devices" "$output"
       ;;
   esac
