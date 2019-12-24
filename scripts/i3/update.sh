@@ -1,15 +1,22 @@
 #!/bin/bash
 
-# An i3blocks update output script
-# Takes in a $BLOCK_BUTTON instance for mouse events
+# An i3blocks update output script.
+# Requires an optional "$BLOCK_BUTTON" instance for mouse events.
 
-# Mouse listener
+# Listen for mouse events.
 case "$BLOCK_BUTTON" in
-  1) # Left click
-    alacritty -e bash -c "yay -Syu && nvim +PlugUpgrade +PlugUpdate +qall && \
-        echo \"Done!\" && sleep infinity"
+  1) # On left click.
+    updates=$(checkupdates 2>&1)
+    if echo "$updates" | grep -q "ERROR"; then
+      alacritty -e bash -c "echo \"Error: Try again.\" && sleep infinity"
+    elif [[ -z "$updates" ]]; then
+      alacritty -e bash -c "echo \"No updates.\" && sleep infinity"
+    else
+      alacritty -e bash -c "yay -Syu && nvim +PlugUpgrade +PlugUpdate +qall && \
+          echo \"Done!\" && sleep infinity"
+    fi
     ;;
-  3) # Right click
+  3) # On right click.
     updates=$(checkupdates 2>&1)
     if echo "$updates" | grep -q "ERROR"; then
       alacritty -e bash -c "echo \"Error: Try again.\" && sleep infinity"
@@ -23,14 +30,14 @@ esac
 
 updates=$(checkupdates 2>&1)
 if echo "$updates" | grep -q "ERROR"; then
-  # Full text
+  # Output full text.
   echo "📥"
-  # Short text
+  # Output short text.
   echo "📥"
 elif [[ -n "$updates" ]]; then
-  # Full text
+  # Output full text.
   echo "📥 $(echo "$updates" | wc -l)"
-  # Short text
+  # Output short text.
   echo "$updates" | wc -l
 fi
 

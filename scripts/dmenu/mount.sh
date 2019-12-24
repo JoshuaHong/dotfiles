@@ -1,20 +1,25 @@
 #!/bin/bash
 
-# A dmenu device mount script
-# Gives a dmenu prompt to mount or unmount loaded devices
-# Requires root access
+# Gives a dmenu prompt to mount or unmount loaded devices.
+# Requires root access.
 
-# Notifications
-# Uses the same parameters as the dunstify command
+# Outputs to standard error.
+# Requires a message "$@" to print.
+echoerr() {
+  echo "$@" 1>&2
+}
+
+# Sends notifications.
+# Requires the same parameters "$@" as the dunstify command.
 notify() {
   local USER_HOME
   USER_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
   "$USER_HOME/scripts/misc/dunstify-as-root.sh" "$@"
 }
 
-# Check for root access
+# Checks for root access.
 if [[ "$EUID" -ne 0 ]]; then
-   echo "ERROR: This script must be run as root"
+   echoerr "Error: This script must be run as root."
    exit 1
 fi
 
@@ -39,8 +44,8 @@ mobileDevices="$(simple-mtpfs -l | awk '{
   print $2
 }')"
 
-# device =[#][type][action][path][(size)]
-# Ex: 1: 💽 Mount /dev/sda (32G)
+# device="[#]: [type] [action] [path] ([size])"
+# Ex: "1: 💽 Mount /dev/sda (32G)"
 if [[ -z "$storageDevices" ]]; then
   device="$(echo -e "\n$mobileDevices" \
       | dmenu -i -p "Select device to mount or unmount")"

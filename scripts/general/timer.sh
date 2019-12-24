@@ -1,24 +1,24 @@
 #!/bin/bash
 
-# A timer script to send an alert after a specified time
-# Takes a time in the following format: xx:xx:xx or xxh xxm xxs
-# For example: ./timer 5:24:30 or ./timer 5h 24m 30s
+# A timer script to send an alert at a specified time.
+# Requires a time in the following format: xx:xx:xx or xxh xxm xxs.
+# For example: ./timer 5:24:30 or ./timer 5h 24m 30s.
 
-# Usage
+# Outputs the usage.
 usage() {
-  echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs"
-  echo "Press any key to pause or unpause"
+  echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs."
+  echo "Press any key to pause or resume."
   echo "Options:"
-  echo "  --help: Show options"
-  echo "  -a|--alert: Hide alert notifications"
-  echo "  -h|--hidden: Hide notifications"
-  echo "  -n|--name: Set name of timer"
-  echo "  -q|--quiet: Suppress standard output"
-  echo "  -s|--stopwatch: Use stopwatch"
-  echo "  -t|--time: Alert at the specified time"
+  echo "  --help: Shows options."
+  echo "  -a|--alert: Hides alert notifications."
+  echo "  -h|--hidden: Hides time notifications."
+  echo "  -n|--name: Sets the name of the timer."
+  echo "  -q|--quiet: Suppresses standard output."
+  echo "  -s|--stopwatch: Uses the stopwatch."
+  echo "  -t|--time: Alerts at the specified time."
 }
 
-# Define flags
+# Define flags.
 a="false"
 h="false"
 n=""
@@ -26,7 +26,7 @@ q="false"
 s="false"
 t="false"
 
-# Check for flags
+# Check for flags.
 while getopts "ahn:qst-:" flags; do
   case "${flags}" in
     -)
@@ -86,7 +86,14 @@ while getopts "ahn:qst-:" flags; do
 done
 shift "$((OPTIND-1))"
 
-# Stops processes on interrupt signal
+# Outputs to standard error.
+# Requires a message "$@" to print.
+echoerr() {
+  echo "$@" 1>&2
+}
+
+# Stops processes on interrupt signal and sends a stopped notification.
+# Requires the same parameters "$@" as the dunstify command.
 stop() {
   if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
     rm -f "/tmp/timerIsPaused$$.txt"
@@ -97,115 +104,98 @@ stop() {
   exit 0
 }
 
-# Timer notifications
-# Takes the same parameters as the dunstify command
-notifyTimer() {
-  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
-    dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "${n}Timer (Paused)" "$2"
-  else
-    dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
-  fi
+# Sends timer notifications.
+# Requires the same parameters "$@" as the dunstify command.
+notify() {
+  dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
 }
 
-# Prints timer to console
-# Takes the current time as input
-printTimer() {
-  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
-    echo -n "${n}Timer (Paused): $1"
-    echo -ne "\r"
-  else
-    echo -n "${n}Time remaining: $1"
-    echo -ne "\r"
-  fi
+# Outputs the time.
+# Requires either "timer" or "stopwatch" as "$1", and the current time as "$2".
+print() {
+  echo -n "$@"
+  echo -ne "\r"
 }
 
-# Stopwatch notifications
-# Takes the same parameters as the dunstify command
-notifyStopwatch() {
-  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
-    dunstify -t 0 -h string:x-canonical-private-synchronous:"timer$$" \
-        "${n}Stopwatch (Paused)" "$2"
-  else
-    dunstify -h string:x-canonical-private-synchronous:"timer$$" "$@"
-  fi
-}
-
-# Prints stopwatch to console
-# Takes the current time as input
-printStopwatch() {
-  if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
-    echo -n "${n}Stopwatch (Paused): $1"
-    echo -ne "\r"
-  else
-    echo -n "${n}Time elapsed      : $1"
-    echo -ne "\r"
-  fi
-}
-
-# Converts miliseconds to hours, minutes, seconds, miliseconds
-# Takes time in miliseconds and returns expanded time as formatted string
+# Converts miliseconds to hours, minutes, seconds, and miliseconds.
+# Requires a time in miliseconds.
+# Returns the expanded time as a formatted string.
 msConverter() {
   printf "%02dh %02dm %02ds %03dms\n" "$((("$1"/3600000)%24))" \
       "$((("$1"/60000)%60))" "$((("$1"/1000)%60))" "$(("$1"%1000))"
 }
 
-# Converts seconds to hours, minutes, seconds
-# Takes time in seconds and returns expanded time as formatted string
+# Converts seconds to hours, minutes, and seconds.
+# Requires a time in seconds.
+# Returns the expanded time as formatted string.
 secConverter() {
   printf "%02dh %02dm %02ds\n" "$(("$1"/3600))" "$((("$1"%3600)/60))" \
       "$(("$1"%60))"
 }
 
-# Start the stopwatch
+# Starts the stopwatch.
 stopwatch() {
   local start
   local timePaused
   local pauseStart
   local pauseEnd
   local end
-
   timePaused=0
   start="$(date +%s%N)"
+
+  # Loop until interrupted.
   while true; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
       pauseStart="$(date +%s%N)"
       pauseEnd="$pauseStart"
-      while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
-        pauseEnd="$(date +%s%N)"
+      end="$(msConverter \
+          "$(((("$pauseStart"-"$start")-"$timePaused"+500000)/1000000))")"
+
+      # Pause the time.
+      if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
         if [[ "$h" == "false" ]]; then
-          end="$(msConverter \
-              "$(((("$pauseStart"-"$start")-"$timePaused"+500000)/1000000))")"
-          notifyStopwatch "${n}Stopwatch (Paused)" "🕛 $end"
+          notify -t 0 "${n}Stopwatch (Paused)" "🕛 $end"
         fi
         if [[ "$q" == "false" ]]; then
-          printStopwatch "$end"
+          print "${n}Stopwatch (Paused): $end"
         fi
-      done
-      ((timePaused+=("$pauseEnd"-"$pauseStart")))
+        while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
+          pauseEnd="$(date +%s%N)"
+        done
+        ((timePaused+=("$pauseEnd"-"$pauseStart")))
+      fi
+    else
+      echoerr "Error: timerIsPaused$$.txt not found."
+      exit 1
     fi
-    # +500000 for rounding (num=num+den/2)
+
+    # Use +500000 for rounding (num=num+den/2).
     end="$(msConverter \
         "$(((("$(date +%s%N)"-"$start")-"$timePaused"+500000)/1000000))")"
+
+    # Output the time.
     if [[ "$h" == "false" ]]; then
-      notifyStopwatch "${n}Stopwatch" "🕛 $end"
+      notify "${n}Stopwatch" "🕛 $end"
     fi
     if [[ "$q" == "false" ]]; then
-      printStopwatch "$end"
+      print "${n}Time elapsed      : $end"
     fi
+
+    # Trap the interrupt signal.
     trap 'stop "${n}Stopwatch (Stopped)" "🕛 $end"' SIGINT
   done
 }
 
-# Start the timer
+# Starts the timer.
 timer() {
   local start
   local end
   local remaining
   local pauseStart
   local pauseEnd
-
   start="$(date "+%s")"
+
+  # Calculate the end time.
   if [[ "$t" == "true" ]]; then
     end="$((("$hours"*3600+"$minutes"*60+"$seconds") \
         -("$(date "+%H")"*3600+"$(date "+%M")"*60+"$(date "+%S")")))"
@@ -218,43 +208,59 @@ timer() {
   fi
   remaining="$(secConverter "$(("$end" - "$start"))")"
 
+  # Loop until timer expires or interrupted.
   while [[ "$start" != "$end" ]]; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
       pauseStart="$(date +%s)"
       pauseEnd="$pauseStart"
-      while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
-        pauseEnd="$(date +%s)"
-        remaining=$(secConverter "$(("$end" - "$start"))")
+
+      # Pause the time.
+      if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
         if [[ "$h" == "false" ]]; then
-          notifyTimer "Timer (Paused)" "⏳ $remaining"
+          notify -t 0 "${n}Timer (Paused)" "⏳ $remaining"
         fi
         if [[ "$q" == "false" ]]; then
-          printTimer "$remaining"
+          print "${n}Timer (Paused): $remaining"
         fi
-      done
-      ((end+=("$pauseEnd"-"$pauseStart")))
+        while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
+          pauseEnd="$(date +%s)"
+          remaining=$(secConverter "$(("$end" - "$start"))")
+        done
+        ((end+=("$pauseEnd"-"$pauseStart")))
+      fi
+    else
+      echoerr "Error: timerIsPaused$$.txt not found."
+      exit 1
     fi
+
+    # Output the time.
     if [[ "$start" -le "$(date -d "+-1second" "+%s")" ]]; then
       start="$(date "+%s")"
       remaining=$(secConverter "$(("$end" - "$start"))")
       if [[ "$h" == "false" ]]; then
-        notifyTimer "${n}Timer" "⏳ $remaining"
+        notify "${n}Timer" "⏳ $remaining"
       fi
       if [[ "$q" == "false" ]]; then
-        printTimer "$remaining"
+        print "${n}Time remaining: $remaining"
       fi
     fi
+
+    # Trap the interrupt signal.
     trap 'stop "${n}Timer (Stopped)" "⌛ $remaining"' SIGINT
   done
+
+  # Output the final message on completion.
   if [[ "$q" == "false" ]]; then
     echo -n "${n}Timer complete"
     echo -ne "\r"
   fi
   if [[ "$a" == "false" ]]; then
-    notifyTimer "${n}Timer" "⌛ Complete" -u critical
+    notify "${n}Timer" "⌛ Complete" -u critical
   elif [[ "$h" == "false" ]]; then
-    notifyTimer "${n}Timer" "⌛ Complete"
+    notify "${n}Timer" "⌛ Complete"
   fi
+
+  # Clean up and exit.
   if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
     rm -f "/tmp/timerIsPaused$$.txt"
   fi
@@ -263,16 +269,14 @@ timer() {
   exit 0
 }
 
-# Pause or unpause
-# /tmp/timerIsPaused$$.txt - File containing pause information
-# First line shows pause state of timer
-# Second line shows pause state of stopwatch
-pauseUnpause() {
+# Pauses or resumes the timer script.
+# Modifies /tmp/timerIsPaused$$.txt, a text file containing the script's
+# paused or resumed state.
+pauseResume() {
   echo "false" > "/tmp/timerIsPaused$$.txt"
 
   while true; do
     read -n 1 -s -r
-
     if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
       echo "false" > "/tmp/timerIsPaused$$.txt"
     else
@@ -281,23 +285,23 @@ pauseUnpause() {
   done
 }
 
-# Start stopwatch
+# Start the stopwatch if set.
 if [[ "$s" == "true" ]]; then
   if [[ "$#" -eq 0 ]]; then
     stopwatch &
-    pauseUnpause
+    pauseResume
     exit 0
   else
-    echo "No arguments needed for stopwatch"
+    echoerr "Error: No arguments needed for the stopwatch option."
     exit 1
   fi
 fi
 
-# Parse arguments and check valid input
 hours=0
 minutes=0
 seconds=0
 
+# Parse arguments and check for valid input.
 if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
   hours="$(echo "$1" | cut -d ":" -f1)"
   minutes="$(echo "$1" | cut -d ":" -f2)"
@@ -317,26 +321,26 @@ elif [[ "$*" =~ \
     seconds="${remainder%%s*}"
   fi
 else
-  echo "Invalid time format"
+  echoerr "Error: Invalid time format."
   exit 1
 fi
 
-# Check valid alert time
+# Check for a valid alert time.
 if [[ "$t" == "true" \
     && ("$hours" -ge 24 || "$minutes" -ge 60 || "$seconds" -ge 60) ]]; then
-  echo "Time must be in the range 00:00:00 - 23:59:59"
+  echoerr "Error: The alert time must be in the range 00:00:00 - 23:59:59."
   exit 1
 fi
 
-# Start timer
+# Start the timer.
 if [[ "$t" == "true" \
     || ("$hours" -ne 0 || "$minutes" -ne 0 || "$seconds" -ne 0) ]]; then
   timer &
-  pauseUnpause
+  pauseResume
   exit 0
 else
   if [[ "$#" -gt 0 ]]; then
-    echo "Cannot set timer for 0 seconds"
+    echoerr "Error: Cannot set the timer for 0 seconds."
   else
     usage
   fi

@@ -1,26 +1,26 @@
 #!/bin/bash
 
-# An i3blocks date output script
-# Takes in a $BLOCK_BUTTON instance for mouse events
+# An i3blocks date output script.
+# Requires an optional "$BLOCK_BUTTON" instance for mouse events.
 
-# Notifications
-# Uses the same parameters as the dunstify command
+# Sends notifications.
+# Requires the same parameters "$@" as the dunstify command.
 notify() {
   dunstify "$@"
 }
 
-# Full text
+# Output full text.
 echo "📅 $(date "+%a %b %d")"
 
-# Short text
+# Output short text.
 date "+%a %b %d"
 
-# Mouse listener
+# Listen for mouse events.
 case "$BLOCK_BUTTON" in
-  1) # Left click
+  1) # Left click.
     notify -t 0 "$(cal)"
     ;;
-  3) # Right click
+  3) # Right click.
     for i in {1..12}; do
       notify -t 5000 "$(cal $(date "+%m %Y" -d "$(date +%F) + $i month"))"
     done

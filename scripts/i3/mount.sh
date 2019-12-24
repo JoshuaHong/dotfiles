@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# An i3blocks mount output script
-# Takes in a $BLOCK_BUTTON instance for mouse events
+# An i3blocks mount output script.
+# Requires an optional "$BLOCK_BUTTON" instance for mouse events.
 
-# Notifications
-# Uses the same parameters as the dunstify command
+# Sends notifications.
+# Requires the same parameters "$@" as the dunstify command.
 notify() {
   dunstify -h string:x-canonical-private-synchronous:"battery" "$@"
 }
@@ -47,7 +47,7 @@ if [[ -n "$device" && "$print" == "true" ]]; then
   # Short text
   echo "📱"
 
-  # Mouse listener
+  # Listen for mouse events
   case "$BLOCK_BUTTON" in
     1) # Left click
       sudo "$HOME/scripts/dmenu/mount.sh" &
@@ -74,3 +74,5 @@ if [[ -n "$device" && "$print" == "true" ]]; then
       ;;
   esac
 fi
+
+exit 0
