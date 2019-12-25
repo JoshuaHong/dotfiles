@@ -33,6 +33,9 @@ export EDITOR=/usr/bin/nvim
 # Enable fzf file previews
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
+# Add key bindings for scrolling preview windows
+export FZF_DEFAULT_OPTS="--bind ctrl-h:preview-up,ctrl-l:preview-down"
+
 # Enable colorized gcc output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # }}}
