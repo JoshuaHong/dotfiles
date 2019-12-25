@@ -3,46 +3,46 @@
 #
 
 # ========== Init ========== {{{
-# If not running interactively, don't do anything
+# If not running interactively, don't do anything.
 [[ $- != *i* ]] && return
 
-# Autostart X at login
+# Autostart X at login.
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
 # }}}
 
 # ========== General ========== {{{
-# Primary prompt
+# Primary prompt.
 gitbranch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 PS1="\[\e[31m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\]\[\e[94m\] \W\[\e[35m\]\$(gitbranch)\[\e[m\]\[\e[m\]\[\e[31m\]]\[\e[m\]\[\e[36m\]$\[\e[m\]\[\e[39m\] "
 
-# Use vim bindings
+# Use vim bindings.
 set -o vi
 
-# Use fzf
+# Use FZF.
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
 # ========== Exports ========== {{{
-# Set default editor
+# Set default editor.
 export EDITOR=/usr/bin/nvim
 
-# Enable fzf file previews
+# Enable FZF file previews.
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
-# Add key bindings for scrolling preview windows
+# Add key bindings for scrolling FZF preview windows.
 export FZF_DEFAULT_OPTS="--bind ctrl-h:preview-up,ctrl-l:preview-down"
 
-# Enable colorized gcc output
+# Enable colorized GCC output.
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # }}}
 
 # ========== Aliases ========== {{{
 # ========== General ========== {{{
-# Cd to previous directory for each "."
+# Cd to previous directory for each ".".
 str-rep() {
   local s=`printf "%$2s"`; printf '%s' "${s// /$1}"
 }
@@ -50,7 +50,7 @@ for i in {1..8}; do
   alias `str-rep . $i`=cd\ `str-rep ../ $i`
 done
 
-# Cd and ls
+# Cd and ls.
 cd() {
   builtin cd "$@" && ls --color=auto
 }

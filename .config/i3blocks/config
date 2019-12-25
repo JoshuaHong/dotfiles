@@ -6,7 +6,7 @@
 #     https://vivien.github.io/i3blocks
 
 
-# Global properties
+# Global properties.
 separator=true
 separator_block_width=15
 

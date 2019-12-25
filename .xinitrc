@@ -1,2 +1,2 @@
-# Start i3
+# Start i3.
 exec i3

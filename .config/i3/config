@@ -1,59 +1,59 @@
 # ========== Init ========== {{{
-# Set keyboard layout
+# Set keyboard layout.
 exec --no-startup-id "xmodmap $HOME/.Xmodmap"
 
-# Dim and lock screen on inactivity (dim, lock) and disable X screensaver
+# Dim and lock screen on inactivity (dim, lock) and disable X screensaver.
 exec --no-startup-id "xset s 300 60 -dpms"
 exec --no-startup-id \
     "xss-lock -n $HOME/scripts/i3/dim.sh -- $HOME/scripts/i3/lock.sh"
 
-# Start daemon processes (notifications, compositor)
+# Start daemon processes (notifications, compositor).
 exec --no-startup-id "dunst"
 exec --no-startup-id "picom"
 
-# Set background imaage
+# Set background imaage.
 exec --no-startup-id \
     "feh --no-fehbg --bg-scale $HOME/images/wallpapers/wallpaper.png"
 
-# Start tray icons
+# Start tray icons.
 exec --no-startup-id "nm-applet"
 exec --no-startup-id "sleep 3; /opt/piavpn/bin/pia-client"
 # }}}
 
 # ========== General ========== {{{
-# Set mod key
+# Set mod key.
 set $mod Mod4
 
-# Set font
+# Set font.
 font pango: Noto Sans 10
 
-# Gaps
+# Set i3 gaps.
 gaps inner 15
 gaps outer 15
 
-# Borders
+# Set borders.
 for_window [class=".*"] border pixel 3
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# Use Mouse+$mod to drag floating windows to their wanted position.
 floating_modifier $mod
 # }}}
 
 # ========== Mappings ========== {{{
-# Start terminal
+# Start terminal.
 bindsym $mod+Return exec --no-startup-id "i3-sensible-terminal"
 
-# Start dmenu
+# Start dmenu.
 bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop"
 
-# Start browser
+# Start browser.
 bindsym $mod+b exec --no-startup-id "firefox"
 bindsym $mod+Shift+b exec --no-startup-id "firefox --private-window"
 
-# Lock screen
+# Lock screen.
 bindsym $mod+e exec --no-startup-id "$HOME/scripts/i3/lock.sh -f"
 bindsym $mod+Shift+e exec --no-startup-id "$HOME/scripts/i3/lock.sh -f -t"
 
-# Change volume
+# Change volume.
 bindsym XF86AudioRaiseVolume exec --no-startup-id \
     "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86AudioLowerVolume exec --no-startup-id \
@@ -61,24 +61,24 @@ bindsym XF86AudioLowerVolume exec --no-startup-id \
 bindsym XF86AudioMute exec --no-startup-id \
     "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+11 i3blocks"
 
-# Change brightness
+# Change brightness.
 bindsym XF86MonBrightnessUp exec --no-startup-id \
     "xbacklight -inc 5 && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec --no-startup-id \
     "xbacklight -dec 5 && pkill -SIGRTMIN+10 i3blocks"
 
-# Printscreen
+# Printscreen.
 bindsym --release Print exec --no-startup-id "$HOME/scripts/i3/screenshot.sh"
 bindsym --release Shift+Print exec --no-startup-id \
     "$HOME/scripts/i3/screenshot.sh -s"
 
-# List unicode characters
+# List unicode characters.
 bindsym $mod+u exec --no-startup-id "$HOME/scripts/dmenu/unicode.sh"
 
-# Mount external devices
+# Mount external devices.
 bindsym $mod+m exec --no-startup-id "sudo $HOME/scripts/dmenu/mount.sh"
 
-# Change focus
+# Change focus.
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -87,29 +87,29 @@ bindsym $mod+p focus parent
 bindsym $mod+c focus child
 bindsym $mod+space focus mode_toggle
 
-# Alternatively, you can use the cursor keys:
+# Alternatively, use the cursor keys.
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move focused window
+# Move focused window.
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# Alternatively, you can use the cursor keys:
+# Alternatively, use the cursor keys.
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Split in horizontal or vertical orientation
+# Split in horizontal or vertical orientation.
 bindsym $mod+v split v
 bindsym $mod+Shift+v split h
 
-# Change container layout (stacked, tabbed, toggle split, floating, fullscreen)
+# Change container layout (stacked, tabbed, toggle split, floating, fullscreen).
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+w layout toggle split
@@ -117,20 +117,20 @@ bindsym $mod+Shift+space floating toggle, resize set 890px 610px, \
     move absolute position center
 bindsym $mod+f fullscreen toggle
 
-# Reload the configuration file
-#bindsym $mod+Shift+c reload
+# Reload the configuration file.
+bindsym $mod+Shift+c reload
 
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
 bindsym $mod+Shift+r restart
 
-# Kill focused window
+# Kill focused window.
 bindsym $mod+Shift+Return kill
 
-# Exit i3 (logs you out of your X session)
+# Exit i3 (logs you out of your X session).
 bindsym $mod+Shift+q exec --no-startup-id "$HOME/scripts/dmenu/prompt.sh \
     'Are you sure you want to exit i3?' 'i3-msg exit'"
 
-# Resize Mode
+# Resize Mode.
 bindsym $mod+r mode "resize"
 
 mode "resize" {
@@ -140,13 +140,13 @@ mode "resize" {
   bindsym k resize shrink height 10 px or 10 ppt
   bindsym l resize grow width 10 px or 10 ppt
 
-  # Alternatively, you can use the cursor keys:
+  # Alternatively, use the cursor keys.
   bindsym Left resize shrink width 10 px or 10 ppt
   bindsym Down resize grow height 10 px or 10 ppt
   bindsym Up resize shrink height 10 px or 10 ppt
   bindsym Right resize grow width 10 px or 10 ppt
 
-  # Back to normal: Enter or Escape or $mod+r
+  # Back to normal mode.
   bindsym Return mode "default"
   bindsym Escape mode "default"
   bindsym $mod+r mode "default"
@@ -154,7 +154,7 @@ mode "resize" {
 # }}}
 
 # ========== Workspaces ========== {{{
-# Define names for default workspaces
+# Define names for default workspaces.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -166,7 +166,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Switch to workspace
+# Switch to workspace.
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -178,7 +178,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# Move focused container to workspace
+# Move focused container to workspace.
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
