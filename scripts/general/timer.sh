@@ -212,7 +212,7 @@ timer() {
   fi
   remaining="$(secConverter "$(("$end"-"$start"))")"
 
-  # Loop until timer expires or interrupted.
+  # Loop until timer expires or is interrupted.
   while [[ "$start" -le "$end" ]]; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
       pauseStart="$(date "+%s%N")"
