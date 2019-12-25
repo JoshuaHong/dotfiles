@@ -111,14 +111,14 @@ notify() {
 }
 
 # Outputs the time.
-# Requires either "timer" or "stopwatch" as "$1", and the current time as "$2".
+# Requires the message to be printed.
 print() {
   echo -n "$@"
   echo -ne "\r"
 }
 
-# Converts miliseconds to hours, minutes, seconds, and miliseconds.
-# Requires a time in miliseconds.
+# Converts milliseconds to hours, minutes, seconds, and milliseconds.
+# Requires a time in milliseconds.
 # Returns the expanded time as a formatted string.
 msConverter() {
   printf "%02dh %02dm %02ds %03dms\n" "$((("$1"/3600000)%24))" \
@@ -141,13 +141,15 @@ stopwatch() {
   local pauseEnd
   local end
   timePaused=0
-  start="$(date +%s%N)"
+  start="$(date "+%s%N")"
 
   # Loop until interrupted.
   while true; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
-      pauseStart="$(date +%s%N)"
+      pauseStart="$(date "+%s%N")"
       pauseEnd="$pauseStart"
+
+      # Use +500000 for rounding.
       end="$(msConverter \
           "$(((("$pauseStart"-"$start")-"$timePaused"+500000)/1000000))")"
 
@@ -160,7 +162,7 @@ stopwatch() {
           print "${n}Stopwatch (Paused): $end"
         fi
         while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
-          pauseEnd="$(date +%s%N)"
+          pauseEnd="$(date "+%s%N")"
         done
         ((timePaused+=("$pauseEnd"-"$pauseStart")))
       fi
@@ -169,9 +171,9 @@ stopwatch() {
       exit 1
     fi
 
-    # Use +500000 for rounding (num=num+den/2).
+    # Use +500000 for rounding.
     end="$(msConverter \
-        "$(((("$(date +%s%N)"-"$start")-"$timePaused"+500000)/1000000))")"
+        "$(((("$(date "+%s%N")"-"$start")-"$timePaused"+500000)/1000000))")"
 
     # Output the time.
     if [[ "$h" == "false" ]]; then
@@ -182,7 +184,7 @@ stopwatch() {
     fi
 
     # Trap the interrupt signal.
-    trap 'stop "${n}Stopwatch (Stopped)" "🕛 $end"' SIGINT
+    trap "stop \"${n}Stopwatch (Stopped)\" \"🕛 $end\"" SIGINT
   done
 }
 
@@ -193,7 +195,9 @@ timer() {
   local remaining
   local pauseStart
   local pauseEnd
-  start="$(date "+%s")"
+  local isStartPrinted
+  isStartPrinted="false"
+  start="$(date "+%s%N")"
 
   # Calculate the end time.
   if [[ "$t" == "true" ]]; then
@@ -202,16 +206,16 @@ timer() {
     if [[ "$end" -lt 0 ]]; then
       end="$(("$end"+86400))"
     fi
-    end="$(("$end"+"$(date "+%s")"))"
+    end="$(date -d "+$end seconds" "+%s%N")"
   else
-    end="$(date -d "+$hours hours $minutes minutes $seconds seconds" "+%s")"
+    end="$(date -d "+$hours hours $minutes minutes $seconds seconds" "+%s%N")"
   fi
-  remaining="$(secConverter "$(("$end" - "$start"))")"
+  remaining="$(secConverter "$(("$end"-"$start"))")"
 
   # Loop until timer expires or interrupted.
-  while [[ "$start" != "$end" ]]; do
+  while [[ "$start" -le "$end" ]]; do
     if [[ -f "/tmp/timerIsPaused$$.txt" ]]; then
-      pauseStart="$(date +%s)"
+      pauseStart="$(date "+%s%N")"
       pauseEnd="$pauseStart"
 
       # Pause the time.
@@ -223,8 +227,10 @@ timer() {
           print "${n}Timer (Paused): $remaining"
         fi
         while [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; do
-          pauseEnd="$(date +%s)"
-          remaining=$(secConverter "$(("$end" - "$start"))")
+          pauseEnd="$(date "+%s%N")"
+          # Use +500000000 for rounding.
+          remaining=$(secConverter "$((("$end"-"$start"+500000000) \
+              /1000000000))")
         done
         ((end+=("$pauseEnd"-"$pauseStart")))
       fi
@@ -234,9 +240,12 @@ timer() {
     fi
 
     # Output the time.
-    if [[ "$start" -le "$(date -d "+-1second" "+%s")" ]]; then
-      start="$(date "+%s")"
-      remaining=$(secConverter "$(("$end" - "$start"))")
+    if [[ "$start" -le "$(date -d "+-1 second" "+%s%N")" \
+        || "$isStartPrinted" == "false" ]]; then
+      isStartPrinted="true"
+      start="$(date "+%s%N")"
+      # Use +500000000 for rounding.
+      remaining=$(secConverter "$((("$end"-"$start"+500000000)/1000000000))")
       if [[ "$h" == "false" ]]; then
         notify "${n}Timer" "⏳ $remaining"
       fi
@@ -246,7 +255,7 @@ timer() {
     fi
 
     # Trap the interrupt signal.
-    trap 'stop "${n}Timer (Stopped)" "⌛ $remaining"' SIGINT
+    trap "stop \"${n}Timer (Stopped)\" \"⌛ $remaining\"" SIGINT
   done
 
   # Output the final message on completion.
