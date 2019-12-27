@@ -7,7 +7,8 @@
 # Outputs the usage.
 usage() {
   echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs."
-  echo "Press any key to pause or resume."
+  echo "Press the Spacebar or Enter key to pause or resume the time."
+  echo "Press any other key to split the time."
   echo "Options:"
   echo "  --help: Shows options."
   echo "  -a|--alert: Hides alert notifications."
@@ -285,11 +286,15 @@ pauseResume() {
   echo "false" > "/tmp/timerIsPaused$$.txt"
 
   while true; do
-    read -n 1 -s -r
-    if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
-      echo "false" > "/tmp/timerIsPaused$$.txt"
+    read -n 1 -s -r key
+    if [[ "$key" == "" ]]; then
+      if [[ "$(< "/tmp/timerIsPaused$$.txt")"  == "true" ]]; then
+        echo "false" > "/tmp/timerIsPaused$$.txt"
+      else
+        echo "true" > "/tmp/timerIsPaused$$.txt"
+      fi
     else
-      echo "true" > "/tmp/timerIsPaused$$.txt"
+      echo ""
     fi
   done
 }
