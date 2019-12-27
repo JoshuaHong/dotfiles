@@ -27,6 +27,9 @@ set -o vi
 # }}}
 
 # ========== Exports ========== {{{
+# Set default terminal.
+export TERMINAL=/usr/bin/alacritty
+
 # Set default editor.
 export EDITOR=/usr/bin/nvim
 
