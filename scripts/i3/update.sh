@@ -12,7 +12,7 @@ i3BlocksUpdate() {
   if echo "$updates" | grep -q "ERROR"; then
     echo "Error: Could not fetch updates."
   elif [[ -z "$updates" ]]; then
-    echo "No updates."
+    echo "No new updates."
   else
     if [[ "$1" == "1" ]]; then
       if yay -Syu && nvim +PlugUpgrade +PlugUpdate +qall; then
