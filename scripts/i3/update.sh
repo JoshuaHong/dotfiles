@@ -21,7 +21,7 @@ i3BlocksUpdate() {
         echo "Error: Update failed."
       fi
     elif [[ "$1" == "3" ]]; then
-      echo "Updates:"
+      echo "Updates available:"
       echo "$updates"
     fi
   fi
