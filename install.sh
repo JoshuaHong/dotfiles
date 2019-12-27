@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# An installation script for setting up the Arch Linux environment
+# An installation script for setting up the Arch Linux environment.
 
-# Set up new user
+# Set up new user.
 createUser() {
   echo "Setting up new user..."
-  read -p "Enter username: " user
+  read -rp "Enter username: " user
   while ! useradd -m -g wheel "$user";  do
-    read -p "Enter username: " user
+    read -rp "Enter username: " user
   done
   while ! passwd "$user"; do
     echo "Try again"
@@ -15,7 +15,7 @@ createUser() {
   echo -e "New user set up!\n"
 }
 
-# Install packages
+# Install packages.
 installPackages() {
   local pacmanPackages="alacritty alsa-utils base base-devel clang dmenu dunst \
       feh firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
@@ -27,33 +27,33 @@ installPackages() {
 
   echo "Updating and installing packages..."
   pacman -Syu
-  pacman -S $pacmanPackages
+  pacman -S "$pacmanPackages"
 
   sudo -u "$user" mkdir -v "/home/$user/programs/"
   sudo -u "$user" git clone "https://aur.archlinux.org/yay.git" \
       "/home/$user/programs/yay/"
-  cd "/home/$user/programs/yay/"
+  cd "/home/$user/programs/yay/" || exit 1
   sudo -u "$user" makepkg -si
-  cd /root
+  cd /root || exit 1
   sudo -u "$user" yay -Syu
-  sudo -u "$user" yay -S $yayPackages
+  sudo -u "$user" yay -S "$yayPackages"
   echo -e "Packages updated and installed!\n"
 }
 
-# Configure Pacman options
-configurePacman() {
-  echo "Enabling Pacman color..."
-  sed -i "s/^#Color/Color/" "/etc/pacman.conf"
-  echo "Enabling Pacman total download percentage..."
-  sed -i "s/^#TotalDownload/TotalDownload/" "/etc/pacman.conf"
-  echo "Enabling Pacman disk space check before installing..."
-  sed -i "s/^#CheckSpace/CheckSpace/" "/etc/pacman.conf"
-  echo "Enabling Pacman loading bar..."
-  sed -i "/^# Misc options/a ILoveCandy" "/etc/pacman.conf"
-  echo -e "Pacman options configured!\n"
+# Update permissions.
+updatePermissions() {
+  echo "Giving wheel group sudo access..."
+  sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" \
+      "/etc/sudoers"
+  echo "Disabling local root login..."
+  passwd -l "root"
+  echo "Disabling ssh root login..."
+  sed -i "s/^#PermitRootLogin prohibit-password/PermitRootLogin No/" \
+      "/etc/ssh/sshd_config"
+  echo -e "Local and ssh root login disabled!\n"
 }
 
-# Update Pacman mirror list
+# Update Pacman mirror list.
 updateMirrorList() {
   hook="[Trigger]\nOperation = Upgrade\nType = Package\n\
 Target = pacman-mirrorlist\n\n[Action]\nDescription = \
@@ -72,25 +72,34 @@ When = PostTransaction\nDepends = reflector\nExec = /bin/sh -c \
   echo -e "Mirror list updated!\n"
 }
 
-# Update permissions
-updatePermissions() {
-  echo "Giving wheel group sudo access..."
-  sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" \
-      "/etc/sudoers"
-  echo "Disabling local root login..."
-  passwd -l "root"
-  echo "Disabling ssh root login..."
-  sed -i "s/^#PermitRootLogin prohibit-password/PermitRootLogin No/" \
-      "/etc/ssh/sshd_config"
-  echo -e "Local and ssh root login disabled!\n"
+# Configure Pacman options.
+configurePacman() {
+  echo "Enabling Pacman color..."
+  sed -i "s/^#Color/Color/" "/etc/pacman.conf"
+  echo "Enabling Pacman total download percentage..."
+  sed -i "s/^#TotalDownload/TotalDownload/" "/etc/pacman.conf"
+  echo "Enabling Pacman disk space check before installing..."
+  sed -i "s/^#CheckSpace/CheckSpace/" "/etc/pacman.conf"
+  echo "Enabling Pacman loading bar..."
+  sed -i "/^# Misc options/a ILoveCandy" "/etc/pacman.conf"
+  echo -e "Pacman options configured!\n"
 }
 
-# Hide GRUB menu unless Shift key held down
+# Configure NetworkManager options.
+configureNetworkManager() {
+  echo "Configuring NetworkManager..."
+  # Allows NetworkManager to reconnect after disconnecting.
+  echo -e "\n[device]\nwifi.scan-rand-mac-address=no" \
+      >> "/etc/NetworkManager/NetworkManager.conf"
+  echo -e "NetworkManager configured!\n"
+}
+
+# Hide GRUB menu unless Shift key held down.
 hideGRUB() {
   echo "Installing GRUB..."
   disk="DISK_NAME_HERE"
   while ! fdisk -l | grep $disk >> /dev/null; do
-    read -p "Enter the disk where GRUB is to be installed (Ex. /dev/sda (NOT /dev/sda1)): " disk
+    read -rp "Enter the disk where GRUB is to be installed (Ex. /dev/sda (NOT /dev/sda1)): " disk
   done
   grub-install --target=i386-pc "$disk"
   echo "Hiding GRUB menu unless Shift key held down..."
@@ -103,7 +112,7 @@ hideGRUB() {
   echo -e "GRUB menu hidden unless Shift key held down!\n"
 }
 
-# Enable parallel compilation and compression
+# Enable parallel compilation and compression.
 enableMultithreading() {
   echo "Optimizing compilation..."
   sed -i "s/^#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j\$(nproc)\"/" "/etc/makepkg.conf"
@@ -116,7 +125,7 @@ enableMultithreading() {
   echo -e "Parallel compilation and compression enabled!\n"
 }
 
-# Copy files from repo
+# Copy files from repository.
 copyRepo() {
   echo "Copying files from repo..."
   sudo -u "$user" git clone "https://github.com/JoshuaHong/env.git" \
@@ -127,7 +136,7 @@ copyRepo() {
   echo -e "Files copied from repo!\n"
 }
 
-# Install Neovim plugins
+# Install Neovim plugins.
 installNeovimPlugins() {
   echo "Installing Neovim plugins..."
   sudo -u "$user" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
@@ -137,19 +146,20 @@ installNeovimPlugins() {
   echo -e "Installed Neovim plugins!\n"
 }
 
-# Check for root access
+# Check for root access.
 if [[ "$EUID" -ne 0 ]]; then
    echo "ERROR: This script must be run as root"
    exit 1
 fi
 
-# Run installation
+# Run installation.
 echo -e "Starting installation...\n"
 createUser
 installPackages
-configurePacman
-updateMirrorList
 updatePermissions
+updateMirrorList
+configurePacman
+configureNetworkManager
 hideGRUB
 enableMultithreading
 copyRepo
