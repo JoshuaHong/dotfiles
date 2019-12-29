@@ -23,16 +23,16 @@ chmod +x install.sh
 | `pacman -Ss`   | Search for packages in the repository |
 | `pacman -Syu`  | Update and upgrade installed packages |
 
-### Packages (49):
+### Packages (51):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
-| alsa-utils             | Audio controls                         | For volume controls                      |
 | autoconf               | Automatically configures source code   | For Yay dependency (base-devel)          |
 | automake               | Automatically creating make files      | For Yay dependency (base-devel)          |
 | base                   | Base packages                          | For Arch install                         |
 | bear *                 | Clang compilation database generator   | For ALE and COC Makefile reader          |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
+| blueman                | Bluetooth manager                      | For configuring Bluetooth                |
 | clang                  | C family compiler                      | For ALE and COC language server          |
 | dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
@@ -56,9 +56,11 @@ chmod +x install.sh
 | npm                    | JavaScript package manager             | For COC dependency                       |
 | openssh                | SSH                                    | For SSH                                  |
 | pacman-contrib         | Scripts and tools for Pacman systems   | For checkupdates                         |
+| pamixer                | PulseAudio command-line mixer          | For audio controls                       |
 | patch                  | Patches files                          | For Yay dependency (base-devel)          |
 | picom                  | Compositor                             | For transparency                         |
 | pkgconf                | Package compiler and linker            | For Yay dependency (base-devel)          |
+| pulseaudio-bluetooth   | Bluetooth support for PulseAudio       | For supporting Bluetooth audio devices   |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
 | scrot                  | Screen capture                         | For taking screenshots                   |

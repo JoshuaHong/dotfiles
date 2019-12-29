@@ -67,14 +67,14 @@ lock() {
 
   # Lock the screen and checklock - unmute and kill checklock on unlock.
   checklock & i3lock --image="$tmpbg" --ignore-empty-password --nofork \
-      && amixer set Master,0 unmute && pkill -15 lock.sh
+      && pamixer --unmute && pkill -15 lock.sh
 }
 
 # Don't lock the screen if a video is playing, unless the force option is set.
 drivers="/proc/asound/card*/pcm*/sub*/status"
 if [[ "$f" == "true" ]] || ! cat $drivers | grep -q "state: RUNNING"; then
   # Mute the audio.
-  amixer set Master,0 mute
+  pamixer --mute
 
   # Lock the screen.
   lock

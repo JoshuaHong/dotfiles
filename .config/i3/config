@@ -17,6 +17,7 @@ exec --no-startup-id \
 
 # Start tray icons.
 exec --no-startup-id "nm-applet"
+exec --no-startup-id "blueman-applet"
 exec --no-startup-id "sleep 3; /opt/piavpn/bin/pia-client"
 # }}}
 
@@ -55,11 +56,11 @@ bindsym $mod+Shift+e exec --no-startup-id "$HOME/scripts/i3/lock.sh -f -t"
 
 # Change volume.
 bindsym XF86AudioRaiseVolume exec --no-startup-id \
-    "amixer -q sset Master,0 2+ unmute && pkill -SIGRTMIN+11 i3blocks"
+    "pamixer --increase 2 && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86AudioLowerVolume exec --no-startup-id \
-    "amixer -q sset Master,0 2- unmute && pkill -SIGRTMIN+11 i3blocks"
+    "pamixer --decrease 2 && pkill -SIGRTMIN+11 i3blocks"
 bindsym XF86AudioMute exec --no-startup-id \
-    "amixer -q sset Master,0 toggle && pkill -SIGRTMIN+11 i3blocks"
+    "pamixer --toggle-mute && pkill -SIGRTMIN+11 i3blocks"
 
 # Change brightness.
 bindsym XF86MonBrightnessUp exec --no-startup-id \

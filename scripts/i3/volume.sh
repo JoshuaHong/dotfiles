@@ -2,12 +2,11 @@
 
 # An i3blocks volume output script.
 
-volume="$(amixer sget Master \
-    | awk -F"[][]" '/dB/ {print substr($2, 1, length($2) -1)}')"
-muted="$(amixer sget Master | grep "off")"
+volume="$(pamixer --get-volume)"
+muted="$(pamixer --get-mute)"
 
 # Output full text.
-if [[ -z "$muted" ]]; then
+if [[ "$muted" == "false" ]]; then
   if [[ "$volume" -le 33 ]]; then
     icon="🔈"
     echo "$icon $volume%"
@@ -18,7 +17,7 @@ if [[ -z "$muted" ]]; then
     icon="🔊"
     echo "$icon $volume%"
   fi
-else
+elif [[ "$muted" == "true" ]]; then
   icon="🔇"
   echo "$icon muted($volume%)"
 fi
@@ -27,7 +26,7 @@ fi
 echo "$volume%"
 
 # Output color on muted.
-if [[ -n "$muted" ]]; then
+if [[ "$muted" == "true" ]]; then
   echo "#ffff00"
 fi
 
