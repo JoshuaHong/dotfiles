@@ -10,19 +10,6 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Useful commands:
-| Command        | Description                           |
-| -------------- | ------------------------------------- |
-| `pacman -Q`    | List installed packages               |
-| `pacman -Qi`   | List installed packages with details  |
-| `pacman -Qtdq` | List orphans                          |
-| `pacman -Qtt`  | List installed non-required packages  |
-| `pacman -Rns`  | Uninstall package                     |
-| `pacman -S`    | Install package                       |
-| `pacman -Sc`   | Remove uninstalled package caches     |
-| `pacman -Ss`   | Search for packages in the repository |
-| `pacman -Syu`  | Update and upgrade installed packages |
-
 ### Packages (51):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
@@ -37,7 +24,7 @@ chmod +x install.sh
 | dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
 | feh                    | Image viewer                           | For setting wallpaper                    |
-| firefox                | Browser                                | For browsing internet                    |
+| firefox                | Browser                                | For browsing Internet                    |
 | flex                   | Generates text scanning programs       | For Yay dependency (base-devel)          |
 | gdb                    | GNU debugger                           | For debugging                            |
 | grub                   | Bootloader                             | For loading Linux kernel                 |
