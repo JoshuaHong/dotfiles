@@ -17,13 +17,13 @@ createUser() {
 
 # Install packages.
 installPackages() {
-  local pacmanPackages="alacritty base base-devel blueman clang dmenu dunst \
-      feh firefox gdb git grub i3-gaps i3blocks i3lock imagemagick linux \
-      linux-firmware man-db neovim net-tools network-manager-applet nodejs \
-      noto-fonts noto-fonts-emoji openssh pacman-contrib pamixer picom \
-      pulseaudio-bluetooth reflector ripgrep scrot shellcheck valgrind xclip \
-      xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset \
-      xss-lock"
+  local pacmanPackages="alacritty base base-devel bash-completion blueman \
+      clang dmenu dunst feh firefox gdb git grub i3-gaps i3blocks i3lock \
+      imagemagick linux linux-firmware man-db neovim net-tools \
+      network-manager-applet nodejs noto-fonts noto-fonts-emoji openssh \
+      pacman-contrib pamixer picom pulseaudio-bluetooth reflector ripgrep \
+      scrot shellcheck valgrind xclip xf86-video-intel xorg-server \
+      xorg-xbacklight xorg-xinit xorg-xset xss-lock"
   local yayPackages="bear simple-mtpfs ttf-symbola"
 
   echo "Updating and installing packages..."

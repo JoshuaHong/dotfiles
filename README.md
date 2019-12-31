@@ -17,6 +17,7 @@ chmod +x install.sh
 | autoconf               | Automatically configures source code   | For Yay dependency (base-devel)          |
 | automake               | Automatically creating make files      | For Yay dependency (base-devel)          |
 | base                   | Base packages                          | For Arch install                         |
+| bash-completion        | Completion for the Bash shell          | For smart tab completion                 |
 | bear *                 | Clang compilation database generator   | For ALE and COC Makefile reader          |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
 | blueman                | Bluetooth manager                      | For configuring Bluetooth                |
