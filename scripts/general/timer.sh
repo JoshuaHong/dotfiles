@@ -203,7 +203,7 @@ timer() {
   # Calculate the end time.
   if [[ "$t" == "true" ]]; then
     end="$((("$hours"*3600+"$minutes"*60+"$seconds") \
-        -("$(date "+%H")"*3600+"$(date "+%M")"*60+"$(date "+%S")")))"
+        -("$(date "+%-H")"*3600+"$(date "+%-M")"*60+"$(date "+%-S")")))"
     if [[ "$end" -lt 0 ]]; then
       end="$(("$end"+86400))"
     fi
