@@ -30,6 +30,10 @@ set -o vi
 
 # Auto cd when entering just a path name.
 shopt -s autocd
+
+# Auto correct directory names.
+shopt -s cdspell
+shopt -s dirspell
 # }}}
 
 # ========== Exports ========== {{{
@@ -53,17 +57,21 @@ export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01 \
 
 # ========== Aliases ========== {{{
 # ========== General ========== {{{
-# Cd to previous directory for each ".".
-str-rep() {
-  local s=`printf "%$2s"`; printf '%s' "${s// /$1}"
-}
-for i in {1..8}; do
-  alias `str-rep . $i`=cd\ `str-rep ../ $i`
-done
-
-# Cd and ls.
+# Cd and ls, and cd to parent directory for every ".".
 cd() {
-  builtin cd "$@" && ls --color=auto
+  local dir="$1"
+  if [[ "$dir" =~ ^(\.)+$ ]]; then
+    local MYOLDPWD="$PWD"
+    for ((i=0; i<"${#dir}"; ++i)); do
+      builtin cd "../"
+    done
+    OLDPWD="$MYOLDPWD"
+    pwd
+  else
+    builtin cd "$@"
+  fi
+
+  ls --color=auto
 }
 
 alias cp="cp -r"
