@@ -1,2 +1,3 @@
+# timer.sh.
 complete -W "-a -h -n -q -s -t --help --alert --hidden --name --quiet \
     --stopwatch --time" timer
