@@ -2,20 +2,23 @@
 
 # A timer script to send an alert at a specified time.
 # Requires a time in the following format: xx:xx:xx or xxh xxm xxs.
-# For example: ./timer 5:24:30 or ./timer 5h 24m 30s.
 
 # Outputs the usage.
 usage() {
-  echo "To specify a time: ./timer xx:xx:xx or ./timer xxh xxm xxs."
-  echo "Press the Spacebar or Enter key to pause or resume the time."
-  echo "Press any other key to split the time."
+  echo -e "To specify a time: timer [options] [format].\n"
+  echo "Commands:"
+  echo "  Press the Spacebar or Enter key to pause or resume the time."
+  echo -e "  Press any other key to split the time.\n"
+  echo "Formats:"
+  echo "  xx:xx:xx"
+  echo -e "  xxh xxm xxs\n"
   echo "Options:"
   echo "  --help: Shows options."
   echo "  -a|--alert: Hides alert notifications."
   echo "  -h|--hidden: Hides time notifications."
   echo "  -n|--name: Sets the name of the timer."
   echo "  -q|--quiet: Suppresses standard output."
-  echo "  -s|--stopwatch: Uses the stopwatch."
+  echo "  -s|--stopwatch: Uses the stopwatch. No time input required"
   echo "  -t|--time: Alerts at the specified time."
 }
 
