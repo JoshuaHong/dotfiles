@@ -5,7 +5,10 @@
 
 # Outputs the usage.
 usage() {
-  echo -e "To specify a time: timer [options] [format].\n"
+  echo "Description:"
+  echo -e "  A timer script to send an alert at a specified time.\n"
+  echo "Usage:"
+  echo -e "  To specify a time: timer [options] [format].\n"
   echo "Commands:"
   echo "  Press the Spacebar or Enter key to pause or resume the time."
   echo -e "  Press any other key to split the time.\n"
@@ -18,8 +21,20 @@ usage() {
   echo "  -h|--hidden: Hides time notifications."
   echo "  -n|--name: Sets the name of the timer."
   echo "  -q|--quiet: Suppresses standard output."
-  echo "  -s|--stopwatch: Uses the stopwatch. No time input required"
+  echo "  -s|--stopwatch: Uses the stopwatch. No time formats required."
   echo "  -t|--time: Alerts at the specified time."
+}
+
+# Outputs the usage if no options or formats are provided.
+if [[ "$#" -eq 0 ]]; then
+  usage
+  exit 0
+fi
+
+# Outputs to standard error.
+# Requires a message "$@" to print.
+echoerr() {
+  echo "$@" 1>&2
 }
 
 # Define flags.
@@ -31,7 +46,7 @@ s="false"
 t="false"
 
 # Check for flags.
-while getopts "ahn:qst-:" flags; do
+while getopts ":ahn:qst-:" flags; do
   case "${flags}" in
     -)
       case "${OPTARG}" in
@@ -59,7 +74,8 @@ while getopts "ahn:qst-:" flags; do
           t="true"
           ;;
         *)
-          usage
+          echoerr "Error: Invalid option."
+          echoerr "See timer --help for more information."
           exit 1
           ;;
       esac
@@ -83,18 +99,13 @@ while getopts "ahn:qst-:" flags; do
       t="true"
       ;;
     *)
-      usage
+      echoerr "Error: Invalid option."
+      echoerr "See timer --help for more information."
       exit 1
       ;;
   esac
 done
 shift "$((OPTIND-1))"
-
-# Outputs to standard error.
-# Requires a message "$@" to print.
-echoerr() {
-  echo "$@" 1>&2
-}
 
 # Stops processes on interrupt signal and sends a stopped notification.
 # Requires the same parameters "$@" as the dunstify command.
@@ -310,6 +321,7 @@ if [[ "$s" == "true" ]]; then
     exit 0
   else
     echoerr "Error: No arguments needed for the stopwatch option."
+    echoerr "See timer --help for more information."
     exit 1
   fi
 fi
@@ -339,6 +351,7 @@ elif [[ "$*" =~ \
   fi
 else
   echoerr "Error: Invalid time format."
+  echoerr "See timer --help for more information."
   exit 1
 fi
 
@@ -346,6 +359,7 @@ fi
 if [[ "$t" == "true" \
     && ("$hours" -ge 24 || "$minutes" -ge 60 || "$seconds" -ge 60) ]]; then
   echoerr "Error: The alert time must be in the range 00:00:00 - 23:59:59."
+  echoerr "See timer --help for more information."
   exit 1
 fi
 
@@ -358,8 +372,10 @@ if [[ "$t" == "true" \
 else
   if [[ "$#" -gt 0 ]]; then
     echoerr "Error: Cannot set the timer for 0 seconds."
+    echoerr "See timer --help for more information."
   else
-    usage
+    echoerr "Error: Time required."
+    echoerr "See timer --help for more information."
   fi
   exit 1
 fi
