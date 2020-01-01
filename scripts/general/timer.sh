@@ -46,7 +46,7 @@ s="false"
 t="false"
 
 # Check for flags.
-while getopts ":ahn:qst-:" flags; do
+while getopts ":ahnqst-:" flags; do
   case "${flags}" in
     -)
       case "${OPTARG}" in
@@ -63,7 +63,11 @@ while getopts ":ahn:qst-:" flags; do
         name)
           n="${!OPTIND} "
           OPTIND="$(( OPTIND + 1 ))"
-          if [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
+          if [[ "$n" == " " ]]; then
+            echoerr "Error: Name cannot be empty."
+            echoerr "See timer --help for more information."
+            exit 1
+          elif [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
             echoerr "Error: Name cannot begin with a hyphen."
             echoerr "See timer --help for more information."
             exit 1
@@ -92,8 +96,13 @@ while getopts ":ahn:qst-:" flags; do
       h="true"
       ;;
     n)
-      n="$OPTARG "
-      if [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
+      n="${!OPTIND} "
+      OPTIND="$(( OPTIND + 1 ))"
+      if [[ "$n" == " " ]]; then
+        echoerr "Error: Name cannot be empty."
+        echoerr "See timer --help for more information."
+        exit 1
+      elif [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
         echoerr "Error: Name cannot begin with a hyphen."
         echoerr "See timer --help for more information."
         exit 1
