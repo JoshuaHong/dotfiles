@@ -19,7 +19,7 @@ usage() {
   echo "  --help: Shows options."
   echo "  -a|--alert: Hides alert notifications."
   echo "  -h|--hidden: Hides time notifications."
-  echo "  -n|--name: Sets the name of the timer."
+  echo "  -n|--name: Sets the name of the timer. Valid name required."
   echo "  -q|--quiet: Suppresses standard output."
   echo "  -s|--stopwatch: Uses the stopwatch. No time formats required."
   echo "  -t|--time: Alerts at the specified time."
@@ -63,6 +63,11 @@ while getopts ":ahn:qst-:" flags; do
         name)
           n="${!OPTIND} "
           OPTIND="$(( OPTIND + 1 ))"
+          if [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
+            echoerr "Error: Name cannot begin with a hyphen."
+            echoerr "See timer --help for more information."
+            exit 1
+          fi
           ;;
         quiet)
           q="true"
@@ -88,6 +93,11 @@ while getopts ":ahn:qst-:" flags; do
       ;;
     n)
       n="$OPTARG "
+      if [[ "$(echo "$n" | head -c 1)" == "-" ]]; then
+        echoerr "Error: Name cannot begin with a hyphen."
+        echoerr "See timer --help for more information."
+        exit 1
+      fi
       ;;
     q)
       q="true"
