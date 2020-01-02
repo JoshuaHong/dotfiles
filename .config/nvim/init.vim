@@ -110,13 +110,16 @@ set nowb                            "Disable writing to backups
 "Set mapleader
 let mapleader = "\<Space>"
 
+"Open the terminal
+nnoremap <Leader>t :terminal<CR>i
+
 "Remap Escape key
 nnoremap <Leader><Space> :
 noremap <C-_> <Esc>
 inoremap <C-_> <Esc>
 snoremap <C-_> <Esc>
 
-"Map movement
+"Remap movement
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
@@ -256,22 +259,25 @@ let g:ale_sign_warning = '⚠'
 "Format buffer
 nnoremap <Leader>; :ALEFix<CR>
 
+"Show full error message
+nnoremap <Leader>d :ALEDetail<CR>
+
 "Go to next error or warning
 nnoremap <Leader>e :ALENextWrap<CR>
 
-"Go to definition
-nnoremap <Leader>d :ALEGoToDefinition<CR>
-
 "Rename
 nnoremap <Leader>r :ALERename<CR>
+
+"Go to definition
+nnoremap gd :ALEGoToDefinition<CR>
 "}}}
 
 "========== COC =========={{{
 "Navigate completion
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -279,7 +285,6 @@ function! s:check_back_space() abort
 endfunction
 
 "Get information
-nnoremap <Leader>i :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -287,6 +292,7 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+nnoremap <Leader>i :call <SID>show_documentation()<CR>
 
 "Highlight symbol under cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -297,7 +303,8 @@ nmap <Leader>u <Plug>(coc-references)
 
 "========== Auto-Pairs =========={{{
 "Set matching pairs
-let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
+let g:AutoPairs={"(":")", "[":"]", "{":"}", "'":"'", '"':'"', "`":"`",
+  \ "```":"```", '"""':'"""', "'''":"'''", "<":">", " <":"", "<<":""}
 
 "Disable <C-h> mapping which deletes pairs
 let g:AutoPairsMapCh = 0
