@@ -63,12 +63,12 @@ cd() {
   if [[ "$dir" =~ ^(\.)+$ ]]; then
     local MYOLDPWD="$PWD"
     for ((i=0; i<"${#dir}"; ++i)); do
-      builtin cd "../"
+      command cd "../"
     done
     OLDPWD="$MYOLDPWD"
     pwd
   else
-    builtin cd "$@"
+    command cd "$@"
   fi
 
   ls --color=auto
