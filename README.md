@@ -10,7 +10,7 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Packages (51):
+### Packages (52):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
