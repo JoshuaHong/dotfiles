@@ -25,12 +25,6 @@ usage() {
   echo "  -t|--time: Alerts at the specified time."
 }
 
-# Outputs the usage if no options or formats are provided.
-if [[ "$#" -eq 0 ]]; then
-  usage
-  exit 0
-fi
-
 # Outputs to standard error.
 # Requires a message "$@" to print.
 echoerr() {
@@ -124,7 +118,21 @@ while getopts ":ahnqst-:" flags; do
       ;;
   esac
 done
+
+# Output the usage if no options or formats are provided.
+if [[ "$#" -eq 0 ]]; then
+  usage
+  exit 0
+fi
+
 shift "$((OPTIND-1))"
+
+# Error if no time is entered with the time flag.
+if [[ "$t" == "true" && "$#" -eq 0 ]]; then
+  echoerr "Error: Time cannot be empty."
+  echoerr "See timer --help for more information."
+  exit 1
+fi
 
 # Stops processes on interrupt signal and sends a stopped notification.
 # Requires the same parameters "$@" as the dunstify command.
@@ -355,7 +363,7 @@ if [[ "$1" =~ ^[0-9]+:[0-5]?[0-9]:[0-5]?[0-9]$ ]]; then
   minutes="$(echo "$1" | cut -d ":" -f2)"
   seconds="$(echo "$1" | cut -d ":" -f3)"
 elif [[ "$*" =~ \
-    ^([0-9]*h)?[[:space:]]*([0-9]*m)?[[:space:]]*(([0-9]*s)?)$ ]]; then
+    ^([0-9]+h)?[[:space:]]*([0-9]+m)?[[:space:]]*(([0-9]+s)?)$ ]]; then
   remainder="$*"
   if [[ "$remainder" == *h* ]]; then
     hours="${remainder%%h*}"
