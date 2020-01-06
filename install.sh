@@ -169,5 +169,6 @@ echo -e "DONE!\n"
 
 echo "TODO:"
 echo "  1. Install Firefox plugins: Tabliss, uBlock Origin, Vimium-FF"
-echo "  2. Download [PIA VPN](https://www.privateinternetaccess.com/installer/x/download_installer_linux) and enable \"Connect on Launch\""
-echo "  3. Reboot"
+echo "  2. Add \"mapkey <C-/> <c-[>\" to Vimium's \"Custom key mappings\""
+echo "  3. Download [PIA VPN](https://www.privateinternetaccess.com/installer/x/download_installer_linux) and enable \"Connect on Launch\""
+echo "  4. Reboot"
