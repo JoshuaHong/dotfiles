@@ -62,7 +62,7 @@ cd() {
   local dir="$1"
   if [[ "$dir" =~ ^(\.)+$ ]]; then
     local MYOLDPWD="$PWD"
-    for ((i=0; i<"${#dir}"; ++i)); do
+    for ((i=1; i<"${#dir}"; ++i)); do
       command cd "../"
     done
     OLDPWD="$MYOLDPWD"
