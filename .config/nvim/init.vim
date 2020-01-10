@@ -2,13 +2,13 @@
 call plug#begin()
   Plug 'altercation/vim-colors-solarized'
   Plug 'bfrg/vim-cpp-modern'
+  Plug 'dense-analysis/ale'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/goyo.vim'
-  Plug 'dense-analysis/ale'
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  Plug 'jiangmiao/auto-pairs'
   Plug 'kshenoy/vim-signature'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 "}}}
@@ -119,7 +119,7 @@ let mapleader = "\<Space>"
 nnoremap <Leader>t :terminal<CR>i
 
 "Remap Escape key
-nnoremap <Leader><Space> :
+noremap <Leader><Space> :
 noremap <C-_> <Esc>
 inoremap <C-_> <Esc>
 snoremap <C-_> <Esc>
@@ -144,8 +144,8 @@ nnoremap <expr> <Leader>c &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 nnoremap <Leader>z za
 
 "Use marks line and position
-noremap ' `
-noremap ` '
+nnoremap ' `
+nnoremap ` '
 
 "Unset search pattern
 nnoremap <silent> <Leader>n :noh<CR>
