@@ -8,6 +8,8 @@ call plug#begin()
   Plug 'dense-analysis/ale'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'jiangmiao/auto-pairs'
+  Plug 'kshenoy/vim-signature'
+  Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 "}}}
 
@@ -67,6 +69,9 @@ function! s:colorscheme()
 
   "Set statusline color
   highlight StatusLine ctermfg=24
+
+  "Set sign column color
+  highlight SignColumn ctermbg=NONE
 
   "ALE diagnostic colors
   highlight ALEErrorSign ctermfg=magenta
@@ -137,6 +142,10 @@ nnoremap <expr> <Leader>c &modified ? ':bd<CR>' : ':bp<bar>sp<bar>bn<bar>bd<CR>'
 
 "Toggle folds
 nnoremap <Leader>z za
+
+"Use marks line and position
+noremap ' `
+noremap ` '
 
 "Unset search pattern
 nnoremap <silent> <Leader>n :noh<CR>
