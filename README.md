@@ -18,6 +18,7 @@ chmod +x install.sh
 | automake               | Automatically creating make files      | For Yay dependency (base-devel)          |
 | base                   | Base packages                          | For Arch install                         |
 | bash-completion        | Completion for the Bash shell          | For smart tab completion                 |
+| bash-language-server   | Bash language server implementation    | For Bash language server protocol        |
 | bear *                 | Clang compilation database generator   | For ALE and COC Makefile reader          |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
 | blueman                | Bluetooth manager                      | For configuring Bluetooth                |
@@ -51,9 +52,8 @@ chmod +x install.sh
 | pulseaudio-bluetooth   | Bluetooth support for PulseAudio       | For supporting Bluetooth audio devices   |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
-| rust                   | Rust programming language              | For Texlab dependency                    |
 | scrot                  | Screen capture                         | For taking screenshots                   |
-| shellcheck             | Shell script analysis tool             | For ALE shell linting                    |
+| shellcheck             | Shell script analysis tool             | For ALE shell script linting             |
 | simple-mtpfs *         | Media transfer protocol file system    | For mounting mobile phones               |
 | texlab                 | LaTeX language server protocol         | For LaTeX language server protocol       |
 | texlive-core           | Tex Live core distribution             | For running LaTeX                        |
