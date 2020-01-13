@@ -10,7 +10,7 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Packages (52):
+### Packages (56):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -21,7 +21,7 @@ chmod +x install.sh
 | bear *                 | Clang compilation database generator   | For ALE and COC Makefile reader          |
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
 | blueman                | Bluetooth manager                      | For configuring Bluetooth                |
-| clang                  | C family compiler                      | For ALE and COC language server          |
+| clang                  | C family compiler                      | For Clangd language server protocol      |
 | dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
 | feh                    | Image viewer                           | For setting wallpaper                    |
@@ -51,9 +51,12 @@ chmod +x install.sh
 | pulseaudio-bluetooth   | Bluetooth support for PulseAudio       | For supporting Bluetooth audio devices   |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
+| rust                   | Rust programming language              | For Texlab dependency                    |
 | scrot                  | Screen capture                         | For taking screenshots                   |
 | shellcheck             | Shell script analysis tool             | For ALE shell linting                    |
 | simple-mtpfs *         | Media transfer protocol file system    | For mounting mobile phones               |
+| texlab                 | LaTeX language server protocol         | For LaTeX language server protocol       |
+| texlive-core           | Tex Live core distribution             | For running LaTeX                        |
 | ttf-symbola *          | Font for unicode symbols               | For rendering unicode on Dmenu           |
 | valgrind               | Memory management tool                 | For catching memory leaks                |
 | which                  | Show full path of commands             | For Yay dependency (base-devel)          |
@@ -65,5 +68,6 @@ chmod +x install.sh
 | xorg-xset              | Set lock timeout                       | For setting dim and lock screen timeouts |
 | xss-lock               | Use external locker                    | For locking screen                       |
 | yay *                  | AUR package manager                    | For installing AUR packages              |
+| zathura-pdf-mupdf      | PDF support for Zathura                | For viewing LaTeX previews               |
 
 \* = AUR packages

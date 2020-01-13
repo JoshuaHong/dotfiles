@@ -3,11 +3,13 @@ call plug#begin()
   Plug 'altercation/vim-colors-solarized'
   Plug 'bfrg/vim-cpp-modern'
   Plug 'dense-analysis/ale'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/goyo.vim'
   Plug 'kshenoy/vim-signature'
+  Plug 'lervag/vimtex'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
@@ -225,30 +227,6 @@ set undofile
 "}}}
 
 "========== Plugins =========={{{
-"========== FZF =========={{{
-"Search buffers
-nnoremap <Leader>b :Buffers<CR>
-
-"Search files
-nnoremap <Leader>f :Files<CR>
-
-"Search marks
-nnoremap <Leader>m :Marks<CR>
-
-"Search lines in open buffers
-nnoremap <Leader>l :Lines<CR>
-
-"Search lines in project
-nnoremap <Leader>s :Rg<CR>
-
-"Search command history
-nnoremap <Leader>h :History:<CR>
-"}}}
-
-"========== Goyo ========== {{{
-nnoremap <Leader>g :Goyo<CR>
-"}}}
-
 "========== ALE =========={{{
 "Set linters to ignore
 let g:ale_linters_ignore = {
@@ -281,6 +259,18 @@ nnoremap <Leader>r :ALERename<CR>
 nnoremap gd :ALEGoToDefinition<CR>
 "}}}
 
+"========== Auto-Pairs =========={{{
+"Set matching pairs
+let g:AutoPairs={"(":")", "[":"]", "{":"}", "'":"'", '"':'"', "`":"`",
+  \ "```":"```", '"""':'"""', "'''":"'''", "<":">", " <":"", "<<":""}
+
+"Disable <C-h> mapping which deletes pairs
+let g:AutoPairsMapCh = 0
+
+"Toggle Auto-Pairs
+let g:AutoPairsShortcutToggle = "<C-p>"
+"}}}
+
 "========== COC =========={{{
 "Navigate completion
 inoremap <silent><expr> <TAB>
@@ -310,16 +300,46 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <Leader>u <Plug>(coc-references)
 "}}}
 
-"========== Auto-Pairs =========={{{
-"Set matching pairs
-let g:AutoPairs={"(":")", "[":"]", "{":"}", "'":"'", '"':'"', "`":"`",
-  \ "```":"```", '"""':'"""', "'''":"'''", "<":">", " <":"", "<<":""}
+"========== FZF =========={{{
+"Search buffers
+nnoremap <Leader>b :Buffers<CR>
 
-"Disable <C-h> mapping which deletes pairs
-let g:AutoPairsMapCh = 0
+"Search files
+nnoremap <Leader>f :Files<CR>
 
-"Toggle Auto-Pairs
-let g:AutoPairsShortcutToggle = "<C-p>"
+"Search marks
+nnoremap <Leader>m :Marks<CR>
+
+"Search lines in open buffers
+nnoremap <Leader>l :Lines<CR>
+
+"Search lines in project
+nnoremap <Leader>s :Rg<CR>
+
+"Search command history
+nnoremap <Leader>h :History:<CR>
+"}}}
+
+"========== Goyo ========== {{{
+nnoremap <Leader>g :Goyo<CR>
+"}}}
+
+"========== Markdown Preview =========={{{
+"Open preview window automatically
+let g:mkdp_auto_start = 1
+
+"Set browser
+let g:mkdp_browser = "firefox"
+"}}}
+
+"========== Vimtex =========={{{
+"Set viewer
+let g:vimtex_view_general_viewer = "zathura"
+
+"Start autocompiling on save
+augroup vimtex_config
+  autocmd User VimtexEventInitPost VimtexCompile
+augroup END
 "}}}
 "}}}
 "}}}
