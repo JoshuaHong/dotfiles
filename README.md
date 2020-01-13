@@ -10,7 +10,7 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Packages (56):
+### Packages (55):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -23,7 +23,6 @@ chmod +x install.sh
 | bison                  | Parser generator                       | For Yay dependency (base-devel)          |
 | blueman                | Bluetooth manager                      | For configuring Bluetooth                |
 | clang                  | C family compiler                      | For Clangd language server protocol      |
-| dmenu                  | Menu bar                               | For searching programs                   |
 | dunst                  | Notification daemon                    | For displaying notifications             |
 | feh                    | Image viewer                           | For setting wallpaper                    |
 | firefox                | Browser                                | For browsing Internet                    |
@@ -52,12 +51,12 @@ chmod +x install.sh
 | pulseaudio-bluetooth   | Bluetooth support for PulseAudio       | For supporting Bluetooth audio devices   |
 | reflector              | Retrieve and filter Pacman mirror list | For updating Pacman mirror list          |
 | ripgrep                | Grep tool                              | For searching files                      |
+| rofi                   | Menu bar                               | For selecting options                    |
 | scrot                  | Screen capture                         | For taking screenshots                   |
 | shellcheck             | Shell script analysis tool             | For ALE shell script linting             |
 | simple-mtpfs *         | Media transfer protocol file system    | For mounting mobile phones               |
 | texlab                 | LaTeX language server protocol         | For LaTeX language server protocol       |
 | texlive-core           | Tex Live core distribution             | For running LaTeX                        |
-| ttf-symbola *          | Font for unicode symbols               | For rendering unicode on Dmenu           |
 | valgrind               | Memory management tool                 | For catching memory leaks                |
 | which                  | Show full path of commands             | For Yay dependency (base-devel)          |
 | xclip                  | Manipulates X11 clipboard              | For copying unicode, Neovim copy on exit |

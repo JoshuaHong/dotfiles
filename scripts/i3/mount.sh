@@ -50,7 +50,7 @@ if [[ -n "$device" && "$print" == "true" ]]; then
   # Listen for mouse events
   case "$BLOCK_BUTTON" in
     1) # Left click
-      sudo "$HOME/scripts/dmenu/mount.sh" &
+      "$HOME/scripts/rofi/mount.sh" &
       kill $$
       ;;
     3) # Right click

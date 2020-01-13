@@ -43,8 +43,8 @@ floating_modifier $mod
 # Start terminal.
 bindsym $mod+Return exec --no-startup-id "i3-sensible-terminal"
 
-# Start dmenu.
-bindsym $mod+d exec --no-startup-id "i3-dmenu-desktop"
+# Start rofi.
+bindsym $mod+d exec --no-startup-id "rofi -show run"
 
 # Start browser.
 bindsym $mod+b exec --no-startup-id "firefox"
@@ -74,10 +74,10 @@ bindsym --release Shift+Print exec --no-startup-id \
     "$HOME/scripts/i3/screenshot.sh -s"
 
 # List unicode characters.
-bindsym $mod+u exec --no-startup-id "$HOME/scripts/dmenu/unicode.sh"
+bindsym $mod+u exec --no-startup-id "$HOME/scripts/rofi/unicode.sh"
 
 # Mount external devices.
-bindsym $mod+m exec --no-startup-id "sudo $HOME/scripts/dmenu/mount.sh"
+bindsym $mod+m exec --no-startup-id "$HOME/scripts/rofi/mount.sh"
 
 # Change focus.
 bindsym $mod+h focus left
@@ -128,7 +128,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+Return kill
 
 # Exit i3 (logs you out of your X session).
-bindsym $mod+Shift+q exec --no-startup-id "$HOME/scripts/dmenu/prompt.sh \
+bindsym $mod+Shift+q exec --no-startup-id "$HOME/scripts/rofi/prompt.sh \
     'Are you sure you want to exit i3?' 'i3-msg exit'"
 
 # Resize Mode.
