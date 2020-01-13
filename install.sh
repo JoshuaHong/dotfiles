@@ -22,7 +22,7 @@ installPackages() {
       i3-gaps i3blocks i3lock imagemagick linux linux-firmware man-db neovim \
       net-tools network-manager-applet nodejs noto-fonts noto-fonts-emoji \
       openssh pacman-contrib pamixer picom pulseaudio-bluetooth reflector \
-      ripgrep rofi scrot shellcheck texlab texlive-core valgrind xclip \
+      ripgrep rofi scrot shellcheck texlab texlive-most valgrind xclip \
       xf86-video-intel xorg-server xorg-xbacklight xorg-xinit xorg-xset \
       xss-lock zathura-pdf-mupdf"
   local yayPackages="bear simple-mtpfs"

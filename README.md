@@ -10,7 +10,7 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Packages (55):
+### Packages (65):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -42,7 +42,7 @@ chmod +x install.sh
 | network-manager-applet | System tray for NetworkManager         | For Network Manager applet               |
 | noto-fonts-emoji       | Font for emoji symbols                 | For rendering unicode symbols            |
 | npm                    | JavaScript package manager             | For COC dependency                       |
-| openssh                | SSH                                    | For SSH                                  |
+| openssh                | SSH protocol                           | For SSH                                  |
 | pacman-contrib         | Scripts and tools for Pacman systems   | For checkupdates                         |
 | pamixer                | PulseAudio command-line mixer          | For audio controls                       |
 | patch                  | Patches files                          | For Yay dependency (base-devel)          |
@@ -56,7 +56,16 @@ chmod +x install.sh
 | shellcheck             | Shell script analysis tool             | For ALE shell script linting             |
 | simple-mtpfs *         | Media transfer protocol file system    | For mounting mobile phones               |
 | texlab                 | LaTeX language server protocol         | For LaTeX language server protocol       |
-| texlive-core           | Tex Live core distribution             | For running LaTeX                        |
+| texlive-bibtexextra    | TeX Live bibliographies                | For LaTeX dependency (texlive-most)      |
+| texlive-fontsextra     | TeX Live extra fonts                   | For LaTeX dependency (texlive-most)      |
+| texlive-formatsextra   | TeX Live extra formats                 | For LaTeX dependency (texlive-most)      |
+| texlive-games          | TeX Live board games                   | For LaTeX dependency (texlive-most)      |
+| texlive-humanities     | TeX Live humanities                    | For LaTeX dependency (texlive-most)      |
+| texlive-music          | TeX Live music                         | For LaTeX dependency (texlive-most)      |
+| texlive-pictures       | TeX Live pictures                      | For LaTeX dependency (texlive-most)      |
+| texlive-pstricks       | TeX Live PSTricks                      | For LaTeX dependency (texlive-most)      |
+| texlive-publishers     | TeX Live publishers                    | For LaTeX dependency (texlive-most)      |
+| texlive-science        | TeX Live science                       | For LaTeX dependency (texlive-most)      |
 | valgrind               | Memory management tool                 | For catching memory leaks                |
 | which                  | Show full path of commands             | For Yay dependency (base-devel)          |
 | xclip                  | Manipulates X11 clipboard              | For copying unicode, Neovim copy on exit |
