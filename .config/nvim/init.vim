@@ -29,7 +29,7 @@ set backspace=indent,eol,start      "Allow backspacing insert mode
 set history=1000                    "Lines of history stored
 set autoread                        "Reload files changed outside Vim
 set mouse=a                         "Enable use of mouse for all modes
-set scrolloff=2                     "Keep cursor from edges when scrolling
+set scrolloff=5                     "Keep cursor from edges when scrolling
 set wildmenu                        "Allow toggling through tab-completion
 set wildignorecase                  "Case-insensitive wildmenu search
 set wildmode=longest:list,full      "Display all results of tab-completion
@@ -261,8 +261,8 @@ nnoremap gd :ALEGoToDefinition<CR>
 
 "========== Auto-Pairs =========={{{
 "Set matching pairs
-let g:AutoPairs={"(":")", "[":"]", "{":"}", "'":"'", '"':'"', "`":"`",
-  \ "```":"```", '"""':'"""', "'''":"'''", "<":">", " <":"", "<<":""}
+let g:AutoPairs={"(":")", "[":"]", "{":"}", "'":"'", "\"":"\"", "`":"`",
+  \ "```":"```", "\"\"\"":"\"\"\"", "'''":"'''", "<":">", " <":"", "<<":""}
 
 "Disable <C-h> mapping which deletes pairs
 let g:AutoPairsMapCh = 0
@@ -334,11 +334,33 @@ let g:mkdp_browser = "firefox"
 
 "========== Vimtex =========={{{
 "Set viewer
-let g:vimtex_view_general_viewer = "zathura"
+let g:vimtex_view_method = "zathura"
 
-"Start autocompiling on save
-augroup vimtex_config
-  autocmd User VimtexEventInitPost VimtexCompile
+"Disable quickfix window for only warnings
+let g:vimtex_quickfix_open_on_warning = 0
+
+"Start compilation in continuous mode
+autocmd VimEnter *.tex normal \ll \lv
+
+"Synchronize scrolling
+autocmd CursorHold *.tex normal \lv
+
+"Clean files on exit
+augroup vimtex_event_1
+  au!
+  au User VimtexEventQuit call vimtex#compiler#clean(0)
+augroup END
+
+"Close viewers on exit
+function! CloseViewers()
+  if executable('xdotool') && exists('b:vimtex')
+      \ && exists('b:vimtex.viewer') && b:vimtex.viewer.xwin_id > 0
+    call system('xdotool windowclose '. b:vimtex.viewer.xwin_id)
+  endif
+endfunction
+augroup vimtex_event_2
+  au!
+  au User VimtexEventQuit call CloseViewers()
 augroup END
 "}}}
 "}}}

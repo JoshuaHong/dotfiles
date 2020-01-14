@@ -10,7 +10,7 @@ chmod +x install.sh
 ./install.sh && rm -v install.sh
 ```
 
-### Packages (65):
+### Packages (66):
 | Package                | Description                            | Function                                 |
 | ---------------------- | -------------------------------------- | ---------------------------------------- |
 | alacritty              | Terminal emulator                      | For running terminal                     |
@@ -69,8 +69,9 @@ chmod +x install.sh
 | valgrind               | Memory management tool                 | For catching memory leaks                |
 | which                  | Show full path of commands             | For Yay dependency (base-devel)          |
 | xclip                  | Manipulates X11 clipboard              | For copying unicode, Neovim copy on exit |
+| xdotool                | X11 automation tool                    | For closing viewers on Neovim exit       |
 | xf86-video-intel       | XOrg video driver                      | For graphics display                     |
-| xorg-server            | XOrg package                           | For running X                            |
+| xorg-server            | XOrg package                           | For running X11                          |
 | xorg-xbacklight        | Screen brightness                      | For brightness controls                  |
 | xorg-xinit             | XOrg initialisation                    | For startx                               |
 | xorg-xset              | Set lock timeout                       | For setting dim and lock screen timeouts |
