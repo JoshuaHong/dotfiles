@@ -1,14 +1,170 @@
 # env
 Setup for the Arch Linux environment
 
+### Pre-installation
+
+##### BIOS configuration
+* Ensure BIOS boot mode is set to UEIF (for systemd-boot)
+* Ensure BIOS SATA operation is set to AHCI (for visible disk partitions)
+
+##### Connect to the internet
+* Use netctl: `wifi-menu`
+
+##### Partition the disks
+* Use fdisk: `fdisk /dev/nvme0n1`
+* Delete all partitions
+* Create a new empty GPT partition table
+* Create a new 512M EFI System
+* Create a new 220G Linux Filesystem
+* Create a new 18G Linux Swap
+
+##### Format the partitions
+* Format the boot partition: `mkfs.fat -F32 /dev/nvme0n1p1`
+* Format the main partition: `mkfs.ext4 /dev/nvme0n1p2`
+* Create the swap partition: `mkswap /dev/nvme0n1p3`
+* Enable the swap partition: `swapon /dev/nvme0n1p3`
+
+##### Mount the file systems
+* Mount the main file system: `mount /dev/nvme0n1p2 /mnt`
+* Create the boot mount point: `mkdir /mnt/boot`
+* Mount the boot file system: `mount /dev/nvme0n1p1 /mnt/boot`
+
 ### Installation
-Copy and run the installation script:
+
+##### Install essential packages
+* Install a text editor and a network manager: `pacstrap /mnt neovim networkmanager`
+* Enable the Network Manager service: `systemctl enable NetworkManager.service`
+
+##### Initramfs
+If `dmesg | grep -i psmouse` returns an error, but the touchpad still works:
+* Create a config file `/etc/modprobe.d/modprobe.conf`:
 ```
-cd /root
-curl https://raw.githubusercontent.com/JoshuaHong/env/master/install.sh -o install.sh
-chmod +x install.sh
-./install.sh && rm -v install.sh
+blacklist psmouse
 ```
+* Then add this file to `/etc/mkinitcpio.conf`:
+```
+...
+FILES=(/etc/modprobe.d/modprobe.conf)
+...
+```
+
+##### Boot loader
+* Install systemd-boot: `bootctl --path=/boot install`
+* Create a Pacman hook for automatic updates in `/etc/pacman.d/hooks/100-systemd-boot.hook`:
+```
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+```
+* Edit the loader configuration file `/boot/loader/loader.conf`:
+```
+default    arch-*
+```
+* Create the arch configuration file `/boot/loader/entries/arch.conf`:
+<pre>
+title    Arch Linux
+linux    /vmlinuz-linux
+initrc   /initramfs-linux.img
+options  root=UUID=<em>UUID</em> rw
+</pre>
+
+\* To find *UUID* in vim run `:r! blkid`
+
+##### Reboot
+* Exit the chroot environment: `exit`
+* Unmount all partitions: `umount -R /mnt`
+* Restart the machine `reboot`
+
+### Post-installation
+
+##### Users and groups
+* Create the main user: `useradd -m -G wheel josh`
+* Set up the user password: `passwd josh`
+* Disable root login: `passwd -l root`
+
+##### Configure Pacman
+* In `/etc/pacman.conf` misc options uncomment the following:
+```
+...
+Color
+TotalDownload
+CheckSpace
+ILoveCandy
+...
+```
+
+##### Enable parallel compilation and compression
+* Edit `/etc/makepkg.conf`:
+```
+...
+MAKEFLAGS="-j$(nproc)"
+...
+COMPRESSXZ=(xz -c -z - --threads=0)
+COMPRESSZST=(zstd -c -z -q - --threads=0)
+...
+```
+
+##### Install packages
+* Reflector: `pacman -S reflector`
+  * Create a copy of the Pacman mirrorlist: `cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup`
+  * Update the Pacman mirrorlist: `reflector --country Canada --latest 200 --age 24 --sort rate --save /etc/pacman.d/mirrorlist`
+  * Create a Pacman hook for automatic updates:
+  ```
+  [Trigger]
+  Operation = Upgrade
+  Type = Package
+  Target = pacman-mirrorlist
+
+  [Action]
+  Description = Updating pacman-mirrorlist with reflector and removing pacnew...
+  When = PostTransaction
+  Depends = reflector
+  Exec = /bin/sh -c "reflector --country Canada --latest 200 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; rm -f /etc/pacman.d/mirrorlist.pacnew"
+  ```
+* Sudo: `pacman -S sudo`
+  * To allow wheel group sudo access, in `/etc/sudoers` uncomment:
+  ```
+  ...
+  %WHEEL ALL=(ALL) NOPASSWD: ALL
+  ...
+  ```
+* Openssh: `pacman -S openssh`
+  * To disable root login over ssh, in `/etc/ssh/sshd_config` edit:
+  ```
+  ...
+  PermitRootLogin No
+  ...
+  ```
+* Yay:
+  * Install dependencies: `pacman -S --needed base-devel git`
+  * Clone Yay: `sudo git clone https://aur.archlinux.org/yay.git /opt`
+  * Give permissions to user: `sudo chown -R josh:josh /opt/yay`
+  * Change directory: `cd /opt/yay`
+  * Build package: `makepkg -si`
+* St:
+  * Install dependencies: `yay -S libxft-bgra` (for color emoji)
+  * Clone St: `sudo git clone https://git.suckless.org/st /usr/local/src`
+  * Change directory: `cd /usr/local/share/st`
+  * Build package: `sudo make install`
+* Dwm:
+  * Install dependencies: `pacman -S dmenu noto-fonts xorg-xinit xorg-server`
+  * Clone Dwm: `sudo git clone https://git.suckless.org/dwm /usr/local/src`
+  * Change directory: `cd /usr/local/share/dwm`
+  * Build package: `sudo make install`
+* Others:
+  * Install remaining packages:
+  ```
+  sudo pacman -S firefox pulseaudio
+  ```
+  
+##### Copy files
+* Copy remaining files:
 
 ### Packages (66):
 | Package                | Description                            | Function                                 |
