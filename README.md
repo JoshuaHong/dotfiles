@@ -35,19 +35,6 @@ Setup for the Arch Linux environment
 * Install a text editor and a network manager: `pacstrap /mnt neovim networkmanager`
 * Enable the Network Manager service: `systemctl enable NetworkManager.service`
 
-##### Initramfs
-If `dmesg | grep -i psmouse` returns an error, but the touchpad still works:
-* Create a config file `/etc/modprobe.d/modprobe.conf`:
-```
-blacklist psmouse
-```
-* Then add this file to `/etc/mkinitcpio.conf`:
-```
-...
-FILES=(/etc/modprobe.d/modprobe.conf)
-...
-```
-
 ##### Boot loader
 * Install systemd-boot: `bootctl --path=/boot install`
 * Create a Pacman hook for automatic updates in `/etc/pacman.d/hooks/100-systemd-boot.hook`:
@@ -165,6 +152,36 @@ COMPRESSZST=(zstd -c -z -q - --threads=0)
   
 ##### Copy files
 * Copy remaining files:
+
+### Dell XPS 13
+
+##### PSMouse Error
+If `dmesg | grep -i psmouse` returns an error, but the touchpad still works:
+* Create a config file `/etc/modprobe.d/modprobe.conf`:
+```
+blacklist psmouse
+```
+* Add this file to `/etc/mkinitcpio.conf`:
+```
+...
+FILES=(/etc/modprobe.d/modprobe.conf)
+...
+```
+* Create a new initramfs: `mkinitpcio -P`
+
+##### PCIe Bus Error
+If `dmesg | grep -i pcieport` returns an error such as:
+```
+pcieport 0000:00:1c.4: AER: Corrected error received: id=00e4
+pcieport 0000:00:1c.4: PCIe Bus Error: severity=Corrected, type=Data Link Layer, id=00e4(Transmitter ID)
+pcieport 0000:00:1c.4:   device [8086:9d14] error status/mask=00001000/00002000
+pcieport 0000:00:1c.4:    [12] Replay Timer Timeout  
+```
+* Confirm QCA6174 exists by checking `sudo lspci | grep QCA6174`
+* Download the latest firmware from `https://github.com/kvalo/ath10k-firmware/archive/master.zip`
+* Rename `firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1` to `firmware-4.bin`
+* Substitude the `QCA6174` folder in `/lib/firmware/ath10k/` with the downloaded one
+* Reboot and test the new Killer Wi-fi firmware
 
 ### Packages (66):
 | Package                | Description                            | Function                                 |
