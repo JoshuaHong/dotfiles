@@ -70,6 +70,32 @@ options  root=UUID=<em>UUID</em> rw
 
 ### Post-installation
 
+##### Keyboard configuration
+* Copy the Linux console keymap to `/usr/share/kbd/keymaps/i386/colemak/colemak-mod-dh.map`
+* Set the Linux console keymap in `/etc/vconsole.conf`:
+```
+KEYMAP=/usr/share/kbd/keymaps/i386/colemak/colemak-mod-dh.map
+```
+* Copy the Xorg keymap to `/usr/share/X11/xkb/symbols/us`
+* Add the Xorg keymap to `/usr/share/X11/xkb/rules/xorg.xml` as a us variant:
+```
+...
+<variant>
+  <configItem>
+    <name>colemak-mod-dh</name>
+    <description>English (Colemak Mod-DH)</description>
+  </configItem>
+</variant>
+...
+```
+* Add the Xorg keymap to `/usr/share/X11/xkb/rules/xorg.lst` as a variant:
+```
+...
+colemak-mod-dh  us: English (Colemak Mod-DH)
+...
+```
+* Set the Xorg keymap: `localectl --no-convert set-x11-keymap us "" colemak-mod-dh ctrl:swap_lalt_lctl`
+
 ##### Users and groups
 * Create the main user: `useradd -m -G wheel josh`
 * Set up the user password: `passwd josh`
@@ -134,15 +160,15 @@ COMPRESSZST=(zstd -c -z -q - --threads=0)
   * Give permissions to user: `sudo chown -R josh:josh /opt/yay`
   * Change directory: `cd /opt/yay`
   * Build package: `makepkg -si`
-* St:
-  * Install dependencies: `yay -S libxft-bgra` (for color emoji)
-  * Clone St: `sudo git clone https://git.suckless.org/st /usr/local/src`
-  * Change directory: `cd /usr/local/share/st`
-  * Build package: `sudo make install`
 * Dwm:
   * Install dependencies: `pacman -S dmenu noto-fonts xorg-xinit xorg-server`
-  * Clone Dwm: `sudo git clone https://git.suckless.org/dwm /usr/local/src`
-  * Change directory: `cd /usr/local/share/dwm`
+  * Clone Dwm: `sudo git clone https://github.com/JoshuaHong/dwm.git /usr/local/src`
+  * Change directory: `cd /usr/local/src/dwm`
+  * Build package: `sudo make install`
+* St:
+  * Install dependencies: `yay -S libxft-bgra` (for color emoji)
+  * Clone St: `sudo git clone https://github.com/JoshuaHong/st /usr/local/src`
+  * Change directory: `cd /usr/local/src/st`
   * Build package: `sudo make install`
 * Others:
   * Install remaining packages:
@@ -243,10 +269,10 @@ pcieport 0000:00:1c.4:    [12] Replay Timer Timeout
 | which                  | Show full path of commands             | For Yay dependency (base-devel)          |
 | xclip                  | Manipulates X11 clipboard              | For copying unicode, Neovim copy on exit |
 | xdotool                | X11 automation tool                    | For closing viewers on Neovim exit       |
-| xf86-video-intel       | XOrg video driver                      | For graphics display                     |
-| xorg-server            | XOrg package                           | For running X11                          |
+| xf86-video-intel       | Xorg video driver                      | For graphics display                     |
+| xorg-server            | Xorg package                           | For running X11                          |
 | xorg-xbacklight        | Screen brightness                      | For brightness controls                  |
-| xorg-xinit             | XOrg initialisation                    | For startx                               |
+| xorg-xinit             | Xorg initialisation                    | For startx                               |
 | xorg-xset              | Set lock timeout                       | For setting dim and lock screen timeouts |
 | xss-lock               | Use external locker                    | For locking screen                       |
 | yay *                  | AUR package manager                    | For installing AUR packages              |
