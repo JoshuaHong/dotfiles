@@ -18,33 +18,33 @@ keycode   8 =          seven     ampersand              eth               ETH   
 keycode   9 =          eight      asterisk            thorn             THORN    Delete
 keycode  10 =           nine     parenleft       asciitilde        asciitilde               #   leftsinglequotemark   leftdoublequotemark
 keycode  11 =           zero    parenright       asciitilde        asciitilde               #  rightsinglequotemark   rightdoublequotemark
-keycode  12 =    bracketleft     braceleft    guillemotleft        asciitilde    Escape               #     guillemotleft         0x1002039
-keycode  13 =   bracketright    braceright   guillemotright        asciitilde    Control_bracketright #    guillemotright         0x100203a
+keycode  12 =          minus    underscore       asciitilde        asciitilde 	 Control_underscore          #            endash            emdash
+keycode  13 =          equal          plus         multiply          division
                                                                                         
 keycode  16 =              q             Q       adiaeresis        Adiaeresis    Control_q
-keycode  17 =              w             W            aring             Aring    Control_w 
-keycode  18 =              f             F           atilde            Atilde    Control_f
+keycode  17 =              w             W            minus        underscore    Control_w 
+keycode  18 =              f             F            equal              plus    Control_f
 keycode  19 =              p             P           oslash          Ooblique    Control_p
 keycode  20 =              b             B       asciitilde        asciitilde    Control_b 	#        dead_breve        asciitilde
 keycode  21 =              j             J       asciitilde        asciitilde    Control_j 	#           dstroke           Dstroke
 keycode  22 =              l             L       asciitilde        asciitilde    Control_l 	#           lstroke           Lstroke
-keycode  23 =              u             U           uacute            Uacute    Control_u
-keycode  24 =              y             Y       udiaeresis        Udiaeresis    Control_y
-keycode  25 =          minus    underscore       asciitilde        asciitilde 	 Control_underscore          #            endash            emdash
-keycode  26 =      semicolon         colon       odiaeresis        Odiaeresis
-keycode  27 =          equal          plus         multiply          division
+keycode  23 =              u             U      bracketleft         braceleft    Control_u
+keycode  24 =              y             Y     bracketright        braceright    Control_y
+keycode  25 =      semicolon         colon       odiaeresis        Odiaeresis
+keycode  26 =    bracketleft     braceleft    guillemotleft        asciitilde    Escape               #     guillemotleft         0x1002039
+keycode  27 =   bracketright    braceright   guillemotright        asciitilde    Control_bracketright #    guillemotright         0x100203a
 keycode  43 =      backslash           bar       asciitilde        asciitilde    Control_backslash
 
-keycode  30 =              a             A           aacute            Aacute    Control_a
-keycode  31 =              r             R       dead_grave        asciitilde    Control_r
-keycode  32 =              s             S           ssharp        asciitilde    Control_s
-keycode  33 =              t             T       dead_acute        asciitilde    Control_t 	#        dead_acute  dead_doubleacute
-keycode  34 =              g             G       asciitilde        asciitilde    Control_g 	#       dead_ogonek        asciitilde
-keycode  35 =              k             K       asciitilde        asciitilde    Control_k      #    dead_abovering        asciitilde
-keycode  36 =              n             N           ntilde            Ntilde    Control_n
-keycode  37 =              e             E           eacute            Eacute    Control_e
-keycode  38 =              i             I           iacute            Iacute    Control_i
-keycode  39 =              o             O           oacute            Oacute    Control_o
+keycode  30 =              a             A              one            exclam    Control_a
+keycode  31 =              r             R              two                at    Control_r
+keycode  32 =              s             S            three        numbersign    Control_s
+keycode  33 =              t             T             four            dollar    Control_t 	#        dead_acute  dead_doubleacute
+keycode  34 =              g             G             five           percent    Control_g 	#       dead_ogonek        asciitilde
+keycode  35 =              k             K              six       asciicircum    Control_k      #    dead_abovering        asciitilde
+keycode  36 =              n             N            seven         ampersand    Control_n
+keycode  37 =              e             E            eight          asterisk    Control_e
+keycode  38 =              i             I             nine         parenleft    Control_i
+keycode  39 =              o             O             zero        parenright    Control_o
 keycode  40 =     apostrophe      quotedbl           otilde            Otilde
 
 keycode  44 =              z             Z               ae                AE    Control_z
@@ -60,7 +60,7 @@ keycode  53 =          slash      question     questiondown        asciitilde   
                                                                              
 keycode  58 =      BackSpace     BackSpace        BackSpace         BackSpace
 keycode  86 =          minus    underscore       asciitilde        asciitilde 	 Control_underscore          #            endash            emdash
-keycode  57 =          space         space            space      nobreakspace    nul
+keycode  57 =          space        Escape            space      nobreakspace    nul
 
 
 keycode   1 = Escape
