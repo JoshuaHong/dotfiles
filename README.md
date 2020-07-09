@@ -71,12 +71,12 @@ options  root=UUID=<em>UUID</em> rw
 ### Post-installation
 
 ##### Keyboard configuration
-* Copy the Linux console keymap to `/usr/share/kbd/keymaps/i386/colemak/colemak-mod-dh.map`
+* Copy the Linux console keymap from `env/keymaps/colemak-mod-dh.map` to `/usr/share/kbd/keymaps/i386/colemak/colemak-mod-dh.map`
 * Set the Linux console keymap in `/etc/vconsole.conf`:
 ```
 KEYMAP=/usr/share/kbd/keymaps/i386/colemak/colemak-mod-dh.map
 ```
-* Copy the Xorg keymap to `/usr/share/X11/xkb/symbols/us`
+* Copy the Xorg keymap from `env/keymaps/us` to `/usr/share/X11/xkb/symbols/us`
 * Add the Xorg keymap to `/usr/share/X11/xkb/rules/xorg.xml` as a us variant:
 ```
 ...
