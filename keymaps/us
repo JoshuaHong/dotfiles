@@ -2032,10 +2032,10 @@ xkb_symbols "colemak-mod-dh" {
     key <AD01> { [            q,            Q,      adiaeresis,       Adiaeresis ] };
     key <AD02> { [            w,            W,           minus,       underscore ] };
     key <AD03> { [            f,            F,           equal,             plus ] };
-    key <AD04> { [            p,            P,          oslash,         Ooblique ] };
+    key <AD04> { [            p,            P,           grave,       asciitilde ] };
     key <AD05> { [            b,            B,      dead_breve,       asciitilde ] };
     key <AD06> { [            j,            J,         dstroke,          Dstroke ] };
-    key <AD07> { [            l,            L,         lstroke,          Lstroke ] };
+    key <AD07> { [            l,            L,       backslash,              bar ] };
     key <AD08> { [            u,            U,     bracketleft,        braceleft ] };
     key <AD09> { [            y,            Y,    bracketright,       braceright ] };
     key <AD10> { [    semicolon,        colon,      odiaeresis,       Odiaeresis ] };
