@@ -242,7 +242,7 @@ If `dmesg | grep -i pcieport` returns an error such as:
 | blueman                | Bluetooth manager                      | For configuring Bluetooth                |
 | clang                  | C family compiler                      | For Clangd language server protocol      |
 | dunst                  | Notification daemon                    | For displaying notifications             |
-| feh                    | Image viewer                           | For setting wallpaper                    |
+| feh                    | Image viewer                           | For setting background                   |
 | firefox                | Browser                                | For browsing Internet                    |
 | flex                   | Generates text scanning programs       | For Yay dependency (base-devel)          |
 | gdb                    | GNU debugger                           | For debugging                            |
