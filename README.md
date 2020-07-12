@@ -132,7 +132,13 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 ```
 
 ##### Copy files
-`@@@@@ TODO @@@@@`
+* Copy files as user: `su josh`
+* Change directory: `cd`
+* Clear the directory: `rm -rf *`
+* Clone this directory: `git clone https://github.com/JoshuaHong/dotfiles.git`
+* Copy files to home: `cp -r .bash_profile .bashrc .cache .config downloads images .local .profile programs`
+* Remove .gitkeep files: `find . -type f -name ".gitkeep" -exec rm -f {} \;`
+* Remove this directory: `rm -rf dotfiles`
 
 ##### Install and configure packages
 * Reflector:
@@ -154,13 +160,15 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   ```
 * Install remaining Pacman packages: `pacman -S ***** TODO *****`
 * Sudo:
+  * Install Sudo: `pacman -S sudo`
   * To allow wheel group sudo access, in `/etc/sudoers` uncomment:
   ```
   ...
   %WHEEL ALL=(ALL) NOPASSWD: ALL
   ...
   ```
-* Openssh: `pacman -S openssh`
+* Openssh:
+  * Install Openssh: `pacman -S openssh`
   * To disable root login over ssh, in `/etc/ssh/sshd_config` edit:
   ```
   ...
