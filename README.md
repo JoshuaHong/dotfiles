@@ -66,7 +66,7 @@ options  root=UUID=<em>UUID</em> rw
 ##### Reboot
 * Exit the chroot environment: `exit`
 * Unmount all partitions: `umount -R /mnt`
-* Restart the machine `reboot`
+* Restart the machine: `reboot`
 
 ### Post-installation
 
@@ -131,8 +131,12 @@ export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 ```
 
-##### Install packages
-* Reflector: `pacman -S reflector`
+##### Copy files
+`@@@@@ TODO @@@@@`
+
+##### Install and configure packages
+* Reflector:
+  * Install Reflector `pacman -S reflector`
   * Create a copy of the Pacman mirrorlist: `cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup`
   * Update the Pacman mirrorlist: `reflector --country Canada --latest 200 --age 24 --sort rate --save /etc/pacman.d/mirrorlist`
   * Create a Pacman hook for automatic updates:
@@ -148,7 +152,8 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   Depends = reflector
   Exec = /bin/sh -c "reflector --country Canada --latest 200 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; rm -f /etc/pacman.d/mirrorlist.pacnew"
   ```
-* Sudo: `pacman -S sudo`
+* Install remaining Pacman packages: `pacman -S ***** TODO *****`
+* Sudo:
   * To allow wheel group sudo access, in `/etc/sudoers` uncomment:
   ```
   ...
@@ -162,37 +167,33 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   PermitRootLogin No
   ...
   ```
-* Yay:
-  * Install dependencies: `pacman -S --needed base-devel git`
-  * Clone Yay: `sudo git clone https://aur.archlinux.org/yay.git /opt`
-  * Give permissions to user: `sudo chown -R josh:josh /opt/yay`
-  * Change directory: `cd /opt/yay`
-  * Build package: `makepkg -si`
 * Dwm:
-  * Install dependencies: `pacman -S dmenu noto-fonts xorg-xinit xorg-server`
-  * Clone Dwm: `sudo git clone https://github.com/JoshuaHong/dwm.git /usr/local/src`
+  * Clone Dwm: `git clone https://github.com/JoshuaHong/dwm.git /usr/local/src`
   * Change directory: `cd /usr/local/src/dwm`
-  * Build package: `sudo make install`
+  * Build package: `make install clean`
+  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/dwm.git`
 * St:
-  * Install dependencies: `yay -S libxft-bgra` (for color emoji)
-  * Clone St: `sudo git clone https://github.com/JoshuaHong/st /usr/local/src`
+  * Clone St: `git clone https://github.com/JoshuaHong/st /usr/local/src`
   * Change directory: `cd /usr/local/src/st`
-  * Build package: `sudo make install`
-* Others:
-  * Install remaining packages:
-  ```
-  sudo pacman -S firefox pulseaudio
-  ```
-  
-##### Copy files
-* Copy remaining files:
-* Install Neovim Plugins: nvim +PlugUpgrade +PlugInstall +qall
-
+  * Build package: `make install clean`
+  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/st.git`
+* Yay:
+  * Clone Yay: `git clone https://aur.archlinux.org/yay.git /opt`
+  * Give permissions to user: `chown -R josh:josh /opt/yay`
+  * Change directory: `cd /opt/yay`
+  * Build package as user: `su -c "makepkg -si" - josh`
+  * Install yay packages: `yay -S @@@@@@ TODO @@@@@@`
+* Neovim:  
+  * Install Neovim Plugins: nvim +PlugUpgrade +PlugInstall +qall
+* Network Manager ?? :
 <!--
   # Allows NetworkManager to reconnect after disconnecting.
   echo -e "\n[device]\nwifi.scan-rand-mac-address=no" \
       >> "/etc/NetworkManager/NetworkManager.conf"
 -->
+
+##### Reboot
+Restart the machine: `reboot`
 
 ### Dell XPS 13
 
@@ -213,7 +214,8 @@ FILES=(/etc/modprobe.d/modprobe.conf)
 ##### PCIe Bus Error
 If `dmesg | grep -i pcieport` returns an error such as:
 ```
-pcieport 0000:00:1c.4: AER: Corrected error received: id=00e4
+   @@@@@ TODO @@@@@
+   and fix other dmesg errors
 ```
 
 ### Packages (66):
