@@ -1,6 +1,15 @@
-#
 # $HOME/.bash_profile
-#
+# !/bin/bash
 
-# Read bashrc on startup.
-[[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
+profile="${HOME}/.profile"
+bashrc="${HOME}/.bashrc"
+
+# Source profile if exists
+if [[ -f "${profile}" ]]; then
+    . "${profile}"
+fi
+
+# Source bashrc if exists
+if [[ -f "${bashrc}" ]]; then
+    . "${bashrc}"
+fi

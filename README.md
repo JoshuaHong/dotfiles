@@ -123,6 +123,14 @@ COMPRESSZST=(zstd -c -z -q - --threads=0)
 ...
 ```
 
+##### Add global environment variables
+* At the bottom of `etc/profile` export the following:
+```
+# XDG base directory
+export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
+```
+
 ##### Install packages
 * Reflector: `pacman -S reflector`
   * Create a copy of the Pacman mirrorlist: `cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup`
