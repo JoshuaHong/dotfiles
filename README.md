@@ -168,20 +168,22 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   ...
   ```
 * Dwm:
-  * Clone Dwm: `git clone https://github.com/JoshuaHong/dwm.git /usr/local/src`
-  * Change directory: `cd /usr/local/src/dwm`
-  * Build package: `make install clean`
+  * Build as user: `su josh`
+  * Clone Dwm: `sudo git clone https://github.com/JoshuaHong/dwm.git $HOME/.local/src/dwm`
+  * Change directory: `cd $HOME/.local/src/dwm`
+  * Build package: `sudo make install clean`
   * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/dwm.git`
 * St:
-  * Clone St: `git clone https://github.com/JoshuaHong/st /usr/local/src`
-  * Change directory: `cd /usr/local/src/st`
-  * Build package: `make install clean`
+  * Build as user: `su josh`
+  * Clone St: `git clone https://github.com/JoshuaHong/st $HOME/.local/src/st`
+  * Change directory: `cd $HOME/.local/src/st`
+  * Build package: `sudo make install clean`
   * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/st.git`
 * Yay:
-  * Clone Yay: `git clone https://aur.archlinux.org/yay.git /opt`
-  * Give permissions to user: `chown -R josh:josh /opt/yay`
-  * Change directory: `cd /opt/yay`
-  * Build package as user: `su -c "makepkg -si" - josh`
+  * Build as user: `su josh`
+  * Clone Yay: `git clone https://aur.archlinux.org/yay.git $HOME/.local/src/yay`
+  * Change directory: `cd $HOME/.local/src/yay`
+  * Build package: `makepkg -si`
   * Install yay packages: `yay -S @@@@@@ TODO @@@@@@`
 * Neovim:  
   * Install Neovim Plugins: nvim +PlugUpgrade +PlugInstall +qall
