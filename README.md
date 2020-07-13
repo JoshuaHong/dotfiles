@@ -177,7 +177,7 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   ```
 * Dwm:
   * Build as user: `su josh`
-  * Clone Dwm: `sudo git clone https://github.com/JoshuaHong/dwm.git $HOME/.local/src/dwm`
+  * Clone Dwm: `git clone https://github.com/JoshuaHong/dwm.git $HOME/.local/src/dwm`
   * Change directory: `cd $HOME/.local/src/dwm`
   * Build package: `sudo make install clean`
   * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/dwm.git`
