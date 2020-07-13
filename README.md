@@ -1,4 +1,4 @@
-# env
+# dotfiles
 Setup for the Arch Linux environment
 
 ### Pre-installation
@@ -227,6 +227,33 @@ If `dmesg | grep -i pcieport` returns an error such as:
    @@@@@ TODO @@@@@
    and fix other dmesg errors
 ```
+
+### Suckless
+
+##### Patching
+* Checkout master branch: `git checkout master`
+* Clean files: `make clean`
+* Revert changes: `git reset --hard origin/master`
+* Checkout patch branch: `git checkout -b patch`
+* Apply the patch: `git apply patch.diff`
+* Add the patch: `git add .`
+* Commit the patch: `git commit -m "Add patch"`
+* Push the patch: `git push`
+* Checkout develop branch: `git checkout develop`
+* Merge the patch: `git merge patch`
+* Push the patch: `git push`
+
+##### Rebasing
+* Checkout master branch: `git checkout master`
+* Pull updates: `git pull`
+* Checkout branch: `git checkout develop`
+* Rebase branch: `git rebase --preserve-merges master`
+* Fix conflicts: `git mergetool`
+* Add resolved conflicts: `git add resolved_file.ext`
+* Continue rebasing: `git rebase --continue`
+* Push the update: `git push`
+* Repeat for each existing branch
+
 
 ### Packages (66):
 | Package                | Description                            | Function                                 |
