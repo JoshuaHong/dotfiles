@@ -1,4 +1,5 @@
 # $HOME/.profile
+
 # !/bin/sh
 
 # Local path
@@ -13,16 +14,14 @@ export TERMINAL="st"
 export VISUAL="nvim"
 
 # XDG base directory
-export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.local/share"
-
 export HISTFILE="${XDG_DATA_HOME}/bash/history"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export LESSHISTFILE=-                                 # Disable less history file
 export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
 export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
-
-export LESSHISTFILE=-                                   # Disable less history file
 
 # Start Xorg
 if systemctl -q is-active graphical.target && [ ! "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then

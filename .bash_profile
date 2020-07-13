@@ -1,4 +1,5 @@
 # $HOME/.bash_profile
+
 # !/bin/bash
 
 profile="${HOME}/.profile"

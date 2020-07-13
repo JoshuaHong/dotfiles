@@ -1,0 +1,59 @@
+# $HOME/.config/X11/Xresources
+
+# Solarized dark
+
+#define base03              #002b36
+#define base02              #073642
+#define base01              #586e75
+#define base00              #657b83
+#define base0               #839496
+#define base1               #93a1a1
+#define base2               #eee8d5
+#define base3               #fdf6e3
+#define yellow              #b58900
+#define orange              #cb4b16
+#define red                 #dc322f
+#define magenta             #d33682
+#define violet              #6c71c4
+#define blue                #268bd2
+#define cyan                #2aa198
+#define green               #859900
+
+*background:                base03
+*foreground:                base0
+*fadeColor:                 base03
+*cursorColor:               base1
+*pointerColorBackground:    base01
+*pointerColorForeground:    base1
+
+!! black dark/light
+*color0:                    base02
+*coor8:                     base03
+
+!! red dark/light
+*color1:                    red
+*color9:                    orange
+
+!! green dark/light
+*color2:                    green
+*color10:                   base01
+
+!! yellow dark/light
+*color3:                    yellow
+*color11:                   base00
+
+!! blue dark/light
+*color4:                    blue
+*color12:                   base0
+
+!! magenta dark/light
+*color5:                    magenta
+*color13:                   violet
+
+!! cyan dark/light
+*color6:                    cyan
+*color14:                   base1
+
+!! white dark/light
+*color7:                    base2
+*color15:                   base3l
