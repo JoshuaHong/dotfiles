@@ -232,8 +232,6 @@ If `dmesg | grep -i pcieport` returns an error such as:
 
 ##### Patching
 * Checkout master branch: `git checkout master`
-* Clean files: `make clean`
-* Revert changes: `git reset --hard origin/master`
 * Checkout patch branch: `git checkout -b patch`
 * Apply the patch: `git apply patch.diff`
 * Add the patch: `git add .`
@@ -252,7 +250,7 @@ If `dmesg | grep -i pcieport` returns an error such as:
 * Add resolved conflicts: `git add resolved_file.ext`
 * Continue rebasing: `git rebase --continue`
 * Push the update: `git push`
-* Repeat for each existing branch
+* Repeat for all branches
 
 
 ### Packages (66):
