@@ -1,4 +1,5 @@
 # $HOME/.config/X11/xinitrc
+
 # !/bin/sh
 
 userresources="${HOME}/.config/X11/Xresources"
@@ -6,7 +7,7 @@ usermodmap="${HOME}/.config/X11/Xmodmap"
 sysresources="/etc/X11/xinit/.Xresources"
 sysmodmap="/etc/X11/xinit/.Xmodmap"
 
-background="${HOME}/.local/share/backgrounds/background.jpg"
+background=$"(find "$HOME/.local/share/backgrounds/" -maxdepth "1" -type "f" -print0 | shuf -z -n "1")"
 
 # Merge in defaults and keymaps
 
