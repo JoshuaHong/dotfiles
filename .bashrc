@@ -2,13 +2,22 @@
 
 # !/bin/bash
 
-# If not running interactively, don't do anything
-if [[ "${-}" != *i* ]]; then
-    return
-fi
+function main() {
+    # If not running interactively, don't do anything
+    if [[ "${-}" != *i* ]]; then
+        return
+    fi
 
-# Aliases
-alias ls="ls --color=auto"  # ls with color
+    setAliases
+    setPrimaryPrompt
+}
 
-# Primary Prompt
-PS1='[\u@\h \W]\$ '
+function setAliases() {
+    alias ls="ls --color=auto"  # ls with color
+}
+
+function setPrimaryPrompt() {
+    PS1='[\u@\h \W]\$ '
+}
+
+main

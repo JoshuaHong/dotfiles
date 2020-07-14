@@ -2,15 +2,23 @@
 
 # !/bin/bash
 
-profile="${HOME}/.profile"
-bashrc="${HOME}/.bashrc"
+function main() {
+    sourceProfile
+    sourceBashrc
+}
 
-# Source profile if exists
-if [[ -f "${profile}" ]]; then
-    . "${profile}"
-fi
+function sourceProfile() {
+    local profile="${HOME}/.profile"
+    if [[ -f "${profile}" ]]; then
+        . "${profile}"
+    fi
+}
 
-# Source bashrc if exists
-if [[ -f "${bashrc}" ]]; then
-    . "${bashrc}"
-fi
+function sourceBashrc() {
+    bashrc="${HOME}/.bashrc"
+    if [[ -f "${bashrc}" ]]; then
+        . "${bashrc}"
+    fi
+}
+
+main

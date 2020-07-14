@@ -1,6 +1,6 @@
-# $HOME/.config/X11/Xresources
+! $HOME/.config/X11/Xresources
 
-# Solarized dark
+! Solarized dark
 
 #define base03              #002b36
 #define base02              #073642
@@ -26,34 +26,34 @@
 *pointerColorBackground:    base01
 *pointerColorForeground:    base1
 
-!! black dark/light
+! black dark/light
 *color0:                    base02
 *coor8:                     base03
 
-!! red dark/light
+! red dark/light
 *color1:                    red
 *color9:                    orange
 
-!! green dark/light
+! green dark/light
 *color2:                    green
 *color10:                   base01
 
-!! yellow dark/light
+! yellow dark/light
 *color3:                    yellow
 *color11:                   base00
 
-!! blue dark/light
+! blue dark/light
 *color4:                    blue
 *color12:                   base0
 
-!! magenta dark/light
+! magenta dark/light
 *color5:                    magenta
 *color13:                   violet
 
-!! cyan dark/light
+! cyan dark/light
 *color6:                    cyan
 *color14:                   base1
 
-!! white dark/light
+! white dark/light
 *color7:                    base2
 *color15:                   base3l
