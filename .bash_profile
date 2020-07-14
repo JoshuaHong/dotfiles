@@ -15,7 +15,7 @@ function sourceProfile() {
 }
 
 function sourceBashrc() {
-    bashrc="${HOME}/.bashrc"
+    local bashrc="${HOME}/.bashrc"
     if [[ -f "${bashrc}" ]]; then
         . "${bashrc}"
     fi
