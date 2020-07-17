@@ -175,18 +175,13 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   PermitRootLogin No
   ...
   ```
-* Dwm:
+* Suckless:
+  * Replace `program` with each of the following: `dwm`, `st`, `dmenu`, `slock`
   * Build as user: `su josh`
-  * Clone Dwm: `git clone https://github.com/JoshuaHong/dwm.git $HOME/.local/src/dwm`
-  * Change directory: `cd $HOME/.local/src/dwm`
+  * Clone program: `git clone https://github.com/JoshuaHong/program.git $HOME/.local/src/program`
+  * Change directory: `cd $HOME/.local/src/program`
   * Build package: `sudo make install clean`
-  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/dwm.git`
-* St:
-  * Build as user: `su josh`
-  * Clone St: `git clone https://github.com/JoshuaHong/st $HOME/.local/src/st`
-  * Change directory: `cd $HOME/.local/src/st`
-  * Build package: `sudo make install clean`
-  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/st.git`
+  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/program.git`
 * Yay:
   * Build as user: `su josh`
   * Clone Yay: `git clone https://aur.archlinux.org/yay.git $HOME/.local/src/yay`
