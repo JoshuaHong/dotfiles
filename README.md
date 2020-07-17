@@ -181,7 +181,7 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   * Clone program: `git clone https://github.com/JoshuaHong/program.git $HOME/.local/src/program`
   * Change directory: `cd $HOME/.local/src/program`
   * Build package: `sudo make install clean`
-  * Set upstream: `git remote set-url --push origin https://github.com/JoshuaHong/program.git`
+  * Set upstream: `git remote set-url origin https://git.suckless.org/program`
 * Yay:
   * Build as user: `su josh`
   * Clone Yay: `git clone https://aur.archlinux.org/yay.git $HOME/.local/src/yay`
