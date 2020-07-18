@@ -1,0 +1,38 @@
+# $HOME/.config/readline/inputrc
+
+# Disable terminal bell on tab completion
+set bell-style none
+
+# Color the common prefix on tab completion
+set colored-completion-prefix on
+
+# Color directories on tab completion
+set colored-stats on
+
+# Pasted characters are not executed
+# Example: Pasting a command followed by a newline character will display a new
+#          line instead of executing the command as if pressing the Enter key
+set enable-bracketed-paste on
+
+# Append slashes to symlinked directories on tab completion
+set mark-symlinked-directories on
+
+# Show common prefix on menu completion before cycling throuth the list
+set menu-complete-display-prefix on
+
+# Single tab shows all results if ambiguous
+set show-all-if-ambiguous on
+
+# Change cursor shape based on Vi mode
+set show-mode-in-prompt
+set vi-cmd-mode-string "\1\e[2 q\2"
+set vi-ins-mode-string "\1\e[6 q\2"
+
+set editing-mode vi
+$if mode=vi
+    TAB: menu-complete
+    "\e[Z": menu-complete-backward
+    Control-l: clear-screen
+    set keymap vi-command
+    set keymap vi-insert
+$endif
