@@ -39,12 +39,27 @@ function setAliases() {
     }
 }
 
-
 function setPrimaryPrompt() {
     function gitbranch() {
         git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/ (\1)/"
     }
-    PS1="\[\e[31m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\]\[\e[94m\] \W\[\e[35m\]\$(gitbranch)\[\e[m\]\[\e[m\]\[\e[31m\]]\[\e[m\]\[\e[36m\]$\[\e[m\]\[\e[39m\] "
+    local red="\[\e[31m\]"
+    local green="\[\e[32m\]"
+    local yellow="\[\e[33m\]"
+    local blue="\[\e[34m\]"
+    local magenta="\[\e[35m\]"
+    local cyan="\[\e[36m\]"
+    local lightBlue="\[\e[94m\]"
+    local reset="\[\e[m\]"
+    local lbrace="["
+    local username="\u"
+    local at="@"
+    local hostname="\h"
+    local pwd="\W"
+    local rbrace="]"
+    local dollar="$"
+    local space=" "
+    PS1="${red}${lbrace}${yellow}${username}${green}${at}${blue}${hostname}${lightBlue}${space}${pwd}${magenta}\$(gitbranch)${red}${rbrace}${cyan}${dollar}${reset}${space}"
 }
 
 function setShopt() {
