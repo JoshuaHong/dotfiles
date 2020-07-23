@@ -228,7 +228,9 @@ If `dmesg | grep -i pcieport` returns an error such as:
 ##### Patching
 * Checkout master branch: `git checkout master`
 * Checkout patch branch: `git checkout -b patch`
-* Apply the patch: `git apply patch.diff`
+* Apply the patch automatically: `git apply patch.diff`
+* Or apply the patch manually and create the diff: `git diff --output=patch.diff`
+* Create the patch directory: `mkdir patches/master && mv patch.diff patches/master`
 * Add the patch: `git add .`
 * Commit the patch: `git commit -m "Add patch"`
 * Push the patch: `git push`
