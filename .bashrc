@@ -22,6 +22,27 @@ function setAliases() {
     alias mkdir="mkdir -p"        # mkdir recursively
     alias mv="mv -i"              # mv confirm if overriding
 
+    alias ga="git add"
+    alias gaa="git add --all"
+    alias gb="git branch"
+    alias gcm="git commit"
+    alias gcl="git clone"
+    alias gco="git checkout"
+    alias gcob="git checkout -b"
+    alias gcom="git checkout master"
+    alias gcob="git checkout develop"
+    alias gd="git diff"
+    alias gdh="git diff HEAD"
+    alias gl="git log --all --decorate --graph --oneline --date=short --pretty=format:'%C(yellow)%h%Creset%C(red)%C(bold)%d%Creset%C(white)(%cd)%Creset %s'"
+    alias gm="git merge"
+    alias gpl="git pull"
+    alias gps="git push"
+    alias grb="git rebase"
+    alias grs="git reset"
+    alias gs="git status"
+    alias gst="git stash"
+    alias gstp="git stash pop"
+
     # Cd and ls, and cd to a parent directory for every "."
     function cd() {
         local dir="$1"
