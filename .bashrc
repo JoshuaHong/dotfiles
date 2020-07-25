@@ -30,7 +30,7 @@ function setAliases() {
     alias gco="git checkout"
     alias gcob="git checkout -b"
     alias gcom="git checkout master"
-    alias gcob="git checkout develop"
+    alias gcod="git checkout develop"
     alias gd="git diff"
     alias gdh="git diff HEAD"
     alias gl="git log --all --decorate --graph --oneline --date=short --pretty=format:'%C(yellow)%h%Creset%C(red)%C(bold)%d%Creset%C(white)(%cd)%Creset %s'"
