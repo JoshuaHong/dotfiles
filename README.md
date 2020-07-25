@@ -178,8 +178,8 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 * Suckless:
   * Replace `program` with each of the following: `dwm`, `st`, `dmenu`, `slock`
   * Build as user: `su josh`
-  * Clone program: `git clone https://github.com/JoshuaHong/program.git $HOME/.local/src/program`
-  * Change directory: `cd $HOME/.local/src/program`
+  * Clone program: `git clone https://github.com/JoshuaHong/program.git $HOME/.local/src/suckless/program`
+  * Change directory: `cd $HOME/.local/src/suckless/program`
   * Build package: `sudo make install clean`
   * Set upstream: `git remote set-url origin https://git.suckless.org/program`
 * Yay:
