@@ -17,9 +17,6 @@ set enable-bracketed-paste on
 # Append slashes to symlinked directories on tab completion
 set mark-symlinked-directories on
 
-# Show common prefix on menu completion before cycling throuth the list
-set menu-complete-display-prefix on
-
 # Single tab shows all results if ambiguous
 set show-all-if-ambiguous on
 
@@ -30,8 +27,6 @@ set vi-ins-mode-string "\1\e[6 q\2"
 
 set editing-mode vi
 $if mode=vi
-    TAB: menu-complete
-    "\e[Z": menu-complete-backward
     Control-l: clear-screen
     set keymap vi-command
     set keymap vi-insert
