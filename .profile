@@ -1,5 +1,3 @@
-# $HOME/.profile
-
 # !/bin/sh
 
 function main() {

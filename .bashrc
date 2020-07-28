@@ -1,5 +1,3 @@
-# $HOME/.bashrc
-
 # !/bin/bash
 
 function main() {
@@ -22,9 +20,12 @@ function setAliases() {
     alias mkdir="mkdir -p"        # mkdir recursively
     alias mv="mv -i"              # mv confirm if overriding
 
+    # Git aliases
     alias ga="git add"
     alias gaa="git add --all"
     alias gb="git branch"
+    alias gbd="git branch -d"
+    alias gbD="git branch -D"
     alias gcm="git commit"
     alias gcl="git clone"
     alias gco="git checkout"
@@ -39,11 +40,12 @@ function setAliases() {
     alias gps="git push"
     alias grb="git rebase"
     alias grs="git reset"
+    alias grsh="git reset --hard"
     alias gs="git status"
     alias gst="git stash"
     alias gstp="git stash pop"
 
-    # Cd and ls, and cd to a parent directory for every "."
+    # ls after cd, and cd to a parent directory for every additional "."
     function cd() {
         local dir="$1"
         if [[ "$dir" =~ ^(\.)+$ ]]; then

@@ -1,5 +1,3 @@
-# $HOME/.bash_profile
-
 # !/bin/bash
 
 function main() {
