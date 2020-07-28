@@ -24,7 +24,6 @@ function setAliases() {
     alias ga="git add"
     alias gaa="git add --all"
     alias gb="git branch"
-    alias gbd="git branch -d"
     alias gbD="git branch -D"
     alias gcm="git commit"
     alias gcl="git clone"
