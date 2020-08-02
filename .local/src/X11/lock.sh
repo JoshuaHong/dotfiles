@@ -1,0 +1,156 @@
+#!/bin/bash
+
+# Locks the screen using slock and a custom lockscreen.
+# Suspends the system on lockscreen inactivity after a specified time
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+main() {
+    getOptions "${@}"
+
+    if canLock; then
+        pamixer --mute
+        lock
+    fi
+}
+
+getOptions() {
+    local options="fht"
+    f="false"
+    t="false"
+    m="false"
+    while getopts "${options}" flag; do
+        case "${flag}" in
+            f)
+                f="true"
+                ;;
+            h)
+                usage
+                exit "0"
+                ;;
+            t)
+                t="true"
+                ;;
+            *)
+                echoerr "Error: Unsupported option"
+                usage
+                exit "1"
+                ;;
+        esac
+    done
+
+    if getMute; then
+        m="true"
+    fi
+}
+
+usage() {
+    echo "Locks the screen using slock and a custom lockscreen"
+    echo "Options:"
+    echo "    -f: Force locking over videos"
+    echo "    -t: Translucent background"
+}
+
+echoerr() {
+    local errorMessage="${*}"
+    echo "${errorMessage}" 1>&2
+}
+
+canLock() {
+    getFlag "${f}" || ! isVideoPlaying
+}
+
+getFlag() {
+    local flag="${1}"
+    [[ "${flag}" == "true" ]]
+}
+
+isVideoPlaying() {
+    local drivers="/proc/asound/card*/pcm*/sub*/status"
+    cat ${drivers} | grep --quiet "state: RUNNING"
+}
+
+lock() {
+    local lockscreen="/tmp/lockscreen.png"
+    setTraps "${lockscreen}"
+    startSuspendTimer
+    createLockscreen "${lockscreen}"
+    slock -i "${lockscreen}"
+}
+
+setTraps() {
+    local lockscreen="${1}"
+    trap "cleanup ${lockscreen}" "EXIT"
+}
+
+cleanup() {
+    local lockscreen="${1}"
+    if fileExists "${lockscreen}"; then
+        rm "${lockscreen}"
+    fi
+    if [[ "${m}" == "false" ]]; then
+        pamixer --unmute
+    fi
+    stopSuspendTimer
+}
+
+fileExists() {
+    local file="${1}"
+    [[ -f "$file" ]]
+}
+
+getMute() {
+    pamixer --get-mute > /dev/null
+}
+
+startSuspendTimer() {
+    local timeInMinutes="10"
+    local suspender="systemctl suspend"
+    xautolock -time "${timeInMinutes}" -locker "${suspender}" &
+}
+
+stopSuspendTimer() {
+    kill %%
+}
+
+createLockscreen() {
+    local lockscreen="${1}"
+    if getFlag "$t"; then
+        createTranslucentLockscreen "${lockscreen}"
+    else
+        createDefaultLockscreen
+    fi
+    addLockIcon "${lockscreen}"
+}
+
+createTranslucentLockscreen() {
+    local lockscreen="${1}"
+    createScreenshot "${lockscreen}"
+    blurImage "${lockscreen}"
+}
+
+createScreenshot() {
+    local lockscreen="${1}"
+    scrot --overwrite "${lockscreen}"
+}
+
+blurImage() {
+    local lockscreen="${1}"
+    convert "${lockscreen}" -filter Gaussian -thumbnail 20% -sample 500% \
+            "${lockscreen}"
+}
+
+createDefaultLockscreen() {
+    cp "${HOME}/.local/share/backgrounds/lockscreens/lockscreen.png" "/tmp/"
+}
+
+addLockIcon() {
+    local lockscreen="${1}"
+    local lockIcon="${HOME}/.local/share/backgrounds/lockscreens/lock.png"
+    convert "${lockscreen}" "${lockIcon}" -gravity "Center" \
+            -composite "${lockscreen}"
+}
+
+main "${@}"
