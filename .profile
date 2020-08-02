@@ -1,28 +1,55 @@
-# !/bin/sh
+#!/bin/sh
 
-function main() {
-    exportLocalPath
-    exportPrograms
-    exportXDGBaseDirectory
-    exportConfigurations
+# The personal initialization file, executed for login shells
+
+main() {
+    exportVariables
     startXorg
 }
 
-function exportLocalPath() {
-    if [ "${UID}" -ge 1000 ] && [ -d "${HOME}/.local/bin" ] \
-            && [ -z "$(echo "${PATH}" | grep -o "${HOME}/.local/bin")" ]; then
-        export PATH="${PATH}:${HOME}/.local/bin"
+exportVariables() {
+    exportLocalPath
+    exportPrograms
+    exportXDGBaseDirectories
+    exportConfigurations
+}
+
+exportLocalPath() {
+    directory="${HOME}/.local/bin"
+    if isValidPath "${directory}"; then
+        export PATH="${PATH}:${directory}"
     fi
 }
 
-function exportPrograms() {
+isValidPath() {
+    directory="${1}"
+    isValidUID && directoryExists "${directory}" \
+            && ! isDirectoryIncludedInPath "${directory}"
+}
+
+isValidUID() {
+    [ "$(id -u)" -ge 1000 ]
+}
+
+
+directoryExists() {
+    directory="${1}"
+    [ -d "${directory}" ]
+}
+
+isDirectoryIncludedInPath() {
+    directory="${1}"
+    echo "${PATH}" | grep --quiet "${directory}"
+}
+
+exportPrograms() {
     export BROWSER="firefox"
     export EDITOR="nvim"
     export TERMINAL="st"
     export VISUAL="nvim"
 }
 
-function exportXDGBaseDirectory() {
+exportXDGBaseDirectories() {
     export XDG_CACHE_HOME="${HOME}/.cache"
     export XDG_CONFIG_HOME="${HOME}/.config"
     export XDG_DATA_HOME="${HOME}/.local/share"
@@ -32,16 +59,34 @@ function exportXDGBaseDirectory() {
     export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 }
 
-function exportConfigurations() {
-    export HISTCONTROL=erasedups:ignoreboth    # Ignore bash history duplicates
-    export LESSHISTFILE=-                      # Disable less history file
+exportConfigurations() {
+    export HISTCONTROL=erasedups:ignoreboth    # Ignore bash history commands
+                                               # repeated or begin with a space
+    export LESSHISTFILE=-                      # Disable the less history file
 }
 
-function startXorg() {
-    if systemctl -q is-active graphical.target && [ ! "${DISPLAY}" ] \
-            && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx "${XDG_CONFIG_HOME}/X11/xinitrc"
+startXorg() {
+    xinitrc="${XDG_CONFIG_HOME}/X11/xinitrc"
+    if canStartXorg; then
+        exec startx "${xinitrc}"
     fi
+}
+
+canStartXorg() {
+    isGraphicalTargetActive && ! displayExists && isVirtualTerminalNumber "1"
+}
+
+isGraphicalTargetActive() {
+    systemctl --quiet is-active graphical.target
+}
+
+displayExists() {
+    [ "${DISPLAY}" ]
+}
+
+isVirtualTerminalNumber() {
+    number="${1}"
+    [ "${XDG_VTNR}" -eq "${number}" ]
 }
 
 main

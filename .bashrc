@@ -1,30 +1,78 @@
-# !/bin/bash
+#!/bin/bash
 
-function main() {
-    # If not running interactively, don't do anything
-    if [[ "${-}" != *i* ]]; then
+# The individual per-interactive-shell startup file
+
+main() {
+    if ! isRunningInteractively; then
         return
     fi
 
     setAliases
     setPrimaryPrompt
-    setShopt
+    setShopts
+    removeHistoryFileDuplicates
 }
 
-function setAliases() {
-    alias cp="cp -ir"             # cp recursively, confirm if overriding
-    alias diff="diff --color"     # diff with color
-    alias grep="grep --color"     # grep with color
-    alias ln="ln -i"              # ln confirm if overriding
-    alias ls="ls --color=auto"    # ls with color
-    alias mkdir="mkdir -p"        # mkdir recursively
-    alias mv="mv -i"              # mv confirm if overriding
+isRunningInteractively() {
+    tty --quiet
+}
 
-    # Git aliases
+setAliases() {
+    setLinuxAliases
+    setGitAliases
+}
+
+setLinuxAliases() {
+    alias cp="cp --interactive --recursive"
+    alias diff="diff --color=auto"
+    alias grep="grep --color=auto"
+    alias ln="ln --interactive"
+    alias ls="ls --color=auto"
+    alias mkdir="mkdir --parents"
+    alias mv="mv --interactive"
+
+    # ls after cd, and cd to a parent directory for every additional "."
+    cd() {
+        local directory="${1}"
+        if containsOnlyOneOrMoreDots "${directory}"; then
+            cdToParentDirectory "${directory}"
+        else
+            command cd "$@"
+        fi
+        ls --color=auto
+    }
+
+    containsOnlyOneOrMoreDots() {
+        local directory="${1}"
+        [[ "$directory" =~ ^(\.)+$ ]]
+    }
+
+    cdToParentDirectory() {
+        local directory="${1}"
+        local initialPWD="$PWD"
+        for ((i=1; i<"$(getLength "${directory}")"; ++i)); do
+            command cd "../"
+        done
+        setOLDPWD "${initialPWD}"
+        pwd
+    }
+
+    getLength() {
+        local variable="${1}"
+        echo "${#variable}"
+    }
+
+    setOLDPWD() {
+        local initialPWD="${1}"
+        OLDPWD="${initialPWD}"
+    }
+}
+
+setGitAliases() {
     alias ga="git add"
     alias gaa="git add --all"
     alias gb="git branch"
-    alias gbD="git branch -D"
+    alias gbD="git branch --delete --force"
     alias gcm="git commit"
     alias gcl="git clone"
     alias gco="git checkout"
@@ -43,26 +91,10 @@ function setAliases() {
     alias gs="git status"
     alias gst="git stash"
     alias gstp="git stash pop"
-
-    # ls after cd, and cd to a parent directory for every additional "."
-    function cd() {
-        local dir="$1"
-        if [[ "$dir" =~ ^(\.)+$ ]]; then
-            local MYOLDPWD="$PWD"
-            for ((i=1; i<"${#dir}"; ++i)); do
-                command cd "../"
-            done
-            OLDPWD="$MYOLDPWD"
-            pwd
-        else
-            command cd "$@"
-        fi
-        ls --color=auto
-    }
 }
 
-function setPrimaryPrompt() {
-    function gitbranch() {
+setPrimaryPrompt() {
+    function getGitBranch() {
         git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/ (\1)/"
     }
     local red="\[\e[31m\]"
@@ -78,22 +110,27 @@ function setPrimaryPrompt() {
     local at="${green}@"
     local hostname="${blue}\h"
     local pwd="${lightBlue}\W"
-    local branch="${magenta}\$(gitbranch)"
+    local branch="${magenta}\$(getGitBranch)"
     local rbrace="${red}]"
     local dollar="${cyan}$"
     local space=" "
     PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${branch}${rbrace}${dollar}${space}${reset}"
 }
 
-function setShopt() {
+setShopts() {
     shopt -s autocd          # cd when entering a path without the cd command
     shopt -s cdspell         # cd automatically fixes minor spelling errors
     shopt -s checkwinsize    # Update LINES and COLUMNS after each command
     shopt -s cmdhist         # Save multiline commands as a single history entry
     shopt -s dirspell        # Fix directory spelling errors on word completion
+    shopt -s direxpand       # Along with dirspell to expand on word completion
     shopt -s dotglob         # Include hidden files in pathname expansion
     shopt -s globstar        # Context match "**" pattern
     shopt -s histappend      # Append history rather than overriding the file
+}
+
+removeHistoryFileDuplicates() {
+    echo "$(tac "${HISTFILE}" | awk '!x[$0]++' | tac)" > "${HISTFILE}"
 }
 
 main

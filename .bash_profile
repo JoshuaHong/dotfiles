@@ -1,22 +1,29 @@
-# !/bin/bash
+#!/bin/bash
 
-function main() {
+# The personal initialization file, sources files for login shells
+
+main() {
     sourceProfile
     sourceBashrc
 }
 
-function sourceProfile() {
+sourceProfile() {
     local profile="${HOME}/.profile"
-    if [[ -f "${profile}" ]]; then
-        . "${profile}"
+    if fileExists "${profile}"; then
+        source "${profile}"
     fi
 }
 
-function sourceBashrc() {
+sourceBashrc() {
     local bashrc="${HOME}/.bashrc"
-    if [[ -f "${bashrc}" ]]; then
-        . "${bashrc}"
+    if fileExists "${bashrc}"; then
+        source "${bashrc}"
     fi
+}
+
+fileExists() {
+    local file="${1}"
+    [[ -f "${file}" ]]
 }
 
 main
