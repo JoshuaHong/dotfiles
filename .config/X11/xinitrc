@@ -75,11 +75,10 @@ isExecutable() {
 }
 
 startDaemons() {
-    dunst &                              # Notifications
-    dwmblocks &                          # Status bar
-    nm-applet &                          # Network manager applet
-    picom &                              # Compositor
-    xss-lock --notifier=dim -- lock &    # Dim and lock screen on inactivity
+    dunst &                                                    # Notifications
+    dwmblocks &                                                # Status bar
+    picom --no-fading-openclose &                              # Compositor
+    xss-lock --notifier=dim --transfer-sleep-lock -- lock &    # Screen locker
 }
 
 setBackgroundImage() {
