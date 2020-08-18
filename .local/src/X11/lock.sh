@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Locks the screen using slock and a custom lockscreen.
-# Suspends the system on lockscreen inactivity after a specified time
+# Suspends the system on lockscreen inactivity after a specified time.
 
 set -o errexit
 set -o nounset
@@ -34,7 +34,7 @@ getOptions() {
                 t="true"
                 ;;
             *)
-                echoerr "Error: Unsupported option"
+                error "Error: Unsupported option"
                 usage
                 exit "1"
                 ;;
@@ -50,10 +50,11 @@ usage() {
     echo "Locks the screen using slock and a custom lockscreen"
     echo "Options:"
     echo "    -f: Force locking over videos"
+    echo "    -h: Help menu"
     echo "    -t: Translucent background"
 }
 
-echoerr() {
+error() {
     local errorMessage="${*}"
     echo "${errorMessage}" 1>&2
 }
@@ -74,10 +75,22 @@ isVideoPlaying() {
 
 lock() {
     local lockscreen="/tmp/lockscreen.png"
+    local locker="slock -i ${lockscreen}"
+    configureLock "${lockscreen}"
+    if lockFileDescriptorIsOpen; then
+        ${locker} {XSS_SLEEP_LOCK_FD}<&- &
+        closeLockFileDescriptor
+    else
+        ${locker} &
+    fi
+    wait "${!}"
+}
+
+configureLock() {
+    local lockscreen="${1}"
     setTraps "${lockscreen}"
     startSuspendTimer
     createLockscreen "${lockscreen}"
-    slock -i "${lockscreen}"
 }
 
 setTraps() {
@@ -87,7 +100,7 @@ setTraps() {
 
 cleanup() {
     local lockscreen="${1}"
-    if fileExists "${lockscreen}"; then
+    if regularFileExists "${lockscreen}"; then
         rm "${lockscreen}"
     fi
     if [[ "${m}" == "false" ]]; then
@@ -96,9 +109,13 @@ cleanup() {
     stopSuspendTimer
 }
 
-fileExists() {
+regularFileExists() {
     local file="${1}"
     [[ -f "$file" ]]
+}
+
+stopSuspendTimer() {
+    kill "%%" > /dev/null
 }
 
 getMute() {
@@ -109,10 +126,6 @@ startSuspendTimer() {
     local timeInMinutes="10"
     local suspender="systemctl suspend"
     xautolock -time "${timeInMinutes}" -locker "${suspender}" &
-}
-
-stopSuspendTimer() {
-    kill %%
 }
 
 createLockscreen() {
@@ -151,6 +164,19 @@ addLockIcon() {
     local lockIcon="${HOME}/.local/share/backgrounds/lockscreens/lock.png"
     convert "${lockscreen}" "${lockIcon}" -gravity "Center" \
             -composite "${lockscreen}"
+}
+
+lockFileDescriptorIsOpen() {
+    fileExists "/dev/fd/${XSS_SLEEP_LOCK_FD:--1}"
+}
+
+fileExists() {
+    local file="${1}"
+    [[ -e "${file}" ]]
+}
+
+closeLockFileDescriptor() {
+    exec {XSS_SLEEP_LOCK_FD}<&-
 }
 
 main "${@}"

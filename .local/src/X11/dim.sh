@@ -34,7 +34,7 @@ setTraps() {
 cleanup() {
     local initialBrightness="${1}"
     setBrightness "${initialBrightness}"
-    kill %%
+    kill "%%"
 }
 
 fadeBrightness() {
