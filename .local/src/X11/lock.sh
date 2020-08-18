@@ -9,7 +9,6 @@ set -o pipefail
 
 main() {
     getOptions "${@}"
-
     if canLock; then
         pamixer --mute
         lock
