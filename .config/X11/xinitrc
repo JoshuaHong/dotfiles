@@ -1,6 +1,6 @@
 #!/bin/bash
-
-# Runs programs and sets environment variables on X server startup
+#
+# Runs programs and sets environment variables on X server startup.
 
 main() {
     setXConfigurations
@@ -20,10 +20,10 @@ setXresources() {
     local sysresources="/etc/X11/xinit/.Xresources"
     local userresources="${HOME}/.config/X11/Xresources"
 
-    if fileExists "${sysresources}"; then
+    if regularFileExists "${sysresources}"; then
         xrdb -merge "${sysresources}"
     fi
-    if fileExists "${userresources}"; then
+    if regularFileExists "${userresources}"; then
         xrdb -merge "${userresources}"
     fi
 }
@@ -32,15 +32,15 @@ setXmodmap() {
     local sysmodmap="/etc/X11/xinit/.Xmodmap"
     local usermodmap="${HOME}/.config/X11/Xmodmap"
 
-    if fileExists "${sysmodmap}"; then
+    if regularFileExists "${sysmodmap}"; then
         xmodmap "${sysmodmap}"
     fi
-    if fileExists "${usermodmap}"; then
+    if regularFileExists "${usermodmap}"; then
         xmodmap "${usermodmap}"
     fi
 }
 
-fileExists() {
+regularFileExists() {
     local file="${1}"
     [ -f "${file}" ]
 }
@@ -57,7 +57,7 @@ runInitrcScripts() {
     if directoryExists "${xinitrcd}"; then
         for script in "${xinitrcd}"/?*.sh; do
             if isExecutable "${script}"; then
-                . "${script}"
+                source "${script}"
             fi
         done
         unset script
@@ -82,13 +82,19 @@ startDaemons() {
 }
 
 setBackgroundImage() {
-    randomBackgroundImage="$(find \
-            "$HOME/.local/share/backgrounds/homescreens/" -type "f" \
-            | shuf --head-count="1")"
-
-    if fileExists "${randomBackgroundImage}"; then
-        feh --bg-scale --no-fehbg "${randomBackgroundImage}"
+    backgroundImageDirectory="$HOME/.local/share/backgrounds/homescreens/"
+    if directoryExists "${backgroundImageDirectory}"; then
+        randomBackgroundImage="$(getRandomBackgroundImage \
+                "${backgroundImageDirectory}")"
+        if regularFileExists "${randomBackgroundImage}"; then
+            feh --bg-scale --no-fehbg "${randomBackgroundImage}"
+        fi
     fi
+}
+
+getRandomBackgroundImage() {
+    directory="${1}"
+    find "${backgroundImageDirectory}" -type "f" | shuf --head-count="1"
 }
 
 startWindowManager() {

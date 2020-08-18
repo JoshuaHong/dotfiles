@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # Notifier script - lowers screen brightness, then waits to be killed.
 # Restores previous brightness on exit.
 
@@ -7,7 +7,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-function main() {
+main() {
     if ! isVideoPlaying; then
         dim
     fi
@@ -27,7 +27,6 @@ dim() {
 }
 
 setTraps() {
-    trap "exit 0" "TERM" "INT"
     trap "cleanup $(getBrightness)" "EXIT"
 }
 

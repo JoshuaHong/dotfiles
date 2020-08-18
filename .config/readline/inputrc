@@ -1,4 +1,4 @@
-# $HOME/.config/readline/inputrc
+# Readline configurations.
 
 # Disable terminal bell on tab completion
 set bell-style none
@@ -9,9 +9,7 @@ set colored-completion-prefix on
 # Color directories on tab completion
 set colored-stats on
 
-# Pasted characters are not executed
-# Example: Pasting a command followed by a newline character will display a new
-#          line instead of executing the command as if pressing the Enter key
+# Pasted characters are placed into an editing buffer instead of being executed
 set enable-bracketed-paste on
 
 # Append slashes to symlinked directories on tab completion

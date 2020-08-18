@@ -190,12 +190,6 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   * Install yay packages: `yay -S @@@@@@ TODO @@@@@@`
 * Neovim:  
   * Install Neovim Plugins: nvim +PlugUpgrade +PlugInstall +qall
-* Network Manager ?? :
-<!--
-  # Allows NetworkManager to reconnect after disconnecting.
-  echo -e "\n[device]\nwifi.scan-rand-mac-address=no" \
-      >> "/etc/NetworkManager/NetworkManager.conf"
--->
 
 ##### Reboot
 Restart the machine: `reboot`

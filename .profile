@@ -1,6 +1,6 @@
 #!/bin/sh
-
-# The personal initialization file, executed for login shells
+#
+# The personal initialization file, executed for login shells.
 
 main() {
     exportVariables
@@ -28,7 +28,7 @@ isValidPath() {
 }
 
 isValidUID() {
-    [ "$(id -u)" -ge 1000 ]
+    [ "$(id --user)" -ge "1000" ]
 }
 
 
@@ -60,9 +60,9 @@ exportXDGBaseDirectories() {
 }
 
 exportConfigurations() {
-    export HISTCONTROL=erasedups:ignoreboth    # Ignore bash history commands
-                                               # repeated or begin with a space
-    export LESSHISTFILE=-                      # Disable the less history file
+    export HISTCONTROL="erasedups:ignoreboth"    # Bash history ignores repeated
+                                                 # or space beginning commands
+    export LESSHISTFILE="-"                      # Disable the less history file
 }
 
 startXorg() {
@@ -77,7 +77,7 @@ canStartXorg() {
 }
 
 isGraphicalTargetActive() {
-    systemctl --quiet is-active graphical.target
+    systemctl --quiet is-active "graphical.target"
 }
 
 displayExists() {

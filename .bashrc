@@ -1,6 +1,6 @@
 #!/bin/bash
-
-# The individual per-interactive-shell startup file
+#
+# The individual per-interactive-shell startup file.
 
 main() {
     if ! isRunningInteractively; then
@@ -30,6 +30,7 @@ setLinuxAliases() {
     alias ls="ls --color=auto"
     alias mkdir="mkdir --parents"
     alias mv="mv --interactive"
+    alias rm="rm --interactive=once"
 
     # ls after cd, and cd to a parent directory for every additional "."
     cd() {
@@ -39,7 +40,7 @@ setLinuxAliases() {
         else
             command cd "$@"
         fi
-        ls --color=auto
+        ls --color="auto"
     }
 
     containsOnlyOneOrMoreDots() {
@@ -49,7 +50,7 @@ setLinuxAliases() {
 
     cdToParentDirectory() {
         local directory="${1}"
-        local initialPWD="$PWD"
+        local initialPWD="${PWD}"
         for ((i=1; i<"$(getLength "${directory}")"; ++i)); do
             command cd "../"
         done
@@ -81,9 +82,10 @@ setGitAliases() {
     alias gcod="git checkout develop"
     alias gd="git diff"
     alias gdh="git diff HEAD"
+    alias gf="git fetch"
     alias gl="git log --all --decorate --graph --oneline --date=short --pretty=format:'%C(yellow)%h%Creset%C(red)%C(bold)%d%Creset%C(white)(%cd)%Creset %s'"
     alias gm="git merge"
-    alias gpl="git pull"
+    alias gpl="git pull --ff-only"
     alias gps="git push"
     alias grb="git rebase"
     alias grs="git reset"

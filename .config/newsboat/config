@@ -1,1 +1,3 @@
-auto-reload yes
+# The Newsboat configuration file.
+
+bind-key O open-all-unread-in-browser-and-mark-read

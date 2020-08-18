@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # Locks the screen using slock and a custom lockscreen.
 # Suspends the system on lockscreen inactivity after a specified time.
 
@@ -156,13 +156,14 @@ blurImage() {
 }
 
 createDefaultLockscreen() {
-    cp "${HOME}/.local/share/backgrounds/lockscreens/lockscreen.png" "/tmp/"
+    local lockscreen="${HOME}/.local/share/backgrounds/lockscreens/lockscreen.png"
+    cp "${lockscreen}" "/tmp/"
 }
 
 addLockIcon() {
     local lockscreen="${1}"
     local lockIcon="${HOME}/.local/share/backgrounds/lockscreens/lock.png"
-    convert "${lockscreen}" "${lockIcon}" -gravity "Center" \
+    convert "${lockscreen}" "${lockIcon}" -gravity "center" \
             -composite "${lockscreen}"
 }
 
