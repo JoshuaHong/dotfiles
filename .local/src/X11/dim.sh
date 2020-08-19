@@ -19,7 +19,7 @@ isVideoPlaying() {
 }
 
 dim() {
-    local minBrightness="5"
+    local minBrightness=5
     setTraps
     fadeBrightness "${minBrightness}"
     sleep "infinity" &
@@ -38,8 +38,8 @@ cleanup() {
 
 fadeBrightness() {
     local brightness="${1}"
-    local fadeTime="200"
-    local fadeSteps="20"
+    local fadeTime=200
+    local fadeSteps=20
     xbacklight -time "${fadeTime}" -steps "${fadeSteps}" -set "${brightness}"
 }
 

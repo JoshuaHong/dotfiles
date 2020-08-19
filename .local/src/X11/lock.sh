@@ -122,7 +122,7 @@ getMute() {
 }
 
 startSuspendTimer() {
-    local timeInMinutes="10"
+    local timeInMinutes=10
     local suspender="systemctl suspend"
     xautolock -time "${timeInMinutes}" -locker "${suspender}" &
 }

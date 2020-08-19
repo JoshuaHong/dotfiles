@@ -84,7 +84,7 @@ fetchUpdates() {
 }
 
 refreshDwmBlocks() {
-    local signal="46"
+    local signal=46
     kill -"${signal}" "$(pidof dwmblocks)"
 }
 

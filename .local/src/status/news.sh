@@ -46,7 +46,8 @@ error() {
 }
 
 countUnread() {
-    local news="$(getNews)"
+    local news
+    news="$(getNews)"
     if hasNews "${news}"; then
         echo "📰 ${news}"
     fi
@@ -62,7 +63,7 @@ hasNews() {
 }
 
 refreshDwmBlocks() {
-    local signal="47"
+    local signal=47
     kill -"${signal}" "$(pidof dwmblocks)"
 }
 
