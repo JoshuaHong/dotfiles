@@ -50,15 +50,20 @@ getFlag() {
 }
 
 screenshot() {
-    local screenshotsDirectory="${HOME}/media/images/screenshots"
-    if directoryExists "${screenshotsDirectory}"; then
+    local screenshotDirectory="${HOME}/media/images/screenshots"
+    if directoryExists "${screenshotDirectory}"; then
+        local screenshot
         if getFlag "${s}"; then
-            captureSelectedScreenshot "${screenshotsDirectory}"
+            screenshot="$(captureSelectedScreenshot)"
         else
-            captureScreenshot "${screenshotsDirectory}"
+            screenshot="$(captureScreenshot)"
         fi
+        local screenshotName="$(getScreenshotName "${screenshotDirectory}")"
+        createScreenshotFile "${screenshot}" \
+                "${screenshotDirectory}/${screenshotName}.png"
+        notify "Screenshot Taken" "📸 ${screenshotName}"
     else
-        notify "Screenshot" "Directory does not exist:\n${screenshotsDirectory}"
+        notify "Screenshot" "Directory does not exist:\n${screenshotDirectory}"
     fi
 }
 
@@ -68,25 +73,39 @@ directoryExists() {
 }
 
 captureScreenshot() {
-    local screenshotsDirectory="${1}"
-    local dateTimeISO8601
-    dateTimeISO8601="$(getDateTimeISO8601)"
-    scrot "${screenshotsDirectory}/${dateTimeISO8601}.png"
-    notify "Screenshot Taken" "📸 ${dateTimeISO8601}"
+    maim | base64 -w "0"
 }
 
 captureSelectedScreenshot() {
-    sleep 0.1    # Dwm needs time to render the selection
-    local screenshotsDirectory="${1}"
-    local dateTimeISO8601
-    dateTimeISO8601="$(getDateTimeISO8601)"
-    notify "Screenshot" "📷 Drag mouse to capture"
-    scrot -s "${screenshotsDirectory}/${dateTimeISO8601}.png"
-    notify "Screenshot Taken" "📸 ${dateTimeISO8601}"
+    maim -s | base64 -w "0"
+}
+
+getScreenshotName() {
+    local screenshotDirectory="${1}"
+    local dateTimeISO8601="$(getDateTimeISO8601)"
+    local screenshotName="${dateTimeISO8601}"
+    local duplicateNumber="$(getDuplicateNumber "${screenshotName}" \
+            "${screenshotDirectory}")"
+    if [[ "${duplicateNumber}" -gt 0 ]]; then
+        screenshotName="${dateTimeISO8601}.${duplicateNumber}"
+    fi
+    echo ${screenshotName}
 }
 
 getDateTimeISO8601() {
     date --iso-8601=seconds
+}
+
+getDuplicateNumber() {
+    local name="${1}"
+    local directory="${2}"
+    find "${directory}" -name "${name}*" -type "f" | wc --lines
+}
+
+createScreenshotFile() {
+    local screenshot="${1}"
+    local screenshotFile="${2}"
+    echo ${screenshot} | base64 -d > "${screenshotFile}"
 }
 
 notify() {
