@@ -28,7 +28,7 @@ isValidPath() {
 }
 
 isValidUID() {
-    [ "$(id --user)" -ge "1000" ]
+    [ "$(id --user)" -ge 1000 ]
 }
 
 
