@@ -12,7 +12,7 @@ main() {
 }
 
 printVolume() {
-    echo "$(getIcon)$(getVolume)%"
+    echo " $(getIcon)$(getVolume)% "
 }
 
 getIcon() {

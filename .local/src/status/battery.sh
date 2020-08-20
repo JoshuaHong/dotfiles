@@ -13,16 +13,16 @@ main() {
 printBattery() {
     case "$(getStatus)" in
         "Discharging")
-            echo "🔋$(getCapacity)%"
+            echo " 🔋$(getCapacity)% "
             ;;
         "Charging")
-            echo "🔌$(getCapacity)%"
+            echo " 🔌$(getCapacity)% "
             ;;
         "Full")
-            echo "✅$(getCapacity)%"
+            echo " ✅$(getCapacity)% "
             ;;
         *)
-            echo "❓$(getCapacity)%"
+            echo " ❓$(getCapacity)% "
             ;;
     esac
 }

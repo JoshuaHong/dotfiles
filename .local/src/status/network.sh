@@ -14,11 +14,11 @@ printNetwork() {
     local network
     network="$(getNetwork)"
     if isConnected "${network}"; then
-        echo "📶$(getConnectedNetwork "${network}")"
+        echo " 📶$(getConnectedNetwork "${network}") "
     elif isConnecting "${network}"; then
-        echo "📡Connecting"
+        echo " 📡Connecting "
     else
-        echo "🌐Disconnected"
+        echo " 🌐Disconnected "
     fi
 }
 

@@ -54,9 +54,9 @@ countUpdates() {
     local updates
     updates="$(getUpdates)"
     if hasError "${updates}"; then
-        echo "📥"
+        echo " 📥 "
     elif hasUpdates "${updates}"; then
-        echo "📥$(getNumberOfUpdates "${updates}")"
+        echo " 📥$(getNumberOfUpdates "${updates}") "
     fi
 }
 

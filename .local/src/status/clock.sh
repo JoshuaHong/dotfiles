@@ -11,7 +11,7 @@ main() {
 }
 
 printTime() {
-    echo "$(getIcon)$(getTime)"
+    echo " $(getIcon)$(getTime) "
 }
 
 getIcon() {
