@@ -145,7 +145,7 @@ createTranslucentLockscreen() {
 
 createScreenshot() {
     local lockscreen="${1}"
-    scrot --overwrite "${lockscreen}"
+    maim "${lockscreen}"
 }
 
 blurImage() {
