@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Captures a screenshot
+# Captures a screenshot.
 
 set -o errexit
 set -o nounset
@@ -58,7 +58,8 @@ screenshot() {
         else
             screenshot="$(captureScreenshot)"
         fi
-        local screenshotName="$(getScreenshotName "${screenshotDirectory}")"
+        local screenshotName
+        screenshotName="$(getScreenshotName "${screenshotDirectory}")"
         createScreenshotFile "${screenshot}" \
                 "${screenshotDirectory}/${screenshotName}.png"
         notify "Screenshot Taken" "📸 ${screenshotName}"
@@ -77,19 +78,22 @@ captureScreenshot() {
 }
 
 captureSelectedScreenshot() {
+    notify "Screenshot" "📷 Drag mouse to capture"
     maim -s | base64 -w "0"
 }
 
 getScreenshotName() {
     local screenshotDirectory="${1}"
-    local dateTimeISO8601="$(getDateTimeISO8601)"
+    local dateTimeISO8601
+    dateTimeISO8601="$(getDateTimeISO8601)"
     local screenshotName="${dateTimeISO8601}"
-    local duplicateNumber="$(getDuplicateNumber "${screenshotName}" \
+    local duplicateNumber
+    duplicateNumber="$(getDuplicateNumber "${screenshotName}" \
             "${screenshotDirectory}")"
     if [[ "${duplicateNumber}" -gt 0 ]]; then
         screenshotName="${dateTimeISO8601}.${duplicateNumber}"
     fi
-    echo ${screenshotName}
+    echo "${screenshotName}"
 }
 
 getDateTimeISO8601() {
@@ -105,7 +109,7 @@ getDuplicateNumber() {
 createScreenshotFile() {
     local screenshot="${1}"
     local screenshotFile="${2}"
-    echo ${screenshot} | base64 -d > "${screenshotFile}"
+    echo "${screenshot}" | base64 -d > "${screenshotFile}"
 }
 
 notify() {
