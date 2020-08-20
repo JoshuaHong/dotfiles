@@ -12,7 +12,7 @@ main() {
 }
 
 printBrightness() {
-    echo " 💡$(getBrightness)% "
+    echo " 💡$(getBrightness)%"
 }
 
 getBrightness() {

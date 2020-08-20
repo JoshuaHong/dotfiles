@@ -11,7 +11,7 @@ main() {
 }
 
 printDate() {
-    echo " 📅$(getDate) "
+    echo " 📅$(getDate)"
 }
 
 getDate() {
