@@ -73,7 +73,7 @@ isVideoPlaying() {
 }
 
 lock() {
-    local lockscreen="/tmp/lockscreen.png"
+    local lockscreen="$(mktemp /tmp/lockscreen.XXXXXXX.png)"
     local locker="slock -i ${lockscreen}"
     configureLock "${lockscreen}"
     if lockFileDescriptorIsOpen; then
@@ -132,7 +132,7 @@ createLockscreen() {
     if getFlag "$t"; then
         createTranslucentLockscreen "${lockscreen}"
     else
-        createDefaultLockscreen
+        createDefaultLockscreen "${lockscreen}"
     fi
     addLockIcon "${lockscreen}"
 }
@@ -155,8 +155,9 @@ blurImage() {
 }
 
 createDefaultLockscreen() {
-    local lockscreen="${HOME}/.local/share/backgrounds/lockscreens/lockscreen.png"
-    cp "${lockscreen}" "/tmp/"
+    local lockscreen="${1}"
+    local defaultLockscreen="${HOME}/.local/share/backgrounds/lockscreens/lockscreen.png"
+    cp "${defaultLockscreen}" "${lockscreen}"
 }
 
 addLockIcon() {
