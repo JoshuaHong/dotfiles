@@ -12,6 +12,9 @@ set colored-stats on
 # Pasted characters are placed into an editing buffer instead of being executed
 set enable-bracketed-paste on
 
+# Enables the application keypad
+set enable-keypad on
+
 # Append slashes to symlinked directories on tab completion
 set mark-symlinked-directories on
 
