@@ -83,7 +83,7 @@ setGitAliases() {
     alias gd="git diff"
     alias gdh="git diff HEAD"
     alias gf="git fetch"
-    alias gl="git log --all --decorate --graph --oneline --date=short --pretty=format:'%C(yellow)%h%Creset%C(red)%C(bold)%d%Creset%C(white)(%cd)%Creset %s'"
+    alias gl="git log --all --decorate --graph --oneline --date=short --pretty=format:'%C(yellow)%h%Creset%C(red)%C(bold)%d%Creset%C(white) (%cd)%Creset %s'"
     alias gm="git merge"
     alias gpl="git pull --ff-only"
     alias gps="git push"
