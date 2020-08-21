@@ -1,59 +1,50 @@
-! $HOME/.config/X11/Xresources
+! Xresources
+!
+! One Dark color scheme for the X Window System
 
-! Solarized dark
+#define background   #222222
+#define black        #282c34
+#define red          #be5046
+#define green        #98c379
+#define yellow       #d19a66
+#define blue         #61afef
+#define magenta      #c678dd
+#define cyan         #56b6c2
+#define white        #abb2bf
+#define lightblack   #545862
+#define lightred     #e06c75
+#define lightgreen   #98c379
+#define lightyellow  #e5c07b
+#define lightblue    #61afef
+#define lightmagenta #c678dd
+#define lightcyan    #56b6c2
+#define lightwhite   #c8ccd4
 
-#define base03              #002b36
-#define base02              #073642
-#define base01              #586e75
-#define base00              #657b83
-#define base0               #839496
-#define base1               #93a1a1
-#define base2               #eee8d5
-#define base3               #fdf6e3
-#define yellow              #b58900
-#define orange              #cb4b16
-#define red                 #dc322f
-#define magenta             #d33682
-#define violet              #6c71c4
-#define blue                #268bd2
-#define cyan                #2aa198
-#define green               #859900
+*.color0:      black
+*.color1:      red
+*.color2:      green
+*.color3:      yellow
+*.color4:      blue
+*.color5:      magenta
+*.color6:      cyan
+*.color7:      white
+*.color8:      lightblack
+*.color9:      lightred
+*.color10:     lightgreen
+*.color11:     lightyellow
+*.color12:     lightblue
+*.color13:     lightmagenta
+*.color14:     lightcyan
+*.color15:     lightwhite
 
-*background:                base03
-*foreground:                base0
-*fadeColor:                 base03
-*cursorColor:               base1
-*pointerColorBackground:    base01
-*pointerColorForeground:    base1
+! Dwm
+*.normbgcolor:     background
+*.normfgcolor:     white
+*.normbordercolor: lightblack
+*.selbgcolor:      black
+*.selfgcolor:      white
+*.selbordercolor:  magenta
 
-! black dark/light
-*color0:                    base02
-*coor8:                     base03
-
-! red dark/light
-*color1:                    red
-*color9:                    orange
-
-! green dark/light
-*color2:                    green
-*color10:                   base01
-
-! yellow dark/light
-*color3:                    yellow
-*color11:                   base00
-
-! blue dark/light
-*color4:                    blue
-*color12:                   base0
-
-! magenta dark/light
-*color5:                    magenta
-*color13:                   violet
-
-! cyan dark/light
-*color6:                    cyan
-*color14:                   base1
-
-! white dark/light
-*color7:                    base2
-*color15:                   base3l
+! St
+*.background:  lightwhite
+*.cursorColor: background
