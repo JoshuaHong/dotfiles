@@ -49,7 +49,7 @@ countUnread() {
     local news
     news="$(getNews)"
     if hasNews "${news}"; then
-        echo " 📰 ${news}"
+        echo " 📰${news}"
     fi
 }
 
