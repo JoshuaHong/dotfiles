@@ -73,7 +73,8 @@ isVideoPlaying() {
 }
 
 lock() {
-    local lockscreen="$(initLockscreen)"
+    local lockscreen
+    lockscreen="$(initLockscreen)"
     local locker="slock -i ${lockscreen}"
     configureLock "${lockscreen}"
     if lockFileDescriptorIsOpen; then
