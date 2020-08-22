@@ -32,13 +32,17 @@ getPadding() {
     local brightness
     local spaces
     brightness="$(getBrightness)"
-    spaces="$(seq -s " " "$(((104 - "${brightness}") / 5 + 1))" \
-            | sed 's/[0-9]//g')"
+    spaces="$(getSpaces "${brightness}")"
     if [[ "${brightness}" -lt 10 ]]; then
         echo "${spaces}  "
     elif [[ "${brightness}" -lt 100 ]]; then
         echo "${spaces} "
     fi
+}
+
+getSpaces() {
+    local brightness="${1}"
+    seq -s " " "$(((104 - "${brightness}") / 5 + 1))" | sed 's/[0-9]//g'
 }
 
 notify() {

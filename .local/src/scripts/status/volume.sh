@@ -52,12 +52,17 @@ getPadding() {
     local volume
     local spaces
     volume="$(getVolume)"
-    spaces="$(seq -s " " "$(((104 - "${volume}") / 5 + 1))" | sed 's/[0-9]//g')"
+    spaces="$(getSpaces "${volume}")"
     if [[ ${volume} -lt 10 ]]; then
         echo "${spaces}  "
     elif [[ ${volume} -lt 100 ]]; then
         echo "${spaces} "
     fi
+}
+
+getSpaces() {
+    local volume="${1}"
+    seq -s " " "$(((104 - "${volume}") / 5 + 1))" | sed 's/[0-9]//g'
 }
 
 notify() {

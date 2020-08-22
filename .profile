@@ -23,14 +23,17 @@ exportLocalPath() {
 
 isValidPath() {
     directory="${1}"
-    isValidUID && directoryExists "${directory}" \
+    isValidUserId && directoryExists "${directory}" \
             && ! isDirectoryIncludedInPath "${directory}"
 }
 
-isValidUID() {
-    [ "$(id --user)" -ge 1000 ]
+isValidUserId() {
+    [ "$(getUserId)" -ge 1000 ]
 }
 
+getUserId() {
+    id --user
+}
 
 directoryExists() {
     directory="${1}"

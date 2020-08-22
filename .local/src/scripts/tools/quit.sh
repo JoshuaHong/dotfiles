@@ -40,7 +40,7 @@ getOptionsLength() {
 }
 
 quit() {
-    kill "$(pidof "dwm")"
+    kill -KILL "$(pidof "dwm")"
 }
 
 reboot() {

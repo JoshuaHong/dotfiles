@@ -62,13 +62,13 @@ hasNews() {
     [[ "${news}" -gt 0 ]]
 }
 
-refreshDwmBlocks() {
-    local signal=47
-    kill -"${signal}" "$(pidof dwmblocks)"
-}
-
 openNews() {
     newsboat -r
+}
+
+refreshDwmBlocks() {
+    local signal=47
+    kill -"${signal}" "$(pidof "dwmblocks")"
 }
 
 main "${@}"
