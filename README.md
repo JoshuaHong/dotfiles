@@ -180,7 +180,7 @@ export XDG_CONFIG_DIRS="/etc/xdg"
   * Build as user: `su josh`
   * Clone program: `git clone https://github.com/JoshuaHong/program.git $HOME/.local/src/suckless/program`
   * Change directory: `cd $HOME/.local/src/suckless/program`
-  * Build package: `sudo make install clean`
+  * Build package: `make && sudo make install clean`
   * Set upstream: `git remote set-url origin https://git.suckless.org/program`
 * Yay:
   * Build as user: `su josh`
