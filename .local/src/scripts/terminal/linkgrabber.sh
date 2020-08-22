@@ -13,7 +13,7 @@ main() {
     local urls
     urls="$(parseUniqueURLs "${stdin}")"
     local selectedURL
-    selectedURL=$(getURL "${urls}")
+    selectedURL="$(getURL "${urls}")"
     openURL "${selectedURL}" "${urls}"
 }
 
@@ -24,12 +24,22 @@ getStdin() {
 parseUniqueURLs() {
     local stdin="${1}"
     urlRegex='(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]'
-    echo "${stdin}" | grep --perl-regexp --only-matching "${urlRegex}" | uniq
+    echo "${stdin}" | grep --perl-regexp --only-matching "${urlRegex}" | uniq \
+            || true
 }
 
 getURL() {
     local urls="${1}"
-    echo "${urls}" | dmenu -p "Open:" -w "$(getWindowId)"
+    if isEmpty "${urls}"; then
+        echo "" | dmenu -p "No URLs" -w "$(getWindowId)"
+    else
+        echo "${urls}" | dmenu -p "Open:" -w "$(getWindowId)"
+    fi
+}
+
+isEmpty() {
+    local variable="${1}"
+    [[ -z "${variable}" ]]
 }
 
 getWindowId() {
@@ -47,7 +57,12 @@ openURL() {
 isValidURL() {
     local selectedURL="${1}"
     local urls="${2}"
-    echo "${selectedURL}" | grep --quiet --fixed-strings --line-regexp "${urls}"
+    if isEmpty "${selectedURL}"; then
+        false
+    else
+        echo "${selectedURL}" \
+                | grep --quiet --fixed-strings --line-regexp "${urls}"
+    fi
 }
 
 getBrowser() {
