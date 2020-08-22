@@ -48,7 +48,6 @@ isDirectoryIncludedInPath() {
 exportPrograms() {
     export BROWSER="firefox"
     export EDITOR="nvim"
-    export TERMINAL="st"
     export VISUAL="nvim"
 }
 
