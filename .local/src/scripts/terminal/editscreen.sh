@@ -8,11 +8,17 @@ set -o nounset
 set -o pipefail
 
 main() {
+    local stdin
+    stdin="$(getStdin)"
     local outputFile
     outputFile="$(initOutputFile)"
     setTraps "${outputFile}"
-    writeToFile "${outputFile}"
+    writeToFile "${stdin}" "${outputFile}"
     openFile "${outputFile}"
+}
+
+getStdin() {
+    echo "$(</dev/stdin)"
 }
 
 initOutputFile() {
@@ -21,12 +27,25 @@ initOutputFile() {
 
 setTraps() {
     local outputFile="${1}"
-    trap "rm ${outputFile}" EXIT
+    trap "cleanup ${outputFile}" EXIT
+}
+
+cleanup() {
+    local outputFile="${1}"
+    if regularFileExists "${outputFile}"; then
+        rm "${outputFile}"
+    fi
+}
+
+regularFileExists() {
+    local file="${1}"
+    [[ -f "${file}" ]]
 }
 
 writeToFile() {
-    local file="${1}"
-    cat > "${file}"
+    local stdin="${1}"
+    local file="${2}"
+    echo "${stdin}" > "${file}"
 }
 
 openFile() {
