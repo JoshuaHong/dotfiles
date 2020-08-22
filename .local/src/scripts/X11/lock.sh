@@ -73,7 +73,7 @@ isVideoPlaying() {
 }
 
 lock() {
-    local lockscreen="$(mktemp /tmp/lockscreen.XXXXXXX.png)"
+    local lockscreen="$(initLockscreen)"
     local locker="slock -i ${lockscreen}"
     configureLock "${lockscreen}"
     if lockFileDescriptorIsOpen; then
@@ -83,6 +83,10 @@ lock() {
         ${locker} &
     fi
     wait "${!}"
+}
+
+initLockscreen() {
+    mktemp "/tmp/lockscreen.XXXXXXX.png"
 }
 
 configureLock() {

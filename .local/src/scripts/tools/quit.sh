@@ -40,7 +40,12 @@ getOptionsLength() {
 }
 
 quit() {
-    kill -KILL "$(pidof "dwm")"
+    kill -KILL "$(getProcessId "dwm")"
+}
+
+getProcessId() {
+    local process="${1}"
+    pidof "${process}"
 }
 
 reboot() {

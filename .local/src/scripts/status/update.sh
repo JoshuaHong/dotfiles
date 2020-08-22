@@ -85,7 +85,12 @@ fetchUpdates() {
 
 refreshDwmBlocks() {
     local signal=46
-    kill -"${signal}" "$(pidof "dwmblocks")"
+    kill -"${signal}" "$(getProcessId "dwmblocks")"
+}
+
+getProcessId() {
+    local process="${1}"
+    pidof "${process}"
 }
 
 main "${@}"
