@@ -33,7 +33,7 @@ getURL() {
     if isEmpty "${urls}"; then
         echo "" | dmenu -p "No URLs" -w "$(getWindowId)"
     else
-        echo "${urls}" | dmenu -p "Open:" -w "$(getWindowId)"
+        echo "${urls}" | dmenu -i -p "Open:" -w "$(getWindowId)"
     fi
 }
 
