@@ -17,40 +17,88 @@ printTime() {
 getIcon() {
     case "$(getHour)" in
         "01")
-            echo "🕐"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕜"
+            else
+                echo "🕐"
+            fi
             ;;
         "02")
-            echo "🕑"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕝"
+            else
+                echo "🕑"
+            fi
             ;;
         "03")
-            echo "🕒"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕞"
+            else
+                echo "🕒"
+            fi
             ;;
         "04")
-            echo "🕓"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕟"
+            else
+                echo "🕓"
+            fi
             ;;
         "05")
-            echo "🕔"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕠"
+            else
+                echo "🕔"
+            fi
             ;;
         "06")
-            echo "🕕"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕡"
+            else
+                echo "🕕"
+            fi
             ;;
         "07")
-            echo "🕖"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕢"
+            else
+                echo "🕖"
+            fi
             ;;
         "08")
-            echo "🕗"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕣"
+            else
+                echo "🕗"
+            fi
             ;;
         "09")
-            echo "🕘"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕤"
+            else
+                echo "🕘"
+            fi
             ;;
         "10")
-            echo "🕙"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕥"
+            else
+                echo "🕙"
+            fi
             ;;
         "11")
-            echo "🕚"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕦"
+            else
+                echo "🕚"
+            fi
             ;;
         "12")
-            echo "🕛"
+            if isHalfPast "$(getMinute)"; then
+                echo "🕧"
+            else
+                echo "🕛"
+            fi
             ;;
         *)
             echo "🕛"
@@ -60,6 +108,16 @@ getIcon() {
 
 getHour() {
     date "+%I"
+}
+
+isHalfPast() {
+    local minute="${1}"
+    local halfHour=30
+    [[ "${minute}" -ge "${halfHour}" ]]
+}
+
+getMinute() {
+    date "+%M"
 }
 
 getTime() {
