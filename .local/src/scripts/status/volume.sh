@@ -21,9 +21,9 @@ getIcon() {
     else
         local volume
         volume="$(getVolume)"
-        if [[ ${volume} -le 33 ]]; then
+        if isLowVolume "${volume}"; then
             echo "🔈"
-        elif [[ ${volume} -le 66 ]]; then
+        elif isMediumVolume "${volume}"; then
             echo "🔉"
         else
             echo "🔊"
@@ -39,8 +39,22 @@ isMuted() {
     pamixer --get-mute > /dev/null
 }
 
+isLowVolume() {
+    local lowVolume=33
+    [[ ${volume} -le "${lowVolume}" ]]
+}
+
+isMediumVolume() {
+    local mediumVolume=66
+    [[ ${volume} -le "${mediumVolume}" ]]
+}
+
 notifyVolume() {
     notify "Volume" "$(getIcon)  $(getBar)$(getPadding)  $(getVolume)%"
+}
+
+notify() {
+    dunstify --hints="string:x-canonical-private-synchronous:volume" "${@}"
 }
 
 getBar() {
@@ -53,9 +67,9 @@ getPadding() {
     local spaces
     volume="$(getVolume)"
     spaces="$(getSpaces "${volume}")"
-    if [[ ${volume} -lt 10 ]]; then
+    if isInSingleDigits "${volume}"; then
         echo "${spaces}  "
-    elif [[ ${volume} -lt 100 ]]; then
+    elif isInDoubleDigits "${volume}"; then
         echo "${spaces} "
     fi
 }
@@ -65,8 +79,16 @@ getSpaces() {
     seq -s " " "$(((104 - "${volume}") / 5 + 1))" | sed 's/[0-9]//g'
 }
 
-notify() {
-    dunstify --hints="string:x-canonical-private-synchronous:volume" "${@}"
+isInSingleDigits() {
+    local volume="${1}"
+    local singleDigits=9
+    [[ "${volume}" -le "${singleDigits}" ]]
+}
+
+isInDoubleDigits() {
+    local volume="${1}"
+    local doubleDigits=99
+    [[ "${volume}" -le "${doubleDigits}" ]]
 }
 
 main

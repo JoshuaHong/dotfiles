@@ -107,7 +107,7 @@ cleanup() {
     if regularFileExists "${lockscreen}"; then
         rm "${lockscreen}"
     fi
-    if [[ "${m}" == "false" ]]; then
+    if ! getFlag "${m}"; then
         pamixer --unmute
     fi
     stopSuspendTimer
@@ -134,7 +134,7 @@ startSuspendTimer() {
 
 createLockscreen() {
     local lockscreen="${1}"
-    if getFlag "$t"; then
+    if getFlag "${t}"; then
         createTranslucentLockscreen "${lockscreen}"
     else
         createDefaultLockscreen "${lockscreen}"

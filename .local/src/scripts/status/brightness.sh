@@ -23,6 +23,10 @@ notifyBrightness() {
     notify "Brightness" "💡  $(getBar)$(getPadding)  $(getBrightness)%"
 }
 
+notify() {
+    dunstify --hints="string:x-canonical-private-synchronous:brightness" "${@}"
+}
+
 getBar() {
     seq -s "─" "$(("$(getBrightness)" / 5 + 1))" | sed 's/[0-9]//g'
 }
@@ -33,9 +37,9 @@ getPadding() {
     local spaces
     brightness="$(getBrightness)"
     spaces="$(getSpaces "${brightness}")"
-    if [[ "${brightness}" -lt 10 ]]; then
+    if isInSingleDigits "${brightness}"; then
         echo "${spaces}  "
-    elif [[ "${brightness}" -lt 100 ]]; then
+    elif isInDoubleDigits "${brightness}"; then
         echo "${spaces} "
     fi
 }
@@ -45,8 +49,16 @@ getSpaces() {
     seq -s " " "$(((104 - "${brightness}") / 5 + 1))" | sed 's/[0-9]//g'
 }
 
-notify() {
-    dunstify --hints="string:x-canonical-private-synchronous:brightness" "${@}"
+isInSingleDigits() {
+    local volume="${1}"
+    local singleDigits=9
+    [[ "${volume}" -le "${singleDigits}" ]]
+}
+
+isInDoubleDigits() {
+    local volume="${1}"
+    local doubleDigits=99
+    [[ "${volume}" -le "${doubleDigits}" ]]
 }
 
 main

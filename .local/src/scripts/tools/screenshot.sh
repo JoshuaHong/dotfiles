@@ -90,7 +90,7 @@ getScreenshotName() {
     local duplicateNumber
     duplicateNumber="$(getDuplicateNumber "${screenshotName}" \
             "${screenshotDirectory}")"
-    if [[ "${duplicateNumber}" -gt 0 ]]; then
+    if hasDuplicates "$duplicateNumber"; then
         screenshotName="${dateTimeISO8601}.${duplicateNumber}"
     fi
     echo "${screenshotName}"
@@ -104,6 +104,11 @@ getDuplicateNumber() {
     local name="${1}"
     local directory="${2}"
     find "${directory}" -name "${name}*" -type "f" | wc --lines
+}
+
+hasDuplicates() {
+    local duplicateNumber="${1}"
+    [[ "${duplicateNumber}" -gt 0 ]]
 }
 
 createScreenshotFile() {
