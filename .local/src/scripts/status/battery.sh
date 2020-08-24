@@ -11,7 +11,7 @@ main() {
 }
 
 printBattery() {
-    local output=""
+    local output=" "
     local capacity
     capacity="$(getCapacity)"
     if isError "${capacity}"; then
@@ -21,18 +21,19 @@ printBattery() {
     fi
     case "$(getStatus)" in
         "Discharging")
-            output+="${capacity}%"
+            output+="🔋"
             ;;
         "Charging")
-            output+="${capacity}%"
+            output+="🔌"
             ;;
         "Full")
-            output+="${capacity}%"
+            output+="✅"
             ;;
         *)
-            output+="${capacity}%"
+            output+="❓"
             ;;
     esac
+    output+="${capacity}%"
     output+="$(getNormalColor)"
     echo -e "${output}"
 }
