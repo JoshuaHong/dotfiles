@@ -53,20 +53,13 @@ error() {
 countUpdates() {
     local updates
     updates="$(getUpdates)"
-    if hasError "${updates}"; then
-        echo " 📥"
-    elif hasUpdates "${updates}"; then
+    if hasUpdates "${updates}"; then
         echo " 📥$(getNumberOfUpdates "${updates}")"
     fi
 }
 
 getUpdates() {
-    checkupdates 2>&1
-}
-
-hasError() {
-    local updates="${1}"
-    echo "${updates}" | grep --quiet "ERROR"
+    checkupdates
 }
 
 hasUpdates() {
