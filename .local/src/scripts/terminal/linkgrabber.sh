@@ -31,9 +31,9 @@ parseUniqueURLs() {
 getURL() {
     local urls="${1}"
     if isEmpty "${urls}"; then
-        echo "" | dmenu -p "No URLs" -w "$(getWindowId)"
+        echo "" | dmenu -l 10 -p "No URLs" -w "$(getWindowId)"
     else
-        echo "${urls}" | dmenu -i -p "Open:" -w "$(getWindowId)"
+        echo "${urls}" | dmenu -l 10 -i -p "Open:" -w "$(getWindowId)"
     fi
 }
 
