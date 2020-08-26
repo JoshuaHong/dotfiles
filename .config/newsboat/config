@@ -12,7 +12,7 @@ highlight feedlist "[║]" yellow default bold
 highlight feedlist "╠═.*" yellow default bold
 
 # Formats
-feedlist-format "%?T?║%3n %9u %t &╠══════════════════════════════════════════════════ %t?"
+feedlist-format "%?T?║%3n %9u %t&╠══════════════════════════════════════════════════ %t? "
 articlelist-format "%4i  %f %D  %?T?|%-17T|  ?%t "
 selecttag-format "  %T (%n unread: %f/%u feeds)"
 datetime-format "%b %d %Y"
