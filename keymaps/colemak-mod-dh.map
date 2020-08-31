@@ -60,7 +60,7 @@ keycode  53 =          slash      question     questiondown        asciitilde   
                                                                              
 keycode  58 =      BackSpace     BackSpace        BackSpace         BackSpace
 keycode  86 =          minus    underscore       asciitilde        asciitilde 	 Control_underscore          #            endash            emdash
-keycode  57 =          space        Escape            space      nobreakspace    nul
+keycode  57 =          space         space           Escape      nobreakspace    nul
 
 
 keycode   1 = Escape

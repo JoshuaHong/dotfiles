@@ -2068,7 +2068,7 @@ xkb_symbols "colemak-mod-dh" {
 
     key <CAPS> { [    BackSpace,    BackSpace,       BackSpace,        BackSpace ] };
     key <LSGT> { [        minus,   underscore,          endash,           emdash ] };
-    key <SPCE> { [        space,       Escape,           space,     nobreakspace ] };
+    key <SPCE> { [        space,        space,          Escape,     nobreakspace ] };
 
     include "level3(ralt_switch)"
 };
