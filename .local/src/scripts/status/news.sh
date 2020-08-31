@@ -25,7 +25,7 @@ getOptions() {
                 exit 0
                 ;;
             *)
-                error "Error: Unsupported option"
+                echoerr "Error: Unsupported option"
                 usage
                 exit 1
                 ;;
@@ -40,7 +40,7 @@ usage() {
     echo "    -h: Help menu"
 }
 
-error() {
+echoerr() {
     local errorMessage="${*}"
     echo "${errorMessage}" 1>&2
 }

@@ -33,7 +33,7 @@ getOptions() {
                 t="true"
                 ;;
             *)
-                error "Error: Unsupported option"
+                echoerr "Error: Unsupported option"
                 usage
                 exit "1"
                 ;;
@@ -53,7 +53,7 @@ usage() {
     echo "    -t: Translucent background"
 }
 
-error() {
+echoerr() {
     local errorMessage="${*}"
     echo "${errorMessage}" 1>&2
 }

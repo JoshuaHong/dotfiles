@@ -24,7 +24,7 @@ getOptions() {
                 exit "0"
                 ;;
             *)
-                error "Error: Unsupported option"
+                echoerr "Error: Unsupported option"
                 usage
                 exit "1"
                 ;;
@@ -39,7 +39,7 @@ usage() {
     echo "    -s: Select an area to capture with the mouse"
 }
 
-error() {
+echoerr() {
     local errorMessage="${*}"
     echo "${errorMessage}" 1>&2
 }
