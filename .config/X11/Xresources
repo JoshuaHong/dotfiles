@@ -2,7 +2,7 @@
 !
 ! One Dark color scheme for the X Window System
 
-#define background   #222222
+#define darkblack    #222222
 #define black        #282c34
 #define red          #be5046
 #define green        #98c379
@@ -20,31 +20,32 @@
 #define lightcyan    #56b6c2
 #define lightwhite   #c8ccd4
 
-*.color0:      black
-*.color1:      red
-*.color2:      green
-*.color3:      yellow
-*.color4:      blue
-*.color5:      magenta
-*.color6:      cyan
-*.color7:      white
-*.color8:      lightblack
-*.color9:      lightred
-*.color10:     lightgreen
-*.color11:     lightyellow
-*.color12:     lightblue
-*.color13:     lightmagenta
-*.color14:     lightcyan
-*.color15:     lightwhite
+*.color0:  black
+*.color1:  red
+*.color2:  green
+*.color3:  yellow
+*.color4:  blue
+*.color5:  magenta
+*.color6:  cyan
+*.color7:  white
+*.color8:  lightblack
+*.color9:  lightred
+*.color10: lightgreen
+*.color11: lightyellow
+*.color12: lightblue
+*.color13: lightmagenta
+*.color14: lightcyan
+*.color15: lightwhite
 
 ! Dwm
-*.normbgcolor:     background
+*.normbgcolor:     darkblack
 *.normfgcolor:     white
-*.normbordercolor: lightblack
+*.normbordercolor: black
 *.selbgcolor:      black
 *.selfgcolor:      white
 *.selbordercolor:  magenta
 
 ! St
-*.background:  lightwhite
-*.cursorColor: background
+*.background:  black
+*.foreground:  white
+*.cursorcolor: white
