@@ -40,7 +40,7 @@
 ! Dwm
 *.normbgcolor:     darkblack
 *.normfgcolor:     white
-*.normbordercolor: black
+*.normbordercolor: lightblack
 *.selbgcolor:      black
 *.selfgcolor:      white
 *.selbordercolor:  magenta
