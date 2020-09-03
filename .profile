@@ -58,7 +58,8 @@ exportXDGBaseDirectories() {
     export XDG_CONFIG_HOME="${HOME}/.config"
     export XDG_DATA_HOME="${HOME}/.local/share"
     export HISTFILE="${XDG_DATA_HOME}/bash/history"
-    export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+    export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+    export LESSKEY="${XDG_CONFIG_HOME}/less/lesskey"
     export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
     export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 }
