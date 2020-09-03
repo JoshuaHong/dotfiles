@@ -11,7 +11,7 @@
 # - $FZF_ALT_C_COMMAND
 # - $FZF_ALT_C_OPTS
 
-FZF_DEFAULT_OPTS="--bind ctrl-n:backward-char,ctrl-i:up,ctrl-e:down,ctrl-o:forward-char,ctrl-a:beginning-of-line,ctrl-r:backward-word,ctrl-s:forward-word,ctrl-t:end-of-line,ctrl-u:preview-up,ctrl-d:preview-down"
+export FZF_DEFAULT_OPTS="--bind ctrl-n:backward-char,ctrl-i:up,ctrl-e:down,ctrl-o:forward-char,ctrl-a:beginning-of-line,ctrl-r:backward-word,ctrl-s:forward-word,ctrl-t:end-of-line,ctrl-u:preview-up,ctrl-d:preview-down"
 FZF_CTRL_T_OPTS="--height 75% --layout reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}' --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 FZF_CTRL_R_OPTS="--height 75% --layout reverse --border --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
