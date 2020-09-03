@@ -10,6 +10,7 @@ main() {
     setAliases
     setPrimaryPrompt
     setShopts
+    sourcePrograms
     removeHistoryFileDuplicates
 }
 
@@ -127,8 +128,28 @@ setShopts() {
     shopt -s dirspell        # Fix directory spelling errors on word completion
     shopt -s direxpand       # Along with dirspell to expand on word completion
     shopt -s dotglob         # Include hidden files in pathname expansion
-    shopt -s globstar        # Context match "**" pattern
     shopt -s histappend      # Append history rather than overriding the file
+}
+
+sourcePrograms() {
+    sourceFzf
+}
+
+sourceFzf() {
+    local fzfCompletion="${XDG_CONFIG_HOME}/fzf/completion.bash"
+    if regularFileExists "${fzfCompletion}"; then
+        source "${fzfCompletion}"
+    fi
+
+    local fzfKeyBindings="${XDG_CONFIG_HOME}/fzf/key-bindings.bash"
+    if regularFileExists "${fzfKeyBindings}"; then
+        source "${fzfKeyBindings}"
+    fi
+}
+
+regularFileExists() {
+    local file="${1}"
+    [[ -f "${file}" ]]
 }
 
 removeHistoryFileDuplicates() {

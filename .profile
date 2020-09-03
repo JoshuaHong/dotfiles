@@ -28,7 +28,8 @@ isValidPath() {
 }
 
 isValidUserId() {
-    [ "$(getUserId)" -ge 1000 ]
+    minimumUserId=1000
+    [ "$(getUserId)" -ge "${minimumUserId}" ]
 }
 
 getUserId() {
@@ -66,6 +67,7 @@ exportConfigurations() {
     export HISTCONTROL="erasedups:ignoreboth"    # Bash history ignores repeated
                                                  # or space beginning commands
     export LESSHISTFILE="-"                      # Disable the less history file
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Color man pages with bat
 }
 
 startXorg() {
