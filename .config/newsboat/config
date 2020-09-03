@@ -18,4 +18,15 @@ selecttag-format "  %T (%n unread: %f/%u feeds)"
 datetime-format "%b %d %Y"
 
 # Macros
-bind-key O open-all-unread-in-browser-and-mark-read
+bind-key n quit
+bind-key e down
+bind-key i up
+bind-key o open
+bind-key ENTER open-in-browser-and-mark-read
+bind-key t toggle-article-read
+bind-key h next-unread
+bind-key H prev-unread
+bind-key a mark-feed-read
+bind-key r pagedown
+bind-key s pageup
+bind-key f set-tag
