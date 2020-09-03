@@ -8,8 +8,8 @@ main() {
     fi
 
     setAliases
-    setPrimaryPrompt
-    setShopts
+    setSettings
+    setPrompts
     sourcePrograms
     removeHistoryFileDuplicates
 }
@@ -97,7 +97,27 @@ setGitAliases() {
     alias gstp="git stash pop"
 }
 
-setPrimaryPrompt() {
+setSettings() {
+    setShopts
+    setTerminal
+}
+
+setShopts() {
+    shopt -s autocd          # cd when entering a path without the cd command
+    shopt -s cdspell         # cd automatically fixes minor spelling errors
+    shopt -s checkwinsize    # Update LINES and COLUMNS after each command
+    shopt -s cmdhist         # Save multiline commands as a single history entry
+    shopt -s dirspell        # Fix directory spelling errors on word completion
+    shopt -s direxpand       # Along with dirspell to expand on word completion
+    shopt -s dotglob         # Include hidden files in pathname expansion
+    shopt -s histappend      # Append history rather than overriding the file
+}
+
+setTerminal() {
+    stty -ixon               # Disable XON/XOFF flow control
+}
+
+setPrompts() {
     function getGitBranch() {
         git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/ (\1)/"
     }
@@ -119,17 +139,6 @@ setPrimaryPrompt() {
     local dollar="${cyan}$"
     local space=" "
     PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${branch}${rbrace}${dollar}${space}${reset}"
-}
-
-setShopts() {
-    shopt -s autocd          # cd when entering a path without the cd command
-    shopt -s cdspell         # cd automatically fixes minor spelling errors
-    shopt -s checkwinsize    # Update LINES and COLUMNS after each command
-    shopt -s cmdhist         # Save multiline commands as a single history entry
-    shopt -s dirspell        # Fix directory spelling errors on word completion
-    shopt -s direxpand       # Along with dirspell to expand on word completion
-    shopt -s dotglob         # Include hidden files in pathname expansion
-    shopt -s histappend      # Append history rather than overriding the file
 }
 
 sourcePrograms() {
