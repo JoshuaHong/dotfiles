@@ -28,7 +28,6 @@ set vi-ins-mode-string "\1\e[6 q\2"
 
 set editing-mode vi
 $if mode=vi
-    "\e[Z": complete
     Control-l: clear-screen
     Control-a: beginning-of-line
     Control-r: backward-word
@@ -36,6 +35,6 @@ $if mode=vi
     Control-t: end-of-line
     Control-n: backward-char
     Control-e: next-history
-    Control-i: previous-history
+    Control-y: previous-history
     Control-o: forward-char
 $endif
