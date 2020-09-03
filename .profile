@@ -67,7 +67,7 @@ exportConfigurations() {
     export HISTCONTROL="erasedups:ignoreboth"    # Bash history ignores repeated
                                                  # or space beginning commands
     export LESSHISTFILE="-"                      # Disable the less history file
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Color man pages with bat
+    export MANPAGER="${EDITOR} +Man!"            # Open manpages in editor
 }
 
 startXorg() {

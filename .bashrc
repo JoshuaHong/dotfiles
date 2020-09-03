@@ -27,6 +27,7 @@ setLinuxAliases() {
     alias cp="cp --interactive --recursive"
     alias diff="diff --color=auto"
     alias grep="grep --color=auto"
+    alias less='less --RAW-CONTROL-CHARS'
     alias ln="ln --interactive"
     alias ls="ls --color=auto"
     alias mkdir="mkdir --parents"
