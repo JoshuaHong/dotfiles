@@ -10,7 +10,6 @@ main() {
     setAliases
     setSettings
     setPrompts
-    sourcePrograms
     removeHistoryFileDuplicates
 }
 
@@ -139,27 +138,6 @@ setPrompts() {
     local dollar="${cyan}$"
     local space=" "
     PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${branch}${rbrace}${dollar}${space}${reset}"
-}
-
-sourcePrograms() {
-    sourceFzf
-}
-
-sourceFzf() {
-    local fzfCompletion="${XDG_CONFIG_HOME}/fzf/completion.bash"
-    if regularFileExists "${fzfCompletion}"; then
-        source "${fzfCompletion}"
-    fi
-
-    local fzfKeyBindings="${XDG_CONFIG_HOME}/fzf/key-bindings.bash"
-    if regularFileExists "${fzfKeyBindings}"; then
-        source "${fzfKeyBindings}"
-    fi
-}
-
-regularFileExists() {
-    local file="${1}"
-    [[ -f "${file}" ]]
 }
 
 removeHistoryFileDuplicates() {
