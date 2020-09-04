@@ -75,7 +75,7 @@ setGitAliases() {
     alias ga="git add"
     alias gaa="git add --all"
     alias gb="git branch"
-    alias gbD="git branch --delete --force"
+    alias gbd="git branch --delete --force"
     alias gcm="git commit"
     alias gcl="git clone"
     alias gco="git checkout"
