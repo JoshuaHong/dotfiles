@@ -29,12 +29,22 @@ set vi-ins-mode-string "\1\e[6 q\2"
 set editing-mode vi
 $if mode=vi
     Control-l: clear-screen
-    Control-a: beginning-of-line
-    Control-r: backward-word
-    Control-s: forward-word
-    Control-t: end-of-line
-    Control-n: backward-char
-    Control-e: next-history
-    Control-y: previous-history
-    Control-o: forward-char
+    set keymap vi-command
+    "l": vi-insertion-mode
+    "L": vi-append-mode
+    "a": beginning-of-line
+    "A": vi-insert-beg
+    "r": backward-word
+    "R": vi-prev-word
+    "s": forward-word
+    "S": vi-next-word
+    "t": end-of-line
+    "T": vi-append-eol
+    "n": backward-char
+    "e": next-history
+    "i": previous-history
+    "o": forward-char
+    "k": vi-change-char
+    "K": vi-replace
+    set keymap vi-insert
 $endif
