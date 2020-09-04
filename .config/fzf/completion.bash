@@ -9,8 +9,6 @@
 # - $FZF_COMPLETION_TRIGGER (default: '**')
 # - $FZF_COMPLETION_OPTS    (default: empty)
 
-FZF_COMPLETION_OPTS="--height 75% --layout reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}' --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
-
 if [[ $- =~ i ]]; then
 
 # To use custom commands instead of find, override _fzf_compgen_{path,dir}

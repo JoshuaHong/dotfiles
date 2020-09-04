@@ -4,7 +4,6 @@
 
 main() {
     exportVariables
-    sourcePrograms
     startXorg
 }
 
@@ -66,6 +65,8 @@ exportXDGBaseDirectories() {
 }
 
 exportConfigurations() {
+    export FZF_DEFAULT_COMMAND="rg --files --follow --no-heading --no-ignore --smart-case"
+    export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
     export FZF_CTRL_T_OPTS="--layout reverse --preview 'bat --style=numbers --color=always --line-range :500 {}'"
     export FZF_COMPLETION_OPTS="--layout reverse --preview 'bat --style=numbers --color=always --line-range :500 {}'"
     export FZF_DEFAULT_OPTS="--bind ctrl-n:backward-char,ctrl-i:up,ctrl-e:down,ctrl-o:forward-char,ctrl-a:beginning-of-line,ctrl-r:backward-word,ctrl-s:forward-word,ctrl-t:end-of-line,ctrl-u:preview-up,ctrl-d:preview-down --height 75% --border --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
@@ -73,28 +74,6 @@ exportConfigurations() {
                                                  # or space beginning commands
     export LESSHISTFILE="-"                      # Disable the less history file
     export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Color man pages with bat
-}
-
-
-sourcePrograms() {
-    sourceFzf
-}
-
-sourceFzf() {
-    local fzfCompletion="${XDG_CONFIG_HOME}/fzf/completion.bash"
-    if regularFileExists "${fzfCompletion}"; then
-        source "${fzfCompletion}"
-    fi
-
-    local fzfKeyBindings="${XDG_CONFIG_HOME}/fzf/key-bindings.bash"
-    if regularFileExists "${fzfKeyBindings}"; then
-        source "${fzfKeyBindings}"
-    fi
-}
-
-regularFileExists() {
-    local file="${1}"
-    [[ -f "${file}" ]]
 }
 
 startXorg() {
