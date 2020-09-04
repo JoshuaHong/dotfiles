@@ -46,5 +46,9 @@ $if mode=vi
     "o": forward-char
     "k": vi-change-char
     "K": vi-replace
+    "b": vi-end-word
+    "B": vi-end-word
     set keymap vi-insert
+    Control-n: previous-history
+    Control-o: next-history
 $endif
