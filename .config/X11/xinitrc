@@ -98,9 +98,7 @@ getRandomBackgroundImage() {
 }
 
 startWindowManager() {
-    while true; do
-        dwm
-    done
+    dwm
 }
 
 main
