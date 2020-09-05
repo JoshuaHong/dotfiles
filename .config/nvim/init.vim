@@ -6,7 +6,7 @@
 syntax on                           " Enable syntax highlighting
 filetype on                         " Enable filetype detection
 filetype indent on                  " Enable filetype specific indenting
-filetype plugin on                  " Enable filetype specific plugins
+filetype plugin on                  " Enable filetype specific plug-ins
 set autoindent                      " Copy indent from current line on new line
 set autoread                        " Reload files changed outside of Neovim
 set background=dark                 " Use dark background unless set by terminal
@@ -68,9 +68,9 @@ set wildmenu                        " Allow toggling through tab-completion
 set wildoptions+=pum                " Display matches as 'ins-completion-menu'
 set wildoptions+=tagfile            " Using CTRL-D list type and file of the tag
 
-" Plugins
-" The man.vim plugin is enabled, to provide the :Man command.
-" The matchit plugin is enabled. To disable it in your config:
+" Plug-ins
+" The man.vim plug-in is enabled, to provide the :Man command.
+" The matchit plug-in is enabled. To disable it in your config:
 "   :let loaded_matchit = 1
 
 " Change cursor shape based on mode
@@ -102,6 +102,7 @@ set list                            " Display unprintable characters
 set listchars=nbsp:˽,tab:>-,trail:· " Set strings to be used in 'list' mode
 set mouse=a                         " Enable use of mouse in all modes
 set noequalalways                   " Don't resize splits when closed
+set nospell                         " Disable spell checking in place of plug-in
 set noswapfile                      " Disable swap files
 set nobackup                        " Disable backups
 set number                          " Precede each line with its line number
@@ -140,10 +141,10 @@ noremap n h
 noremap e j
 noremap i k
 noremap o l
-noremap N <C-b>
-noremap E L
-noremap I H
-noremap O <C-f>
+noremap N H
+noremap E <C-d>
+noremap I <C-u>
+noremap O L
 noremap a ^
 noremap r b
 noremap s w
@@ -234,17 +235,21 @@ nnoremap <expr> <Leader>c &modified ? ":bd<CR>" : ":bp<bar>sp<bar>bn<bar>bd<CR>"
 inoremap <silent> <Esc> <Esc>`^
 
 "
-" ================================== Plugins ===================================
+" ================================== Plug-ins ==================================
 "
 " ============== Vim-plug ==============
 call plug#begin(stdpath('data') . '/plugged')
+    Plug 'ap/vim-css-color'
     Plug 'bfrg/vim-cpp-modern'
+    Plug 'gcavallanti/vim-noscrollbar'
     Plug 'joshdick/onedark.vim'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
+    Plug 'kamykn/spelunker.vim'
     Plug 'nvim-lua/diagnostic-nvim'
     Plug 'neovim/nvim-lsp'
     Plug 'nvim-lua/completion-nvim'
+    Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 
 " Open Vim-plug splits vertically in the far right
@@ -256,6 +261,9 @@ let g:cpp_named_requirements_highlight = 1
 
 " Don't highlight braces inside brackets
 let c_no_curly_error = 1
+
+" ========== Vim-noscrollbar ===========
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(25,'-','█',['▐'],['▌'])}
 
 " ============ Onedark.vim =============
 " Use true colors
@@ -297,7 +305,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '70%' }
 
 " ================ Goyo ================
-" Reload colorschemes on Goyo exit
+" Reload color schemes on Goyo exit
 augroup Goyo
     autocmd!
     autocmd  User GoyoLeave nested source $HOME/.config/nvim/init.vim
@@ -305,6 +313,16 @@ augroup END
 
 " Mappings
 nnoremap <Leader>g :Goyo<CR>
+
+" =========== Spelunker.vim ============
+" Disable by default
+let g:enable_spelunker_vim = 0
+
+" Movement
+nnoremap <Leader>. :call spelunker#jump_next()<CR>
+nnoremap <Leader>, :call spelunker#jump_prev()<CR>
+nnoremap <Leader>z :call spelunker#correct_from_list()<CR>
+nnoremap <Leader>Z :call spelunker#toggle()<CR>
 
 " ========== Diagnostic-nvim ===========
 " Define diagnostic symbols
@@ -351,6 +369,15 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 inoremap <expr> <Tab>   pumvisible() ? "\<C-p>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
 inoremap <expr> <C-e> pumvisible() ? "\<C-n>" : "\<C-e>"
+
+" ======= Comfortable-motion.vim =======
+" Scroll proportional to window height
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 1
+nnoremap <silent> E :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> I :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
 
 " =============== Netrw ================
 augroup Netrw
