@@ -117,7 +117,6 @@ set splitbelow                      " Add horizontal splits to the bottom
 set splitright                      " Add vertical splits to the right
 set tabstop=4                       " Set number of spaces per tab
 set termguicolors                   " Enable 24 bit RGB color in the TUI
-set updatetime=30                   " Set idle time to trigger 'CursorHold'
 set wildignorecase                  " Case-insensitive wildmenu search
 set wildmode=longest:list,full      " Display all results of tab-completion
 set writebackup                     " Make a temp backup before overwriting file
@@ -241,14 +240,16 @@ inoremap <silent> <Esc> <Esc>`^
 call plug#begin(stdpath('data') . '/plugged')
     Plug 'ap/vim-css-color'
     Plug 'bfrg/vim-cpp-modern'
+    Plug 'dense-analysis/ale'
     Plug 'gcavallanti/vim-noscrollbar'
     Plug 'joshdick/onedark.vim'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'
     Plug 'kamykn/spelunker.vim'
-    Plug 'nvim-lua/diagnostic-nvim'
     Plug 'neovim/nvim-lsp'
     Plug 'nvim-lua/completion-nvim'
+    Plug 'nvim-lua/diagnostic-nvim'
+    Plug 'preservim/nerdcommenter'
     Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 
@@ -261,6 +262,21 @@ let g:cpp_named_requirements_highlight = 1
 
 " Don't highlight braces inside brackets
 let c_no_curly_error = 1
+
+" ================ ALE =================
+" Set error symbol priority
+let g:ale_sign_priority = 0
+
+" Only enable listed linters
+let g:ale_linters_explicit = 1
+let g:ale_linters = {'cpp': ['clangcheck', 'clangtidy', 'cppcheck', 'flawfinder']}
+
+" Linter options
+let g:ale_cpp_clangtidy_extra_options = '--checks=*'
+let g:ale_cpp_cppcheck_options = '--enable=all'
+
+" Mappings
+nmap <Leader>d <Plug>(ale_detail)
 
 " ========== Vim-noscrollbar ===========
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(25,'-','█',['▐'],['▌'])}
@@ -289,8 +305,6 @@ highlight WhiteSpace guifg=#5c6370
 " Mappings
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>; :History:<CR>
-nnoremap <Leader>/ :History/<CR>
 nnoremap <Leader>l :Lines<CR>
 nnoremap <Leader>' :Marks<CR>
 nnoremap <Leader>s :Rg<CR>
@@ -308,7 +322,7 @@ let g:fzf_layout = { 'down': '70%' }
 " Reload color schemes on Goyo exit
 augroup Goyo
     autocmd!
-    autocmd  User GoyoLeave nested source $HOME/.config/nvim/init.vim
+    autocmd  User GoyoLeave nested source ${HOME}/.config/nvim/init.vim
 augroup END
 
 " Mappings
@@ -325,7 +339,7 @@ nnoremap <Leader>z :call spelunker#correct_from_list()<CR>
 nnoremap <Leader>Z :call spelunker#toggle()<CR>
 
 " ========== Diagnostic-nvim ===========
-" Define diagnostic symbols
+" Diagnostic symbols
 call sign_define("LspDiagnosticsErrorSign", {"text" : "❌", "texthl" : "LspDiagnosticsError"})
 call sign_define("LspDiagnosticsWarningSign", {"text" : "⚠️", "texthl" : "LspDiagnosticsWarning"})
 call sign_define("LspDiagnosticsInformationSign", {"text" : "ℹ️", "texthl" : "LspDiagnosticsInformation"})
@@ -335,8 +349,21 @@ call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnos
 let g:diagnostic_insert_delay = 1
 
 " Mappings
-nnoremap <Leader>y :NextDiagnosticCycle<CR>
-nnoremap <Leader>Y :PrevDiagnosticCycle<CR>
+nmap <Leader>y :call NextErrorWrap()<CR>
+nmap <Leader>Y :call PreviousErrorWrap()<CR>
+
+function NextErrorWrap()
+    " Search for Nvim-lsp diagnostics, then ALE diagnostics
+    if execute('NextDiagnosticCycle') == "\nNo diagnostics found"
+        exec "normal \<Plug>(ale_next_wrap)"
+    endif
+endfunction
+function PreviousErrorWrap()
+    " Search for Nvim-lsp diagnostics, then ALE diagnostics
+    if execute('PrevDiagnosticCycle') == "\nNo diagnostics found"
+        exec "normal \<Plug>(ale_previous_wrap)"
+    endif
+endfunction
 
 " ============== Nvim-lsp ==============
 lua <<EOF
@@ -345,18 +372,19 @@ lua <<EOF
         require'diagnostic'.on_attach()
     end
     require'nvim_lsp'.clangd.setup{
-        on_attach=on_attach
+        on_attach=on_attach;
     }
 EOF
 
 " Mappings
 nnoremap <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <Leader>d <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <Leader>D <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <Leader>p <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <Leader>k <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <Leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <Leader>u <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <Leader>; :ClangdSwitchSourceHeader<CR>
 
 " =========== Completion-lsp ===========
 " Enable auto insert parenthesis
@@ -366,9 +394,32 @@ let g:completion_enable_auto_paren=1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
 " Set completion mappings
-inoremap <expr> <Tab>   pumvisible() ? "\<C-p>" : "\<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
 inoremap <expr> <C-e> pumvisible() ? "\<C-n>" : "\<C-e>"
+
+" =========== NERDCommenter ============
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Mappings
+vmap <Leader>/ <Plug>NERDCommenterToggle
+nmap <Leader>/ <Plug>NERDCommenterToggle
 
 " ======= Comfortable-motion.vim =======
 " Scroll proportional to window height
