@@ -222,7 +222,14 @@ nnoremap <Leader>v :vnew<CR>
 nnoremap <Leader>x :new<CR>
 
 " Make and display output
-nnoremap <Leader>m :make<bar>copen 24<CR>
+nnoremap <Leader>m :call Compile()<CR>
+function Compile()
+    if (&filetype == 'c' || &filetype == 'cpp')
+        make | copen 24
+    else
+        echoerr 'Cannot compile filetype ' . &filetype
+    endif
+endfunction
 
 " Unset search pattern
 nnoremap <Leader>h :nohlsearch<CR>
@@ -264,12 +271,16 @@ let g:cpp_named_requirements_highlight = 1
 let c_no_curly_error = 1
 
 " ================ ALE =================
+" Disable highlights
+let g:ale_set_highlights = 0
+
 " Set error symbol priority
 let g:ale_sign_priority = 0
 
 " Only enable listed linters
 let g:ale_linters_explicit = 1
-let g:ale_linters = {'cpp': ['clangcheck', 'clangtidy', 'cppcheck', 'flawfinder']}
+let g:ale_linters = { 'c': ['clangtidy', 'cppcheck', 'flawfinder'],
+        \ 'cpp': ['clangcheck', 'clangtidy', 'cppcheck', 'flawfinder'] }
 
 " Linter options
 let g:ale_cpp_clangtidy_extra_options = '--checks=*'
@@ -467,7 +478,7 @@ endfunction
 
 function NetrwClose()
     " Close Netrw if it's the only open buffer and all buffers are not modified
-    if winnr("$") == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"
+    if winnr("$") == 1 && &filetype == "netrw"
         try
             quit
         catch
@@ -498,7 +509,11 @@ let g:termdebug_wide=1
 " Mappings
 nnoremap <Leader>j :call TermDebugSetup()<CR>
 function TermDebugSetup()
-    packadd termdebug
-    Termdebug
-    normal A
+    if (&filetype == 'c' || &filetype == 'cpp')
+        packadd termdebug
+        Termdebug
+        normal A
+    else
+        echoerr 'Cannot debug filetype ' . &filetype
+    endif
 endfunction
