@@ -69,7 +69,7 @@ exportConfigurations() {
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
     export FZF_CTRL_T_OPTS="--layout reverse --preview 'bat --style=numbers --color=always --line-range :500 {}'"
     export FZF_COMPLETION_OPTS="--layout reverse --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-    export FZF_DEFAULT_OPTS="--bind ctrl-n:backward-char,ctrl-i:up,ctrl-e:down,ctrl-o:forward-char,ctrl-a:beginning-of-line,ctrl-r:backward-word,ctrl-s:forward-word,ctrl-t:end-of-line,ctrl-u:preview-up,ctrl-d:preview-down --height 75% --border --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+    export FZF_DEFAULT_OPTS="--bind ctrl-n:backward-char,ctrl-i:up,ctrl-e:down,ctrl-o:forward-char,ctrl-a:beginning-of-line,ctrl-r:backward-word,ctrl-s:forward-word,ctrl-t:end-of-line,ctrl-u:preview-up,ctrl-d:preview-down --height 70% --border --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
     export HISTCONTROL="erasedups:ignoreboth"    # Bash history ignores repeated
                                                  # or space beginning commands
     export LESSHISTFILE="-"                      # Disable the less history file
