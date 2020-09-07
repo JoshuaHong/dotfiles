@@ -398,11 +398,11 @@ nnoremap <Leader>u <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <Leader>; :ClangdSwitchSourceHeader<CR>
 
 " Focus quickfix window when opening references
-autocmd filetype qf call FocusQuickfix()
-function FocusQuickfix()
+autocmd filetype qf call FocusQuickFix()
+function FocusQuickFix()
     nmap <buffer> <CR> <CR>:cclose<CR>
     echo 'Open references'
-    throw 'Focus references'
+    echoerr 'Focus quickfix'
 endfunction
 
 " =========== Completion-lsp ===========
