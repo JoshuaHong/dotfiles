@@ -73,3 +73,10 @@ Setup for the Arch Linux environment.
     When = PostTransaction
     Exec = /usr/bin/systemctl restart systemd-boot-update.service
     ```
+
+## Post-installation
+
+### Errors
+
+#### tpm tpm0: [Firmware Bug]: TPM interrupt not working
+* In the BIOS change Security->TPM Availability from Available to Hidden
