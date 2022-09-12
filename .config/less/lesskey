@@ -1,8 +1,0 @@
-# The less configuration file
-#
-# To compile, run: lesskey config
-
-e forw-line
-i back-line
-h repeat-search
-H reverse-search

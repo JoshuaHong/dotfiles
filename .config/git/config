@@ -1,5 +1,0 @@
-[user]
-	email = Joshua99Hong@gmail.com
-	name = Joshua Hong
-[credential]
-	helper = cache --timeout=86400
