@@ -8,8 +8,8 @@ Setup for the Arch Linux environment.
 * Disable secure boot
 
 ### Connect to the internet
-* Use iwd: `iwctl station <device> connect <SSID>`
-\* To find the device run: `iwctl device list`
+* Use iwd: `iwctl station <device> connect <SSID>` \
+\* To find the device run: `iwctl device list` \
 \* To find the SSID run: `iwctl station <device> get-networks`
 
 ### Partition the disks
