@@ -35,7 +35,7 @@ Setup for the Arch Linux environment.
 ## Installation
 
 ### Install essential packages
-* Install a network manager and a text editor: `pacman -S iwd neovim`
+* Install the microcode, a network manager, and a text editor: `pacman -S intel-ucode iwd neovim`
 * Enable iwd: `systemctl enable --now iwd.service systemd-resolved.service`
 * Create the iwd configuration file `/etc/iwd/main.conf`:
     ```
@@ -54,10 +54,11 @@ Setup for the Arch Linux environment.
     ```
 * Create the Arch configuration file `/boot/loader/entries/arch.conf`:
     ```
-    title    Arch Linux
-    linux    /vmlinuz-linux
-    initrc   /initramfs-linux.img
-    options  root=UUID=<Root UUID> rw
+    title   Arch Linux
+    linux   /vmlinuz-linux
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux.img
+    options root=UUID=<Root UUID> rw
     ```
     \* To find the UUID of the root partition in vim run: `:r! blkid`
 
