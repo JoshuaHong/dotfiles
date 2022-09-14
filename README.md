@@ -87,3 +87,4 @@ Setup for the Arch Linux environment.
 ```
 MODULES=(i915)
 ```
+* Recreate the initramfs image: `mkinitcpio -P`
