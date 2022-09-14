@@ -81,3 +81,9 @@ Setup for the Arch Linux environment.
 
 #### tpm tpm0: [Firmware Bug]: TPM interrupt not working
 * In the BIOS change Security->TPM Availability from Available to Hidden
+
+#### Screen flashes while booting on TTY
+* Add the following to `/etc/mkinitcpio.conf`:
+```
+MODULES=(i915)
+```
