@@ -58,9 +58,9 @@ Setup for the Arch Linux environment.
     linux   /vmlinuz-linux
     initrd  /intel-ucode.img
     initrd  /initramfs-linux.img
-    options root=UUID=<Root UUID> rw
+    options root=UUID=<UUID> rw
     ```
-    \* To find the UUID of the root partition in vim run: `:r! blkid`
+    \* To find the UUID of the **root** partition in vim run: `:r! blkid`
 
 * Create a Pacman hook for automatic updates in `/etc/pacman.d/hooks/100-systemd-boot.hook`:
     ```
@@ -86,5 +86,15 @@ Setup for the Arch Linux environment.
 * Add the following to `/etc/mkinitcpio.conf`:
 ```
 MODULES=(i915)
+```
+* Recreate the initramfs image: `mkinitcpio -P`
+
+#### cros-usbpd-charger cros-usbpd-charger.5.auto: Unexpected number of charge port count
+* No solution found
+
+### Silence the boot output
+* Add the `quiet` kernel parameter in `/boot/loader/entries/arch.conf`:
+```
+options root=UUID=<UUID> rw quiet
 ```
 * Recreate the initramfs image: `mkinitcpio -P`
