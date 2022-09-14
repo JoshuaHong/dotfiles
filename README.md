@@ -84,9 +84,9 @@ Setup for the Arch Linux environment.
 
 #### Screen flashes while booting on TTY
 * Add the following to `/etc/mkinitcpio.conf`:
-```
-MODULES=(i915)
-```
+    ```
+    MODULES=(i915)
+    ```
 * Recreate the initramfs image: `mkinitcpio -P`
 
 #### cros-usbpd-charger cros-usbpd-charger.5.auto: Unexpected number of charge port count
@@ -94,6 +94,6 @@ MODULES=(i915)
 
 ### Silence the boot output
 * Add the `quiet` kernel parameter in `/boot/loader/entries/arch.conf`:
-```
-options root=UUID=<UUID> rw quiet
-```
+    ```
+    options root=UUID=<UUID> rw quiet
+    ```
