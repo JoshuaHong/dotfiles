@@ -97,4 +97,3 @@ MODULES=(i915)
 ```
 options root=UUID=<UUID> rw quiet
 ```
-* Recreate the initramfs image: `mkinitcpio -P`
