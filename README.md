@@ -115,14 +115,15 @@ Setup for the Arch Linux environment.
     ```
 
 ## Packages
-| Package        | Description     | Justification                             |
-| -------------- | --------------- | ----------------------------------------- |
-| base           | Base packages   | Runs Arch linux                           |
-| intel-ucode    | Intel microcode | Updates the firmware for system stability |
-| iwd            | Wireless daemon | Manages networking                        |
-| linux          | Linux kernel    | Runs the Linux kernel                     |
-| linux-firmware | Linux firmware  | Runs the Linux firmware                   |
-| neovim         | Text editor     | Edits text                                |
+| Package        | Description                      | Justification                             |
+| -------------- | -------------------------------- | ----------------------------------------- |
+| base           | Base packages                    | Runs Arch linux                           |
+| doas           | Execute commands as another user | Allows privilege elevation                |
+| intel-ucode    | Intel microcode                  | Updates the firmware for system stability |
+| iwd            | Wireless daemon                  | Manages networking                        |
+| linux          | Linux kernel                     | Runs the Linux kernel                     |
+| linux-firmware | Linux firmware                   | Runs the Linux firmware                   |
+| neovim         | Text editor                      | Edits text                                |
 
 
 \* AUR packages
