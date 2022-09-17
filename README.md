@@ -77,6 +77,10 @@ Setup for the Arch Linux environment.
 
 ## Post-installation
 
+### Users and groups
+* Add a new user: `useradd -m -G wheel josh`
+* Add a password: `passwd josh`
+
 ### Errors
 
 #### tpm tpm0: [Firmware Bug]: TPM interrupt not working
@@ -97,3 +101,16 @@ Setup for the Arch Linux environment.
     ```
     options root=UUID=<UUID> rw quiet
     ```
+
+## Packages
+| Package        | Description     | Justification                             |
+| -------------- | --------------- | ----------------------------------------- |
+| base           | Base packages   | Runs Arch linux                           |
+| intel-ucode    | Intel microcode | Updates the firmware for system stability |
+| iwd            | Wireless daemon | Manages networking                        |
+| linux          | Linux kernel    | Runs the Linux kernel                     |
+| linux-firmware | Linux firmware  | Runs the Linux firmware                   |
+| neovim         | Text editor     | Edits text                                |
+
+
+\*AUR packages
