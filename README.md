@@ -81,6 +81,18 @@ Setup for the Arch Linux environment.
 * Add a new user: `useradd -m -G wheel josh`
 * Add a password: `passwd josh`
 
+### Security
+
+#### Privilege elevation
+* Install opendoas: `pacman -S opendoas`
+* Permit the wheel group in `/etc/doas.conf`:
+    ```
+    permit persist setenv { XAUTHORITY LANG LC_ALL } :wheel
+    ```
+* Set the owner: `chown -c root:root /etc/doas.conf`
+* Set the group: `chmod -c 0400 /etc/doas.conf`
+* Check syntax errors: `doas -C /etc/doas.conf && echo "config ok" || echo "config error"`
+
 ### Errors
 
 #### tpm tpm0: [Firmware Bug]: TPM interrupt not working
@@ -113,4 +125,4 @@ Setup for the Arch Linux environment.
 | neovim         | Text editor     | Edits text                                |
 
 
-\*AUR packages
+\* AUR packages
