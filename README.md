@@ -50,7 +50,7 @@ Setup for the Arch Linux environment.
 * Install systemd-boot: `bootctl install`
 * Edit the loader configuration file `/boot/loader/loader.conf`:
     ```
-    default    arch.conf
+    default arch.conf
     ```
 * Create the Arch configuration file `/boot/loader/entries/arch.conf`:
     ```
@@ -78,20 +78,39 @@ Setup for the Arch Linux environment.
 ## Post-installation
 
 ### Users and groups
-* Add a new user: `useradd -m -G wheel josh`
+* Add a new user: `useradd -m -G wheel josh` \
+  \* `-m` creates the user's home directory \
+  \* `-G` adds the user to the group
 * Add a password: `passwd josh`
 
 ### Security
 
 #### Privilege elevation
 * Install opendoas: `pacman -S opendoas`
-* Permit the wheel group in `/etc/doas.conf`:
+* Permit the `wheel` group in `/etc/doas.conf`:
     ```
     permit persist setenv { XAUTHORITY LANG LC_ALL } :wheel
     ```
+    \* `persist` does not require a password again after successful authentication for some time \
+    \* `setenv { XAUTHORITY LANG LC_ALL }` allows starting graphical applications under X and accessing the user's locale
 * Set the owner: `chown -c root:root /etc/doas.conf`
 * Set the group: `chmod -c 0400 /etc/doas.conf`
-* Check syntax errors: `doas -C /etc/doas.conf && echo "config ok" || echo "config error"`
+* Check for syntax errors: `doas -C /etc/doas.conf && echo "config ok" || echo "config error"`
+
+#### Restricting root
+* Restrict root login: `passwd --lock root`
+* Require a user to be in the `wheel` group to use `su` by uncommenting the following line in `/etc/pam.d/su` and `/etc/pam.d/su-l`:
+    ```
+    auth required pam_wheel.so use_uid
+    ```
+
+#### Denying SSH login
+* Install openssh: `pacman -S openssh`
+* Deny SSH login by uncommenting `PermitRootLogin` and changing `prohibit-password` to `no` in `/etc/ssh/sshd_config`:
+    ```
+    PermitRootLogin no
+    ```
+* Restart the SSH daemon: `systemctl restart sshd.service`
 
 ### Errors
 
@@ -124,6 +143,7 @@ Setup for the Arch Linux environment.
 | linux          | Linux kernel                     | Runs the Linux kernel                     |
 | linux-firmware | Linux firmware                   | Runs the Linux firmware                   |
 | neovim         | Text editor                      | Edits text                                |
+| openssh        | Remote login tool with SSH       | Allows remote login with SSH              |
 
 
 \* AUR packages
