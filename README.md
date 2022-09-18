@@ -35,7 +35,7 @@ Setup for the Arch Linux environment.
 ## Installation
 
 ### Install essential packages
-* Install the microcode, a network manager, and a text editor: `pacman -S intel-ucode iwd neovim`
+* Install the microcode, a wireless daemon, and a text editor: `pacman -S intel-ucode iwd neovim`
 * Enable iwd: `systemctl enable --now iwd.service systemd-resolved.service`
 * Create the iwd configuration file `/etc/iwd/main.conf`:
     ```
@@ -86,16 +86,14 @@ Setup for the Arch Linux environment.
 ### Security
 
 #### Privilege elevation
-* Install opendoas: `pacman -S opendoas`
-* Permit the `wheel` group in `/etc/doas.conf`:
-    ```
-    permit persist setenv { XAUTHORITY LANG LC_ALL } :wheel
-    ```
-    \* `persist` does not require a password again after successful authentication for some time \
-    \* `setenv { XAUTHORITY LANG LC_ALL }` allows starting graphical applications under X and accessing the user's locale
-* Set the owner: `chown -c root:root /etc/doas.conf`
-* Set the group: `chmod -c 0400 /etc/doas.conf`
-* Check for syntax errors: `doas -C /etc/doas.conf && echo "config ok" || echo "config error"`
+* Install sudo: `pacman -S sudo`
+* Create a temporary symlink to use visudo: `ln -s /usr/bin/nvim /usr/bin/vi`
+* Open the configuration file: `visudo`
+* Allow users in the `wheel` group to use `sudo` without a password by uncommenting the following line:
+  ```
+  %WHEEL ALL=(ALL) NOPASSWD: ALL
+  ```
+* Remove the temporary symlink: `rm /usr/bin/vi`
 
 #### Restricting root
 * Restrict root login: `passwd --lock root`
@@ -111,6 +109,58 @@ Setup for the Arch Linux environment.
     PermitRootLogin no
     ```
 * Restart the SSH daemon: `systemctl restart sshd.service`
+
+### Package Management
+
+#### Pacman
+* Uncomment the following miscellaneous configurations in `/etc/pacman.conf`:
+  ```
+  Color
+  CheckSpace
+  VerbosePkgLists
+  ParallelDownloads = 5
+  ILoveCandy
+  ```
+
+#### Mirrors
+* Install pacman-contrib: `pacman -S pacman-contrib`
+* Back up the mirrorlist: `cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup`
+* Fetch and rank the live mirror list: `curl -s "https://archlinux.org/mirrorlist/?country=all&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 10 - > /etc/pacman.d/mirrorlist` \
+  \* Mirror list from all countries, using the HTTPS protocol, IPV4 or IPV6, filtered by mirror score
+
+#### Makepkg
+* Automatically detect and enable safe architecture-specific optimizations in `/etc/makepkg.conf`:
+  * Remove any `-march` and `-mtune` C flags
+  * Add the `-march=native` C flag:
+    ```
+    CFLAGS="-march=native ..."
+    ```
+  * Uncomment the Rust flags
+  * Add the `-C target-cpu=native` Rust flag:
+    ```
+    RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
+    ```
+* Use additional parallel compilation in `/etc/makepkg.conf`:
+  * Uncomment the Make flags
+  * Replace the Make flag `-j2` with `-j$(nproc)`:
+    ```
+    MAKEFLAGS="-j$(nproc)"
+    ```
+* Use multiple cores on compression in `/etc/makepkg.conf`:
+  * Add `--threads=0` to XZ and Zstandard:
+    ```
+    COMPRESSXZ=(xz -c -z --threads=0 -)
+    COMPRESSZST=(zstd -c -z -q --threads=0 -)
+    ```
+
+#### Arch User Repository helpers
+* Install base-devel and git: `pacman -S base-devel git`
+* Clone Paru: `git clone https://aur.archlinux.org/paru.git`
+* Change directories: `cd paru`
+* Build Paru: `makepkg -si`
+* Change directories: `cd ..`
+* Remove the directory: `rm -r paru`
+* Uninstall Rust: `pacman -Rns rust`
 
 ### Errors
 
@@ -134,16 +184,17 @@ Setup for the Arch Linux environment.
     ```
 
 ## Packages
-| Package        | Description                      | Justification                             |
-| -------------- | -------------------------------- | ----------------------------------------- |
-| base           | Base packages                    | Runs Arch linux                           |
-| doas           | Execute commands as another user | Allows privilege elevation                |
-| intel-ucode    | Intel microcode                  | Updates the firmware for system stability |
-| iwd            | Wireless daemon                  | Manages networking                        |
-| linux          | Linux kernel                     | Runs the Linux kernel                     |
-| linux-firmware | Linux firmware                   | Runs the Linux firmware                   |
-| neovim         | Text editor                      | Edits text                                |
-| openssh        | Remote login tool with SSH       | Allows remote login with SSH              |
+List of all installed packages that are not strict dependencies of other packages, and which are not in the `base` or `base-devel` package groups: `comm -23 <(pacman -Qqtt | sort) <({ pacman -Qqg base-devel; echo base; } | sort -u)`:
 
+| Package        | Description                         | Justification                             |
+| -------------- | ----------------------------------- | ----------------------------------------- |
+| intel-ucode    | Intel microcode                     | Updates the firmware for system stability |
+| iwd            | Wireless daemon                     | Manages networking                        |
+| linux          | Linux kernel                        | Runs the Linux kernel                     |
+| linux-firmware | Linux firmware                      | Runs the Linux firmware                   |
+| neovim         | Text editor                         | Edits text                                |
+| openssh        | Remote login tool with SSH          | Allows remote login with SSH              |
+| pacman-contrib | Tools for Pacman systems            | Checks for updates and ranks mirrors      |
+| paru           | AUR helper                          | Installs packages from the AUR            |
 
 \* AUR packages
