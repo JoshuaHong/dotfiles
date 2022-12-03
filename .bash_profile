@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 #
-# The profile script executed when Bash is invoked as an interactive login
-# shell.
-# Contains commands that should only be called once to set up the environment.
+# The script executed when Bash is invoked as an interactive login shell.
+# Contains commands to set up the Bash environment.
 
 main() {
     sourceProfile

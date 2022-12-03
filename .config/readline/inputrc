@@ -1,0 +1,117 @@
+# Readline configuration file.
+
+# Set the terminal bell style.
+set bell-style none
+# Bind control characters.
+set bind-tty-special-chars on
+# Briefly flash the opening parenthesis when a closing parenthesis is inserted.
+set blink-matching-paren off
+# Show the common prefix of possible completions in a different color.
+set colored-completion-prefix on
+# Show possible completions in different colors based on their file types.
+set colored-stats on
+# Set the string to add before a comment using the `insert-comment` command.
+set comment-begin "#"
+# Set the number of screen columns to use to display possible completions.
+# A value less than zero means use all columns.
+set completion-display-width -1
+# Perform case-insensitive completion.
+set completion-ignore-case off
+# Treat `-` and `_` as equivalent if completion-ignore-case is enabled.
+set completion-map-case off
+# Set the length of characters of the common prefix for possible completions.
+# Truncate prefixes longer than the value with an ellipsis if greater than zero.
+set completion-prefix-display-length 0
+# Set the number of possible completions before asking the user to view all.
+set completion-query-items 100
+# Use escape as the `meta` prefix.
+set convert-meta on
+# Disable word completion.
+set disable-completion off
+# Echo control characters generated from the keyboard.
+set echo-control-characters on
+# Set the editing mode of keybindings.
+set editing-mode vi
+# Set the string to show if `show-mode-in-prompt` is enabled in Emacs mode.
+set emacs-mode-string "@"
+# Treat special characters as the literal value when pasting in the terminal.
+set enable-bracketed-paste on
+# Enable the keypad.
+set enable-keypad on
+# Enable the meta key.
+set enable-meta-key on
+# Expand the tilde character on word completion.
+set expand-tilde off
+# Attempt to set the cursor at the same location on each history line.
+set history-preserve-point off
+# Set the maximum number of history entries saved in the history list.
+# A value less than zero means the number of history entries is not limited.
+set history-size -1
+# Allow scrolling the input horizontally instead of wrapping to a new line.
+set horizontal-scroll-mode off
+# Don't clear the eighth bit in the characters it reads.
+set input-meta off
+# Set the string of characters that should terminate an incremental search.
+set isearch-terminators "C-[ C-J"
+# Set the current readline keymap.
+set keymap vi-insert
+# Set the duration to wait for a character when reading a key sequence.
+set keyseq-timeout 500
+# Append a forward slash to completed directory names.
+set mark-directories on
+# Display modified history lines with a preceding asterisk.
+set mark-modified-lines off
+# Append a slash to completed names which are symbolic links to directories.
+set mark-symlinked-directories on
+# Match hidden files when performing filename completion.
+set match-hidden-files on
+# Show the full list of completions before cycling through the list.
+set menu-complete-display-prefix off
+# Display characters with the eighth bit set directly rather than escaped.
+set output-meta off
+# Use a pager to display a screenful of possible completions.
+set page-completions on
+# Sort matches horizontally in alphabetical order rather than vertically.
+set print-completions-horizontally off
+# Undo all changes to history lines before returning.
+set revert-all-at-newline off
+# Show ambiguous completions instead of ringing the bell.
+set show-all-if-ambiguous on
+# Show ambiguous completions without a common prefix.
+set show-all-if-unmodified on
+# Show the current mode in the prompt.
+set show-mode-in-prompt on
+# Skip completion when performing completion in the middle of a word.
+set skip-completed-text off
+# Set the string to show in the prompt if `show-mode-in-prompt` is enabled.
+set vi-cmd-mode-string "\1\e[2 q\2"
+# Set the string to show in the prompt if `show-mode-in-prompt` is enabled.
+set vi-ins-mode-string "\1\e[6 q\2"
+# Append the filetype to the filename on completion.
+set visible-stats on
+
+$if mode=vi
+    # Control-l: clear-screen
+    # set keymap vi-command
+    # "l": vi-insertion-mode
+    # "L": vi-append-mode
+    # "a": beginning-of-line
+    # "A": vi-insert-beg
+    # "r": backward-word
+    # "R": vi-prev-word
+    # "s": forward-word
+    # "S": vi-next-word
+    # "t": end-of-line
+    # "T": vi-append-eol
+    # "n": backward-char
+    # "e": next-history
+    # "i": previous-history
+    # "o": forward-char
+    # "k": vi-change-char
+    # "K": vi-replace
+    # "b": vi-end-word
+    # "B": vi-end-word
+    # set keymap vi-insert
+    # Control-n: previous-history
+    # Control-o: next-history
+$endif

@@ -1,22 +1,21 @@
-#!/bin/sh
+#!/usr/bin/sh
 #
-# The profile script executed when a Bourne shell is invoked as an interactive
-# login shell.
-# Contains commands that should only be called once to set up the environment.
+# The script executed when a Bourne shell is invoked as an interactive login
+# shell.
+# Contains commands to set up the Bourne shell environment.
 
 main() {
     exportLocalPath
     exportPrograms
     exportXDGBaseDirectories
+    exportBashVariables
 }
 
 exportLocalPath() {
     directory="${HOME}/.local/share"
-    if ! isValidPath "${directory}"; then
-        return
+    if isValidPath "${directory}"; then
+        export PATH="${PATH}:${directory}"
     fi
-
-    export PATH="${PATH}:${directory}"
 }
 
 exportPrograms() {
@@ -26,19 +25,25 @@ exportPrograms() {
 }
 
 exportXDGBaseDirectories() {
-    # User directories
     export XDG_CACHE_HOME="${HOME}/.cache"
+    export XDG_CONFIG_DIRS="/etc/xdg"
     export XDG_CONFIG_HOME="${HOME}/.config"
+    export XDG_DATA_DIRS="/usr/local/share:/usr/share"
     export XDG_DATA_HOME="${HOME}/.local/share"
     export XDG_STATE_HOME="${HOME}/.local/state"
+}
 
-    # System directories
-    export XDG_CONFIG_DIRS="/etc/xdg"
-    export XDG_DATA_DIRS="/usr/local/share:/usr/share"
-
-    # Programs
-    mkdir -p "${XDG_STATE_HOME}/bash"
+exportBashVariables() {
+    # Erase previous duplicates from the Bash history file.
+    export HISTCONTROL=erasedups
+    # Set the Bash history file path.
     export HISTFILE="${XDG_STATE_HOME}/bash/history"
+    # Don't truncate the Bash history file.
+    export HISTFILESIZE=-1
+    # Save all commands in the Bash history file without limit.
+    export HISTSIZE=-1
+    # Set the inputrc file path.
+    export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
 }
 
 isValidPath() {
