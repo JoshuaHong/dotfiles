@@ -8,9 +8,9 @@ Setup for the Arch Linux environment.
 * Disable secure boot
 
 ### Connect to the internet
-* Use iwd: `iwctl station <device> connect <SSID>` \
-\* To find the device run: `iwctl device list` \
-\* To find the SSID run: `iwctl station <device> get-networks`
+* Use iwd: `iwctl station <device> connect <SSID>`
+    * To find the device run: `iwctl device list`
+    * To find the SSID run: `iwctl station <device> get-networks`
 
 ### Partition the disks
 * Use fdisk: `fdisk /dev/nvme0n1`
@@ -78,9 +78,9 @@ Setup for the Arch Linux environment.
 ## Post-installation
 
 ### Users and groups
-* Add a new user: `useradd -m -G wheel josh` \
-  \* `-m` creates the user's home directory \
-  \* `-G` adds the user to the group
+* Add a new user: `useradd -m -G wheel josh`
+    * `-m` creates the user's home directory
+    * `-G` adds the user to the group
 * Add a password: `passwd josh`
 
 ### Security
