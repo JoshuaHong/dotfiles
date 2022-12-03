@@ -19,6 +19,42 @@ setAliases() {
         command mv --backup=numbered "${@}" "${HOME}/.trash"
     }
 
+    # ls after cd, and cd to a parent directory for every additional "."
+    cd() {
+        containsOnlyOneOrMoreDots() {
+            local directory="${1}"
+            [[ "$directory" =~ ^(\.)+$ ]]
+        }
+
+        cdToParentDirectory() {
+            local directory="${1}"
+            local initialPWD="${PWD}"
+            for ((i=1; i<"$(getLength "${directory}")"; ++i)); do
+                command cd "../"
+            done
+            setOLDPWD "${initialPWD}"
+            pwd
+        }
+
+        getLength() {
+            local variable="${1}"
+            echo "${#variable}"
+        }
+
+        setOLDPWD() {
+            local initialPWD="${1}"
+            OLDPWD="${initialPWD}"
+        }
+
+        local directory="${1}"
+        if containsOnlyOneOrMoreDots "${directory}"; then
+            cdToParentDirectory "${directory}"
+        else
+            command cd "$@"
+        fi
+        ls
+    }
+
     alias cp="cp --interactive --recursive"
     alias diff="diff --color=auto"
     alias grep="grep --color=auto"
@@ -86,7 +122,8 @@ setOptions() {
     # E.g. [a-d] matches a or b or c or d.
     shopt -s globasciiranges
     # Don't match `.` and `..` filenames during filename expansion.
-    shopt -s globskipdots
+    # shopt -s globskipdots
+    # Invalid shell option name.
     # Enable the `**` pattern matching. Used to search all sub-directories
     # recursively.
     # E.g., ls foo/**/*.txt -> Lists all `.txt` files recursively in `foo`.
@@ -134,13 +171,15 @@ setOptions() {
     # Perform case-insensitive matching.
     shopt -u nocasematch
     # Enclose the results of `$"..."` in single quotes instead of double quotes.
-    shopt -u noexpand_translation
+    # shopt -u noexpand_translation
+    # Invalid shell option name.
     # Patterns that match nothing expand to an empty string instead of searching
     # for a literal file named `*`.
     # E.g., ls * -> "".
     shopt -s nullglob
     # Expand `&` in pattern substitution.
-    shopt -s patsub_replacement
+    # shopt -s patsub_replacement
+    # Invalid shell option name.
     # Enable programmable completion.
     shopt -s progcomp
     # Treat a command that doesn't have any possible completions as the name of
@@ -156,7 +195,8 @@ setOptions() {
     shopt -s sourcepath
     # Automatically close file descriptors assigned using `{varname}` instead of
     # leaving them open when the command completes.
-    shopt -s varredir_close
+    # shopt -s varredir_close
+    # Invalid shell option name.
     # Expand backslash-escape sequences by default when using `echo`.
     # Equivalent to `echo -e`.
     shopt -u xpg_echo
