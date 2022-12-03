@@ -52,7 +52,7 @@ setAliases() {
         else
             command cd "$@"
         fi
-        ls
+        ls --color=auto
     }
 
     alias cp="cp --interactive --recursive"
