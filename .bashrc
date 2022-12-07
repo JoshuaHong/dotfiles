@@ -122,8 +122,7 @@ setOptions() {
     # E.g. [a-d] matches a or b or c or d.
     shopt -s globasciiranges
     # Don't match `.` and `..` filenames during filename expansion.
-    # shopt -s globskipdots
-    # Invalid shell option name.
+    # shopt -s globskipdots  # Invalid shell option name.
     # Enable the `**` pattern matching. Used to search all sub-directories
     # recursively.
     # E.g., ls foo/**/*.txt -> Lists all `.txt` files recursively in `foo`.
@@ -171,15 +170,13 @@ setOptions() {
     # Perform case-insensitive matching.
     shopt -u nocasematch
     # Enclose the results of `$"..."` in single quotes instead of double quotes.
-    # shopt -u noexpand_translation
-    # Invalid shell option name.
+    # shopt -u noexpand_translation  # Invalid shell option name.
     # Patterns that match nothing expand to an empty string instead of searching
     # for a literal file named `*`.
     # E.g., ls * -> "".
     shopt -s nullglob
     # Expand `&` in pattern substitution.
-    # shopt -s patsub_replacement
-    # Invalid shell option name.
+    # shopt -s patsub_replacement  # Invalid shell option name.
     # Enable programmable completion.
     shopt -s progcomp
     # Treat a command that doesn't have any possible completions as the name of
@@ -195,8 +192,7 @@ setOptions() {
     shopt -s sourcepath
     # Automatically close file descriptors assigned using `{varname}` instead of
     # leaving them open when the command completes.
-    # shopt -s varredir_close
-    # Invalid shell option name.
+    # shopt -s varredir_close  # Invalid shell option name.
     # Expand backslash-escape sequences by default when using `echo`.
     # Equivalent to `echo -e`.
     shopt -u xpg_echo
