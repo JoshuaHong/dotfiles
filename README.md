@@ -215,5 +215,6 @@ List all installed packages that are not strict dependencies of other packages, 
 | openssh          | Remote login tool with SSH          | Allows remote login with SSH              |
 | pacman-contrib   | Tools for Pacman systems            | Checks for updates and ranks mirrors      |
 | paru             | AUR helper                          | Installs packages from the AUR            |
+| wbg *            | Wallpaper application               | Sets the background image                 |
 
 \* AUR packages
