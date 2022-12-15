@@ -1,0 +1,5 @@
+[user]
+	name = =
+	email = =
+[credential]
+	helper = cache --timeout=86400
