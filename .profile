@@ -48,7 +48,7 @@ exportBashVariables() {
 }
 
 startWayland() {
-    if canStartwayland; then
+    if canStartWayland; then
         exec Hyprland
     fi
 }

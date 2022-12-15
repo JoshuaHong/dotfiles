@@ -135,9 +135,9 @@ Type = Package
 Target = pacman-mirrorlist
 
 [Action]
-Description = Ranking pacman-mirrorlist by speed.
+Description = Ranking pacman-mirrorlist by speed
 When = PostTransaction
-Depends = rankmirrors
+Depends = pacman-contrib
 Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup && rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist && sed -i '/^#/d' /etc/pacman.d/mirrorlist"
 ```
 
@@ -199,17 +199,21 @@ Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlis
 ## Packages
 List all installed packages that are not strict dependencies of other packages, and which are not in the `base` or `base-devel` package groups: `comm -23 <(pacman -Qqtt | sort) <({ pacman -Qqg base-devel; echo base; } | sort -u)`:
 
-| Package         | Description                         | Justification                            |
-| --------------- | ----------------------------------- | ---------------------------------------- |
-| bash-completion | Completion for Bash                 | Add additional Bash completion commands  |
-| intel-ucode     | Intel microcode                     | Update the firmware for system stability |
-| iwd             | Wireless daemon                     | Manage networking                        |
-| linux           | Linux kernel                        | Run the Linux kernel                     |
-| linux-firmware  | Linux firmware                      | Run the Linux firmware                   |
-| man-db          | Man page reader                     | Read man pages                           |
-| neovim          | Text editor                         | Edit text                                |
-| openssh         | Remote login tool with SSH          | Allow remote login with SSH              |
-| pacman-contrib  | Tools for Pacman systems            | Check for updates and ranks mirrors      |
-| paru            | AUR helper                          | Install packages from the AUR            |
+| Package          | Description                         | Justification                             |
+| ---------------- | ----------------------------------- | ----------------------------------------- |
+| bash-completion  | Completion for Bash                 | Adds additional Bash completion commands  |
+| foot             | Terminal emulator                   | Runs the terminal                         |
+| hyprland *       | Wayland compositor                  | Manages windows                           |
+| intel-ucode      | Intel microcode                     | Updates the firmware for system stability |
+| iwd              | Wireless daemon                     | Manages networking                        |
+| linux            | Linux kernel                        | Runs the Linux kernel                     |
+| linux-firmware   | Linux firmware                      | Runs the Linux firmware                   |
+| man-db           | Man page reader                     | Reads man pages                           |
+| neovim           | Text editor                         | Edits text                                |
+| noto-fonts       | Font family                         | Provides fonts                            |
+| noto-fonts-emoji | Font family                         | Provides emoji fonts                      |
+| openssh          | Remote login tool with SSH          | Allows remote login with SSH              |
+| pacman-contrib   | Tools for Pacman systems            | Checks for updates and ranks mirrors      |
+| paru             | AUR helper                          | Installs packages from the AUR            |
 
 \* AUR packages
