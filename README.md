@@ -199,25 +199,25 @@ Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlis
 ## Packages
 List all installed packages that are not strict dependencies of other packages, and which are not in the `base` or `base-devel` package groups: `comm -23 <(pacman -Qqtt | sort) <({ pacman -Qqg base-devel; echo base; } | sort -u)`:
 
-| Package               | Description                         | Justification                             | Notes                                            |
-| --------------------- | ----------------------------------- | ----------------------------------------- | ------------------------------------------------ |
-| bash-completion       | Completion for Bash                 | Adds additional Bash completion commands  |                                                  |
-| firefox               | Web browser                         | Browses the web                           | Select noto-fonts and pipewire-jack dependencies |
-| foot                  | Terminal emulator                   | Runs the terminal                         |                                                  |
-| hyprland *            | Wayland compositor                  | Manages windows                           |                                                  |
-| intel-ucode           | Intel microcode                     | Updates the firmware for system stability |                                                  |
-| iwd                   | Wireless daemon                     | Manages networking                        |                                                  |
-| linux                 | Linux kernel                        | Runs the Linux kernel                     |                                                  |
-| linux-firmware        | Linux firmware                      | Runs the Linux firmware                   |                                                  |
-| man-db                | Man page reader                     | Reads man pages                           |                                                  |
-| neovim                | Text editor                         | Edits text                                |                                                  |
-| nerd-fonts-noto       | Patched Noto font                   | Displays colorless symbols                |                                                  |
-| noto-fonts-emoji      | Font family                         | Displays color emojis                     |                                                  |
-| openssh               | Remote login tool with SSH          | Allows remote login with SSH              |                                                  |
-| pacman-contrib        | Tools for Pacman systems            | Checks for updates and ranks mirrors      |                                                  |
-| paru                  | AUR helper                          | Installs packages from the AUR            |                                                  |
-| pipewire-pulse        | Multimedia processor                | Manages audio and video                   | Replaces PulseAudio                              |
-| waybar-hyprland *     | Wayland bar for Hyprland            | Displays the bar                          |                                                  |
-| wbg *                 | Wallpaper application               | Sets the background image                 |                                                  |
+| Package               | Description                         | Justification                             | Notes                                              |
+| --------------------- | ----------------------------------- | ----------------------------------------- | -------------------------------------------------- |
+| bash-completion       | Completion for Bash                 | Adds additional Bash completion commands  |                                                    |
+| firefox               | Web browser                         | Browses the web                           | Select noto-fonts and pipewire-jack dependencies   |
+| foot                  | Terminal emulator                   | Runs the terminal                         |                                                    |
+| hyprland *            | Wayland compositor                  | Manages windows                           |                                                    |
+| intel-ucode           | Intel microcode                     | Updates the firmware for system stability |                                                    |
+| iwd                   | Wireless daemon                     | Manages networking                        |                                                    |
+| linux                 | Linux kernel                        | Runs the Linux kernel                     |                                                    |
+| linux-firmware        | Linux firmware                      | Runs the Linux firmware                   |                                                    |
+| man-db                | Man page reader                     | Reads man pages                           |                                                    |
+| neovim                | Text editor                         | Edits text                                |                                                    |
+| nerd-fonts-noto       | Patched Noto font                   | Displays colorless symbols                |                                                    |
+| noto-fonts-emoji      | Font family                         | Displays color emojis                     |                                                    |
+| openssh               | Remote login tool with SSH          | Allows remote login with SSH              |                                                    |
+| pacman-contrib        | Tools for Pacman systems            | Checks for updates and ranks mirrors      |                                                    |
+| paru                  | AUR helper                          | Installs packages from the AUR            |                                                    |
+| pipewire-pulse        | Multimedia processor                | Manages audio and video                   | Replaces PulseAudio                                |
+| waybar-hyprland-git * | Wayland bar for Hyprland            | Displays the bar                          | Git version temporarily needed for sort-by-numbers |
+| wbg *                 | Wallpaper application               | Sets the background image                 |                                                    |
 
 \* AUR packages
