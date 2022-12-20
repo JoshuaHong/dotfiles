@@ -6,6 +6,7 @@
   "modules-right": ["backlight", "pulseaudio", "battery", "network", "clock"],
   "wlr/workspaces": {
     "format": "{icon}",
+    "sort-by-number": true,
     "on-click": "activate"
   },
   "hyprland/window": {
@@ -13,58 +14,87 @@
   },
   "backlight": {
     "interval": "once",
-    "format": "{icon}{percent}%",
+    "format": "{icon} {percent}%",
     "states": {
       "dim": 50,
       "bright": 100
     },
-    "format-icons": ["🔅", "🔆"]
+    "format-icons": ["盛", ""]
   },
   "battery": {
     "interval": 60,
-    "format-discharging-critical": "🪫{capacity}%",
-    "format-discharging-warning": "🪫{capacity}%",
-    "format-discharging-ok": "🔋{capacity}%",
-    "format-discharging-full": "🔋{capacity}%",
-    "format-plugged": "🔌{capacity}%",
-    "format-charging": "🔌{capacity}%",
-    "format-plugged-full": "✅{capacity}%",
-    "format-charging-full": "✅{capacity}%",
+    "format": " ?%",
+    "format-discharging-ten": " {capacity}%",
+    "format-discharging-twenty": " {capacity}%",
+    "format-discharging-thirty": " {capacity}%",
+    "format-discharging-fourty": " {capacity}%",
+    "format-discharging-fifty": " {capacity}%",
+    "format-discharging-sixty": " {capacity}%",
+    "format-discharging-seventy": " {capacity}%",
+    "format-discharging-eighty": " {capacity}%",
+    "format-discharging-ninty": " {capacity}%",
+    "format-discharging-hundred": " {capacity}%",
+    "format-plugged-ten": "{capacity}% ﮤ",
+    "format-plugged-twenty": "{capacity}% ﮤ",
+    "format-plugged-thirty": "{capacity}% ﮤ",
+    "format-plugged-fourty": "{capacity}% ﮤ",
+    "format-plugged-fifty": "{capacity}% ﮤ",
+    "format-plugged-sixty": "{capacity}% ﮤ",
+    "format-plugged-seventy": "{capacity}% ﮤ",
+    "format-plugged-eighty": "{capacity}% ﮤ",
+    "format-plugged-ninty": "{capacity}% ﮤ",
+    "format-plugged-hundred": "{capacity}% ﮤ",
+    "format-charging-ten": " {capacity}%",
+    "format-charging-twenty": " {capacity}%",
+    "format-charging-thirty": " {capacity}%",
+    "format-charging-fourty": " {capacity}%",
+    "format-charging-fifty": " {capacity}%",
+    "format-charging-sixty": " {capacity}%",
+    "format-charging-seventy": " {capacity}%",
+    "format-charging-eighty": " {capacity}%",
+    "format-charging-ninty": " {capacity}%",
+    "format-charging-hundred": " {capacity}%",
     "states": {
-      "critical": 5,
-      "warning": 15,
-      "ok": 90,
-      "full": 100
+      "ten": 10,
+      "twenty": 20,
+      "thirty": 30,
+      "fourty": 40,
+      "fifty": 50,
+      "sixty": 60,
+      "seventy": 70,
+      "eighty": 80,
+      "ninty": 90,
+      "hundred": 100
     }
   },
   "clock": {
     "interval": 60,
     "format": "{:%a %b %d  %I:%M %p}",
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
-    "format-calendar": "<span color='#99d1db'><b>{}</b></span>",
-    "today-format": "<span color='#ea999c'><b><u>{}</u></b></span>",
-    "format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+    "format-calendar": "<span color='#8caaee'><b>{}</b></span>",
+    "today-format": "<span color='#ca9ee6'><b><u>{}</u></b></span>",
+    "format-calendar-weekdays": "<span color='#81c8be'><b>{}</b></span>",
     "on-scroll": {
       "calendar": 1
     }
   },
   "network": {
     "interval": 60,
-    "format": "📶{signalStrength}%",
-    "format-ethernet": "🖧{signalStrength}%",
-    "format-wifi": "📶{signalStrength}%",
-    "format-disconnected": "🌐0%",
+    "format": "直 {signalStrength}%",
+    "format-ethernet": " {signalStrength}%",
+    "format-wifi": "直 {signalStrength}%",
+    "format-disconnected": "睊 0%",
     "tooltip-format": "{essid} {bandwidthDownBits}"
   },
   "pulseaudio": {
     "interval": "once",
-    "format": "{icon}{volume}%",
-    "format-muted": "{volume}%🔇",
+    "format": "{icon} {volume}%",
+    "format-muted": " {volume}%",
     "states": {
       "quiet": 33,
       "medium": 66,
       "loud": 100
     },
-    "format-icons": ["🔈", "🔉", "🔊"]
+    "format-icons": ["", "", ""]
   }
 }

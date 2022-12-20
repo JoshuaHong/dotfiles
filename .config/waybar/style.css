@@ -1,12 +1,12 @@
 * {
-  font-family: "Noto Sans";
+  font-family: "Noto Sans Nerd Font";
   font-size: 20px;
+  color: #c6d0f5;
 }
 
 window#waybar {
   background-color: rgba(43, 48, 59, 0.5);
   border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-  color: #ffffff;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -16,7 +16,7 @@ window#waybar.hidden {
 }
 
 tooltip {
-  background-color: rgba(43, 48, 59, 0.90);
+  background-color: rgba(65, 69, 89, 0.90);
 }
 
 button {
@@ -41,12 +41,12 @@ button:hover {
 }
 
 #workspaces button.active {
-  background-color: #64727d;
+  background-color: #626880;
   box-shadow: inset 0 -3px #ffffff;
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+  background-color: #e78284;
 }
 
 #window, #workspaces {
@@ -67,11 +67,23 @@ button:hover {
   padding: 5px 10px 5px 10px;
 }
 
-#battery.warning:not(.plugged):not(.charging) {
+#backlight {
+  color: #e5c890;
+}
+
+#pulseaudio {
+  color: #99d1db;
+}
+
+#battery {
+  color: #a6d189;
+}
+
+#battery.twenty:not(.charging) {
   color: yellow;
 }
 
-#battery.critical:not(.plugged):not(.charging) {
+#battery.ten:not(.charging) {
   color: red;
   animation-name: blink;
   animation-duration: 0.6s;
@@ -85,4 +97,8 @@ button:hover {
     opacity: 1;
     opacity: 0;
   }
+}
+
+#network {
+  color: #ca9ee6;
 }
