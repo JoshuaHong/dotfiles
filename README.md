@@ -201,6 +201,7 @@ List all installed packages that are not strict dependencies of other packages, 
 
 | Package               | Description                         | Justification                             | Notes                                             |
 | --------------------- | ----------------------------------- | ----------------------------------------- | ------------------------------------------------- |
+| backlight_control *   | Backlight brightness controller     | Controls the backlight brightness         |                                                   |
 | bash-completion       | Completion for Bash                 | Adds additional Bash completion commands  |                                                   |
 | firefox               | Web browser                         | Browses the web                           | Select noto-fonts and pipewire-jack dependencies  |
 | foot                  | Terminal emulator                   | Runs the terminal                         |                                                   |
