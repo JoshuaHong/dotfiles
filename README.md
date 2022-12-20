@@ -212,7 +212,7 @@ List all installed packages that are not strict dependencies of other packages, 
 | linux-firmware        | Linux firmware                      | Runs the Linux firmware                   |                                                   |
 | man-db                | Man page reader                     | Reads man pages                           |                                                   |
 | neovim                | Text editor                         | Edits text                                |                                                   |
-| nerd-fonts-noto       | Patched Noto fonts                  | Displays colorless symbols                | Use Noto fonts since Firefox requires it anyway   |
+| nerd-fonts-noto *     | Patched Noto fonts                  | Displays colorless symbols                | Use Noto fonts since Firefox requires it anyway   |
 | noto-fonts-emoji      | Font family                         | Displays color emojis                     |                                                   |
 | openssh               | Remote login tool with SSH          | Allows remote login with SSH              |                                                   |
 | pacman-contrib        | Tools for Pacman systems            | Checks for updates and ranks mirrors      |                                                   |
