@@ -63,7 +63,7 @@ button:hover {
   margin-right: 0;
 }
 
-#backlight, #pulseaudio, #battery, #network, #clock {
+#backlight, #pulseaudio, #battery, #network, #clock, #custom-weather {
   padding: 5px 10px 5px 10px;
 }
 
@@ -101,4 +101,8 @@ button:hover {
 
 #network {
   color: #ca9ee6;
+}
+
+#custom-weather {
+  color: #ea999c;
 }

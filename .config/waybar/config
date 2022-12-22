@@ -3,7 +3,7 @@
   "height": 40,
   "modules-left": ["wlr/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["backlight", "pulseaudio", "battery", "network", "clock"],
+  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "network", "clock"],
   "wlr/workspaces": {
     "format": "{icon}",
     "sort-by-number": true,
@@ -15,11 +15,7 @@
   "backlight": {
     "interval": "once",
     "format": "{icon} {percent}%",
-    "states": {
-      "dim": 50,
-      "bright": 100
-    },
-    "format-icons": ["盛", ""]
+    "format-icons": [""]
   },
   "battery": {
     "interval": 60,
@@ -96,5 +92,9 @@
       "loud": 100
     },
     "format-icons": ["", "", ""]
+  },
+  "custom/weather": {
+    "exec": "weather toronto",
+    "interval": 3600
   }
 }
