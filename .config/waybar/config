@@ -3,7 +3,7 @@
   "height": 40,
   "modules-left": ["wlr/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "network", "clock"],
+  "modules-right": ["custom/update", "custom/weather", "backlight", "pulseaudio", "battery", "network", "clock"],
   "wlr/workspaces": {
     "format": "{icon}",
     "sort-by-number": true,
@@ -96,5 +96,11 @@
   "custom/weather": {
     "exec": "weather toronto",
     "interval": 3600
+  },
+  "custom/update": {
+    "exec": "update -c",
+    "interval": 3600,
+    "signal": 1,
+    "format": "{}"
   }
 }

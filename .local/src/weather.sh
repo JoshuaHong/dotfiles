@@ -2,7 +2,7 @@
 #
 # Display the current weather.
 #
-# Usage: weather [options...] [location].
+# Usage: weather [options] [location].
 #
 # Dependencies: [curl].
 
@@ -13,7 +13,7 @@ set -o pipefail
 # Dependencies.
 declare -agr DEPENDENCIES=("curl")
 
-# Command line arguments.
+# Command-line arguments.
 declare -g location=""
 
 main() {
@@ -46,7 +46,7 @@ parseArguments() {
   location="${location// /+}"  # Replace " " with "+".
 }
 
-# Print the current weather.
+# Display the current weather.
 displayWeather() {
   local weatherReport="$(fetchWeatherReport)"
   if isVariableEmpty "${weatherReport}"; then
@@ -67,7 +67,7 @@ fetchWeatherReport() {
   curl -fs "https://v2d.wttr.in/${location}"
 }
 
-# Get the command-line options.
+# Parse the command-line options.
 parseOptions() {
   while getopts ":h" flag; do
     case "${flag}" in
@@ -76,7 +76,7 @@ parseOptions() {
         exit 0
         ;;
       *)
-        echoError "Error: Unsupported option."
+        echoError "Error: Invalid option."
         printUsageMessage
         exit 1
         ;;
@@ -87,7 +87,7 @@ parseOptions() {
 # Print the help message.
 printHelpMessage() {
   echo "Weather - Display the current weather using wttr.in."
-  echo -e "\nUsage: weather [options...] [location]"
+  echo -e "\nUsage: weather [options] [location]"
   echo -e "\nOptions:"
   echo -e "\t-h\t\tPrint the help menu and exit."
   echo -e "\nArguments:"
@@ -98,10 +98,10 @@ printHelpMessage() {
   echo -e "\tcurl\t\tTo fetch the current weather."
 }
 
-# Print the usage message.
+# Print the usage message after an error.
 printUsageMessage() {
-  echoError "Usage: weather [options...] [location]"
-  echoError "Type \"weather -h\" for more information."
+  echo "Usage: weather [options] [location]"
+  echo "Type \"weather -h\" for more information."
 }
 
 # Print the error message to standard output.
