@@ -218,6 +218,8 @@ List all installed packages that are not strict dependencies of other packages, 
 | pacman-contrib        | Tools for Pacman systems            | Checks for updates and ranks mirrors      |                                                   |
 | paru                  | AUR helper                          | Installs packages from the AUR            |                                                   |
 | pipewire-pulse        | Multimedia processor                | Manages audio and video                   | Replaces PulseAudio                               |
+| swayidle              | Idle management daemon              | Manages events on idle                    |                                                   |
+| swaylock              | Screen locker                       | Locks the screen                          |                                                   |
 | waybar-hyprland-git * | Wayland bar for Hyprland            | Displays the bar                          | Git version temporarily needed for sort-by-number |
 | wbg *                 | Wallpaper application               | Sets the background image                 |                                                   |
 

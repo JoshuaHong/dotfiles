@@ -1,0 +1,26 @@
+ignore-empty-password
+image=/home/josh/.local/share/backgrounds/lockscreen.jpg
+hide-keyboard-layout
+indicator-caps-lock
+font=Noto Sans
+font-size=25
+indicator-radius=150
+key-hl-color=8caaeecc
+bs-hl-color=e78284cc
+caps-lock-key-hl-color=8caaeecc
+caps-lock-bs-hl-color=e78284cc
+inside-color=30344680
+inside-clear-color=30344680
+inside-caps-lock-color=30344680
+inside-ver-color=30344680
+inside-wrong-color=30344680
+ring-color=303446cc
+ring-clear-color=303446cc
+ring-caps-lock-color=e5c890cc
+ring-ver-color=a6d189cc
+ring-wrong-color=e78284cc
+text-color=c6d0f5cc
+text-clear-color=c6d0f500
+text-caps-lock-color=c6d0f5cc
+text-ver-color=c6d0f5cc
+text-wrong-color=c6d0f5cc

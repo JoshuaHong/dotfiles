@@ -139,7 +139,7 @@ printUsageMessage() {
 # Print the error message to standard output.
 echoError() {
   local errorMessage="${*}"
-  echo -e "${errorMessage}" 1>&2,
+  echo -e "${errorMessage}" 1>&2
 }
 
 # Return true if the program exists, false otherwise.

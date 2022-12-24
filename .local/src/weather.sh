@@ -10,7 +10,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Dependencies.
+# Constants.
 declare -agr DEPENDENCIES=("curl")
 
 # Command-line arguments.
@@ -19,7 +19,7 @@ declare -g location=""
 main() {
   assertDependencies
   parseArguments "${@}"
-  displayWeather
+  run
 }
 
 # Assrt that the dependencies exist.
@@ -47,7 +47,7 @@ parseArguments() {
 }
 
 # Display the current weather.
-displayWeather() {
+run() {
   local weatherReport="$(fetchWeatherReport)"
   if isVariableEmpty "${weatherReport}"; then
     echo " °C"
