@@ -55,7 +55,7 @@ setAliases() {
         ls --color=auto
     }
 
-    alias cp="cp --interactive --recursive"
+    alias cp="cp --interactive --archive"
     alias diff="diff --color=auto"
     alias grep="grep --color=auto"
     alias ip="ip -color=auto"
