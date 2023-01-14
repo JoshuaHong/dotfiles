@@ -6,52 +6,36 @@
 #
 # Dependencies: [checkupdates, paru].
 
-set -o errexit
-set -o nounset
-set -o pipefail
+# Imports.
+source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
 declare -agr DEPENDENCIES=("checkupdates" "paru")
-declare -gr SIGNAL="SIGRTMIN+1"
+declare -gr OPTSTRING="cl"
+declare -gir MAX_NUM_ARGUMENTS=0
 declare -gr BAR="waybar"
+declare -gr SIGNAL="SIGRTMIN+1"
 
-# Command-line arguments.
-declare -g c="false"
-declare -g l="false"
+# Variables.
+declare -Ag options=()
+declare -ag operands=()
 
+# Set-up for the script.
+# Parameters:
+#   arguments (array[string]): The array of arguments to the program.
+setUp() {
+  local -ag arguments=("${@}")
+  setBashOptions
+  assertDependenciesExist "${DEPENDENCIES[@]}"
+  parseOptions "${OPTSTRING}" options "${arguments[@]}"
+  parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
+}
+
+# Main function of the script.
 main() {
-  assertDependencies
-  parseArguments "${@}"
-  run
-}
-
-# Assert that the dependencies exist.
-assertDependencies() {
-  for dependency in "${DEPENDENCIES[@]}"; do
-    if ! programExists "${dependency}"; then
-      echoError "Error: Missing dependency\"${dependency}\"."
-      printUsageMessage
-      exit 1
-    fi
-  done
-}
-
-# Parse the command-line arguments.
-parseArguments() {
-  parseOptions "${@}"
-  local numArgs="$(("${#}" - "${OPTIND}" + 1))"
-  if [[ "${numArgs}" -gt 0 ]]; then
-    echoError "Error: Invalid number of arguments."
-    printUsageMessage
-    exit 1
-  fi
-}
-
-# Begin the program execution.
-run() {
-  if [[ "${c}" == "true" ]]; then
+  if isVariableSet options["c"]; then
     printNumUpdates
-  elif [[ "${l}" == "true" ]]; then
+  elif isVariableSet options["l"]; then
     printUpdates
   else
     update
@@ -61,18 +45,18 @@ run() {
 
 # Print the number of updates available.
 printNumUpdates() {
-  local updates="$(checkupdates)"
-  if isVariableEmpty "${updates}"; then
+  local -r updates="$(checkupdates)"
+  if isVariableEmpty updates; then
     exit 0
   fi
   local numUpdates="$(echo "${updates}" | wc -l)"
-  echo " ${numUpdates}"
+  echo "${numUpdates}"
 }
 
 # Print the updates available.
 printUpdates() {
-  local updates="$(checkupdates)"
-  if isVariableEmpty "${updates}"; then
+  local -r updates="$(checkupdates)"
+  if isVariableEmpty updates; then
     exit 0
   fi
   echo "${updates}"
@@ -80,10 +64,10 @@ printUpdates() {
 
 # Update packages and notify of any .pacnew or .pacsave files.
 update() {
-  paru -Syu
-  local pacnewPacsaveFiles="$(find /etc -regextype posix-extended \
+  paru -Syu --removemake --cleanafter
+  local -r pacnewPacsaveFiles="$(find /etc -regextype posix-extended \
       -regex ".+\.pac(new|save)" 2> /dev/null)"
-  if ! isVariableEmpty "${pacnewPacsaveFiles}"; then
+  if isVariableSet pacnewPacsaveFiles; then
     echo -e "\nFix the following .pacnew and .pacsave files:"
     echo "${pacnewPacsaveFiles}"
   fi
@@ -92,29 +76,6 @@ update() {
 # Send a signal to refresh the bar.
 refreshBar() {
   pkill -"${SIGNAL}" "${BAR}"
-}
-
-# Parse the command-line options.
-parseOptions() {
-  while getopts ":chl" flag; do
-    case "${flag}" in
-      c)
-        c="true"
-        ;;
-      h)
-        printHelpMessage
-        exit 0
-        ;;
-      l)
-        l="true"
-        ;;
-      *)
-        echoError "Error: Invalid option."
-        printUsageMessage
-        exit 1
-        ;;
-    esac
-  done
 }
 
 # Print the help message.
@@ -136,22 +97,5 @@ printUsageMessage() {
   echo "Type \"update -h\" for more information."
 }
 
-# Print the error message to standard output.
-echoError() {
-  local errorMessage="${*}"
-  echo -e "${errorMessage}" 1>&2
-}
-
-# Return true if the program exists, false otherwise.
-programExists() {
-  local program="${1}"
-  command -v "${program}" > /dev/null 2>&1
-}
-
-# Return true if the variable is empty, false otherwise.
-isVariableEmpty() {
-  local variable="${1}"
-  [[ -z "${variable}" ]]
-}
-
-main "${@}"
+setUp "${@}"
+main

@@ -6,55 +6,47 @@
 #
 # Dependencies: [curl].
 
-set -o errexit
-set -o nounset
-set -o pipefail
+# Imports.
+source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
 declare -agr DEPENDENCIES=("curl")
+declare -gr OPTSTRING=""
+declare -gri MAX_NUM_ARGUMENTS=1
 
-# Command-line arguments.
+# Variables.
+declare -Ag options=()
+declare -ag operands=()
 declare -g location=""
 
-main() {
-  assertDependencies
-  parseArguments "${@}"
-  run
-}
-
-# Assrt that the dependencies exist.
-assertDependencies() {
-  for dependency in "${DEPENDENCIES[@]}"; do
-    if ! programExists "${dependency}"; then
-      echoError "Error: Missing dependency \"${dependency}\"."
-      printUsageMessage
-      exit 1
-    fi
-  done
-}
-
-# Parse the command-line arguments.
-parseArguments() {
-  parseOptions "${@}"
-  local numArgs="$(("${#}" - "${OPTIND}" + 1))"
-  if [[ "${numArgs}" -gt 1 ]]; then
-    echoError "Error: Invalid number of arguments."
-    printUsageMessage
-    exit 1
-  fi
-  location="${1:-}"  # Set the location if specified, or empty otherwise.
+# Set-up for the script.
+# Parameters:
+#   arguments (array[string]): The array of arguments to the program.
+setUp() {
+  local -ag arguments=("${@}")
+  setBashOptions
+  assertDependenciesExist "${DEPENDENCIES[@]}"
+  parseOptions "${OPTSTRING}" options "${arguments[@]}"
+  parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
+  location="${operands[0]:-}"  # Set the location if specified, or empty otherwise.
   location="${location// /+}"  # Replace " " with "+".
 }
 
+# Main function of the script.
+main() {
+  displayWeather
+}
+
+
 # Display the current weather.
-run() {
-  local weatherReport="$(fetchWeatherReport)"
-  if isVariableEmpty "${weatherReport}"; then
+displayWeather() {
+  local -r weatherReport="$(fetchWeatherReport)"
+  if isVariableEmpty weatherReport; then
     echo " °C"
     exit 1
   fi
   declare -ar weather=($(echo "${weatherReport}" | grep "Weather:"))
-  local condition="${weather[1]}"
+  local -r condition="${weather[1]}"
   local temperature="${weather[-4]}"
   temperature="${temperature//,/}"  # Replace "," with "".
   temperature="${temperature//+/}"  # Replace "+" with "".
@@ -65,23 +57,6 @@ run() {
 # Fetch the full weather report.
 fetchWeatherReport() {
   curl -fs "https://v2d.wttr.in/${location}"
-}
-
-# Parse the command-line options.
-parseOptions() {
-  while getopts ":h" flag; do
-    case "${flag}" in
-      h)
-        printHelpMessage
-        exit 0
-        ;;
-      *)
-        echoError "Error: Invalid option."
-        printUsageMessage
-        exit 1
-        ;;
-    esac
-  done
 }
 
 # Print the help message.
@@ -98,28 +73,11 @@ printHelpMessage() {
   echo -e "\tcurl\t\tTo fetch the current weather."
 }
 
-# Print the usage message after an error.
+# Print the usage message.
 printUsageMessage() {
   echo "Usage: weather [options] [location]"
   echo "Type \"weather -h\" for more information."
 }
 
-# Print the error message to standard output.
-echoError() {
-  local errorMessage="${*}"
-  echo -e "${errorMessage}" 1>&2
-}
-
-# Return true if the program exists, false otherwise.
-programExists() {
-  local program="${1}"
-  command -v "${program}" > /dev/null 2>&1
-}
-
-# Return true if the variable is empty, false otherwise.
-isVariableEmpty() {
-  local variable="${1}"
-  [[ -z "${variable}" ]]
-}
-
-main "${@}"
+setUp "${@}"
+main
