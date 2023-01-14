@@ -181,13 +181,13 @@ setOptions() {
   # shopt -s patsub_replacement  # Invalid shell option name.
   # Enable programmable completion.
   shopt -s progcomp
-  # Treat a command that doesn't have any possible completions as the name of
-  # an alias and attempt to use the alias.
+  # Treat a command that doesn't have any possible completions as the name of an
+  # alias and attempt to use the alias.
   shopt -u progcomp_alias
   # Allow expansion in prompt strings.
   shopt -s promptvars
-  # Print an error if the `shift` command count exceeds the number of
-  # positional parameters.
+  # Print an error if the `shift` command count exceeds the number of positional
+  # parameters.
   shopt -s shift_verbose
   # The `source` command uses `PATH` to find the path containing the file
   # being sourced.
