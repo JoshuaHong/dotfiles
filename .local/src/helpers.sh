@@ -7,6 +7,7 @@
 # Set the Bash options.
 setBashOptions() {
   set -o errexit
+  set -o noclobber
   set -o nounset
   set -o pipefail
 }
