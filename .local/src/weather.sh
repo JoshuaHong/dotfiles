@@ -28,7 +28,7 @@ setUp() {
   assertDependenciesExist "${DEPENDENCIES[@]}"
   parseOptions "${OPTSTRING}" options "${arguments[@]}"
   parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
-  location="${operands[0]:-}"  # Set the location if specified, or empty otherwise.
+  location="${operands[0]:-}"  # Set the location if specified, empty otherwise.
   location="${location// /+}"  # Replace " " with "+".
 }
 
