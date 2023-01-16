@@ -123,6 +123,14 @@ programExists() {
   command -v "${program}" > /dev/null 2>&1
 }
 
+# Return true if the directory exists, false otherwise.
+# Parameters:
+#   directory (string): The name of the directory to test if it exists.
+directoryExists() {
+  local -r directory="${1}"
+  [[ -d "${directory}" ]]
+}
+
 # Print the help message.
 printHelpMessage() {
   echoError "Error: Missing implementation of \"printHelpMessage\"."
