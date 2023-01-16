@@ -64,7 +64,7 @@ printHelpMessage() {
   echo "Weather - Display the current weather using wttr.in."
   echo -e "\nUsage: weather [options] [location]"
   echo -e "\nOptions:"
-  echo -e "\t-h\t\tPrint the help menu and exit."
+  echo -e "\t-h\t\tPrint the help menu."
   echo -e "\nArguments:"
   echo -e "\tlocation\tThe location from which to fetch the weather."
   echo -e "\t\t\tMust be a valid location in wttr.in."

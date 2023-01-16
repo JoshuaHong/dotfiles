@@ -10,8 +10,8 @@
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("checkupdates" "paru")
-declare -gr OPTSTRING="cl"
+declare -agr DEPENDENCIES=("checkupdates" "comm" "paru" "sort")
+declare -gr OPTSTRING="clp"
 declare -gir MAX_NUM_ARGUMENTS=0
 declare -gr BAR="waybar"
 declare -gr SIGNAL="SIGRTMIN+1"
@@ -37,6 +37,8 @@ main() {
     printNumUpdates
   elif isVariableSet options["l"]; then
     printUpdates
+  elif isVariableSet options["p"]; then
+    printPackages
   else
     update
     refreshBar
@@ -62,6 +64,14 @@ printUpdates() {
   echo "${updates}"
 }
 
+# Print the installed packages.
+# These packages are not strict dependencies of other packages, and are not in
+# the "base" or "base-devel" package groups.
+printPackages() {
+  comm -23 <(paru -Qqtt | sort) \
+      <({ paru -Qqg base-devel; echo "base"; } | sort -u)
+}
+
 # Update packages and notify of any .pacnew or .pacsave files.
 update() {
   paru -Syu --removemake --cleanafter
@@ -83,12 +93,17 @@ printHelpMessage() {
   echo "Update - Update packages."
   echo -e "\nUsage: update [options]"
   echo -e "\nOptions:"
-  echo -e "\t-c\t\tCount the number of available updates and exit."
-  echo -e "\t-h\t\tPrint the help menu and exit."
-  echo -e "\t-l\t\tList the available updates and exit."
+  echo -e "\t-c\t\tCount the number of available updates."
+  echo -e "\t-h\t\tPrint the help menu."
+  echo -e "\t-l\t\tList the available updates."
+  echo -e "\t-p\t\tList all installed packages."
+  echo -e "\t\t\tThese packages are not strict dependencies of other packages"
+  echo -e "\t\t\tand are not in the \"base\" or \"base-devel\" package groups."
   echo -e "\nDependencies:"
   echo -e "\tcheckupdates\tTo check for package updates."
+  echo -e "\tcomm\t\tTo list installed packages excluding base package groups."
   echo -e "\tparu\t\tTo update packages."
+  echo -e "\tsort\t\tTo list installed packages excluding base package groups."
 }
 
 # Print the usage message.

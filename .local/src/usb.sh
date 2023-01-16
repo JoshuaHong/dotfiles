@@ -160,7 +160,7 @@ printHelpMessage() {
   echo "Usb - Manage USB device mounting."
   echo -e "\nUsage: usb [options]"
   echo -e "\nOptions:"
-  echo -e "\t-h\t\tPrint the help menu and exit."
+  echo -e "\t-h\t\tPrint the help menu."
   echo -e "\t-l\t\tList the available devices."
   echo -e "\t-m name\t\tMount the device."
   echo -e "\t-u name\t\tUnmount the device."
