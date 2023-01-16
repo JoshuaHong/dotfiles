@@ -46,6 +46,9 @@ main() {
 listDevices() {
   local -a devices=()
   getDevices devices
+  if isVariableEmpty devices; then
+    exit 0
+  fi
   echo -e "NAME\tSIZE\tMOUNTPOINT"
   for device in "${devices[@]}"; do
     echo -e "${device// /"\t"}"  # Replace " " with "\t".
@@ -60,8 +63,10 @@ mountDevice() {
   local -a devices=()
   getDevices devices
   assertDeviceIsUnmounted "${name}" devices
-  sudo mkdir "/mnt/${name}"
-  sudo mount "/dev/${name}" "/mnt/${name}"
+  local -r mountpoint="/mnt/${name}"
+  assertDirectoryNotExists "${mountpoint}"
+  sudo mkdir "${mountpoint}"
+  sudo mount "/dev/${name}" "${mountpoint}"
 }
 
 # Unmount the selected device.
@@ -72,8 +77,9 @@ unmountDevice() {
   local -a devices=()
   getDevices devices
   assertDeviceIsMounted "${name}" devices
+  local -r mountpoint="/mnt/${name}"
   sudo umount "/dev/${name}"
-  sudo rmdir "/mnt/${name}"
+  sudo rmdir "${mountpoint}" > /dev/null 2>&1
 }
 
 # Get available devices.
@@ -125,8 +131,8 @@ assertDeviceIsUnmounted() {
   local -r name="${1}"
   local -n devicesRef="${2}"
   for device in "${devicesRef[@]}"; do
-    if [[ "${name}" == "${device%% *}" ]]; then
-      if [[ ! "${device##* }" =~ "/" ]]; then
+    if [[ "${name}" == "${device%% *}" ]]; then  # The first word is the name.
+      if [[ ! "${device##* }" =~ "/" ]]; then  # The last word contains no "/".
         return 0
       else
         echoError "Error: Device \"${name}\" is already mounted."
@@ -138,13 +144,24 @@ assertDeviceIsUnmounted() {
   exit 1
 }
 
+# Assert that the directory does not exist.
+# Parameters:
+#   directory (string): The name of the directory to check if it exists.
+assertDirectoryNotExists() {
+  local -r directory="${1}"
+  if directoryExists "${directory}"; then
+    echoError "Error: Directory \"${directory}\" already exists."
+    exit 1
+  fi
+}
+
 # Print the help message.
 printHelpMessage() {
   echo "Usb - Manage USB device mounting."
   echo -e "\nUsage: usb [options]"
   echo -e "\nOptions:"
   echo -e "\t-h\t\tPrint the help menu and exit."
-  echo -e "\t-l\t\tList the devices to mount or unmount."
+  echo -e "\t-l\t\tList the available devices."
   echo -e "\t-m name\t\tMount the device."
   echo -e "\t-u name\t\tUnmount the device."
   echo -e "\nDependencies:"
