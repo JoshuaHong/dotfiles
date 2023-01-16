@@ -10,9 +10,9 @@
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("curl")
+declare -agr DEPENDENCIES=("curl" "grep")
 declare -gr OPTSTRING=""
-declare -gri MAX_NUM_ARGUMENTS=1
+declare -gir MAX_NUM_ARGUMENTS=1
 
 # Variables.
 declare -Ag options=()
@@ -29,7 +29,7 @@ setUp() {
   parseOptions "${OPTSTRING}" options "${arguments[@]}"
   parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
   location="${operands[0]:-}"  # Set the location if specified, empty otherwise.
-  location="${location// /+}"  # Replace " " with "+".
+  location="${location//" "/"+"}"  # Replace " " with "+".
 }
 
 # Main function of the script.
@@ -48,9 +48,9 @@ displayWeather() {
   declare -ar weather=($(echo "${weatherReport}" | grep "Weather:"))
   local -r condition="${weather[1]}"
   local temperature="${weather[-4]}"
-  temperature="${temperature//,/}"  # Replace "," with "".
-  temperature="${temperature//+/}"  # Replace "+" with "".
-  temperature="${temperature//-0/0}"  # Replace "-0" with "0".
+  temperature="${temperature//","/""}"  # Replace "," with "".
+  temperature="${temperature//"+"/""}"  # Replace "+" with "".
+  temperature="${temperature//"-0"/"0"}"  # Replace "-0" with "0".
   echo "${condition}  ${temperature}"
 }
 
@@ -71,6 +71,7 @@ printHelpMessage() {
   echo -e "\t\t\tIf unspecified, fetches the weather based on IP address."
   echo -e "\nDependencies:"
   echo -e "\tcurl\t\tTo fetch the current weather."
+  echo -e "\tgrep\t\tTo match patterns."
 }
 
 # Print the usage message.

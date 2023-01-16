@@ -67,7 +67,7 @@ update() {
   paru -Syu --removemake --cleanafter
   local -r pacnewPacsaveFiles="$(find /etc -regextype posix-extended \
       -regex ".+\.pac(new|save)" 2> /dev/null)"
-  if isVariableSet pacnewPacsaveFiles; then
+  if ! isVariableEmpty pacnewPacsaveFiles; then
     echo -e "\nFix the following .pacnew and .pacsave files:"
     echo "${pacnewPacsaveFiles}"
   fi

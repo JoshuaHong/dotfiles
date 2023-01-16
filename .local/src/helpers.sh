@@ -23,7 +23,7 @@ assertDependenciesExist() {
       missingDependencies+=("\"${dependency}\"")
     fi
   done
-  if isVariableSet missingDependencies; then
+  if ! isVariableEmpty missingDependencies; then
     echoError "Error: Missing dependencies: [${missingDependencies[*]}]"
     printUsageMessage
     exit 1
@@ -46,7 +46,8 @@ parseOptions() {
           printHelpMessage
           exit 0
         else
-          echoError "Error: Invalid option \"-${OPTARG}\"."
+          echoError "Error: Invalid option \"--${OPTARG}\"."
+          printUsageMessage
           exit 1
         fi
         ;;
@@ -55,7 +56,7 @@ parseOptions() {
         exit 0
         ;;
       [a-z])
-        if isVariableEmpty OPTARG; then
+        if ! isVariableSet OPTARG; then
           optionsRef["${flag}"]="true"
         else
           optionsRef["${flag}"]="${OPTARG}"
@@ -98,12 +99,12 @@ echoError() {
   echo -e "${errorMessage}" 1>&2
 }
 
-# Return true if the variable is set and not empty, false otherwise.
+# Return true if the variable is set, false otherwise.
 # Parameters:
 #   variable (variable): The variable to test if it is set.
 isVariableSet() {
   local -n variableRef="${1}"
-  [[ -n "${variableRef:+x}" ]]
+  [[ -n "${variableRef+x}" ]]
 }
 
 # Return true if the variable is empty or unset, false otherwise.
