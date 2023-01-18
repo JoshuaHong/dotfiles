@@ -10,7 +10,7 @@
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("checkupdates" "comm" "paru" "sort")
+declare -agr DEPENDENCIES=("checkupdates" "paru")
 declare -gr OPTSTRING="clp"
 declare -gir MAX_NUM_ARGUMENTS=0
 declare -gr BAR="waybar"
@@ -68,8 +68,16 @@ printUpdates() {
 # These packages are not strict dependencies of other packages, and are not in
 # the "base" or "base-devel" package groups.
 printPackages() {
-  comm -23 <(paru -Qqtt | sort) \
-      <({ paru -Qqg base-devel; echo "base"; } | sort -u)
+  local -ar installedPackages=($(paru -Qqtt))
+  local -ar baseDevelPackages=($(paru -Qqg base-devel))
+  for package in "${installedPackages[@]}"; do
+    # Skip the "base" package and packages in the "base-devel" group.
+    if [[ " ${baseDevelPackages[*]} " =~ " ${package} " \
+        || "${package}" == "base" ]]; then
+      continue
+    fi
+    echo "${package}"
+  done
 }
 
 # Update packages and notify of any .pacnew or .pacsave files.
@@ -101,9 +109,7 @@ printHelpMessage() {
   echo -e "\t\t\tand are not in the \"base\" or \"base-devel\" package groups."
   echo -e "\nDependencies:"
   echo -e "\tcheckupdates\tTo check for package updates."
-  echo -e "\tcomm\t\tTo list installed packages excluding base package groups."
   echo -e "\tparu\t\tTo update packages."
-  echo -e "\tsort\t\tTo list installed packages excluding base package groups."
 }
 
 # Print the usage message.
