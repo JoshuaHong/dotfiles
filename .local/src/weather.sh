@@ -23,11 +23,11 @@ declare -g location=""
 # Parameters:
 #   arguments (array[string]): The array of arguments to the program.
 setUp() {
-  local -ag arguments=("${@}")
+  local -ar arguments=("${@}")
   setBashOptions
   assertDependenciesExist "${DEPENDENCIES[@]}"
-  parseOptions "${OPTSTRING}" options "${arguments[@]}"
-  parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
+  parseOptions options "${OPTSTRING}" "${arguments[@]}"
+  parseOperands operands "${MAX_NUM_ARGUMENTS}" "${arguments[@]}"
   location="${operands[0]:-}"  # Set the location if specified, empty otherwise.
   location="${location//" "/"+"}"  # Replace " " with "+".
 }

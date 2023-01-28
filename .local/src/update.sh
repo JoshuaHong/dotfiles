@@ -10,7 +10,7 @@
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("checkupdates" "paru")
+declare -agr DEPENDENCIES=("checkupdates" "find" "paru")
 declare -gr OPTSTRING="clp"
 declare -gir MAX_NUM_ARGUMENTS=0
 declare -gr BAR="waybar"
@@ -24,11 +24,11 @@ declare -ag operands=()
 # Parameters:
 #   arguments (array[string]): The array of arguments to the program.
 setUp() {
-  local -ag arguments=("${@}")
+  local -ar arguments=("${@}")
   setBashOptions
   assertDependenciesExist "${DEPENDENCIES[@]}"
-  parseOptions "${OPTSTRING}" options "${arguments[@]}"
-  parseOperands "${MAX_NUM_ARGUMENTS}" operands "${arguments[@]}"
+  parseOptions options "${OPTSTRING}" "${arguments[@]}"
+  parseOperands operands "${MAX_NUM_ARGUMENTS}" "${arguments[@]}"
 }
 
 # Main function of the script.
@@ -47,12 +47,11 @@ main() {
 
 # Print the number of updates available.
 printNumUpdates() {
-  local -r updates="$(checkupdates)"
+  readarray -t updates < <(checkupdates)
   if isVariableEmpty updates; then
     exit 0
   fi
-  local numUpdates="$(echo "${updates}" | wc -l)"
-  echo "${numUpdates}"
+  echo "${#updates[@]}"
 }
 
 # Print the updates available.
@@ -109,6 +108,7 @@ printHelpMessage() {
   echo -e "\t\t\tand are not in the \"base\" or \"base-devel\" package groups."
   echo -e "\nDependencies:"
   echo -e "\tcheckupdates\tTo check for package updates."
+  echo -e "\tfind\t\tTo search for \".pacnew\" and \".pacsave\" files."
   echo -e "\tparu\t\tTo update packages."
 }
 

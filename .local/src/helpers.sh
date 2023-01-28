@@ -14,12 +14,12 @@ setBashOptions() {
 
 # Assert that the dependencies exist.
 # Parameters:
-#   dependencies (array[string]): An array of dependencies.
+#   dependencies (array[string]): The array of dependencies.
 assertDependenciesExist() {
   local -ar dependencies=("${@}")
   local -a missingDependencies=()
   for dependency in "${dependencies[@]}"; do
-    if ! programExists "${dependency}"; then
+    if ! isInstalled "${dependency}"; then
       missingDependencies+=("\"${dependency}\"")
     fi
   done
@@ -32,12 +32,13 @@ assertDependenciesExist() {
 
 # Parse the command-line options.
 # Parameters:
+#   options (variable): The variable of an array to be populated with the
+#       parsed command-line options.
 #   optString (string): The OPTSTRING to use for getopts.
-#   options (variable): The variable containing an array of options.
 #   arguments (array[string]): The array of arguments to the program.
 parseOptions() {
-  local -r optString="${1}"
-  local -n optionsRef="${2}"
+  local -n optionsRef="${1}"
+  local -r optString="${2}"
   shift 2
   while getopts ":h-:${optString}" flag; do
     case "${flag}" in
@@ -73,13 +74,14 @@ parseOptions() {
 
 # Parse the command-line operands.
 # Parameters:
+#   operands (variable): The variable of an array to be populated with the
+#       parsed command-line operands.
 #   maxNumArguments (integer): The maximum number of arguments to the program.
-#     If less than 0, the maximum number of arguments is unbounded.
-#   operands (variable): The variable containing an array of operands.
+#       If less than 0, the maximum number of arguments is unbounded.
 #   arguments (array[string]): The array of arguments to the program.
 parseOperands() {
-  local -ir maxNumArguments="${1}"
-  local -n operandsRef="${2}"
+  local -n operandsRef="${1}"
+  local -ir maxNumArguments="${2}"
   shift "$(( "${OPTIND}" + 1 ))"
   local -ir numOperands="${#@}"
   if [[ "${numOperands}" -gt "${maxNumArguments}" \
@@ -112,21 +114,21 @@ isVariableSet() {
 #   variable (variable): The variable to test if it is empty.
 isVariableEmpty() {
   local -n variableRef="${1}"
-  [[ -z "${variableRef:+x}" ]]
+  [[ -z "${variableRef[@]}" ]]
 }
 
-# Return true if the program exists, false otherwise.
+# Return true if the program is installed, false otherwise.
 # Parameters:
-#   program (string): The name of the program to test if it exists.
-programExists() {
+#   program (string): The name of the program to test if it is installed.
+isInstalled() {
   local -r program="${1}"
   command -v "${program}" > /dev/null 2>&1
 }
 
-# Return true if the directory exists, false otherwise.
+# Return true if the string is a directory, false otherwise.
 # Parameters:
-#   directory (string): The name of the directory to test if it exists.
-directoryExists() {
+#   directory (string): The name of the string to test if it is a directory.
+isDirectory() {
   local -r directory="${1}"
   [[ -d "${directory}" ]]
 }
