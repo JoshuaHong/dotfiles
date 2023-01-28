@@ -13,6 +13,7 @@ source "/home/josh/.local/src/helpers.sh"
 declare -agr DEPENDENCIES=("curl" "grep")
 declare -gr OPTSTRING=""
 declare -gir MAX_NUM_ARGUMENTS=1
+declare -gr WEATHER_API_URL="https://v2d.wttr.in"
 
 # Variables.
 declare -Ag options=()
@@ -56,7 +57,7 @@ displayWeather() {
 
 # Fetch the full weather report.
 fetchWeatherReport() {
-  curl -fs "https://v2d.wttr.in/${location}"
+  curl -fs "${WEATHER_API_URL}/${location}"
 }
 
 # Print the help message.
