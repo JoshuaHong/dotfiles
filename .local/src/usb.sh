@@ -4,7 +4,7 @@
 #
 # Usage: usb [options].
 #
-# Dependencies: [mount, umount].
+# Dependencies: [chown, grep, jmtpfs, mkdir, mount, rmdir, sed, sudo, umount].
 
 # Imports.
 source "/home/josh/.local/src/helpers.sh"

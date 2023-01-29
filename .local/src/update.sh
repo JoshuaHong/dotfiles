@@ -4,7 +4,7 @@
 #
 # Usage: update [options].
 #
-# Dependencies: [checkupdates, paru].
+# Dependencies: [checkupdates, find, paru].
 
 # Imports.
 source "/home/josh/.local/src/helpers.sh"

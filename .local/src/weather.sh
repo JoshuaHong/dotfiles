@@ -4,7 +4,7 @@
 #
 # Usage: weather [options] [location].
 #
-# Dependencies: [curl].
+# Dependencies: [curl, grep].
 
 # Imports.
 source "/home/josh/.local/src/helpers.sh"
