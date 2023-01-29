@@ -12,7 +12,7 @@ source "/home/josh/.local/src/helpers.sh"
 # Constants.
 declare -agr DEPENDENCIES=("chown" "grep" "jmtpfs" "mkdir" "mount" "rmdir" \
     "sed" "sudo" "umount")
-declare -gr OPTSTRING="lm:u:"
+declare -gr OPTSTRING="lm:p:u:"
 declare -gir MAX_NUM_ARGUMENTS=0
 declare -Agr MSC_DEVICE_ATTRIBUTES=(["SIZE"]=0 ["MOUNTPOINTS"]=1)
 declare -Agr MTP_DEVICE_ATTRIBUTES=(["BUS_LOCATION"]=0 ["DEV_NUM"]=1 \
@@ -25,6 +25,8 @@ declare -Ag options=()
 declare -ag operands=()
 declare -Ag mscDevices=()
 declare -Ag mtpDevices=()
+declare -g baseMountpoint="${BASE_MOUNTPOINT}"
+
 
 # Set-up for the script.
 # Parameters:
@@ -45,6 +47,9 @@ main() {
   fi
 
   fetchAvailableDevices
+  if isVariableSet options["p"]; then
+    setMountpoint "${options["p"]}"
+  fi
   if isVariableSet options["l"]; then
     listDevices
   elif isVariableSet options["m"]; then
@@ -58,6 +63,20 @@ main() {
 fetchAvailableDevices() {
   fetchMscDevices
   fetchMtpDevices
+}
+
+# Set the custom mountpoint.
+# Parameters:
+#   mountpoint (string): The custom mountpoint to use.
+setMountpoint() {
+  local -r mountpoint="${1}"
+  if [[ "${#options[@]}" -eq 1 ]]; then
+    echoError "Error: Specify another option along with \"-p\"."
+    printUsageMessage
+    exit 1
+  fi
+  assertDirectoryExists "${mountpoint}"
+  baseMountpoint="${mountpoint}"
 }
 
 # List available devices.
@@ -114,7 +133,7 @@ printMtpDevices() {
     echo -n "(${mtpDeviceAttributes["${MTP_DEVICE_ATTRIBUTES["VENDOR"]}"]} "
     echo -n "${mtpDeviceAttributes["${MTP_DEVICE_ATTRIBUTES["PRODUCT"]}"]}) "
     if isMtpDeviceMounted "${i}"; then
-      echo "[${BASE_MOUNTPOINT}/${i}]"
+      echo "[${baseMountpoint}/${i}]"
     else
       echo "[unmounted]"
     fi
@@ -126,7 +145,7 @@ printMtpDevices() {
 #   name (string): The name of the MSC device to mount.
 mountMscDevice() {
   local -r name="${1}"
-  local -r mountpoint="${BASE_MOUNTPOINT}/${name}"
+  local -r mountpoint="${baseMountpoint}/${name}"
   assertMscDeviceUnmounted "${name}"
   assertBaseMountpointNotBusy
   assertDirectoryNotExists "${mountpoint}"
@@ -139,7 +158,7 @@ mountMscDevice() {
 #   name (string): The name of the MTP device to mount.
 mountMtpDevice() {
   local -r name="${1}"
-  local -r mountpoint="${BASE_MOUNTPOINT}/${name}"
+  local -r mountpoint="${baseMountpoint}/${name}"
   assertMtpDeviceUnmounted "${name}"
   assertBaseMountpointNotBusy
   assertDirectoryNotExists "${mountpoint}"
@@ -165,7 +184,7 @@ unmountMscDevice() {
   for mountpoint in "${mountpoints[@]}"; do
     sudo umount "${mountpoint}"
   done
-  local -r mountpoint="${BASE_MOUNTPOINT}/${name}"
+  local -r mountpoint="${baseMountpoint}/${name}"
   sudo rmdir "${mountpoint}" > /dev/null 2>&1  # Ignore no such directory error.
 }
 
@@ -174,7 +193,7 @@ unmountMscDevice() {
 #   name (string): The name of the MTP device to unmount.
 unmountMtpDevice() {
   local -r name="${1}"
-  local -r mountpoint="${BASE_MOUNTPOINT}/${name}"
+  local -r mountpoint="${baseMountpoint}/${name}"
   assertMtpDeviceMounted "${name}"
   fusermount -u "${mountpoint}"
   sudo rmdir "${mountpoint}" > /dev/null 2>&1  # Ignore no such directory error.
@@ -244,7 +263,7 @@ isMscDeviceMounted() {
 #   name (string): The name of the MTP device to check if it is mounted.
 isMtpDeviceMounted() {
   local -r name="${1}"
-  mount | grep -q "${BASE_MOUNTPOINT}/${name}"
+  mount | grep -q "${baseMountpoint}/${name}"
 }
 
 # Assert that the MSC device is mounted.
@@ -293,15 +312,26 @@ assertMtpDeviceUnmounted() {
 
 # Assert that the base mountpoint itself is not being used as a mountpoint.
 assertBaseMountpointNotBusy() {
-  if mount | grep -q "${BASE_MOUNTPOINT} "; then
-    echoError "Error: Mountpoint \"${BASE_MOUNTPOINT}\" is busy."
+  if mount | grep -q "${baseMountpoint} "; then
+    echoError "Error: Mountpoint \"${baseMountpoint}\" is busy."
+    exit 1
+  fi
+}
+
+# Assert that the directory exists.
+# Parameters:
+#   directory (string): The name of the directory to check if it exists.
+assertDirectoryExists() {
+  local -r directory="${1}"
+  if ! isDirectory "${directory}"; then
+    echoError "Error: Directory \"${directory}\" does not exist."
     exit 1
   fi
 }
 
 # Assert that the directory does not exist.
 # Parameters:
-#   directory (string): The name of the directory to check if it exists.
+#   directory (string): The name of the directory to check if it does not exist.
 assertDirectoryNotExists() {
   local -r directory="${1}"
   if isDirectory "${directory}"; then
@@ -318,6 +348,7 @@ printHelpMessage() {
   echo -e "\t-h\t\tPrint the help menu."
   echo -e "\t-l\t\tList the available devices."
   echo -e "\t-m name\t\tMount the device."
+  echo -e "\t-p mountpoint\tSpecify the base mountpoint. Defaults to /mnt."
   echo -e "\t-u name\t\tUnmount the device."
   echo -e "\nDependencies:"
   echo -e "\tchown\t\tTo allow users access to the mounted filesystems."
