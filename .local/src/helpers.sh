@@ -76,17 +76,19 @@ parseOptions() {
 # Parameters:
 #   operands (variable): The variable of an array to be populated with the
 #       parsed command-line operands.
-#   maxNumArguments (integer): The maximum number of arguments to the program.
-#       If less than 0, the maximum number of arguments is unbounded.
+#   maxNumOperands (integer): The maximum number of operands to the program.
+#       If less than 0, the maximum number of operands is unbounded.
+#   minNumOperands (integer): The minimum number of operands to the program.
 #   arguments (array[string]): The array of arguments to the program.
 parseOperands() {
   local -n operandsRef="${1}"
-  local -ir maxNumArguments="${2}"
-  shift "$(( "${OPTIND}" + 1 ))"
+  local -ir maxNumOperands="${2}"
+  local -ir minNumOperands="${3}"
+  shift "$(( "${OPTIND}" + 2 ))"
   local -ir numOperands="${#@}"
-  if [[ "${numOperands}" -gt "${maxNumArguments}" \
-        && "${maxNumArguments}" -ge 0 ]]; then
-    echoError "Error: Invalid number of arguments."
+  if [[ "${numOperands}" -gt "${maxNumOperands}" && "${maxNumOperands}" -ge 0 \
+	|| "${numOperands}" -lt "${minNumOperands}" ]]; then
+    echoError "Error: Invalid number of operands."
     printUsageMessage
     exit 1
   fi

@@ -13,7 +13,8 @@ source "/home/josh/.local/src/helpers.sh"
 declare -agr DEPENDENCIES=("chown" "grep" "jmtpfs" "mkdir" "mount" "rmdir" \
     "sed" "sudo" "umount")
 declare -gr OPTSTRING="lm:p:u:"
-declare -gir MAX_NUM_ARGUMENTS=0
+declare -gir MAX_NUM_OPERANDS=0
+declare -gir MIN_NUM_OPERANDS=0
 declare -Agr MSC_DEVICE_ATTRIBUTES=(["SIZE"]=0 ["MOUNTPOINTS"]=1)
 declare -Agr MTP_DEVICE_ATTRIBUTES=(["BUS_LOCATION"]=0 ["DEV_NUM"]=1 \
     ["PRODUCT_ID"]=2 ["VENDOR_ID"]=3 ["PRODUCT"]=4 ["VENDOR"]=5)
@@ -36,7 +37,8 @@ setUp() {
   setBashOptions
   assertDependenciesExist "${DEPENDENCIES[@]}"
   parseOptions options "${OPTSTRING}" "${arguments[@]}"
-  parseOperands operands "${MAX_NUM_ARGUMENTS}" "${arguments[@]}"
+  parseOperands operands "${MAX_NUM_OPERANDS}" "${MIN_NUM_OPERANDS}" \
+      "${arguments[@]}"
 }
 
 # Main function of the script.

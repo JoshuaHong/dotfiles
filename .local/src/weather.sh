@@ -12,7 +12,8 @@ source "/home/josh/.local/src/helpers.sh"
 # Constants.
 declare -agr DEPENDENCIES=("curl" "grep")
 declare -gr OPTSTRING=""
-declare -gir MAX_NUM_ARGUMENTS=1
+declare -gir MAX_NUM_OPERANDS=1
+declare -gir MIN_NUM_OPERANDS=0
 declare -gr WEATHER_API_URL="https://v2d.wttr.in"
 
 # Variables.
@@ -28,7 +29,13 @@ setUp() {
   setBashOptions
   assertDependenciesExist "${DEPENDENCIES[@]}"
   parseOptions options "${OPTSTRING}" "${arguments[@]}"
-  parseOperands operands "${MAX_NUM_ARGUMENTS}" "${arguments[@]}"
+  parseOperands operands "${MAX_NUM_OPERANDS}" "${MIN_NUM_OPERANDS}" \
+      "${arguments[@]}"
+  setOperands
+}
+
+# Set the operands.
+setOperands() {
   location="${operands[0]:-}"  # Set the location if specified, empty otherwise.
   location="${location//" "/"+"}"  # Replace " " with "+".
 }
@@ -66,7 +73,7 @@ printHelpMessage() {
   echo -e "\nUsage: weather [options] [location]"
   echo -e "\nOptions:"
   echo -e "\t-h\t\tPrint the help menu."
-  echo -e "\nArguments:"
+  echo -e "\nOperands:"
   echo -e "\tlocation\tThe location from which to fetch the weather."
   echo -e "\t\t\tMust be a valid location in wttr.in."
   echo -e "\t\t\tIf unspecified, fetches the weather based on IP address."

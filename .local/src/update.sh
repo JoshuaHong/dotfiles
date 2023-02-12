@@ -12,7 +12,8 @@ source "/home/josh/.local/src/helpers.sh"
 # Constants.
 declare -agr DEPENDENCIES=("checkupdates" "find" "paru")
 declare -gr OPTSTRING="clp"
-declare -gir MAX_NUM_ARGUMENTS=0
+declare -gir MAX_NUM_OPERANDS=0
+declare -gir MIN_NUM_OPERANDS=0
 declare -gr BAR="waybar"
 declare -gr SIGNAL="SIGRTMIN+1"
 
@@ -28,7 +29,8 @@ setUp() {
   setBashOptions
   assertDependenciesExist "${DEPENDENCIES[@]}"
   parseOptions options "${OPTSTRING}" "${arguments[@]}"
-  parseOperands operands "${MAX_NUM_ARGUMENTS}" "${arguments[@]}"
+  parseOperands operands "${MAX_NUM_OPERANDS}" "${MIN_NUM_OPERANDS}" \
+      "${arguments[@]}"
 }
 
 # Main function of the script.
