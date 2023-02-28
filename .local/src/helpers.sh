@@ -135,6 +135,58 @@ isDirectory() {
   [[ -d "${directory}" ]]
 }
 
+# Return true if the string is a regular file, false otherwise.
+# Parameters:
+#   file (string): The name of the string to test if it is a regular file.
+isRegularFile() {
+  local -r file="${1}"
+  [[ -f "${file}" ]]
+}
+
+# Assert that the directory exists.
+# Parameters:
+#   directory (string): The name of the directory to check if it exists.
+assertDirectoryExists() {
+  local -r directory="${1}"
+  if ! isDirectory "${directory}"; then
+    echoError "Error: Directory \"${directory}\" does not exist."
+    exit 1
+  fi
+}
+
+# Assert that the directory does not exist.
+# Parameters:
+#   directory (string): The name of the directory to check if it exists.
+assertDirectoryNotExists() {
+  local -r directory="${1}"
+  if isDirectory "${directory}"; then
+    echoError "Error: Directory \"${directory}\" already exists."
+    exit 1
+  fi
+}
+
+# Assert that the regular file exists.
+# Parameters:
+#   file (string): The name of the regular file to check if it exists.
+assertRegularFileExists() {
+  local -r file="${1}"
+  if ! isRegularFile "${file}"; then
+    echoError "Error: Regular file \"${file}\" does not exist."
+    exit 1
+  fi
+}
+
+# Assert that the regular file does not exist.
+# Parameters:
+#   file (string): The name of the regular file to check if it exists.
+assertRegularFileNotExists() {
+  local -r file="${1}"
+  if isRegularFile "${file}"; then
+    echoError "Error: Regular file \"${file}\" already exists."
+    exit 1
+  fi
+}
+
 # Print the help message.
 printHelpMessage() {
   echoError "Error: Missing implementation of \"printHelpMessage\"."

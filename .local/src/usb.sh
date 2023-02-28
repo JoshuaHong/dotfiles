@@ -47,14 +47,15 @@ main() {
     printHelpMessage
     exit 0
   fi
-
   fetchAvailableDevices
+  if isVariableSet options["l"]; then
+    listDevices
+    exit 0
+  fi
   if isVariableSet options["p"]; then
     setMountpoint "${options["p"]}"
   fi
-  if isVariableSet options["l"]; then
-    listDevices
-  elif isVariableSet options["m"]; then
+  if isVariableSet options["m"]; then
     mountDevice "${options["m"]}"
   elif isVariableSet options["u"]; then
     unmountDevice "${options["u"]}"
@@ -316,28 +317,6 @@ assertMtpDeviceUnmounted() {
 assertBaseMountpointNotBusy() {
   if mount | grep -q "${baseMountpoint} "; then
     echoError "Error: Mountpoint \"${baseMountpoint}\" is busy."
-    exit 1
-  fi
-}
-
-# Assert that the directory exists.
-# Parameters:
-#   directory (string): The name of the directory to check if it exists.
-assertDirectoryExists() {
-  local -r directory="${1}"
-  if ! isDirectory "${directory}"; then
-    echoError "Error: Directory \"${directory}\" does not exist."
-    exit 1
-  fi
-}
-
-# Assert that the directory does not exist.
-# Parameters:
-#   directory (string): The name of the directory to check if it does not exist.
-assertDirectoryNotExists() {
-  local -r directory="${1}"
-  if isDirectory "${directory}"; then
-    echoError "Error: Directory \"${directory}\" already exists."
     exit 1
   fi
 }
