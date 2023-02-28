@@ -95,6 +95,21 @@ parseOperands() {
   operandsRef=("${@}")
 }
 
+# Return true if confirmed, false otherwise.
+# Parameters:
+#   warning (string): The warning message to print before the confirmation.
+confirm() {
+  local -r warning="${1}"
+  while true; do
+    echoError "${warning}"
+    read -p "Confirm (y/n)? " confirmation
+    if [[ "${confirmation}" == "y" || "${confirmation}" == "n" ]]; then
+      break
+    fi
+  done
+  [[ "${confirmation}" == "y" ]]
+}
+
 # Print the error message to standard error.
 # Parameters:
 #   errorMessage (string): The error message to print to standard error.

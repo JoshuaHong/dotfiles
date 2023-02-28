@@ -103,6 +103,8 @@ unarchive() {
 }
 
 # Create an encrypted file of the directory.
+# Parameters:
+#   directory (string): The name of the directory to encrypt.
 encrypt() {
   local -r directory="${1%"/"}"  # Remove the trailing "/" if there is one.
   local -r parent="${directory%"/"}/../"  # Add a trailing "/../".
@@ -119,6 +121,8 @@ encrypt() {
 }
 
 # Decrypt and extract an encrypted file.
+# Parameters:
+#   file (string): The name of the file to decrypt.
 decrypt() {
   local -r file="${1}"
   local -r name="${file%"${ENCRYPTED_SUFFIX}"}"  # Remove the encrypted suffix.
@@ -126,7 +130,7 @@ decrypt() {
   assertRegularFileExists "${file}"
   if isDirectory "${name}"; then
     directory="${name}${NEW_SUFFIX}"
-    if ! confirmOverridingDirectory "${directory}"; then
+    if ! confirm "Warning: Directory \"${directory}\" will be overridden."; then
       return
     fi
   fi
@@ -153,30 +157,14 @@ readPassword() {
 }
 
 # Return true if the directory exists and should be archived, false otherwise.
+# Parameters:
+#   directory (string): The name of the directory to check for archival.
 shouldArchive () {
   local -r directory="${1}"
   local -r encryptedFile="${directory}${ENCRYPTED_SUFFIX}"
   isDirectory "${directory}" \
       && isRegularFile "${directory}${ENCRYPTED_SUFFIX}" \
       && [[ "${directory}" -nt "${encryptedFile}" ]]
-}
-
-# Confirm overriding the directory if it exists.
-# Parameters:
-#   directory (string): The name of the directory to confirm overriding.
-confirmOverridingDirectory() {
-  local -r directory="${1}"
-  if ! isDirectory "${directory}"; then
-    return
-  fi
-  while true; do
-    echoError "Warning: Directory \"${directory}\" will be overridden."
-    read -p "Override (y/n)? " confirmation
-    if [[ "${confirmation}" == "y" || "${confirmation}" == "n" ]]; then
-      break
-    fi
-  done
-  [[ "${confirmation}" == "y" ]]
 }
 
 # Unset the password variables for additional security.
