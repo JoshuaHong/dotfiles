@@ -162,9 +162,16 @@ readPassword() {
 shouldArchive () {
   local -r directory="${1}"
   local -r encryptedFile="${directory}${ENCRYPTED_SUFFIX}"
-  isDirectory "${directory}" \
-      && isRegularFile "${directory}${ENCRYPTED_SUFFIX}" \
-      && [[ "${directory}" -nt "${encryptedFile}" ]]
+  if ! isDirectory "${directory}" || ! isRegularFile "${encryptedFile}"; then
+    return 1
+  fi
+  readarray -t subfiles < <(find "${directory}")
+  for file in "${subfiles[@]}"; do
+    if [[ ! "${file}" -ot "${encryptedFile}" ]]; then
+      return 0
+    fi
+  done
+  return 1
 }
 
 # Unset the password variables for additional security.
