@@ -65,6 +65,7 @@ addAttribute() {
   fi
   read -e -p "Enter the value: " value
   setfattr --name="${NAMESPACE}.${name}" --value="${value}" "${file}"
+  updateModificationTime "${file}"
 }
 
 # Delete an attribute.
@@ -77,6 +78,7 @@ deleteAttribute() {
     return
   fi
   setfattr --remove="${NAMESPACE}.${name}" "${file}"
+  updateModificationTime "${file}"
 }
 
 # Edit an attribute.
@@ -92,6 +94,7 @@ editAttribute() {
       --only-values "${file}")"
   read -e -i "${previousValue}" -p "Enter the value: " value
   setfattr --name="${NAMESPACE}.${name}" --value="${value}" "${file}"
+  updateModificationTime "${file}"
 }
 
 # Get an attribute.
@@ -120,6 +123,16 @@ setMediaAttributes() {
   addAttribute "datetime"
   echo -e "\nSet the description attribute"
   addAttribute "description"
+}
+
+# Update the file's modification time to the current time.
+# This is used in conjunction with the archive script so that it knows that the
+# file has been modified and should create a new updated archive.
+# Parameters:
+#   file (string): The name of the file whose modification time should update.
+updateModificationTime() {
+  local -r file="${1}"
+  touch "${file}"
 }
 
 # Return true if the attribute already exists, false otherwise.
