@@ -63,7 +63,7 @@ addAttribute() {
       && ! confirm "Warning: Attribute \"${name}\" will be overridden."; then
     return
   fi
-  read -p "Enter the value: " value
+  read -e -p "Enter the value: " value
   setfattr --name="${NAMESPACE}.${name}" --value="${value}" "${file}"
 }
 
