@@ -16,7 +16,7 @@ declare -gir MAX_NUM_OPERANDS=1
 declare -gir MIN_NUM_OPERANDS=1
 declare -gr NAMESPACE="user"
 
-# Variables
+# Variables.
 declare -Ag options=()
 declare -ag operands=()
 declare -g file
