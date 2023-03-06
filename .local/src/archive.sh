@@ -192,7 +192,7 @@ printHelpMessage() {
   echo "Archive - Archive and encrypt files."
   echo -e "\nArchive will recursively search for all files in the source "
   echo -e "directory containing the \"${ENCRYPTED_SUFFIX}\" suffix and copy "
-  echo -e "it to the destination directory. Use the \"-e\" flag to create an "
+  echo -e "them to the destination directory. Use the \"-e\" flag to create an "
   echo -e "encrypted copy of a directory to specify which subdirectories of "
   echo -e "the source should be archived. If the encrypted copy is older than "
   echo -e "its non-encrypted directory's modification time, then a new "
