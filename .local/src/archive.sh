@@ -4,13 +4,13 @@
 #
 # Usage: archive [source destination].
 #
-# Dependencies: [find, gpg, rsync, tar].
+# Dependencies: [find, gpg, mkdir, rm, rsync, tar].
 
 # Imports.
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("find" "gpg" "rsync" "tar")
+declare -agr DEPENDENCIES=("find" "gpg" "mkdir" "rm" "rsync" "tar")
 declare -gr OPTSTRING="d:e:u"
 declare -gir MAX_NUM_OPERANDS=2
 declare -gir MIN_NUM_OPERANDS=0
@@ -75,6 +75,11 @@ main() {
 # Archive and encrypt all files ending in "${ENCRYPTED_SUFFIX}".
 archive() {
   readPassword
+  if ! isDirectoryEmpty "${dest}"; then
+    if ! confirm "Warning: Directory \"${dest}\" will be overridden."; then
+        return
+    fi
+  fi
   readarray -t files \
       < <(find "${src}" -name "*${ENCRYPTED_SUFFIX}" -type "f" 2> /dev/null)
   for file in "${files[@]}"; do
@@ -130,6 +135,8 @@ decrypt() {
   assertRegularFileExists "${file}"
   if isDirectory "${name}"; then
     directory="${name}${NEW_SUFFIX}"
+  fi
+  if isDirectory "${directory}"; then
     if ! confirm "Warning: Directory \"${directory}\" will be overridden."; then
       return
     fi
@@ -202,6 +209,8 @@ printHelpMessage() {
   echo -e "\nDependencies:"
   echo -e "\tfind\t\tTo list directories to archive."
   echo -e "\tgpg\t\tTo encrypt and decrypt files."
+  echo -e "\tmkdir\t\tTo make new directories."
+  echo -e "\trm\t\tTo remove files."
   echo -e "\trsync\t\tTo copy files."
   echo -e "\ttar\t\tTo archive and unarchive files."
 }
