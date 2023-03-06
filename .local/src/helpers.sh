@@ -158,6 +158,15 @@ isRegularFile() {
   [[ -f "${file}" ]]
 }
 
+# Return true if the directory is empty, false otherwise.
+# Parameters:
+#   directory (string): The name of the directory to test if it is empty.
+isDirectoryEmpty() {
+  local -r directory="${1}"
+  assertDirectoryExists "${directory}"
+  [[ -z "$(ls -A "${directory}")" ]]
+}
+
 # Assert that the directory exists.
 # Parameters:
 #   directory (string): The name of the directory to check if it exists.
