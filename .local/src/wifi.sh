@@ -34,19 +34,34 @@ setUp() {
 
 # Main function of the script.
 main() {
-  if isVariableSet options["w"]; then
-    wlan="${options["w"]}"
-  fi
-
   if isVariableEmpty options; then
     printHelpMessage
-  elif isVariableSet options["c"]; then
+    exit 0
+  fi
+  if isVariableSet options["l"]; then
+    listNetworks
+    exit 0
+  fi
+  if isVariableSet options["w"]; then
+    setWlan "${options["w"]}"
+  fi
+  if isVariableSet options["c"]; then
     connect "${options["c"]}"
   elif isVariableSet options["d"]; then
     disconnect
-  elif isVariableSet options["l"]; then
-    listNetworks
   fi
+}
+
+# Set the custom WLAN.
+# Parameters:
+#   wlan (string): The custom WLAN to use.
+setWlan() {
+  if [[ "${#options[@]}" -eq 1 ]]; then
+    echoError "Error: Specify another option along with \"-w\"."
+    printUsageMessage
+    exit 1
+  fi
+  wlan="${1}"
 }
 
 # Connect to a network.
