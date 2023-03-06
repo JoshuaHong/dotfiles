@@ -230,7 +230,13 @@ fetchMtpDevices() {
       | sed --expression='1,/^Available devices/d')"
   jmtpfsOutput="${jmtpfsOutput//", "/","}"  # Replace ", " with ",".
   readarray -t jmtpfsMtpDevices < <(echo -n "${jmtpfsOutput}")
+  local -A uniqueDevices=()
   for i in "${!jmtpfsMtpDevices[@]}"; do
+    # Skip duplicate entries. Required due to jmtpfs printing duplicate entries.
+    if [[ "${uniqueDevices["${jmtpfsMtpDevices["${i}"]}"]-"x"}" != "x" ]]; then
+      continue
+    fi
+    uniqueDevices["${jmtpfsMtpDevices["${i}"]}"]=1
     mtpDevices["${MTP_DEVICE_NAME_PREFIX}${i}"]="${jmtpfsMtpDevices["${i}"]}"
   done
 }
