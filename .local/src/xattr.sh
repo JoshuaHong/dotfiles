@@ -4,13 +4,13 @@
 #
 # Usage: xattr [options] file.
 #
-# Dependencies: [getfattr, setfattr].
+# Dependencies: [getfattr, setfattr, touch].
 
 # Imports.
 source "/home/josh/.local/src/helpers.sh"
 
 # Constants.
-declare -agr DEPENDENCIES=("getfattr" "setfattr")
+declare -agr DEPENDENCIES=("getfattr" "setfattr" "touch")
 declare -gr OPTSTRING="a:d:e:g:lm"
 declare -gir MAX_NUM_OPERANDS=1
 declare -gir MIN_NUM_OPERANDS=1
@@ -157,6 +157,7 @@ printHelpMessage() {
   echo -e "\nDependencies:"
   echo -e "\tgetfattr\tTo get extended file attributes."
   echo -e "\tsetfattr\tTo set extended file attributes."
+  echo -e "\ttouch\tTo update the file's modification time."
 }
 
 # Print the usage message.
