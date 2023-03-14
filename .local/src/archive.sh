@@ -75,7 +75,7 @@ main() {
 # Archive and encrypt all files ending in "${ENCRYPTED_SUFFIX}".
 archive() {
   readPassword
-  local srcName="${src##*"/"}"  # Remove everything before the last "/".
+  local -r srcName="${src##*"/"}"  # Remove everything before the last "/".
   if isDirectory "${dest}/${srcName}" \
       && ! isDirectoryEmpty "${dest}/${srcName}"; then
     if ! confirm \
