@@ -75,16 +75,17 @@ main() {
 # Archive and encrypt all files ending in "${ENCRYPTED_SUFFIX}".
 archive() {
   readPassword
-  local name="${src##*"/"}"  # Remove everything before the last "/".
-  if isDirectory "${dest}/${name}" && ! isDirectoryEmpty "${dest}/${name}"; then
-    if ! confirm "Warning: Directory \"${dest}/${name}\" will be overridden."; \
-        then
+  local srcName="${src##*"/"}"  # Remove everything before the last "/".
+  if isDirectory "${dest}/${srcName}" \
+      && ! isDirectoryEmpty "${dest}/${srcName}"; then
+    if ! confirm \
+        "Warning: Directory \"${dest}/${srcName}\" will be overridden."; then
       return
     fi
   fi
   readarray -t files \
       < <(find "${src}" -name "*${ENCRYPTED_SUFFIX}" -type "f" 2> /dev/null)
-  files+=("${src}${ENCRYPTED_SUFFIX}")  # Also add the src archive itself.
+  files+=("${src}${ENCRYPTED_SUFFIX}")  # Add the src archive.
   for file in "${files[@]}"; do
     local name="${file%"${ENCRYPTED_SUFFIX}"}"  # Remove the encrypted suffix.
     if shouldArchive "${name}"; then
@@ -95,8 +96,8 @@ archive() {
   unsetPasswords
   rsync --archive --delete --include="*/" --include="*${ENCRYPTED_SUFFIX}" \
       --exclude="*" --prune-empty-dirs --xattrs "${src}" "${dest}"
-  rsync --archive --delete --include="${src}${ENCRYPTED_SUFFIX}" --exclude="*" \
-      --xattrs "${src}/../" "${dest}"  # Also copy the src archive itself.
+  rsync --archive --delete --include="${srcName}${ENCRYPTED_SUFFIX}" \
+      --exclude="*" --xattrs "${src}/../" "${dest}"  # Copy the src archive.
 }
 
 # Decrypt and extract all files from the archive.
