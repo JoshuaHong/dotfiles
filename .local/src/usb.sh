@@ -172,7 +172,8 @@ mountMtpDevice() {
   jmtpfs -device="${mtpDeviceAttributes["${MTP_DEVICE_ATTRIBUTES["BUS_LOCATION"]}"]},${mtpDeviceAttributes["${MTP_DEVICE_ATTRIBUTES["DEV_NUM"]}"]}" \
       "${mountpoint}" > /dev/null || sudo rmdir "${mountpoint}"
   ls ${mountpoint} > /dev/null 2>&1 \
-      || echoError "Warning: Enable USB file transfer on the device."
+      || echoError "Error: Enable USB file transfer on the device." \
+      && unmountMtpDevice "${name}"
 }
 
 # Unmount the selected MSC device.
