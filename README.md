@@ -1,226 +1,265 @@
+<div align = center>
+
 # Dotfiles
-Setup for the Arch Linux environment.
+![screenshot](https://github.com/JoshuaHong/dotfiles/assets/35504995/2827b4a2-c767-427b-be73-fcfefdacefcb)
+The Artix Linux environment.
+</div>
 
-## Pre-installation
+<br>
 
-### BIOS configuration
+# Programs
+* Operating system: [Artix Linux](https://artixlinux.org)
+* Init system: [Dinit](https://github.com/davmac314/dinit)
+  > 📝 **Note:** Dinit is the fastest and simplist and solves problems of the other init systems.
+
+<br>
+
+# Installation
+
+### Install the ISO
+* [Download](https://artixlinux.org/download.php) the stable base Dinit ISO and the corresponding PGP signature
+* Verify the ISO: <code>gpg --auto-key-retrieve --verify <code><var>SIG_NAME</var></code>.iso.sig <code><var>ISO_NAME</var></code>.iso</code>
+* Install the ISO to a drive: <code>cat <code><var>ISO_NAME</var></code>.iso > /dev/<code><var>DRIVE_LOCATION</var></code></code>
+
+### Configure the BIOS
 * Use UEFI boot mode
+  > 📝 **Note:** UEFI is the newest standard and most modern hardware do not support legacy BIOS boot.
 * Disable secure boot
+  > 📝 **Note:** The Arch Linux installation images do not support secure boot. Secure boot can be set up after installation.
 
-### Connect to the internet
-* Use iwd: `iwctl station <device> connect <SSID>`
-    * To find the device run: `iwctl device list`
-    * To find the SSID run: `iwctl station <device> get-networks`
+### Enter the live environment
+* Boot into the installation medium
+* Log in using username <code>artix</code> and password <code>artix</code>
 
 ### Partition the disks
-* Use fdisk: `fdisk /dev/nvme0n1`
-* Delete all partitions
+* Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
+* Delete all existing partitions and signatures
+  > ⚠️ **Warning:** This will wipe out the entire drive.
 * Create a new empty GPT partition table
+  > 📝 **Note:** GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
 * Create a 550M EFI System
-* Create a 4G Linux Swap
+  > 📝 **Note:** The author of gdisk suggests 550M.
+* Create a 30G Linux Swap
+  > 📝 **Note:** The rule of thumb is 2xRAM for hibernation.
 * Create a 30G Linux root (x86-64)
+  > 📝 **Note:** 15G is the recommended minimum, so 30G should be enough.
 * Create the rest for Linux home
 
 ### Format the partitions
-* Format the boot partition: `mkfs.fat -F 32 /dev/nvme0n1p1`
-* Create the swap partition: `mkswap /dev/nvme0n1p2`
-* Format the root partition: `mkfs.ext4 /dev/nvme0n1p3`
-* Format the home partition: `mkfs.ext4 /dev/nvme0n1p4`
+* Format the boot partition: <code>mkfs.fat -F 32 /dev/<code><var>BOOT_PARTITION</var></code></code>
+  > 📝 **Note:** The EFI system partition must be formatted as FAT32 on UEFI systems.
+* Set the boot partition label name: <code>fatlabel /dev/<code><var>BOOT_PARTITION</var></code> BOOT</code>
+  > 💡 **Tip:** Assigning labels to partitions helps referring to them later without their numbers. \
+  > 📝 **Note:** FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
+* Create the swap partition: <code>mkswap -L SWAP /dev/<code><var>SWAP_PARTITION</var></code></code>
+  > 💡 **Tip:** May need to remove any existing swap partitions in advance: <code>swapoff -a</code>.
+* Format the root partition: <code>mkfs.ext4 -L ROOT /dev/<code><var>ROOT_PARTITION</var></code></code>
+  > 📝 **Note:** Ext4 is the fast, pure, and stable standard.
+* Format the home partition: <code>mkfs.ext4 -L HOME /dev/<code><var>HOME_PARTITION</var></code></code>
 
 ### Mount the file systems
-* Mount the root partition: `mount /dev/nvme0n1p3 /mnt`
-* Mount the boot partition: `mount --mkdir /dev/nvme0n1p1 /mnt/boot`
-* Enable the swap volume: `swapon /dev/nvme0n1p2`
+* Mount the root partition: <code>mount /dev/<code><var>ROOT_PARTITION</var></code> /mnt</code>
+* Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/boot</code>
+* Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/home</code>
+* Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
 
-## Installation
+### Connect to the internet
+* Enter the ConnMan CLI: <code>connmanctl</code>
+  * Enable Wi-Fi: <code>enable wifi</code>
+  * Scan for networks: <code>scan wifi</code>
+  * Enable the agent: <code>agent on</code>
+    > 📝 **Note:** Needed to enable entering a password.
+  * List available networks: <code>services</code>
+  * Connect to a network: <code>connect wifi_<code><var>NETWORK_NAME</var></code></code>
+    > 💡 **Tip:** Network names can be tab-completed.
+* Verify the connection: <code>ping artixlinux.org</code>
+
+### Update the system clock
+* Activate the NTP daemon: <code>dinitctl start ntpd</code>
 
 ### Install essential packages
-* Install the microcode, a wireless daemon, and a text editor: `pacman -S intel-ucode iwd neovim`
-* Enable iwd: `systemctl enable --now iwd.service systemd-resolved.service`
-* Create the iwd configuration file `/etc/iwd/main.conf`:
-    ```
-    [General]
-    EnableNetworkConfiguration=true
+*  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
 
-    [Network]
-    EnableIPv6=true
-    ```
+### Generate the fstab
+* Generate the fstab file: <code>fstabgen -U /mnt >> /mnt/etc/fstab</code>
+  > 📝 **Note:** Using <code>-U</code> for UUIDs instaed of <code>-L</code> for labels is safer.
 
-### Boot loader
-* Install systemd-boot: `bootctl install`
-* Edit the loader configuration file `/boot/loader/loader.conf`:
-    ```
-    default arch.conf
-    ```
-* Create the Arch configuration file `/boot/loader/entries/arch.conf`:
-    ```
-    title   Arch Linux
-    linux   /vmlinuz-linux
-    initrd  /intel-ucode.img
-    initrd  /initramfs-linux.img
-    options root=UUID=<UUID> rw
-    ```
-    \* To find the UUID of the **root** partition in vim run: `:r! blkid`
+### Enter the system
+* Change root into the system: <code>artix-chroot /mnt</code>
 
-* Create a Pacman hook for automatic updates in `/etc/pacman.d/hooks/100-systemd-boot.hook`:
-    ```
-    [Trigger]
-    Type = Package
-    Operation = Upgrade
-    Target = systemd
+### Configure the system clock
+* Set the time zone: <code>ln -sf /usr/share/zoneinfo/<code><var>REGION</var></code>/<code><var>CITY</var></code> /etc/localtime</code>
+* Set the hardware clock: <code>hwclock --systohc</code>
 
-    [Action]
-    Description = Gracefully upgrading systemd-boot...
-    When = PostTransaction
-    Exec = /usr/bin/systemctl restart systemd-boot-update.service
-    ```
+### Configure the localization
+* Install a text editor: <code>sudo pacman -S neovim</code>
+* Uncomment <code>en_US.UTF-8 UTF-8</code> and other needed locales in <code>/etc/locale.gen</code>
+* Generate the locales: <code>locale-gen</code>
+* Create the locale configuration file <code>/etc/locale.conf</code>:
+  <pre>
+  LANG=en_US.UTF-8
+  </pre>
 
-## Post-installation
+### Configure the boot loader
+* Install a boot manager and the microcode: <code>pacman -S efibootmgr intel-ucode</code>
+  > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader. \
+  > 📝 **Note:** The microcode package depends on the CPU manufacturer.
+* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Artix Linux" --loader /vmlinuz-linux --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw quiet console=tty2 initrd=\\<code><var>CPU_MANUFACTURER</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
+  > 📝 **Note:** For example, if the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>PARTITION_NUMBER</code> is <code>1</code>. \
+  > 📝 **Note:** Replace <code>CPU_MANUFACTURER</code> with <code>amd</code> or <code>intel</code>. \
+  > 📝 **Note:** <code>console=tty2</code> redirects all boot messages to TTY 2. \
+  > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
+* Verify the entry was added properly: <code>efibootmgr --unicode</code>
+* Set the boot order: <code>efibootmgr --bootorder <var>####</var>,<var>####</var> --unicode</code>
 
-### Users and groups
-* Add a new user: `useradd -m -G wheel josh`
-    * `-m` creates the user's home directory
-    * `-G` adds the user to the group
-* Add a password: `passwd josh`
+### Configure users
+* Set the root password: <code>passwd</code>
+* Add a new user: <code>useradd -m -G wheel <code><var>USERNAME</var></code></code>
+  > 📝 **Note:** <code>-m</code> creates the user's home directory, <code>-G</code> adds the user to the group
+* Assign a password: <code>passwd <code><var>USERNAME</var></code></code>
 
-### Security
+### Configure networking
+* Create the hostname file <code>/etc/hostname</code>:
+  <pre>
+  <code><var>HOSTNAME</var></code>
+  </pre>
+  > 💡 **Tip:** Choose a hostname to identify the machine on a network.
+* Add the entry to the hosts file <code>/etc/hosts</code>:
+  <pre>
+  127.0.0.1        localhost
+  ::1              localhost
+  127.0.1.1        <var>HOSTNAME</var>.localdomain  <var>HOSTNAME</var>
+  </pre>
+* Install a wireless daemon and a DNS framework: <code>pacman -S dinit-iwd openresolv</code>
+  > 📝 **Note:** Iwd manages networking without a network manager, and aims to replace wpa_supplicant.
+* Create the iwd configuration file <code>/etc/iwd/main.conf</code>:
+  <pre>
+  [General]
+  EnableNetworkConfiguration=true
 
-#### Privilege elevation
-* Install sudo: `pacman -S sudo`
-* Create a temporary symlink to use visudo: `ln -s /usr/bin/nvim /usr/bin/vi`
-* Open the configuration file: `visudo`
-* Allow users in the `wheel` group to use `sudo` without a password by uncommenting the following line:
-  ```
-  %WHEEL ALL=(ALL) NOPASSWD: ALL
-  ```
-* Remove the temporary symlink: `rm /usr/bin/vi`
+  [Network]
+  EnableIPv6=true
+  NameResolvingService=resolvconf
+  </pre>
+  > 📝 **Note:** <code>EnableNetworkConfiguration</code> allows networking through iwd directly without a network manager. \
+  > 📝 **Note:** <code>resolvconf</code> is required using <code>openresolv</code> for DNS management and networking.
+* Enable the networking service: <code>ln -s /etc/dinit.d/iwd /etc/dinit.d/boot.d/</code>
 
-#### Restricting root
-* Restrict root login: `passwd --lock root`
-* Require a user to be in the `wheel` group to use `su` by uncommenting the following line in `/etc/pam.d/su` and `/etc/pam.d/su-l`:
-    ```
-    auth required pam_wheel.so use_uid
-    ```
+### Reboot
+* Exit the chroot environment: <code>exit</code>
+* Unmount the drive: <code>umount -R /mnt</code>
+* Reboot the system: <code>reboot</code>
 
-#### Denying SSH login
-* Install openssh: `pacman -S openssh`
-* Deny SSH login by uncommenting `PermitRootLogin` and changing `prohibit-password` to `no` in `/etc/ssh/sshd_config`:
-    ```
-    PermitRootLogin no
-    ```
-* Restart the SSH daemon: `systemctl restart sshd.service`
+<br>
 
-### Package Management
+# Post-installation
 
-#### Pacman
-* Uncomment the following miscellaneous configurations in `/etc/pacman.conf`:
-  ```
+### Connect to the internet
+* Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
+  > 💡 **Tip:** To find the device run: <code>iwctl device list</code>, and to find the SSID run: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
+* Verify the connection: <code>ping artixlinux.org</code>
+
+### Enable privilege elevation
+* Temporarily set the editor to use visudo: <code>export VISUAL=nvim</code>
+* Open the configuration file: <code>visudo</code>
+* Allow users in the <code>wheel</code> group to use <code>sudo</code> without a password by uncommenting the following line:
+  <pre>
+  %wheel ALL=(ALL:ALL) NOPASSWD: ALL
+  </pre>
+
+### Restrict root
+* Restrict root login: <code>passwd --lock root</code>
+* Require a user to be in the <code>wheel</code> group to use <code>su</code> by uncommenting the following line in <code>/etc/pam.d/su</code> and <code>/etc/pam.d/su-l</code>:
+  <pre>
+  auth required pam_wheel.so use_uid
+  </pre>
+
+### Deny SSH login
+* Install openssh: <code>pacman -S openssh-dinit</code>
+* Deny SSH login by uncommenting <code>PermitRootLogin</code> and changing <code>prohibit-password</code> to <code>no</code> in <code>/etc/ssh/sshd_config</code>:
+  <pre>
+  PermitRootLogin no
+  </pre>
+
+### Configure Pacman
+* Uncomment the following configurations in <code>/etc/pacman.conf</code>:
+  <pre>
   Color
   CheckSpace
   VerbosePkgLists
   ParallelDownloads = 5
   ILoveCandy
-  ```
+  </pre>
 
-#### Mirrors
-* Install pacman-contrib: `pacman -S pacman-contrib`
-* Back up the mirrorlist: `cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup`
-* Uncomment every mirror: `sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup`
-* Rank the mirrors: `rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist`
-* Create a hook to rank mirrors on update in `/etc/pacman.d/hooks/mirrorupgrade.hook`:
-```
-[Trigger]
-Operation = Upgrade
-Type = Package
-Target = pacman-mirrorlist
+### Configure mirrors
+* Install pacman-contrib: <code>pacman -S pacman-contrib</code>
+* Back up the mirrorlist: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup</code>
+* Create a hook to rank mirrors on update in <code>/etc/pacman.d/hooks/rankmirrors.hook</code>:
+  <pre>
+  [Trigger]
+  Operation = Upgrade
+  Type = Package
+  Target = pacman-mirrorlist
 
-[Action]
-Description = Ranking pacman-mirrorlist by speed
-When = PostTransaction
-Depends = pacman-contrib
-Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup && rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist && sed -i '/^#/d' /etc/pacman.d/mirrorlist"
-```
+  [Action]
+  Description = Ranking pacman-mirrorlist by speed
+  When = PostTransaction
+  Depends = pacman-contrib
+  Exec = /bin/sh -c "cp --force /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.pacnew && sed -i '/^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
+  </pre>
 
-#### Makepkg
-* Automatically detect and enable safe architecture-specific optimizations in `/etc/makepkg.conf`:
-  * Remove any `-march` and `-mtune` C flags
-  * Add the `-march=native` C flag:
-    ```
+### Configure Makepkg
+* Automatically detect and enable safe architecture-specific optimizations in <code>/etc/makepkg.conf</code>:
+  * Remove any <code>-march</code> and <code>-mtune</code> C flags
+  * Add the <code>-march=native</code> C flag:
+    <pre>
     CFLAGS="-march=native ..."
-    ```
+    </pre>
   * Uncomment the Rust flags
-  * Add the `-C target-cpu=native` Rust flag:
-    ```
+  * Add the <code>-C target-cpu=native</code> Rust flag:
+    <pre>
     RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
-    ```
-* Use additional parallel compilation in `/etc/makepkg.conf`:
+    </pre>
   * Uncomment the Make flags
-  * Replace the Make flag `-j2` with `-j$(nproc)`:
-    ```
+  * Use parallel compilation by replacing the Make flag <code>-j2</code> with <code>-j$(nproc)</code>:
+    <pre>
     MAKEFLAGS="-j$(nproc)"
-    ```
-* Use multiple cores on compression in `/etc/makepkg.conf`:
-  * Add `--threads=0` to XZ and Zstandard:
-    ```
+    </pre>
+  * Use multiple cores on compression by adding <code>--threads=0</code> to XZ and Zstandard:
+    <pre>
     COMPRESSXZ=(xz -c -z --threads=0 -)
     COMPRESSZST=(zstd -c -z -q --threads=0 -)
-    ```
+    </pre>
 
-#### Arch User Repository helpers
-* Install base-devel and git: `pacman -S base-devel git`
-* Clone Paru: `git clone https://aur.archlinux.org/paru.git`
-* Change directories: `cd paru`
-* Build Paru: `makepkg -si`
-* Change directories: `cd ..`
-* Remove the directory: `rm -r paru`
-* Uninstall Rust: `pacman -Rns rust`
+### Install an AUR helper
+* Install Git: <code>pacman -S git-dinit</code>
+* Clone Paru: <code>git clone https://aur.archlinux.org/paru.git</code>
+  > 📝 **Note:** Paru is the latest AUR helper and a Rust rewrite of Yay.
+* Build Paru: <code>cd paru/ && makepkg -sir</code>
+* Remove the directory: <code>cd ../ && rm -rf paru</code>
 
-### Errors
+### Install the remaining packages
+* Install the remaining packages: <code>TODO</code>
+* Copy the configuration files: <code>TODO</code>
 
-#### tpm tpm0: [Firmware Bug]: TPM interrupt not working
-* In the BIOS change Security->TPM Availability from Available to Hidden
+<br>
 
-#### Screen flashes while booting on TTY
-* Add the following to `/etc/mkinitcpio.conf`:
-    ```
-    MODULES=(i915)
-    ```
-* Recreate the initramfs image: `mkinitcpio -P`
+# Packages
+List all installed packages that are not strict dependencies of other packages: <code>pacman -Qtt</code>
 
-#### cros-usbpd-charger cros-usbpd-charger.5.auto: Unexpected number of charge port count
-* No solution found
-
-### Silence the boot output
-* Add the `quiet` kernel parameter in `/boot/loader/entries/arch.conf`:
-    ```
-    options root=UUID=<UUID> rw quiet
-    ```
-
-## Packages
-List all installed packages that are not strict dependencies of other packages, and which are not in the `base` or `base-devel` package groups: `comm -23 <(pacman -Qqtt | sort) <({ pacman -Qqg base-devel; echo base; } | sort -u)`:
-
-| Package               | Description                         | Justification                             | Notes                                             |
-| --------------------- | ----------------------------------- | ----------------------------------------- | ------------------------------------------------- |
-| backlight_control *   | Backlight brightness controller     | Controls the backlight brightness         |                                                   |
-| bash-completion       | Completion for Bash                 | Adds additional Bash completion commands  |                                                   |
-| firefox               | Web browser                         | Browses the web                           | Select noto-fonts and pipewire-jack dependencies  |
-| foot                  | Terminal emulator                   | Runs the terminal                         |                                                   |
-| hyprland *            | Wayland compositor                  | Manages windows                           |                                                   |
-| intel-ucode           | Intel microcode                     | Updates the firmware for system stability |                                                   |
-| iwd                   | Wireless daemon                     | Manages networking                        |                                                   |
-| linux                 | Linux kernel                        | Runs the Linux kernel                     |                                                   |
-| linux-firmware        | Linux firmware                      | Runs the Linux firmware                   |                                                   |
-| man-db                | Man page reader                     | Reads man pages                           |                                                   |
-| neovim                | Text editor                         | Edits text                                |                                                   |
-| nerd-fonts-noto *     | Patched Noto fonts                  | Displays colorless symbols                | Use Noto fonts since Firefox requires it anyway   |
-| noto-fonts-emoji      | Font family                         | Displays color emojis                     |                                                   |
-| openssh               | Remote login tool with SSH          | Allows remote login with SSH              |                                                   |
-| pacman-contrib        | Tools for Pacman systems            | Checks for updates and ranks mirrors      |                                                   |
-| paru                  | AUR helper                          | Installs packages from the AUR            |                                                   |
-| pipewire-pulse        | Multimedia processor                | Manages audio and video                   | Replaces PulseAudio                               |
-| swayidle              | Idle management daemon              | Manages events on idle                    |                                                   |
-| swaylock              | Screen locker                       | Locks the screen                          |                                                   |
-| waybar-hyprland-git * | Wayland bar for Hyprland            | Displays the bar                          | Git version temporarily needed for sort-by-number |
-| wbg *                 | Wallpaper application               | Sets the background image                 |                                                   |
+| Package               | Justification                                 |
+| --------------------- | --------------------------------------------- |
+| base                  | Tools to install Artix Linux.                 |
+| base-devel            | Tools to build Artix Linux packages.          |
+| efibootmgr            | Boots Linux without a bootloader.             |
+| git-dinit             | Manages version control.                      |
+| intel-ucode           | Updates the firmware for system stability.    |
+| iwd-dinit             | Manages networking without a network manager. |
+| linux                 | Runs the Linux kernel.                        |
+| linux-firmware        | Runs the Linux firmware.                      |
+| neovim                | Edits text.                                   |
+| openssh               | Allows remote login with SSH.                 |
+| pacman-contrib        | Checks for updates and ranks mirrors.         |
+| paru                  | Installs packages from the AUR.               |
 
 \* AUR packages
