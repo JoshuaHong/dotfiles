@@ -15,7 +15,7 @@ main() {
 exportLocalPath() {
   directory="${HOME}/.local/bin"
   if isValidPath "${directory}"; then
-      export PATH="${PATH}:${directory}"
+    export PATH="${PATH}:${directory}"
   fi
 }
 
@@ -48,9 +48,7 @@ exportBashVariables() {
 }
 
 startWayland() {
-  if canStartWayland; then
-      exec Hyprland
-  fi
+  exec river
 }
 
 isValidPath() {
@@ -66,23 +64,6 @@ directoryExists() {
 isDirectoryInPath() {
   directory="${1}"
   echo "${PATH}" | grep --quiet "${directory}"
-}
-
-canStartWayland() {
-  isGraphicalTargetActive && ! displayExists && isVirtualTerminalNumber 1
-}
-
-isGraphicalTargetActive() {
-  systemctl --quiet is-active "graphical.target"
-}
-
-displayExists() {
-  [ "${DISPLAY}" ]
-}
-
-isVirtualTerminalNumber() {
-  number="${1}"
-  [ "${XDG_VTNR}" -eq "${number}" ]
 }
 
 main

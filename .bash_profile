@@ -18,7 +18,7 @@ sourceProfile() {
 sourceBashrc() {
   local bashrc="${HOME}/.bashrc"
   if regularFileExists "${bashrc}"; then
-      source "${bashrc}"
+    source "${bashrc}"
   fi
 }
 

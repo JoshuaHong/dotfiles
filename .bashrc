@@ -5,7 +5,7 @@
 
 main() {
   if ! isRunningInteractively; then
-      return
+    return
   fi
 
   setAliases
@@ -16,7 +16,7 @@ main() {
 
 setAliases() {
   moveToTrash() {
-      command mv --backup=numbered "${@}" "${HOME}/.trash"
+    command mv --backup=numbered "${@}" "${HOME}/.trash"
   }
 
   # ls after cd, and cd to a parent directory for every additional "."
