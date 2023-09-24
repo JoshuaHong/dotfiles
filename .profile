@@ -33,6 +33,7 @@ exportXDGBaseDirectories() {
   export XDG_DATA_HOME="${HOME}/.local/share"
   export XDG_STATE_HOME="${HOME}/.local/state"
 
+  export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
   export HISTFILE="${XDG_STATE_HOME}/bash/history"
   export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
   # Disable the less history file.
