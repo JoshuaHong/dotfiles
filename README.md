@@ -257,6 +257,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | iwd-dinit             | Manages networking without a network manager. |
 | linux                 | Runs the Linux kernel.                        |
 | linux-firmware        | Runs the Linux firmware.                      |
+| man-db                | Reads man pages.                              |
 | neovim                | Edits text.                                   |
 | openssh               | Allows remote login with SSH.                 |
 | pacman-contrib        | Checks for updates and ranks mirrors.         |
