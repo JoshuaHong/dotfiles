@@ -217,7 +217,7 @@ setPrompts() {
   local rbrace="${red}]"
   local dollar="${magenta}$"
   local space=" "
-    PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${rbrace}${dollar}${space}${reset}"
+  PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${rbrace}${dollar}${space}${reset}"
 }
 
 disableFlowControl() {
