@@ -32,19 +32,20 @@ exportXDGBaseDirectories() {
   export XDG_DATA_DIRS="/usr/local/share:/usr/share"
   export XDG_DATA_HOME="${HOME}/.local/share"
   export XDG_STATE_HOME="${HOME}/.local/state"
+
+  export HISTFILE="${XDG_STATE_HOME}/bash/history"
+  export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+  # Disable the less history file.
+  export LESSHISTFILE="-"
 }
 
 exportBashVariables() {
   # Erase previous duplicates from the Bash history file.
   export HISTCONTROL=erasedups
-  # Set the Bash history file path.
-  export HISTFILE="${XDG_STATE_HOME}/bash/history"
   # Don't truncate the Bash history file.
   export HISTFILESIZE=-1
   # Save all commands in the Bash history file without limit.
   export HISTSIZE=-1
-  # Set the inputrc file path.
-  export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
 }
 
 startWayland() {
