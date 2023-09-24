@@ -91,27 +91,27 @@ set vi-ins-mode-string "\1\e[6 q\2"
 set visible-stats on
 
 $if mode=vi
-    # Control-l: clear-screen
-    # set keymap vi-command
-    # "l": vi-insertion-mode
-    # "L": vi-append-mode
-    # "a": beginning-of-line
-    # "A": vi-insert-beg
-    # "r": backward-word
-    # "R": vi-prev-word
-    # "s": forward-word
-    # "S": vi-next-word
-    # "t": end-of-line
-    # "T": vi-append-eol
-    # "n": backward-char
-    # "e": next-history
-    # "i": previous-history
-    # "o": forward-char
-    # "k": vi-change-char
-    # "K": vi-replace
-    # "b": vi-end-word
-    # "B": vi-end-word
-    # set keymap vi-insert
-    # Control-n: previous-history
-    # Control-o: next-history
+  # Control-l: clear-screen
+  # set keymap vi-command
+  # "l": vi-insertion-mode
+  # "L": vi-append-mode
+  # "a": beginning-of-line
+  # "A": vi-insert-beg
+  # "r": backward-word
+  # "R": vi-prev-word
+  # "s": forward-word
+  # "S": vi-next-word
+  # "t": end-of-line
+  # "T": vi-append-eol
+  # "n": backward-char
+  # "e": next-history
+  # "i": previous-history
+  # "o": forward-char
+  # "k": vi-change-char
+  # "K": vi-replace
+  # "b": vi-end-word
+  # "B": vi-end-word
+  # set keymap vi-insert
+  # Control-n: previous-history
+  # Control-o: next-history
 $endif
