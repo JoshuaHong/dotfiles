@@ -201,31 +201,31 @@ setOptions() {
 }
 
 setPrompts() {
-    local red="\[\e[31m\]"
-    local green="\[\e[32m\]"
-    local yellow="\[\e[33m\]"
-    local blue="\[\e[34m\]"
-    local magenta="\[\e[35m\]"
-    local cyan="\[\e[36m\]"
-    local lightYellow="\[\e[93m\]"
-    local reset="\[\e[m\]"
-    local lbrace="${red}["
-    local username="${yellow}\u"
-    local at="${lightYellow}@"
-    local hostname="${green}\h"
-    local pwd="${blue}\W"
-    local rbrace="${red}]"
-    local dollar="${magenta}$"
-    local space=" "
+  local red="\[\e[31m\]"
+  local green="\[\e[32m\]"
+  local yellow="\[\e[33m\]"
+  local blue="\[\e[34m\]"
+  local magenta="\[\e[35m\]"
+  local cyan="\[\e[36m\]"
+  local lightYellow="\[\e[93m\]"
+  local reset="\[\e[m\]"
+  local lbrace="${red}["
+  local username="${yellow}\u"
+  local at="${lightYellow}@"
+  local hostname="${green}\h"
+  local pwd="${blue}\W"
+  local rbrace="${red}]"
+  local dollar="${magenta}$"
+  local space=" "
     PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${rbrace}${dollar}${space}${reset}"
 }
 
 disableFlowControl() {
-    stty -ixon  # Don't allow `Ctrl+S` to disable terminal execution.
+  stty -ixon  # Don't allow `Ctrl+S` to disable terminal execution.
 }
 
 isRunningInteractively() {
-    tty --quiet
+  tty --quiet
 }
 
 main
