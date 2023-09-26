@@ -8,7 +8,7 @@ main() {
   exportLocalPath
   exportPrograms
   exportXDGBaseDirectories
-  exportBashVariables
+  exportVariables
   startWayland
 }
 
@@ -36,17 +36,19 @@ exportXDGBaseDirectories() {
   export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
   export HISTFILE="${XDG_STATE_HOME}/bash/history"
   export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
-  # Disable the less history file.
-  export LESSHISTFILE="-"
 }
 
-exportBashVariables() {
+exportVariables() {
   # Erase previous duplicates from the Bash history file.
   export HISTCONTROL=erasedups
   # Don't truncate the Bash history file.
   export HISTFILESIZE=-1
   # Save all commands in the Bash history file without limit.
   export HISTSIZE=-1
+  # Disable the less history file.
+  export LESSHISTFILE="-"
+  # Set the libseat backend for River.
+  export LIBSEAT_BACKEND=logind
 }
 
 startWayland() {
