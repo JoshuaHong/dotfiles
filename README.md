@@ -192,20 +192,45 @@ The Artix Linux environment.
   </pre>
 
 ### Configure mirrors
-* Install pacman-contrib: <code>pacman -S pacman-contrib</code>
-* Back up the mirrorlist: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup</code>
-* Create a hook to rank mirrors on update in <code>/etc/pacman.d/hooks/rankmirrors.hook</code>:
+* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
+* Install artix-archlinux-support for Arch Linux packages: <code>pacman -S artix-archlinux-support</code>
+  > 📝 **Note:** This is needed because many common Arch Linux packages are missing from the Artix Linux repositories.
+* Add the Arch Linux mirrorlists **after** the Artix Linux mirrorlists in <code>/etc/pacman.conf</code>:
+  <pre>
+  [extra]
+  Include = /etc/pacman.d/mirrorlist-arch
+
+  [multilib]
+  Include = /etc/pacman.d/mirrorlist-arch
+  </pre>
+  > ⚠️ **Important:** The Arch mirrorlists must be listed after the Artix mirrorlists so that the Artix packages take precedence.
+* Update the keyring for Arch packages: <code>pacman-key --populate archlinux</code>
+* Back up the mirrorlists: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup && cp /etc/pacman.d/mirrorlist-arch /etc/pacman.d/mirrorlist-arch.backup</code>
+* Create a hook to rank mirrors on artix-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors.hook</code>:
   <pre>
   [Trigger]
   Operation = Upgrade
   Type = Package
-  Target = pacman-mirrorlist
+  Target = artix-mirrorlist
 
   [Action]
-  Description = Ranking pacman-mirrorlist by speed
+  Description = Ranking artix-mirrorlist by speed
   When = PostTransaction
   Depends = pacman-contrib
-  Exec = /bin/sh -c "cp --force /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.pacnew && sed -i '/^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
+  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i -e 's/^#Server/Server/' -e /^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
+  </pre>
+* Create a hook to rank mirrors on archlinux-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors-arch.hook</code>:
+  <pre>
+  [Trigger]
+  Operation = Upgrade
+  Type = Package
+  Target = archlinux-mirrorlist
+
+  [Action]
+  Description = Ranking archlinux-mirrorlist by speed
+  When = PostTransaction
+  Depends = pacman-contrib
+  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist-arch.pacnew /etc/pacman.d/mirrorlist-arch.backup && sed -i -e 's/^#Server/Server/' -e '/^#/d' /etc/pacman.d/mirrorlist-arch.pacnew && rankmirrors /etc/pacman.d/mirrorlist-arch.pacnew > /etc/pacman.d/mirrorlist-arch && rm /etc/pacman.d/mirrorlist-arch.pacnew"
   </pre>
 
 ### Configure Makepkg
@@ -247,20 +272,21 @@ The Artix Linux environment.
 # Packages
 List all installed packages that are not strict dependencies of other packages: <code>pacman -Qtt</code>
 
-| Package               | Justification                                 |
-| --------------------- | --------------------------------------------- |
-| base                  | Tools to install Artix Linux.                 |
-| base-devel            | Tools to build Artix Linux packages.          |
-| efibootmgr            | Boots Linux without a bootloader.             |
-| git-dinit             | Manages version control.                      |
-| intel-ucode           | Updates the firmware for system stability.    |
-| iwd-dinit             | Manages networking without a network manager. |
-| linux                 | Runs the Linux kernel.                        |
-| linux-firmware        | Runs the Linux firmware.                      |
-| man-db                | Reads man pages.                              |
-| neovim                | Edits text.                                   |
-| openssh               | Allows remote login with SSH.                 |
-| pacman-contrib        | Checks for updates and ranks mirrors.         |
-| paru                  | Installs packages from the AUR.               |
+| Package                 | Justification                                                                                                          |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| artix-archlinux-support | Enables installing Arch Linux packages. Many common Arch Linux packages are missing from the Artix Linux repositories. |
+| base                    | Tools to install Artix Linux.                                                                                          |
+| base-devel              | Tools to build Artix Linux packages.                                                                                   |
+| efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
+| git-dinit               | Manages version control.                                                                                               |
+| intel-ucode             | Updates the firmware for system stability.                                                                             |
+| iwd-dinit               | Manages networking without a full network manager.                                                                     |
+| linux                   | Runs the Linux kernel.                                                                                                 |
+| linux-firmware          | Runs the Linux firmware.                                                                                               |
+| man-db                  | Reads man pages.                                                                                                       |
+| neovim                  | Edits text.                                                                                                            |
+| openssh                 | Allows remote login with SSH.                                                                                          |
+| pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
+| paru                    | Installs packages from the Arch User Repository.                                                                       |
 
 \* AUR packages
