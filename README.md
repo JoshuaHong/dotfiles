@@ -278,6 +278,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | base                    | Tools to install Artix Linux.                                                                                          |
 | base-devel              | Tools to build Artix Linux packages.                                                                                   |
 | efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
+| foot                    | Emulates the terminal.                                                                                                 |
 | git-dinit               | Manages version control.                                                                                               |
 | intel-ucode             | Updates the firmware for system stability.                                                                             |
 | iwd-dinit               | Manages networking without a full network manager.                                                                     |
@@ -288,5 +289,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
 | paru                    | Installs packages from the Arch User Repository.                                                                       |
+| polkit                  | Manages elevated permissions to run Wayland.                                                                           |
+| river                   | Manages windows.                                                                                                       |
 
 \* AUR packages
