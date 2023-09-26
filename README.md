@@ -278,18 +278,19 @@ List all installed packages that are not strict dependencies of other packages: 
 | base                    | Tools to install Artix Linux.                                                                                          |
 | base-devel              | Tools to build Artix Linux packages.                                                                                   |
 | efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
-| foot                    | Emulates the terminal.                                                                                                 |
+| foot                    | Terminal emulator.                                                                                                     |
 | git-dinit               | Manages version control.                                                                                               |
 | intel-ucode             | Updates the firmware for system stability.                                                                             |
 | iwd-dinit               | Manages networking without a full network manager.                                                                     |
-| linux                   | Runs the Linux kernel.                                                                                                 |
-| linux-firmware          | Runs the Linux firmware.                                                                                               |
+| linux                   | Linux kernel.                                                                                                          |
+| linux-firmware          | Linux firmware.                                                                                                        |
 | man-db                  | Reads man pages.                                                                                                       |
-| neovim                  | Edits text.                                                                                                            |
+| neovim                  | Text editor.                                                                                                           |
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
 | paru                    | Installs packages from the Arch User Repository.                                                                       |
 | polkit                  | Manages elevated permissions to run Wayland.                                                                           |
-| river                   | Manages windows.                                                                                                       |
+| river                   | Window manager.                                                                                                        |
+| ungoogled-chromium      | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
 
 \* AUR packages
