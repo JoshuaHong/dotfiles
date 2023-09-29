@@ -104,10 +104,9 @@ The Artix Linux environment.
 * Install a boot manager and the microcode: <code>pacman -S efibootmgr intel-ucode</code>
   > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader. \
   > 📝 **Note:** The microcode package depends on the CPU manufacturer.
-* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Artix Linux" --loader /vmlinuz-linux --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw quiet console=tty2 initrd=\\<code><var>CPU_MANUFACTURER</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
+* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Artix Linux" --loader /vmlinuz-linux --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw quiet initrd=\\<code><var>CPU_MANUFACTURER</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
   > 📝 **Note:** For example, if the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>PARTITION_NUMBER</code> is <code>1</code>. \
   > 📝 **Note:** Replace <code>CPU_MANUFACTURER</code> with <code>amd</code> or <code>intel</code>. \
-  > 📝 **Note:** <code>console=tty2</code> redirects all boot messages to TTY 2. \
   > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
 * Verify the entry was added properly: <code>efibootmgr --unicode</code>
 * Set the boot order: <code>efibootmgr --bootorder <var>####</var>,<var>####</var> --unicode</code>
