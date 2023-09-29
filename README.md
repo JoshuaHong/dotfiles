@@ -32,6 +32,7 @@ The Artix Linux environment.
 ### Enter the live environment
 * Boot into the installation medium
 * Log in using username <code>artix</code> and password <code>artix</code>
+* Switch to the root user: <code>su</code>
 
 ### Partition the disks
 * Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
