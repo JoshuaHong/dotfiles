@@ -132,7 +132,7 @@ The Artix Linux environment.
   ::1              localhost
   127.0.1.1        <var>HOSTNAME</var>.localdomain  <var>HOSTNAME</var>
   </pre>
-* Install a wireless daemon and a DNS framework: <code>pacman -S dinit-iwd openresolv</code>
+* Install a wireless daemon and a DNS framework: <code>pacman -S iwd-dinit openresolv</code>
   > 📝 **Note:** Iwd manages networking without a network manager, and aims to replace wpa_supplicant.
 * Create the iwd configuration file <code>/etc/iwd/main.conf</code>:
   <pre>
