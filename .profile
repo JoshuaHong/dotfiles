@@ -40,7 +40,7 @@ exportXDGBaseDirectories() {
 
 exportVariables() {
   # Erase previous duplicates from the Bash history file.
-  export HISTCONTROL=erasedups
+  export HISTCONTROL="erasedups"
   # Don't truncate the Bash history file.
   export HISTFILESIZE=-1
   # Save all commands in the Bash history file without limit.
@@ -48,7 +48,7 @@ exportVariables() {
   # Disable the less history file.
   export LESSHISTFILE="-"
   # Set the libseat backend for River.
-  export LIBSEAT_BACKEND=logind
+  export LIBSEAT_BACKEND="logind"
 }
 
 startWayland() {
