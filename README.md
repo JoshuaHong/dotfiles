@@ -281,8 +281,13 @@ The Artix Linux environment.
 * Remove the directory: <code>cd ../ && rm -rf paru</code>
 
 ### Install the remaining packages
-* Install the remaining packages: <code>TODO</code>
-* Copy the configuration files: <code>TODO</code>
+* Install the remaining packages: <code>pacman -S foot man-db polkit river ungoogled-chromium</code>
+  > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
+* Copy the configuration files: <code>cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
+
+### Reboot
+* Reboot: <code>reboot</code>
 
 <br>
 
