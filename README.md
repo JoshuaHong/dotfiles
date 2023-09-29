@@ -186,14 +186,14 @@ The Artix Linux environment.
 ### Configure Pacman
 * Uncomment the following configurations in <code>/etc/pacman.conf</code>:
   <pre>
-  Color
   CheckSpace
-  VerbosePkgLists
-  ParallelDownloads = 5
+  Color
   ILoveCandy
+  ParallelDownloads = 5
+  VerbosePkgLists
   </pre>
 * Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
-* Create a hook that finds all .pacnew and .pacsave files on upgrade:
+* Create a hook that finds all .pacnew and .pacsave files on upgrade in <code>/etc/pacman.d/hooks/pacdiff.hook</code>:
   <pre>
   [Trigger]
   Operation = Upgrade
@@ -232,7 +232,7 @@ The Artix Linux environment.
   Description = Ranking artix-mirrorlist by speed
   When = PostTransaction
   Depends = pacman-contrib
-  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i -e 's/^#Server/Server/' -e /^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
+  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i -e 's/^#Server/Server/' -e '/^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
   </pre>
 * Create a hook to rank mirrors on archlinux-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors-arch.hook</code>:
   <pre>
@@ -247,6 +247,7 @@ The Artix Linux environment.
   Depends = pacman-contrib
   Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist-arch.pacnew /etc/pacman.d/mirrorlist-arch.backup && sed -i -e 's/^#Server/Server/' -e '/^#/d' /etc/pacman.d/mirrorlist-arch.pacnew && rankmirrors /etc/pacman.d/mirrorlist-arch.pacnew > /etc/pacman.d/mirrorlist-arch && rm /etc/pacman.d/mirrorlist-arch.pacnew"
   </pre>
+* Sync the Arch Linux repositories: <code>pacman -Syu</code>
 
 ### Configure Makepkg
 * Automatically detect and enable safe architecture-specific optimizations in <code>/etc/makepkg.conf</code>:
@@ -276,6 +277,7 @@ The Artix Linux environment.
 * Clone Paru: <code>git clone https://aur.archlinux.org/paru.git</code>
   > 📝 **Note:** Paru is the latest AUR helper and a Rust rewrite of Yay.
 * Build Paru: <code>cd paru/ && makepkg -sir</code>
+  > 📝 **Note:** Select the rust cargo dependency.
 * Remove the directory: <code>cd ../ && rm -rf paru</code>
 
 ### Install the remaining packages
@@ -303,7 +305,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | neovim                  | Text editor.                                                                                                           |
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
-| paru                    | Installs packages from the Arch User Repository.                                                                       |
+| paru                    | Installs packages from the Arch User Repository. Install using the rust depencendy.                                    |
 | polkit                  | Manages elevated permissions to run Wayland.                                                                           |
 | river                   | Window manager.                                                                                                        |
 | ungoogled-chromium      | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
