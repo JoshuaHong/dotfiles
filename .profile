@@ -52,8 +52,7 @@ exportVariables() {
 }
 
 startWayland() {
-  exec river &> /dev/null
-  clear
+  exec river > /dev/null 2>&1
 }
 
 isValidPath() {
