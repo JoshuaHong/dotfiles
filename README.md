@@ -11,6 +11,8 @@ The Artix Linux environment.
 * Operating system: [Artix Linux](https://artixlinux.org)
 * Init system: [Dinit](https://github.com/davmac314/dinit)
   > 📝 **Note:** Dinit is the fastest and simplist and solves problems of the other init systems.
+* Browser: [Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium)
+  > 📝 **Note:** All of the benefits of Chromium without the spyware.
 
 <br>
 
