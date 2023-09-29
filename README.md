@@ -190,9 +190,22 @@ The Artix Linux environment.
   ParallelDownloads = 5
   ILoveCandy
   </pre>
+* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
+* Create a hook that finds all .pacnew and .pacsave files on upgrade:
+  <pre>
+  [Trigger]
+  Operation = Upgrade
+  Type = Package
+  Target = *
+
+  [Action]
+  Description = Finding all .pacnew and .pacsave files
+  When = PostTransaction
+  Depends = pacman-contrib
+  Exec = /bin/sh -c "pacdiff -o"
+  </pre>
 
 ### Configure mirrors
-* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
 * Install artix-archlinux-support for Arch Linux packages: <code>pacman -S artix-archlinux-support</code>
   > 📝 **Note:** This is needed because many common Arch Linux packages are missing from the Artix Linux repositories.
 * Add the Arch Linux mirrorlists **after** the Artix Linux mirrorlists in <code>/etc/pacman.conf</code>:
