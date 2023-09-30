@@ -268,7 +268,7 @@ The Artix Linux environment.
 * Remove the directory: <code>cd ../ && rm -rf paru</code>
 
 ### Install the remaining packages
-* Install the remaining packages: <code>pacman -S foot man-db polkit river ungoogled-chromium</code>
+* Install the remaining packages: <code>pacman -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
@@ -298,9 +298,10 @@ List all installed packages that are not strict dependencies of other packages: 
 | noto-fonts-emoji        | Emoji fonts.                                                                                                           |
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
-| paru                    | Installs packages from the Arch User Repository. Install using the rust depencendy.                                    |
+| paru *                  | Installs packages from the Arch User Repository. Install using the rust depencendy.                                    |
 | polkit                  | Manages elevated permissions to run Wayland.                                                                           |
 | river                   | Window manager.                                                                                                        |
 | ungoogled-chromium      | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
+| yambar *                | Status panel.                                                                                                          |
 
 \* AUR packages
