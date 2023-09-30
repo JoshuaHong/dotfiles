@@ -192,20 +192,6 @@ The Artix Linux environment.
   ParallelDownloads = 5
   VerbosePkgLists
   </pre>
-* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
-* Create a hook that finds all .pacnew and .pacsave files on upgrade in <code>/etc/pacman.d/hooks/pacdiff.hook</code>:
-  <pre>
-  [Trigger]
-  Operation = Upgrade
-  Type = Package
-  Target = *
-
-  [Action]
-  Description = Finding all .pacnew and .pacsave files
-  When = PostTransaction
-  Depends = pacman-contrib
-  Exec = /bin/sh -c "pacdiff -o"
-  </pre>
 
 ### Configure mirrors
 * Install artix-archlinux-support for Arch Linux packages: <code>pacman -S artix-archlinux-support</code>
@@ -220,6 +206,7 @@ The Artix Linux environment.
   </pre>
   > ⚠️ **Important:** The Arch mirrorlists must be listed after the Artix mirrorlists so that the Artix packages take precedence.
 * Update the keyring for Arch packages: <code>pacman-key --populate archlinux</code>
+* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
 * Back up the mirrorlists: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup && cp /etc/pacman.d/mirrorlist-arch /etc/pacman.d/mirrorlist-arch.backup</code>
 * Create a hook to rank mirrors on artix-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors.hook</code>:
   <pre>
