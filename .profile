@@ -59,10 +59,10 @@ startWayland() {
 
 isValidPath() {
   directory="${1}"
-  directoryExists "${directory}" && ! isDirectoryInPath "${directory}"
+  isDirectory "${directory}" && ! isDirectoryInPath "${directory}"
 }
 
-directoryExists() {
+isDirectory() {
   directory="${1}"
   [ -d "${directory}" ]
 }

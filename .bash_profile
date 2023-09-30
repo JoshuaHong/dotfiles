@@ -10,19 +10,19 @@ main() {
 
 sourceProfile() {
   local profile="${HOME}/.profile"
-  if regularFileExists "${profile}"; then
+  if isRegularFile "${profile}"; then
     source "${profile}"
   fi
 }
 
 sourceBashrc() {
   local bashrc="${HOME}/.bashrc"
-  if regularFileExists "${bashrc}"; then
+  if isRegularFile "${bashrc}"; then
     source "${bashrc}"
   fi
 }
 
-regularFileExists() {
+isRegularFile() {
   local file="${1}"
   [[ -f "${file}" ]]
 }

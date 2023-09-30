@@ -61,3 +61,6 @@ riverctl map normal Super+Shift Q exit
 # Set layout generator.
 riverctl default-layout rivertile
 rivertile -view-padding 10 -outer-padding 10 -main-ratio 0.5 &
+
+# Start external programs.
+wbg "${XDG_DATA_HOME}/backgrounds/background.jpg" &
