@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # The script executed when Bash is invoked as an interactive login shell.
 # Contains commands to set up the Bash environment.

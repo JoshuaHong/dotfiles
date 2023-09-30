@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 #
 # The script executed when a Bourne shell is invoked as an interactive login
 # shell.
@@ -20,8 +20,10 @@ exportLocalPath() {
 }
 
 exportPrograms() {
+  export BROWSER="/usr/bin/chromium"
   export EDITOR="/usr/bin/nvim"
   export PAGER="/usr/bin/less"
+  export TERM="/usr/bin/foot"
   export VISUAL="/usr/bin/nvim"
 }
 
