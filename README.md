@@ -295,6 +295,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | linux-firmware          | Linux firmware.                                                                                                        |
 | man-db                  | Reads man pages.                                                                                                       |
 | neovim                  | Text editor.                                                                                                           |
+| noto-fonts-emoji        | Emoji fonts.                                                                                                           |
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
 | paru                    | Installs packages from the Arch User Repository. Install using the rust depencendy.                                    |
