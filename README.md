@@ -9,10 +9,19 @@ The Artix Linux environment.
 
 # Programs
 * Operating system: [Artix Linux](https://artixlinux.org)
+  > Simple, fast, systemd-free.
 * Init system: [Dinit](https://github.com/davmac314/dinit)
-  > 📝 **Note:** Dinit is the fastest and simplist and solves problems of the other init systems.
+  > The fastest and simplist, and solves problems of the other init systems.
+* Compositor: [River](https://github.com/riverwm/river)
+  > A simple and fast tiling Wayland compositor.
+* Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
+  > A fast, lightweight, minimalistic, and Wayland native terminal emulator.
 * Browser: [Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium)
-  > 📝 **Note:** All of the benefits of Chromium without the spyware.
+  > All of the benefits of Chromium without the spyware.
+* Status bar: [Yambar](https://codeberg.org/dnkl/yambar)
+  > A modular, configurable, and lightweight status bar.
+* Screenlocker: [Waylock](https://github.com/ifreund/waylock)
+  > A small and secure screenlocker for Wayland.
 
 <br>
 
@@ -268,10 +277,10 @@ The Artix Linux environment.
 * Remove the directory: <code>cd ../ && rm -rf paru</code>
 
 ### Install the remaining packages
-* Install the remaining packages: <code>pacman -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium yambar</code>
+* Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
-* Copy the configuration files: <code>cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
+* Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
 ### Reboot
 * Reboot: <code>reboot</code>
@@ -287,7 +296,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | base                    | Tools to install Artix Linux.                                                                                          |
 | base-devel              | Tools to build Artix Linux packages.                                                                                   |
 | efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
-| foot                    | Terminal emulator.                                                                                                     |
+| foot                    | Terminal emulator. Fast, lightweight, minimalistic, and Wayland native.                                                |
 | git-dinit               | Manages version control.                                                                                               |
 | intel-ucode             | Updates the firmware for system stability.                                                                             |
 | iwd-dinit               | Manages networking without a full network manager.                                                                     |
@@ -295,13 +304,15 @@ List all installed packages that are not strict dependencies of other packages: 
 | linux-firmware          | Linux firmware.                                                                                                        |
 | man-db                  | Reads man pages.                                                                                                       |
 | neovim                  | Text editor.                                                                                                           |
-| noto-fonts-emoji        | Emoji fonts.                                                                                                           |
+| noto-fonts-emoji        | Emoji fonts. The only open-source color emoji font.                                                                    |
 | openssh                 | Allows remote login with SSH.                                                                                          |
 | pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
-| paru *                  | Installs packages from the Arch User Repository. Install using the rust depencendy.                                    |
+| paru *                  | Installs packages from the Arch User Repository. The latest AUR helper and Rust rewrite of Yay. Install using rust.    |
 | polkit                  | Manages elevated permissions to run Wayland.                                                                           |
-| river                   | Window manager.                                                                                                        |
+| river                   | Window manager. Simple and fast tiling Wayland compositor.                                                             |
 | ungoogled-chromium      | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
-| yambar *                | Status panel.                                                                                                          |
+| waylock                 | Screenlocker. A small and secure screenlocker for Wayland.                                                             |
+| wbg *                   | Sets the wallpaper for Wayland. Extremely minimal; does only one thing.                                                |
+| yambar *                | Status panel. Modular, configurable, and lightweight.                                                                  |
 
 \* AUR packages
