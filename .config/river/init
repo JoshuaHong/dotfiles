@@ -7,10 +7,10 @@ riverctl attach-mode bottom
 riverctl border-width 3
 
 # Set colors.
-riverctl background-color 0x4B3B76
-riverctl border-color-focused 0x33CCFF
-riverctl border-color-unfocused 0x595959
-riverctl border-color-urgent 0xFFCCCB
+riverctl background-color 0x303446
+riverctl border-color-focused 0xBaBBF1
+riverctl border-color-inactive 0x737994
+riverctl border-color-urgent 0xE5C890
 
 # Spawn programs.
 riverctl map normal Super Return spawn foot
