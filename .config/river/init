@@ -15,6 +15,7 @@ riverctl border-color-urgent 0xE5C890
 # Spawn programs.
 riverctl map normal Super Return spawn foot
 riverctl map normal Super G spawn "chromium --ozone-platform-hint=auto"
+riverctl map normal Super+Shift E spawn "waylock -init-color 0x303446 -fail-color 0xE78284"
 
 # Change layout.
 riverctl map normal Super Space toggle-float
