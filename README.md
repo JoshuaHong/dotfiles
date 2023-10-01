@@ -282,6 +282,12 @@ The Artix Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
+### Import GPG keys
+* Create the GnuPG directory: <code>mkdir --parents ~/.local/share/gnupg/private-keys-v1.d</code>
+* Import the public key: <code>gpg --import <code><var>PUBLIC-KEY</var></code>.gpg</code>
+* Import the private key: <code>gpg --import <code><var>PRIVATE-KEY</var></code>.gpg</code>
+* Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ~/.local/share/gnupg/openpgp-revocs.d/</code>
+
 ### Reboot
 * Reboot: <code>reboot</code>
 
