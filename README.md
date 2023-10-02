@@ -283,10 +283,13 @@ The Artix Linux environment.
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
 ### Import GPG keys
-* Create the GnuPG directory: <code>mkdir --parents ~/.local/share/gnupg/private-keys-v1.d</code>
+* Create the GnuPG directory: <code>mkdir --parents ${XDG_DATA_HOME}/gnupg/private-keys-v1.d</code>
+  > 💡 **Tip:** May need to manually export the <code>XDG_DATA_HOME</code> environment variable temporarily.
 * Import the public key: <code>gpg --import <code><var>PUBLIC-KEY</var></code>.gpg</code>
 * Import the private key: <code>gpg --import <code><var>PRIVATE-KEY</var></code>.gpg</code>
-* Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ~/.local/share/gnupg/openpgp-revocs.d/</code>
+* Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ${XDG_DATA_HOME}/gnupg/openpgp-revocs.d/</code>
+* Set the permissions: <code>chown -R $(whoami) ${XDG_DATA_HOME}/gnupg && chmod 700 ${XDG_DATA_HOME}/gnupg && chmod 600 ${XDG_DATA_HOME}/* && chmod 700 ${XDG_DATA_HOME}/gnupg/*.d</code>
+  > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>
 
 ### Reboot
 * Reboot: <code>reboot</code>
