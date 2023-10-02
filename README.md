@@ -288,7 +288,7 @@ The Artix Linux environment.
 * Import the public key: <code>gpg --import <code><var>PUBLIC-KEY</var></code>.gpg</code>
 * Import the private key: <code>gpg --import <code><var>PRIVATE-KEY</var></code>.gpg</code>
 * Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ${XDG_DATA_HOME}/gnupg/openpgp-revocs.d</code>
-* Set the permissions: <code>chown -R $(whoami) ${XDG_DATA_HOME}/gnupg && chmod 700 ${XDG_DATA_HOME}/gnupg && chmod 600 ${XDG_DATA_HOME}/* && chmod 700 ${XDG_DATA_HOME}/gnupg/*.d</code>
+* Set the permissions: <code>chown -R $(whoami) ${XDG_DATA_HOME}/gnupg && chmod 700 ${XDG_DATA_HOME}/gnupg && chmod 600 ${XDG_DATA_HOME}/gnupg/* && chmod 700 ${XDG_DATA_HOME}/gnupg/*.d</code>
   > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
 
 ### Reboot
