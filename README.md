@@ -272,9 +272,9 @@ The Artix Linux environment.
 * Install Git: <code>pacman -S git-dinit</code>
 * Clone Paru: <code>git clone https://aur.archlinux.org/paru.git</code>
   > 📝 **Note:** Paru is the latest AUR helper and a Rust rewrite of Yay.
-* Build Paru: <code>cd paru/ && makepkg -sir</code>
+* Build Paru: <code>cd paru && makepkg -sir</code>
   > 📝 **Note:** Select the rust cargo dependency.
-* Remove the directory: <code>cd ../ && rm -rf paru</code>
+* Remove the directory: <code>cd .. && rm -rf paru</code>
 
 ### Install the remaining packages
 * Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
@@ -283,8 +283,8 @@ The Artix Linux environment.
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
 ### Import GPG keys
+* Temporarily export the XDG_DATA_HOME environment variable: <code>export XDG_DATA_HOME=~/.local/share</code>
 * Create the GnuPG directory: <code>mkdir --parents ${XDG_DATA_HOME}/gnupg/private-keys-v1.d</code>
-  > 💡 **Tip:** May need to manually export the <code>XDG_DATA_HOME</code> environment variable temporarily.
 * Import the public key: <code>gpg --import <code><var>PUBLIC-KEY</var></code>.gpg</code>
 * Import the private key: <code>gpg --import <code><var>PRIVATE-KEY</var></code>.gpg</code>
 * Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ${XDG_DATA_HOME}/gnupg/openpgp-revocs.d/</code>
