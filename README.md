@@ -276,12 +276,6 @@ The Artix Linux environment.
   > 📝 **Note:** Select the rust cargo dependency.
 * Remove the directory: <code>cd .. && rm -rf paru</code>
 
-### Install the remaining packages
-* Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
-  > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
-* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
-* Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
-
 ### Import GPG keys
 * Temporarily export the XDG_DATA_HOME environment variable: <code>export XDG_DATA_HOME=~/.local/share</code>
 * Create the GnuPG directory: <code>mkdir --parents ${XDG_DATA_HOME}/gnupg/private-keys-v1.d</code>
@@ -290,6 +284,12 @@ The Artix Linux environment.
 * Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ${XDG_DATA_HOME}/gnupg/openpgp-revocs.d</code>
 * Set the permissions: <code>chown -R $(whoami) ${XDG_DATA_HOME}/gnupg && chmod 700 ${XDG_DATA_HOME}/gnupg && chmod 600 ${XDG_DATA_HOME}/gnupg/* && chmod 700 ${XDG_DATA_HOME}/gnupg/*.d</code>
   > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
+
+### Install the remaining packages
+* Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
+  > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
+* Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
 ### Reboot
 * Reboot: <code>reboot</code>
