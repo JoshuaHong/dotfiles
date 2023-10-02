@@ -154,7 +154,7 @@ The Artix Linux environment.
   </pre>
   > 📝 **Note:** <code>EnableNetworkConfiguration</code> allows networking through iwd directly without a network manager. \
   > 📝 **Note:** <code>resolvconf</code> is required using <code>openresolv</code> for DNS management and networking.
-* Enable the networking service: <code>ln -s /etc/dinit.d/iwd /etc/dinit.d/boot.d/</code>
+* Enable the networking service: <code>ln -s /etc/dinit.d/iwd /etc/dinit.d/boot.d</code>
 
 ### Reboot
 * Exit the chroot environment: <code>exit</code>
@@ -279,7 +279,7 @@ The Artix Linux environment.
 ### Install the remaining packages
 * Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
-* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
 
 ### Import GPG keys
