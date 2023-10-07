@@ -286,7 +286,7 @@ The Artix Linux environment.
   > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
 
 ### Install the remaining packages
-* Install the remaining packages: <code>paru -S foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
+* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
@@ -302,6 +302,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | Package                 | Justification                                                                                                          |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | artix-archlinux-support | Enables installing Arch Linux packages. Many common Arch Linux packages are missing from the Artix Linux repositories. |
+| backlight_control *     | Controls the backlight brightness. Extremely minimal and requires no permissions setup like other backlight utilities. |
 | base                    | Tools to install Artix Linux.                                                                                          |
 | base-devel              | Tools to build Artix Linux packages.                                                                                   |
 | efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
