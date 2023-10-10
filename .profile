@@ -49,8 +49,6 @@ exportVariables() {
   export HISTSIZE=-1
   # Disable the less history file.
   export LESSHISTFILE="-"
-  # Set the libseat backend for River.
-  export LIBSEAT_BACKEND="logind"
 }
 
 startWayland() {

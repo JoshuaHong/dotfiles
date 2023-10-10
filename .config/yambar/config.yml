@@ -1,0 +1,123 @@
+# The Yambar configuration file.
+
+bar:
+  height: 40
+  location: top
+  font: monospace:pixelsize=18
+  background: 2B303B80
+  foreground: C6D0F5FF
+  spacing: 10
+  border:
+    bottom-width: 3
+    color: 64727D80
+
+  left:
+    - river:
+        anchors:
+          - base: &tags
+              margin: 10
+              conditions:
+                id == 1: {string: {text: "1"}}
+                id == 2: {string: {text: "2"}}
+                id == 3: {string: {text: "3"}}
+                id == 4: {string: {text: "4"}}
+                id == 5: {string: {text: "5"}}
+                id == 6: {string: {text: "6"}}
+                id == 7: {string: {text: "7"}}
+                id == 8: {string: {text: "8"}}
+                id == 9: {string: {text: "9"}}
+                id == 10: {string: {text: "0"}}
+        content:
+          map:
+            conditions:
+              state == urgent:
+                map:
+                  <<: *tags
+                  deco: {background: {color: E7828480}}
+              state == focused:
+                map:
+                  <<: *tags
+                  deco: {background: {color: 949CBB30}}
+              state == invisible && occupied:
+                map:
+                  <<: *tags
+                  deco: {background: {color: 51576D50}}
+
+  center:
+    - river:
+        title: {string: {text: "{title}"}}
+        content:
+          empty: {}
+
+  right:
+    - script:
+        path: /home/josh/.config/yambar/scripts/updates.sh
+        content:
+          map:
+            conditions:
+              pkg > 0:
+                string: {text: "📥{pkg}"}
+    - removables:
+        content:
+          map:
+            conditions:
+              mounted:
+                string: {text: "💿dksfjdlsk"}
+              ~mounted:
+                string: {text: "⏏ hi"}
+    - alsa:
+        card: default
+        mixer: Master
+        content:
+          map:
+            conditions:
+              muted:
+                string: {text: "🔇{percent}%"}
+              ~muted:
+                ramp:
+                  tag: percent
+                  items:
+                    - string: {text: "🔈{percent}%"}
+                    - string: {text: "🔉{percent}%"}
+                    - string: {text: "🔊{percent}%"}
+    - backlight:
+        name: intel_backlight
+        content:
+          string: {text: "💡{percent}%"}
+    - battery:
+        name: BAT1
+        poll-interval: 60000
+        content:
+          map:
+            conditions:
+              state == full || capacity == 100:
+                string: {text: "✅{capacity}%"}
+              state == "not charging":
+                string: {text: "🔌{capacity}%"}
+              state == charging:
+                string: {text: "⚡{capacity}%"}
+              state == discharging && capacity > 20:
+                string: {text: "🔋{capacity}%"}
+              state == discharging && capacity <= 20:
+                string: {text: "🪫{capacity}%"}
+              state == unknown:
+                string: {text: "❓{capacity}%"}
+    - clock:
+        time-format: "%H:%M"
+        content:
+          string: {text: "🕛{time}"}
+    - clock:
+        date-format: "%a %b %d"
+        content:
+          string: {text: "📅{date}"}
+    - network:
+        name: wlan0
+        poll-interval: 60000
+        content:
+          map:
+            right-margin: 10
+            conditions:
+              state == up:
+                string: {text: "🛜{ssid}"}
+              state == down:
+                string: {text: "🌐Disconnected"}

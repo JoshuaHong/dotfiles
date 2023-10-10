@@ -217,7 +217,11 @@ setPrompts() {
   local rbrace="${red}]"
   local dollar="${magenta}$"
   local space=" "
+
+  # Set the primary prompt.
   PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${rbrace}${dollar}${space}${reset}"
+  # Unset the prompt command so that the window title is not set to PS1.
+  unset PROMPT_COMMAND
 }
 
 disableFlowControl() {
