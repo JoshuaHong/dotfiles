@@ -71,6 +71,11 @@ all_tags=$(((1 << 32) - 1))
 riverctl map normal Super+Control 0 toggle-focused-tags $all_tags
 riverctl map normal Super+Control+Shift 0 toggle-view-tags $all_tags
 
+# Set scratchpad.
+riverctl map normal Super Space toggle-focused-tags $((1 << 10))
+riverctl map normal Super+Shift Space set-view-tags $((1 << 10))
+riverctl spawn-tagmask $((((1 << 32) -1) ^ $((1 << 10))))
+
 # Close and exit.
 riverctl map normal Super+Shift C close
 riverctl map normal Super+Shift Q exit
