@@ -3,7 +3,7 @@
 bar:
   height: 40
   location: top
-  font: monospace:pixelsize=18
+  font: Iosevka:pixelsize=20, Material Symbols Outlined:pixelsize=16
   background: 2B303B80
   foreground: C6D0F5FF
   spacing: 10
@@ -57,67 +57,81 @@ bar:
             conditions:
               pkg > 0:
                 string: {text: "📥{pkg}"}
-    - removables:
-        content:
-          map:
-            conditions:
-              mounted:
-                string: {text: "💿dksfjdlsk"}
-              ~mounted:
-                string: {text: "⏏ hi"}
     - alsa:
         card: default
         mixer: Master
+        foreground: 99D1DBFF
         content:
           map:
             conditions:
               muted:
-                string: {text: "🔇{percent}%"}
+                string: {text: "\uE04F {percent}%"}
               ~muted:
                 ramp:
                   tag: percent
                   items:
-                    - string: {text: "🔈{percent}%"}
-                    - string: {text: "🔉{percent}%"}
-                    - string: {text: "🔊{percent}%"}
+                    - string: {text: "\uE04E {percent}%"}
+                    - string: {text: "\uE04D {percent}%"}
+                    - string: {text: "\uE050 {percent}%"}
     - backlight:
         name: intel_backlight
+        foreground: E5C890FF
         content:
-          string: {text: "💡{percent}%"}
+          string: {text: "\uE518 {percent}%"}
     - battery:
         name: BAT1
         poll-interval: 60000
+        foreground: A6D189FF
         content:
           map:
             conditions:
-              state == full || capacity == 100:
-                string: {text: "✅{capacity}%"}
               state == "not charging":
-                string: {text: "🔌{capacity}%"}
+                string: {text: "\uE646 {capacity}%"}
               state == charging:
-                string: {text: "⚡{capacity}%"}
-              state == discharging && capacity > 20:
-                string: {text: "🔋{capacity}%"}
-              state == discharging && capacity <= 20:
-                string: {text: "🪫{capacity}%"}
+                ramp:
+                  tag: capacity
+                  items:
+                    - string: {text: "\uE1A3 {capacity}%"}
+                    - string: {text: "\uF0A2 {capacity}%"}
+                    - string: {text: "\uF0A3 {capacity}%"}
+                    - string: {text: "\uF0A4 {capacity}%"}
+                    - string: {text: "\uF0A5 {capacity}%"}
+                    - string: {text: "\uF0A6 {capacity}%"}
+                    - string: {text: "\uF0A7 {capacity}%"}
+                    - string: {text: "\uF67D {capacity}%"}
+              state == discharging:
+                ramp:
+                  tag: capacity
+                  items:
+                    - string: {text: "\uE19C {capacity}%"}
+                    - string: {text: "\uEBD9 {capacity}%"}
+                    - string: {text: "\uEBE0 {capacity}%"}
+                    - string: {text: "\uEBDD {capacity}%"}
+                    - string: {text: "\uEBE2 {capacity}%"}
+                    - string: {text: "\uEBD4 {capacity}%"}
+                    - string: {text: "\uEBD2 {capacity}%"}
+                    - string: {text: "\uE1A4 {capacity}%"}
               state == unknown:
-                string: {text: "❓{capacity}%"}
+                string: {text: "\uE1A6 {capacity}%"}
     - clock:
         time-format: "%H:%M"
+        foreground: F4B8E4FF
         content:
-          string: {text: "🕛{time}"}
+          string: {text: "\uE8B5 {time}"}
     - clock:
         date-format: "%a %b %d"
+        foreground: 81C8BEFF
         content:
-          string: {text: "📅{date}"}
+          string: {text: "\uEBCC {date}"}
     - network:
         name: wlan0
         poll-interval: 60000
+        foreground: BABBF1FF
         content:
           map:
             right-margin: 10
             conditions:
               state == up:
-                string: {text: "🛜{ssid}"}
+                string: {text: "\uE63E {ssid}"}
               state == down:
-                string: {text: "🌐Disconnected"}
+                string: {text: "\uE648 Disconnected"}
