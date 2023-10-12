@@ -22,6 +22,8 @@ The Artix Linux environment.
   > A modular, configurable, and lightweight status bar.
 * Screenlocker: [Waylock](https://github.com/ifreund/waylock)
   > A small and secure screenlocker for Wayland.
+* Font: [Iosevka](https://typeof.net/Iosevka)
+  > An aesthetic, open-source, monospace typeface family.
 
 <br>
 
@@ -286,7 +288,7 @@ The Artix Linux environment.
   > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
 
 ### Install the remaining packages
-* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji polkit river ungoogled-chromium waylock wbg yambar</code>
+* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji polkit river ttf-iosevka ttf-material-symbols-git ungoogled-chromium waylock wbg yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
@@ -299,30 +301,32 @@ The Artix Linux environment.
 # Packages
 List all installed packages that are not strict dependencies of other packages: <code>pacman -Qtt</code>
 
-| Package                 | Justification                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| artix-archlinux-support | Enables installing Arch Linux packages. Many common Arch Linux packages are missing from the Artix Linux repositories. |
-| backlight_control *     | Controls the backlight brightness. Extremely minimal and requires no permissions setup like other backlight utilities. |
-| base                    | Tools to install Artix Linux.                                                                                          |
-| base-devel              | Tools to build Artix Linux packages.                                                                                   |
-| efibootmgr              | Boots Linux without a bootloader by loading the kernel directly.                                                       |
-| foot                    | Terminal emulator. Fast, lightweight, minimalistic, and Wayland native.                                                |
-| git-dinit               | Manages version control.                                                                                               |
-| intel-ucode             | Updates the firmware for system stability.                                                                             |
-| iwd-dinit               | Manages networking without a full network manager.                                                                     |
-| linux                   | Linux kernel.                                                                                                          |
-| linux-firmware          | Linux firmware.                                                                                                        |
-| man-db                  | Reads man pages.                                                                                                       |
-| neovim                  | Text editor.                                                                                                           |
-| noto-fonts-emoji        | Emoji fonts. The only open-source color emoji font.                                                                    |
-| openssh                 | Allows remote login with SSH.                                                                                          |
-| pacman-contrib          | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
-| paru *                  | Installs packages from the Arch User Repository. The latest AUR helper and Rust rewrite of Yay. Install using rust.    |
-| polkit                  | Manages elevated permissions to run Wayland.                                                                           |
-| river                   | Window manager. Simple and fast tiling Wayland compositor.                                                             |
-| ungoogled-chromium      | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
-| waylock                 | Screenlocker. A small and secure screenlocker for Wayland.                                                             |
-| wbg *                   | Sets the wallpaper for Wayland. Extremely minimal; does only one thing.                                                |
-| yambar *                | Status panel. Modular, configurable, and lightweight.                                                                  |
+| Package                  | Justification                                                                                                          |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| artix-archlinux-support  | Enables installing Arch Linux packages. Many common Arch Linux packages are missing from the Artix Linux repositories. |
+| backlight_control *      | Controls the backlight brightness. Extremely minimal and requires no permissions setup like other backlight utilities. |
+| base                     | Tools to install Artix Linux.                                                                                          |
+| base-devel               | Tools to build Artix Linux packages.                                                                                   |
+| efibootmgr               | Boots Linux without a bootloader by loading the kernel directly.                                                       |
+| foot                     | Terminal emulator. Fast, lightweight, minimalistic, and Wayland native.                                                |
+| git-dinit                | Manages version control.                                                                                               |
+| intel-ucode              | Updates the firmware for system stability.                                                                             |
+| iwd-dinit                | Manages networking without a full network manager.                                                                     |
+| linux                    | Linux kernel.                                                                                                          |
+| linux-firmware           | Linux firmware.                                                                                                        |
+| man-db                   | Reads man pages.                                                                                                       |
+| neovim                   | Text editor.                                                                                                           |
+| noto-fonts-emoji         | Emoji fonts.                                                                                                           |
+| openssh                  | Allows remote login with SSH.                                                                                          |
+| pacman-contrib           | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
+| paru *                   | Installs packages from the Arch User Repository. The latest AUR helper and Rust rewrite of Yay. Install using rust.    |
+| polkit                   | Manages elevated permissions to run Wayland.                                                                           |
+| river                    | Window manager. Simple and fast tiling Wayland compositor.                                                             |
+| ttf-iosevka              | Typeface family. An aesthetic, open-source, monospace typeface family.                                                 |
+| ttf-material-symbols-git | Emoji symbol outlines.                                                                                                 |
+| ungoogled-chromium       | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
+| waylock                  | Screenlocker. A small and secure screenlocker for Wayland.                                                             |
+| wbg *                    | Sets the wallpaper for Wayland. Extremely minimal; does only one thing.                                                |
+| yambar *                 | Status panel. Modular, configurable, and lightweight.                                                                  |
 
 \* AUR packages
