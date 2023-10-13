@@ -288,7 +288,7 @@ The Artix Linux environment.
   > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
 
 ### Install the remaining packages
-* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji pass polkit river ttf-iosevka ttf-material-symbols-git ungoogled-chromium waylock wbg yambar</code>
+* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji pass polkit river ttf-iosevka ttf-material-symbols-git ungoogled-chromium waylock wbg wl-clipboard yambar</code>
   > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
 * Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
@@ -328,6 +328,7 @@ List all installed packages that are not strict dependencies of other packages: 
 | ungoogled-chromium         | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
 | waylock                    | Screenlocker. A small and secure screenlocker for Wayland.                                                             |
 | wbg *                      | Sets the wallpaper for Wayland. Extremely minimal; does only one thing.                                                |
+| wl-clipboard               | Wayland clipboard manager. Used for copying passwords without printing to the terminal.                                |
 | yambar *                   | Status panel. Modular, configurable, and lightweight.                                                                  |
 
 \* AUR packages
