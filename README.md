@@ -2,48 +2,32 @@
 
 # Dotfiles
 ![screenshot](https://github.com/JoshuaHong/dotfiles/assets/35504995/2827b4a2-c767-427b-be73-fcfefdacefcb)
-The Artix Linux environment.
+The Gentoo Linux environment.
 </div>
 
 <br>
 
 # Programs
-* Operating system: [Artix Linux](https://artixlinux.org)
-  > Simple, fast, systemd-free.
-* Init system: [Dinit](https://github.com/davmac314/dinit)
-  > The fastest and simplist, and solves problems of the other init systems.
-* Compositor: [River](https://github.com/riverwm/river)
-  > A simple and fast tiling Wayland compositor.
-* Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
-  > A fast, lightweight, minimalistic, and Wayland native terminal emulator.
-* Browser: [Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium)
-  > All of the benefits of Chromium without the spyware.
-* Status bar: [Yambar](https://codeberg.org/dnkl/yambar)
-  > A modular, configurable, and lightweight status bar.
-* Screenlocker: [Waylock](https://github.com/ifreund/waylock)
-  > A small and secure screenlocker for Wayland.
-* Font: [Iosevka](https://typeof.net/Iosevka)
-  > An aesthetic, open-source, monospace typeface family.
+* Operating system: [Gentoo Linux](https://www.gentoo.org)
+  > A highly flexible, source-based Linux distribution. 
 
 <br>
 
 # Installation
 
 ### Install the ISO
-* [Download](https://artixlinux.org/download.php) the stable base Dinit ISO and the corresponding PGP signature
-* Verify the ISO: <code>gpg --auto-key-retrieve --verify <code><var>SIG_NAME</var></code>.iso.sig <code><var>ISO_NAME</var></code>.iso</code>
-* Install the ISO to a drive: <code>cat <code><var>ISO_NAME</var></code>.iso > /dev/<code><var>DRIVE_LOCATION</var></code></code>
+* [Download](https://www.gentoo.org/downloads/) the latest minimal installation <code>.iso</code> CD and the corresponding <code>.asc</code> PGP signature
+* [Download](https://www.gentoo.org/downloads/signatures/) the automated weekly release key: <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
+* Verify the ISO: <code>gpg --verify <code><var>SIG_NAME</var></code>.iso.asc <code><var>ISO_NAME</var></code>.iso</code>
+* Install the ISO to a drive: <code>dd if=<code><var>ISO_NAME</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
 
-### Configure the BIOS
+### Boot the installation medium
 * Use UEFI boot mode
   > 📝 **Note:** UEFI is the newest standard and most modern hardware do not support legacy BIOS boot.
 * Disable secure boot
-  > 📝 **Note:** The Arch Linux installation images do not support secure boot. Secure boot can be set up after installation.
-
-### Enter the live environment
-* Boot into the installation medium
-* Log in using username <code>artix</code> and password <code>artix</code>
-* Switch to the root user: <code>su</code>
+  > 📝 **Note:** Sometimes installation images do not support secure boot. Secure boot can be set up after installation.
+* Ensure that the boot order prioritizes the external bootable media over the internal disk devices
+* Boot into the live environment
 
 ### Partition the disks
 * Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
