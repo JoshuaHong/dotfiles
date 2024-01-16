@@ -32,7 +32,7 @@ The Gentoo Linux environment.
 ### Configure the network
 * Disable the shell history: <code>set +o history</code>
   > ⚠️ **Warning:** History is disabled to avoid storing the clear text password in history.
-* Connect to a network: <code>wpa_supplicant -i <code><var>DEVICE_NAME</var></code> -c <(wpa_passphrase <code><var>SSID</var></code> <code><var>PASSWORD</var></code>)</code>
+* Connect to the network: <code>wpa_supplicant -i <code><var>DEVICE_NAME</var></code> -c <(wpa_passphrase "<code><var>SSID</var></code>" "<code><var>PASSWORD</var></code>") &</code>
   > 💡 **Tip:** List all device names: <code>ip link</code>.
 * Enable the shell history: <code>set -o history</code>
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
