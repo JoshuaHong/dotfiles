@@ -29,6 +29,14 @@ The Gentoo Linux environment.
 * Ensure that the boot order prioritizes the external bootable media over the internal disk devices
 * Boot into the live environment
 
+### Configure the network
+* Disable the shell history: <code>set +o history</code>
+  > ⚠️ **Warning:** History is disabled to avoid storing the clear text password in history.
+* Connect to a network: <code>wpa_supplicant -i <code><var>DEVICE_NAME</var></code> -c <(wpa_passphrase <code><var>SSID</var></code> <code><var>PASSWORD</var></code>)</code>
+  > 💡 **Tip:** List all device names: <code>ip link</code>.
+* Enable the shell history: <code>set -o history</code>
+* Verify the connection: <code>ping -c 3 gentoo.org</code>
+
 ### Partition the disks
 * Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
 * Delete all existing partitions and signatures
@@ -60,17 +68,6 @@ The Gentoo Linux environment.
 * Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/boot</code>
 * Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
-
-### Connect to the internet
-* Enter the ConnMan CLI: <code>connmanctl</code>
-  * Enable Wi-Fi: <code>enable wifi</code>
-  * Scan for networks: <code>scan wifi</code>
-  * Enable the agent: <code>agent on</code>
-    > 📝 **Note:** Needed to enable entering a password.
-  * List available networks: <code>services</code>
-  * Connect to a network: <code>connect wifi_<code><var>NETWORK_NAME</var></code></code>
-    > 💡 **Tip:** Network names can be tab-completed.
-* Verify the connection: <code>ping artixlinux.org</code>
 
 ### Update the system clock
 * Activate the NTP daemon: <code>dinitctl start ntpd</code>
@@ -153,7 +150,8 @@ The Gentoo Linux environment.
 
 ### Connect to the internet
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
-  > 💡 **Tip:** To find the device run: <code>iwctl device list</code>, and to find the SSID run: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
+  > 💡 **Tip:** List all device names: <code>iwctl device list</code> \
+  > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
 * Verify the connection: <code>ping artixlinux.org</code>
 
 ### Enable privilege elevation
@@ -199,7 +197,7 @@ The Gentoo Linux environment.
   [multilib]
   Include = /etc/pacman.d/mirrorlist-arch
   </pre>
-  > ⚠️ **Important:** The Arch mirrorlists must be listed after the Artix mirrorlists so that the Artix packages take precedence.
+  > ❗ **Important:** The Arch mirrorlists must be listed after the Artix mirrorlists so that the Artix packages take precedence.
 * Update the keyring for Arch packages: <code>pacman-key --populate archlinux</code>
 * Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
 * Back up the mirrorlists: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup && cp /etc/pacman.d/mirrorlist-arch /etc/pacman.d/mirrorlist-arch.backup</code>
