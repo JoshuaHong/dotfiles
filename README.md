@@ -23,7 +23,7 @@ The Gentoo Linux environment.
 
 ### Boot the installation medium
 * Use UEFI boot mode
-  > 📝 **Note:** UEFI is the newest standard and most modern hardware do not support legacy BIOS boot.
+  > 📝 **Note:** UEFI is the newest standard, and most modern hardware does not support legacy BIOS boot.
 * Disable secure boot
   > 📝 **Note:** Sometimes installation images do not support secure boot. Secure boot can be set up after installation.
 * Ensure that the boot order prioritizes the external bootable media over the internal disk devices
@@ -59,14 +59,15 @@ The Gentoo Linux environment.
   > 📝 **Note:** FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
 * Create the swap partition: <code>mkswap -L SWAP /dev/<code><var>SWAP_PARTITION</var></code></code>
   > 💡 **Tip:** May need to remove any existing swap partitions in advance: <code>swapoff -a</code>.
-* Format the root partition: <code>mkfs.ext4 -L ROOT /dev/<code><var>ROOT_PARTITION</var></code></code>
-  > 📝 **Note:** Ext4 is the fast, pure, and stable standard.
-* Format the home partition: <code>mkfs.ext4 -L HOME /dev/<code><var>HOME_PARTITION</var></code></code>
+* Format the root partition: <code>mkfs.xfs -L ROOT /dev/<code><var>ROOT_PARTITION</var></code></code>
+  > 📝 **Note:** XFS is the Gentoo recommended all-purpose, all-platform filesystem.
+* Format the home partition: <code>mkfs.xfs -L HOME /dev/<code><var>HOME_PARTITION</var></code></code>
 
 ### Mount the file systems
-* Mount the root partition: <code>mount /dev/<code><var>ROOT_PARTITION</var></code> /mnt</code>
-* Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/boot</code>
-* Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/home</code>
+* Mount the root partition: <code>mount --mkdir /dev/<code><var>ROOT_PARTITION</var></code> /mnt/gentoo</code>
+  > ⚠️ **Warning:** Gentoo mounts the live CD on <code>/mnt/livecd</code>; mounting anything on <code>/mnt</code> itself will break all commands.
+* Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/gentoo/boot</code>
+* Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/gentoo/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
 
 ### Update the system clock
