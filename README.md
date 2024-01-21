@@ -130,7 +130,7 @@ The Gentoo Linux environment.
 * Configure the time zone: <code>echo "<code><var>TIME_ZONE</var></code>" > /etc/timezone</code>
   > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
 * Update the local time: <code>emerge --config sys-libs/timezone-data</code>
-* Update the locale configuration file: <code>[/etc/locale.gen]()</code>
+* Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
 * Verify the locales are available: <code>locale -a</code>
 * List all locales: <code>eselect locale list</code>
