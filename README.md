@@ -88,6 +88,56 @@ The Gentoo Linux environment.
 ### Configure the compile options
 * Update the make configuration file <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
 
+### Copy DNS information
+* Copy DNS information: <code>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</code>
+
+### Mount the filesystems
+* Mount /proc: <code>mount --types proc /proc /mnt/gentoo/proc</code>
+* Mount /sys: <code>mount --rbind /sys /mnt/gentoo/sys</code>
+* Enslave /sys: <code>mount --make-rslave /mnt/gentoo/sys</code>
+* Mount /dev: <code>mount --rbind /dev /mnt/gentoo/dev</code>
+* Enslave /dev: <code>mount --make-rslave /mnt/gentoo/dev</code>
+* Mount /run: <code>mount --bind /run /mnt/gentoo/run</code>
+* Enslave /run: <code>mount --make-slave /mnt/gentoo/run</code>
+
+### Enter the new environment
+* Change root: <code>chroot /mnt/gentoo /bin/bash</code>
+* Source the profile configuration file: <code>source /etc/profile</code>
+* Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
+
+### Prepare the bootloader
+* Mount the EFI system partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /efi</code>
+
+### Configure Portage
+* Create the repositories directory: <code>mkdir --parents /etc/portage/repos.conf</code>
+* Copy the repository configuration file: <code>cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf</code>
+* Install the ebuild repository: <code>emerge-webrsync</code>
+* Sync the ebuild repository: <code>emerge --sync</code>
+* Read the news: <code>eselect news read | less</code>
+* Purge the news: <code>eselect news purge</code>
+* Verify the profile: <code>eselect profile list</code>
+* Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
+  > ⚠️ **Warning:** The recommended profile is the default profile.
+* Update the make configuration file CPU flags: <code>emerge --ask app-portage/cpuid2cpuflags && cpuid2cpuflags >> /etc/portage/make.conf</code>
+* Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 3</code>
+* Clean up the make configuration file: <code>/etc/portage/make.conf</code>
+* Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
+* Update the @world set: <code>emerge --ask --verbose --update --deep --newuse @world</code>
+* List obsolete packages: <code>emerge --ask --pretend --depclean</code>
+* Remove obsolete packages, if necessary: <code>emerge --ask --depclean</code>
+
+### Configure the system
+* Configure the time zone: <code>echo "<code><var>TIME_ZONE</var></code>" > /etc/timezone</code>
+  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
+* Update the local time: <code>emerge --config sys-libs/timezone-data</code>
+* Update the locale configuration file: <code>[/etc/locale.gen]()</code>
+* Generate the locales: <code>locale-gen</code>
+* Verify the locales are available: <code>locale -a</code>
+* List all locales: <code>eselect locale list</code>
+* Select the locale to set: <code>eselect locale set <code><var>LOCALE_NUMBER</var></code></code>
+  > 📝 **Note:** This sets the <code>LANG</code> variable in <code>/etc/env.d/02locale</code>. This is typically <code>en_US.utf8</code>.
+* Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
+
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
 
