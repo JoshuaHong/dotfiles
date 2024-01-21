@@ -16,10 +16,10 @@ The Gentoo Linux environment.
 # Installation
 
 ### Install the ISO
-* [Download](https://www.gentoo.org/downloads/) the latest minimal installation <code>.iso</code> CD and the corresponding <code>.asc</code> PGP signature
-* [Download](https://www.gentoo.org/downloads/signatures/) the automated weekly release key: <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
-* Verify the ISO: <code>gpg --verify <code><var>SIG_NAME</var></code>.iso.asc <code><var>ISO_NAME</var></code>.iso</code>
-* Install the ISO to a drive: <code>dd if=<code><var>ISO_NAME</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
+* Download the [latest minimal installation](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/) <code>.iso</code> CD and the corresponding <code>.asc</code> PGP signature
+* Fetch the [automated weekly release key](https://www.gentoo.org/downloads/signatures/): <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
+* Verify the ISO: <code>gpg --verify install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso.asc install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso</code>
+* Install the ISO to a drive: <code>dd if=install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
 
 ### Boot the installation medium
 * Use UEFI boot mode
@@ -70,8 +70,20 @@ The Gentoo Linux environment.
 * Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/gentoo/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
 
-### Update the system clock
-* Activate the NTP daemon: <code>dinitctl start ntpd</code>
+### Install the stage file
+* Update the system clock: <code>chronyd -q</code>
+* Change directories to the mount point: <code>cd /mnt/gentoo</code>
+* Download the [latest stage 3 openrc](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/) <code>.tar.xz</code> file and associated <code>.tar.xz.CONTENTS.gz</code>, <code>.tar.xz.DIGESTS</code>, <code>.tar.xz.asc</code>, and <code>.tar.xz.sha256</code> files: <code>wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.<code><var>FILE_EXTENSION</var></code></code>
+  > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https://www.gentoo.org/downloads</code>.
+* Verify the SHA512 checksum: <code>openssl dgst -r -sha512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
+* Verify the BLAKE2B512 checksum: <code>openssl dgst -r -blake2b512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
+* Verify the SHA256 hash: <code>sha256sum --check stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.sha256</code>
+* Import the PGP keys: <code>gpg --import /usr/share/openpgp-keys/gentoo-release.asc</code>
+* Verify the tarball: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.asc</code>
+* Verify the DIGESTS checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.DIGESTS</code>
+* Verify the SHA256 checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.sha256</code>
+* Install the stage file: <code>tar xpvf stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz --xattrs-include='\*.\*' --numeric-owner</code>
+* Remove the stage file: <code>rm stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
