@@ -124,8 +124,8 @@ The Gentoo Linux environment.
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
 ### Configure the time zone and locales
-* Configure the time zone: <code>echo "<code><var>TIME_ZONE</var></code>" > /etc/timezone</code>
-  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>. For example, <code>America/Los_Angeles</code>.
+* Set the time zone: <code>[/etc/timezone](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/timezone)</code>
+  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
 * Update the local time: <code>emerge --config sys-libs/timezone-data</code>
 * Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
@@ -138,7 +138,7 @@ The Gentoo Linux environment.
 ### Install the firmware and microcode
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
-* Install the Intel microcode: <code>sys-firmware/intel-microcode</code>
+* Install the Intel microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
 
 ### Install the kernel
 * Disable systemd: <code>[/etc/portage/package.use/bootloader](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.use/bootloader)</code>
@@ -146,6 +146,15 @@ The Gentoo Linux environment.
 * Remove older versions: <code>emerge --depclean</code>
 * Rebuild the kernel modules: <code>emerge --ask @module-rebuild</code>
 * Rebuild the initramfs: <code>emerge --config sys-kernel/gentoo-kernel-bin</code>
+
+### Configure the system
+* Update the fstab file: <code>[/etc/fstab](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/fstab)</code>
+* Set the hostname: <code>[/etc/hostname](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/hostname)</code>
+* Configure the network interface: <code>emerge --ask net-misc/dhcpcd && rc-update add dhcpcd default && rc-service dhcpcd start</code>
+* Create the hosts file: <code>[/etc/hosts](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/hosts)</code>
+* Set the root password: <code>passwd</code>
+* Update the OpenRC configuration file: <code>[/etc/rc.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/rc.conf)</code>
+* Update the clock configuration file: <code>[/etc/conf.d/hwclock](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/conf.d/hwclock)</code>
 
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
