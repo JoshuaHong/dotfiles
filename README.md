@@ -66,7 +66,7 @@ The Gentoo Linux environment.
 ### Mount the file systems
 * Mount the root partition: <code>mount --mkdir /dev/<code><var>ROOT_PARTITION</var></code> /mnt/gentoo</code>
   > ⚠️ **Warning:** Gentoo mounts the live CD on <code>/mnt/livecd</code>; mounting anything on <code>/mnt</code> itself will break all commands.
-* Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/gentoo/boot</code>
+* Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/gentoo/efi</code>
 * Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/gentoo/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
 
@@ -104,9 +104,6 @@ The Gentoo Linux environment.
 * Change root: <code>chroot /mnt/gentoo /bin/bash</code>
 * Source the profile configuration file: <code>source /etc/profile</code>
 * Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
-
-### Prepare the bootloader
-* Mount the EFI system partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /efi</code>
 
 ### Configure Portage
 * Create the repositories directory: <code>mkdir --parents /etc/portage/repos.conf</code>
