@@ -1,0 +1,14 @@
+# Set to "UTC" if the hardware clock is set to UTC.
+# Set to "local" otherwise.
+# Run `hwclock` to check if it is set to UTC or local.
+clock="local"
+
+# Do not allow the hardware clock to update the software clock.
+# Modern kernels use NTP to synchronize the system clock.
+clock_hctosys="NO"
+
+# Update the hardware clock to the current system time during shutdown.
+clock_systohc="YES"
+
+# Additional arguments to hwclock during bootup.
+clock_args=""
