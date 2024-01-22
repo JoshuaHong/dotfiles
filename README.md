@@ -121,12 +121,12 @@ The Gentoo Linux environment.
 * Update the make configuration file CPU flags: <code>emerge --ask app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
 * Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
-  > 💡 **Tip:** The default mirror can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
+  > 💡 **Tip:** The default mirrors can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Update the @world set: <code>emerge --ask --verbose --update --deep --newuse @world</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
-### Configure the system
+### Configure the time zone and locales
 * Configure the time zone: <code>echo "<code><var>TIME_ZONE</var></code>" > /etc/timezone</code>
   > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>. For example, <code>America/Los_Angeles</code>.
 * Update the local time: <code>emerge --config sys-libs/timezone-data</code>
@@ -137,6 +137,18 @@ The Gentoo Linux environment.
 * Select the locale to set: <code>eselect locale set <code><var>LOCALE_NUMBER</var></code></code>
   > 📝 **Note:** This sets the <code>LANG</code> variable in <code>/etc/env.d/02locale</code>. This is typically <code>en_US.utf8</code>.
 * Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
+
+### Install the firmware and microcode
+* Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
+* Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
+* Install the Intel microcode: <code>sys-firmware/intel-microcode</code>
+
+### Install the kernel
+* Disable systemd: <code>[/etc/portage/package.use/bootloader](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.use/bootloader)</code>
+* Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
+* Remove older versions: <code>emerge --depclean</code>
+* Rebuild the kernel modules: <code>emerge --ask @module-rebuild</code>
+* Rebuild the initramfs: <code>emerge --config sys-kernel/gentoo-kernel-bin</code>
 
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
