@@ -16,7 +16,7 @@ The Gentoo Linux environment.
 # Installation
 
 ### Install the ISO
-* Download the [latest minimal installation](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/) <code>.iso</code> CD and the corresponding <code>.asc</code> PGP signature
+* Download the [latest minimal installation](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/) <code>.iso</code> CD and the corresponding <code>.iso.asc</code> PGP signature
 * Fetch the [automated weekly release key](https://www.gentoo.org/downloads/signatures/): <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
 * Verify the ISO: <code>gpg --verify install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso.asc install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso</code>
 * Install the ISO to a drive: <code>dd if=install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
@@ -39,17 +39,17 @@ The Gentoo Linux environment.
 
 ### Partition the disks
 * Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
-* Delete all existing partitions and signatures
-  > ⚠️ **Warning:** This will wipe out the entire drive.
-* Create a new empty GPT partition table
-  > 📝 **Note:** GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
-* Create a 550M EFI System
-  > 📝 **Note:** The author of gdisk suggests 550M.
-* Create a 30G Linux Swap
-  > 📝 **Note:** The rule of thumb is 2xRAM for hibernation.
-* Create a 30G Linux root (x86-64)
-  > 📝 **Note:** 15G is the recommended minimum, so 30G should be enough.
-* Create the rest for Linux home
+  * Delete all existing partitions and signatures
+    > ⚠️ **Warning:** This will wipe out the entire drive.
+  * Create a new empty GPT partition table
+    > 📝 **Note:** GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
+  * Create a 550M EFI System
+    > 📝 **Note:** The author of gdisk suggests 550M.
+  * Create a 30G Linux Swap
+    > 📝 **Note:** The rule of thumb is 2xRAM for hibernation.
+  * Create a 30G Linux root (x86-64)
+    > 📝 **Note:** 15G is the recommended minimum, so 30G should be enough.
+  * Create the rest for Linux home
 
 ### Format the partitions
 * Format the boot partition: <code>mkfs.fat -F 32 /dev/<code><var>BOOT_PARTITION</var></code></code>
@@ -118,17 +118,17 @@ The Gentoo Linux environment.
 * Verify the profile: <code>eselect profile list</code>
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
   > ⚠️ **Warning:** The recommended profile is the default profile.
-* Update the make configuration file CPU flags: <code>emerge --ask app-portage/cpuid2cpuflags && cpuid2cpuflags >> /etc/portage/make.conf</code>
-* Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 3</code>
-* Clean up the make configuration file: <code>/etc/portage/make.conf</code>
+* Update the make configuration file CPU flags: <code>emerge --ask app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
+* Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
+* Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
+  > 💡 **Tip:** The default mirror can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Update the @world set: <code>emerge --ask --verbose --update --deep --newuse @world</code>
-* List obsolete packages: <code>emerge --ask --pretend --depclean</code>
-* Remove obsolete packages, if necessary: <code>emerge --ask --depclean</code>
+* Remove obsolete packages: <code>emerge --ask --depclean</code>
 
 ### Configure the system
 * Configure the time zone: <code>echo "<code><var>TIME_ZONE</var></code>" > /etc/timezone</code>
-  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
+  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>. For example, <code>America/Los_Angeles</code>.
 * Update the local time: <code>emerge --config sys-libs/timezone-data</code>
 * Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
