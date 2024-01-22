@@ -88,9 +88,6 @@ The Gentoo Linux environment.
 ### Configure the compile options
 * Update the make configuration file <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
 
-### Copy DNS information
-* Copy DNS information: <code>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</code>
-
 ### Mount the filesystems
 * Mount /proc: <code>mount --types proc /proc /mnt/gentoo/proc</code>
 * Mount /sys: <code>mount --rbind /sys /mnt/gentoo/sys</code>
@@ -101,6 +98,7 @@ The Gentoo Linux environment.
 * Enslave /run: <code>mount --make-slave /mnt/gentoo/run</code>
 
 ### Enter the new environment
+* Copy DNS information: <code>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</code>
 * Change root: <code>chroot /mnt/gentoo /bin/bash</code>
 * Source the profile configuration file: <code>source /etc/profile</code>
 * Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
