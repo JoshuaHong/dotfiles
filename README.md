@@ -155,6 +155,16 @@ The Gentoo Linux environment.
 * Update the OpenRC configuration file: <code>[/etc/rc.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/rc.conf)</code>
 * Update the clock configuration file: <code>[/etc/conf.d/hwclock](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/conf.d/hwclock)</code>
 
+### Install system tools
+* Install a system logger: <code>emerge --ask app-admin/sysklogd && rc-update add sysklogd default</code>
+* Install a cron daemon: <code>emerge --ask sys-process/dcron && rc-update add dcron default</code>
+* Install a file indexer: <code>emerge --ask sys-apps/mlocate && mlocate</code>
+* Configure the ssh daemon: <code>rc-update add sshd default</code>
+* Install a shell completion tool: <code>emerge --ask app-shells/bash-completion</code>
+* Install a time synchronizaiton tool: <code>emerge --ask net-misc/chrony && rc-update add chronyd default</code>
+* Install filesystem tools: <code>emerge --ask sys-fs/xfsprogs && emerge --ask sys-block/io-scheduler-udev-rules</code>
+* Install a wireless daemon: <code>emerge --ask net-wireless/iwd</code>
+
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
 
