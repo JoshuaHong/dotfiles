@@ -165,6 +165,17 @@ The Gentoo Linux environment.
 * Install filesystem tools: <code>emerge --ask sys-fs/xfsprogs && emerge --ask sys-block/io-scheduler-udev-rules</code>
 * Install a wireless daemon: <code>emerge --ask net-wireless/iwd</code>
 
+### Configure the boot loader
+* Install a boot manager: <code>emerge --ask sys-boot/efibootmgr</code>
+  > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader.
+* Copy the kernel: <code>mkdir --parents /efi/efi/gentoo/ && cp /boot/vmlinuz-<code><var>VERSION</var></code>-gentoo-dist /efi/efi/gentoo/bzImage.efi</code>
+* Copy the initramfs: <code>cp /usr/src/linux-<code><var>VERSION</var></code>-gentoo-dist/arch/x86/boot/initrd /efi/efi/gentoo/initrd</code>
+* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Gentoo Linux" --loader "\\efi\\gentoo\\bzImage.efi" --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw initrd=\\boot\\intel-uc.img initrd=\\efi\\gentoo\\initrd'</code>
+  > 📝 **Note:** For example, if the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>PARTITION_NUMBER</code> is <code>1</code>. \
+  > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
+* Verify the entry was added properly: <code>efibootmgr --unicode</code>
+* Set the boot order: <code>efibootmgr --bootorder <var>####</var>,<var>####</var> --unicode</code>
+
 ### Install essential packages
 *  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
 
