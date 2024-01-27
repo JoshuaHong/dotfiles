@@ -134,6 +134,7 @@ The Gentoo Linux environment.
 * Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
 
 ### Install the firmware and microcode
+* Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
 * Install the Intel microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
