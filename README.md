@@ -83,7 +83,7 @@ The Gentoo Linux environment.
 * Verify the DIGESTS checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.DIGESTS</code>
 * Verify the SHA256 checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.sha256</code>
 * Install the stage file: <code>tar xpvf stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz --xattrs-include='\*.\*' --numeric-owner</code>
-* Remove the stage file: <code>rm stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
+* Remove the stage file and checksums: <code>rm stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.*</code>
 
 ### Configure the compile options
 * Update the make configuration file <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
