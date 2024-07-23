@@ -2,14 +2,14 @@
 
 # Dotfiles
 ![screenshot](https://github.com/JoshuaHong/dotfiles/assets/35504995/2827b4a2-c767-427b-be73-fcfefdacefcb)
-The Gentoo Linux environment.
+The Arch Linux environment.
 </div>
 
 <br>
 
 # Programs
-* Operating system: [Gentoo Linux](https://www.gentoo.org)
-  > A highly flexible, source-based Linux distribution. 
+* Operating system: [Arch Linux](https://archlinux.org)
+  > A simple, lightweight distribution. 
 
 <br>
 
