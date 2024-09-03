@@ -59,7 +59,7 @@ The Gentoo Linux environment.
   > 💡 **Tip:** Assigning labels to partitions helps referring to them later without their numbers. \
   > 📝 **Note:** FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
 * Create the swap partition: <code>mkswap -L SWAP /dev/<code><var>SWAP_PARTITION</var></code></code>
-  > 💡 **Tip:** May need to remove any existing swap partitions in advance: <code>swapoff -a</code>.
+  > 💡 **Tip:** Any existing swap partitions may need to be removed in advance: <code>swapoff -a</code>.
 * Format the root partition: <code>mkfs.xfs -L ROOT /dev/<code><var>ROOT_PARTITION</var></code></code>
   > 📝 **Note:** XFS is the Gentoo recommended all-purpose, all-platform filesystem.
 * Format the home partition: <code>mkfs.xfs -L HOME /dev/<code><var>HOME_PARTITION</var></code></code>
