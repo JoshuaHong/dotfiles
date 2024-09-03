@@ -72,8 +72,8 @@ The Gentoo Linux environment.
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
 
 ### Install the stage file
-* Update the system clock: <code>chronyd -q</code>
 * Change directories to the mount point: <code>cd /mnt/gentoo</code>
+* Update the system clock: <code>chronyd -q</code>
 * Download the [latest stage 3 openrc](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/) <code>.tar.xz</code> file and associated <code>.tar.xz.CONTENTS.gz</code>, <code>.tar.xz.DIGESTS</code>, <code>.tar.xz.asc</code>, and <code>.tar.xz.sha256</code> files: <code>wget https\://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.<code><var>FILE_EXTENSION</var></code></code>
   > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>.
 * Verify the SHA512 checksum: <code>openssl dgst -r -sha512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
