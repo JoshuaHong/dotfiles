@@ -17,7 +17,7 @@ The Gentoo Linux environment.
 
 ### Install the ISO
 * Download the [latest minimal installation](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/) <code>.iso</code> CD and the corresponding <code>.iso.asc</code> PGP signature
-* Fetch the [automated weekly release key](https://www.gentoo.org/downloads/signatures/): <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
+* Fetch the [Gentoo Linux release engineering key fingerprint](https://www.gentoo.org/downloads/signatures/): <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
 * Verify the ISO: <code>gpg --verify install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso.asc install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso</code>
 * Install the ISO to a drive: <code>dd if=install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
   > 📝 **Note:** <code>dd</code> is the natural tool for working with raw images.
