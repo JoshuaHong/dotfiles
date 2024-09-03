@@ -78,6 +78,7 @@ The Gentoo Linux environment.
   > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>.
 * Verify the SHA512 checksum: <code>openssl dgst -r -sha512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 * Verify the BLAKE2B512 checksum: <code>openssl dgst -r -blake2b512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
+* Ensure that the above two hashes match the one in the <code>.tar.xz.DIGESTS</code> file
 * Verify the SHA256 hash: <code>sha256sum --check stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.sha256</code>
 * Import the PGP keys: <code>gpg --import /usr/share/openpgp-keys/gentoo-release.asc</code>
 * Verify the tarball: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.asc</code>
