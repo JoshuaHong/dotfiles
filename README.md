@@ -107,20 +107,19 @@ The Gentoo Linux environment.
 * Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
 
 ### Configure Portage
-* Create the repositories directory: <code>mkdir --parents /etc/portage/repos.conf</code>
-* Copy the repository configuration file: <code>cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf</code>
 * Install the ebuild repository: <code>emerge-webrsync</code>
+* Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
+* Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
+  > 💡 **Tip:** The default mirrors can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
+* Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
+* Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Sync the ebuild repository: <code>emerge --sync</code>
 * Read the news: <code>eselect news read | less</code>
 * Purge the news: <code>eselect news purge</code>
 * Verify the profile: <code>eselect profile list</code>
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
   > ⚠️ **Warning:** The recommended profile is the default profile.
-* Update the make configuration file CPU flags: <code>emerge --ask app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
-* Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
-* Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
-  > 💡 **Tip:** The default mirrors can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
-* Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
+* Set up the necessary keyring for binary package verification: <code>getuto</code>
 * Update the @world set: <code>emerge --ask --verbose --update --deep --newuse @world</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
