@@ -89,6 +89,7 @@ The Gentoo Linux environment.
 
 ### Configure the compile options
 * Update the make configuration file <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
+  > 💡 **Tip:** Alternatively, download the files directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 
 ### Mount the filesystems
 * Mount /proc: <code>mount --types proc /proc /mnt/gentoo/proc</code>
