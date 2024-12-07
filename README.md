@@ -86,7 +86,7 @@ The Gentoo Linux environment.
 * Verify the tarball: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.asc</code>
 * Verify the DIGESTS checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.DIGESTS</code>
 * Verify the SHA256 checksum: <code>gpg --verify stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz.sha256</code>
-* Install the stage file: <code>tar xpvf stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz --xattrs-include='\*.\*' --numeric-owner</code>
+* Install the stage file: <code>tar xpvf stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz --xattrs-include='\*.\*' --numeric-owner -C /mnt/gentoo</code>
 * Remove the stage file and checksums: <code>rm stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.*</code>
 
 ### Configure the compile options
