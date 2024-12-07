@@ -129,7 +129,6 @@ The Gentoo Linux environment.
 ### Configure the time zone and locales
 * Set the time zone: <code>[/etc/timezone](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/timezone)</code>
   > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
-* Update the local time: <code>emerge --config sys-libs/timezone-data</code>
 * Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
 * Verify the locales are available: <code>locale -a</code>
@@ -139,7 +138,6 @@ The Gentoo Linux environment.
 * Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
 
 ### Install the firmware and microcode
-* Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
 * Install the Intel microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
