@@ -123,7 +123,7 @@ The Gentoo Linux environment.
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
   > ⚠️ **Warning:** The recommended profile is the default profile.
 * Set up the necessary keyring for binary package verification: <code>getuto</code>
-* Update the @world set: <code>emerge --ask --verbose --update --deep --newuse @world</code>
+* Update the @world set: <code>emerge --ask --verbose --update --deep --newuse --getbinpkg @world</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
 ### Configure the time zone and locales
