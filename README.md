@@ -113,7 +113,8 @@ The Gentoo Linux environment.
 * Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
   > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
-* Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
+* Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && cpuid2cpuflags >> /etc/portage/make.conf</code>
+* Format the make configuration file with the new CPU flags: <code>/etc/portage/make.conf</code>
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Sync the ebuild repository: <code>emerge --sync</code>
 * Read the news: <code>eselect news read | less</code>
