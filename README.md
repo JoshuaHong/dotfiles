@@ -110,7 +110,7 @@ The Gentoo Linux environment.
 
 ### Configure Portage
 * Install the ebuild repository: <code>emerge-webrsync</code>
-* Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
+* Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
   > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
