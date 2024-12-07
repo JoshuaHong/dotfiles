@@ -75,8 +75,9 @@ The Gentoo Linux environment.
 ### Install the stage file
 * Change directories to the mount point: <code>cd /mnt/gentoo</code>
 * Update the system clock: <code>chronyd -q</code>
-* Download the [latest stage 3 openrc](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/) <code>.tar.xz</code> file and associated <code>.tar.xz.CONTENTS.gz</code>, <code>.tar.xz.DIGESTS</code>, <code>.tar.xz.asc</code>, and <code>.tar.xz.sha256</code> files: <code>wget https\://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.<code><var>FILE_EXTENSION</var></code></code>
-  > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>.
+* [Download](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/) the latest stage 3 openrc <code>.tar.xz</code> file and associated <code>.tar.xz.CONTENTS.gz</code>, <code>.tar.xz.DIGESTS</code>, <code>.tar.xz.asc</code>, and <code>.tar.xz.sha256</code> files: <code>wget https\://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.<code><var>FILE_EXTENSION</var></code></code>
+  > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>. \
+  > 💡 **Tip:** If using links, press <code>Esc</code> to open the menu and use <code>File > Save as</code> to download the <code>.tar.xz.asc</code> text file.
 * Verify the SHA512 checksum: <code>openssl dgst -r -sha512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 * Verify the BLAKE2B512 checksum: <code>openssl dgst -r -blake2b512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 * Ensure that the above two hashes match the one in the <code>.tar.xz.DIGESTS</code> file
@@ -111,7 +112,7 @@ The Gentoo Linux environment.
 * Install the ebuild repository: <code>emerge-webrsync</code>
 * Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --deep --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
-  > 💡 **Tip:** The default mirrors can be found by running <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
+  > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && sed -i 's/# CPU_FLAGS_\\*/'"$(cpuid2cpuflags | sed -e 's/: /="/' -e 's/$/"/')"'/' /etc/portage/make.conf</code>
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Sync the ebuild repository: <code>emerge --sync</code>
