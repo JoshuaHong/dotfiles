@@ -141,34 +141,21 @@ The Gentoo Linux environment.
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
 * Install the microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
-* Set installkernel keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
-* Set installkernel USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
+* Set the kernel installer keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
+* Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Clean up packages: <code>emerge --depclean</code>
 * Clean up old kernel versions: <code>emerge --prune sys-kernel/gentoo-kernel-bin</code>
+* Rebuild the kernel modules: <code>emerge --ask @module-rebuild</code>
 * Rebuild the initramfs: <code>emerge --config sys-kernel/gentoo-kernel-bin</code>
-* Install kernel sources: <code>emerge --ask sys-kernel/gentoo-sources</code>
+* Install the kernel sources: <code>emerge --ask sys-kernel/gentoo-sources</code>
 * List symlink targets: <code>eselect kernel list</code>
 * Create the symlink: <code>eselect kernel set <var>#</var></code>
   > 📝 **Note:** The <code>-dist</code> suffix indicates a distribution kernel.
 
 TODO HERE
-
-### Install the firmware and microcode
-* Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
-  > 📝 **Note:** This is required to install the following packages.
-* Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
-* Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
-* Install the Intel microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
-
-### Install the kernel
-* Disable systemd: <code>[/etc/portage/package.use/bootloader](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.use/bootloader)</code>
-* Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
-* Remove older versions: <code>emerge --depclean</code>
-* Rebuild the kernel modules: <code>emerge --ask @module-rebuild</code>
-* Rebuild the initramfs: <code>emerge --config sys-kernel/gentoo-kernel-bin</code>
 
 ### Configure the system
 * Update the fstab file: <code>[/etc/fstab](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/fstab)</code>
