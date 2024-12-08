@@ -89,10 +89,6 @@ The Gentoo Linux environment.
 * Install the stage file: <code>tar xpvf stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz --xattrs-include='\*.\*' --numeric-owner -C /mnt/gentoo</code>
 * Remove the stage file and checksums: <code>rm stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.*</code>
 
-### Configure the compile options
-* Update the make configuration file: <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
-  > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
-
 ### Mount the filesystems
 * Mount /proc: <code>mount --types proc /proc /mnt/gentoo/proc</code>
 * Mount /sys: <code>mount --rbind /sys /mnt/gentoo/sys</code>
@@ -109,6 +105,8 @@ The Gentoo Linux environment.
 * Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
 
 ### Configure Portage
+* Update the make configuration file: <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
+  > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 * Install the ebuild repository: <code>emerge-webrsync</code>
 * Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
