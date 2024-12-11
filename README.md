@@ -155,8 +155,6 @@ The Gentoo Linux environment.
 * Create the symlink: <code>eselect kernel set <var>#</var></code>
   > 📝 **Note:** The <code>-dist</code> suffix indicates a distribution kernel.
 
-TODO HERE
-
 ### Configure the system
 * Update the fstab file: <code>[/etc/fstab](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/fstab)</code>
 * Set the hostname: <code>[/etc/hostname](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/hostname)</code>
@@ -168,13 +166,15 @@ TODO HERE
 
 ### Install system tools
 * Install a system logger: <code>emerge --ask app-admin/sysklogd && rc-update add sysklogd default</code>
-* Install a cron daemon: <code>emerge --ask sys-process/dcron && rc-update add dcron default</code>
+* Install a cron daemon: <code>emerge --ask sys-process/cronie && rc-update add cronie default</code>
 * Install a file indexer: <code>emerge --ask sys-apps/mlocate && mlocate</code>
 * Configure the ssh daemon: <code>rc-update add sshd default</code>
 * Install a shell completion tool: <code>emerge --ask app-shells/bash-completion</code>
 * Install a time synchronizaiton tool: <code>emerge --ask net-misc/chrony && rc-update add chronyd default</code>
 * Install filesystem tools: <code>emerge --ask sys-fs/xfsprogs && emerge --ask sys-block/io-scheduler-udev-rules</code>
-* Install a wireless daemon: <code>emerge --ask net-wireless/iwd</code>
+* Install a wireless daemon: <code>emerge --ask net-misc/dhcpcd && emerge --ask net-wireless/iwd</code>
+
+TODO HERE
 
 ### Configure the boot loader
 * Install a boot manager: <code>emerge --ask sys-boot/efibootmgr</code>
