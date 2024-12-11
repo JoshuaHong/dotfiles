@@ -174,7 +174,8 @@ The Gentoo Linux environment.
 * Install filesystem tools: <code>emerge --ask sys-fs/xfsprogs && emerge --ask sys-block/io-scheduler-udev-rules</code>
 * Install a wireless daemon: <code>emerge --ask net-misc/dhcpcd && emerge --ask net-wireless/iwd</code>
 
-TODO HERE
+TODO HERE - see if we need to update /etc/package.use/installkernel -systemd
+update the below to use EFI/Gentoo instaed of efi/gentoo
 
 ### Configure the boot loader
 * Install a boot manager: <code>emerge --ask sys-boot/efibootmgr</code>
