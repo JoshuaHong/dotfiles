@@ -177,7 +177,7 @@ The Gentoo Linux environment.
 ### Configure the boot loader
 * Install a boot manager: <code>emerge --ask sys-boot/efibootmgr</code>
   > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader.
-* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Gentoo Linux" --loader "\\EFI\\Gentoo\\vmlinuz-<code><var>VERSION</var></code>-gentoo-dist.efi" --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw initrd=\\EFI\\Gentoo\\initramfs-<code><var>VERSION</var></code>-gentoo-dist.img'</code>
+* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Gentoo Linux" --loader "\\EFI\\Gentoo\\vmlinuz-<code><var>VERSION</var></code>-gentoo-dist.efi" --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> initrd=\\EFI\\Gentoo\\initramfs-<code><var>VERSION</var></code>-gentoo-dist.img rw quiet'</code>
   > 📝 **Note:** If, for example, the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>BOOT_PARTITION_NUMBER</code> is <code>1</code>. \
   > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
 * Verify the entry was added properly: <code>efibootmgr --unicode</code>
