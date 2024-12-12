@@ -140,7 +140,7 @@ The Gentoo Linux environment.
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
   > 📝 **Note:** This is required to install the following packages.
-* Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code
+* Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
