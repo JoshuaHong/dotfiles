@@ -140,6 +140,8 @@ The Gentoo Linux environment.
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
   > 📝 **Note:** This is required to install the following packages.
+* Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
+  > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
@@ -173,15 +175,6 @@ The Gentoo Linux environment.
 * Install a time synchronizaiton tool: <code>emerge --ask net-misc/chrony && rc-update add chronyd default</code>
 * Install filesystem tools: <code>emerge --ask sys-fs/xfsprogs && emerge --ask sys-block/io-scheduler-udev-rules</code>
 * Install a wireless daemon: <code>emerge --ask net-misc/dhcpcd && emerge --ask net-wireless/iwd</code>
-
-### Configure the boot loader
-* Install a boot manager: <code>emerge --ask sys-boot/efibootmgr</code>
-  > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader.
-* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Gentoo Linux" --loader "\\EFI\\Gentoo\\vmlinuz-<code><var>VERSION</var></code>-gentoo-dist.efi" --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> initrd=\\EFI\\Gentoo\\initramfs-<code><var>VERSION</var></code>-gentoo-dist.img rw quiet rd.udev.log_level=3 console=tty3'</code>
-  > 📝 **Note:** If, for example, the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>BOOT_PARTITION_NUMBER</code> is <code>1</code>. \
-  > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
-* Verify the entry was added properly: <code>efibootmgr --unicode</code>
-* Set the boot order: <code>efibootmgr --bootorder <code><var>####</var></code>,<code><var>####</var></code> --unicode</code>
 
 ### Reboot the system
 * Exit the chrooted environment: <code>exit</code>
