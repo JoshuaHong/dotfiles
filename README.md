@@ -183,39 +183,12 @@ The Gentoo Linux environment.
 * Verify the entry was added properly: <code>efibootmgr --unicode</code>
 * Set the boot order: <code>efibootmgr --bootorder <code><var>####</var></code>,<code><var>####</var></code> --unicode</code>
 
-### Install essential packages
-*  Install the base system: <code>basestrap /mnt base base-devel dinit elogind-dinit linux linux-firmware</code>
+### Reboot the system
+* Exit the chrooted environment: <code>exit</code>
+* Unmount the mounted partitions: <code>cd && umount -l /mnt/gento/dev && umount -R /mnt/gentoo</code>
+* Reboot: <code>reboot</code>
 
-### Generate the fstab
-* Generate the fstab file: <code>fstabgen -U /mnt >> /mnt/etc/fstab</code>
-  > 📝 **Note:** Using <code>-U</code> for UUIDs instaed of <code>-L</code> for labels is safer.
-
-### Enter the system
-* Change root into the system: <code>artix-chroot /mnt</code>
-
-### Configure the system clock
-* Set the time zone: <code>ln -sf /usr/share/zoneinfo/<code><var>REGION</var></code>/<code><var>CITY</var></code> /etc/localtime</code>
-* Set the hardware clock: <code>hwclock --systohc</code>
-
-### Configure the localization
-* Install a text editor: <code>sudo pacman -S neovim</code>
-* Uncomment <code>en_US.UTF-8 UTF-8</code> and other needed locales in <code>/etc/locale.gen</code>
-* Generate the locales: <code>locale-gen</code>
-* Create the locale configuration file <code>/etc/locale.conf</code>:
-  <pre>
-  LANG=en_US.UTF-8
-  </pre>
-
-### Configure the boot loader
-* Install a boot manager and the microcode: <code>pacman -S efibootmgr intel-ucode</code>
-  > 📝 **Note:** Use EFISTUB to boot the kernel directly without a bootloader. \
-  > 📝 **Note:** The microcode package depends on the CPU manufacturer.
-* Create a boot entry with hibernation on the swap partition: <code>efibootmgr --create --disk /dev/<code><var>DISK_NAME</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Artix Linux" --loader /vmlinuz-linux --unicode 'root=UUID=<code><var>ROOT_UUID</var></code> resume=UUID=<code><var>SWAP_UUID</var></code> rw quiet initrd=\\<code><var>CPU_MANUFACTURER</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
-  > 📝 **Note:** For example, if the boot partition is on <code>/dev/nvme0n1p1</code>, then the <code>DISK_NAME</code> is <code>nvme0n1</code> and the <code>PARTITION_NUMBER</code> is <code>1</code>. \
-  > 📝 **Note:** Replace <code>CPU_MANUFACTURER</code> with <code>amd</code> or <code>intel</code>. \
-  > 💡 **Tip:** To find the UUIDs, run <code>lsblk -f</code>.
-* Verify the entry was added properly: <code>efibootmgr --unicode</code>
-* Set the boot order: <code>efibootmgr --bootorder <var>####</var>,<var>####</var> --unicode</code>
+TOOD - Resume here
 
 ### Configure users
 * Set the root password: <code>passwd</code>
