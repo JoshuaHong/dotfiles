@@ -7,7 +7,6 @@
 #            needs to be updated by running efibootmgr and passing the new
 #            kernel loader and initramfs. By disabling systemd, installkernel
 #            will call uefi-mkconfig to dynamically update the UEFI
-#            configuration automatically:
-#            https://wiki.gentoo.org/wiki/EFI_stub#Traditional_installkernel.
+#            configuration automatically.
 
 sys-kernel/installkernel dracut efistub -systemd
