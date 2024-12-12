@@ -1,0 +1,13 @@
+# Add your kernel commandline arguments following "; "
+# KERNEL_CONFIG="%entry_id %linux_name Linux %kernel_version ; example=test kernel=test cmdline=test arguments=test"
+KERNEL_CONFIG="Gentoo Linux ; root=/dev/nvme0n1p3 resume=/dev/nvme0n1p2 rw quiet rd.udev.log_level=3 console=tty3"
+
+# Turn on to only add efi files of the latest kernel version
+ONLY_LATEST=true
+
+# Revers order in which entries are added
+# REVERS_ORDER=false
+
+# Entry label length limit of 60 characters for better compatibility with UEFI Firmware
+# Can be disabled but thorough testing is recommended before using entry labels longer than 60 characters 
+# ENTRY_LABEL_LIMIT=true
