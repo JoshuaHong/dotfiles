@@ -193,8 +193,7 @@ TOOD - Resume here
 
 ### Configure users
 * Set the root password: <code>passwd</code>
-* Add a new user: <code>useradd -m -G wheel <code><var>USERNAME</var></code></code>
-  > 📝 **Note:** <code>-m</code> creates the user's home directory, <code>-G</code> adds the user to the group
+* Add a new user: <code>useradd --create-home --groups wheel <code><var>USERNAME</var></code></code>
 * Assign a password: <code>passwd <code><var>USERNAME</var></code></code>
 
 ### Configure networking
