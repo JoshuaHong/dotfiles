@@ -186,7 +186,7 @@ The Gentoo Linux environment.
 ### Reboot the system
 * Exit the chrooted environment: <code>exit</code>
 * Unmount the mounted partitions: <code>cd && umount -l /mnt/gento/dev && umount -R /mnt/gentoo</code>
-* Reboot: <code>reboot</code>
+* Reboot the system: <code>reboot</code>
 
 TOOD - Resume here
 
