@@ -136,13 +136,13 @@ The Gentoo Linux environment.
 * Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
 
 ### Install the kernel
+* Set the kernel installer keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
+* Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
   > 📝 **Note:** This is required to install the following packages.
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
 * Install the microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
-* Set the kernel installer keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
-* Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
