@@ -140,12 +140,12 @@ The Gentoo Linux environment.
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
   > 📝 **Note:** This is required to install the following packages.
+* Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code
+* Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
+* Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
 * Install the microcode: <code>emerge --ask sys-firmware/intel-microcode</code>
-* Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
-* Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
-* Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Clean up packages: <code>emerge --depclean</code>
 * Clean up old kernel versions: <code>emerge --prune sys-kernel/gentoo-kernel-bin</code>
 * Rebuild the kernel modules: <code>emerge --ask @module-rebuild</code>
@@ -167,7 +167,7 @@ The Gentoo Linux environment.
 ### Install system tools
 * Install a system logger: <code>emerge --ask app-admin/sysklogd && rc-update add sysklogd default</code>
 * Install a cron daemon: <code>emerge --ask sys-process/cronie && rc-update add cronie default</code>
-* Install a file indexer: <code>emerge --ask sys-apps/mlocate && mlocate</code>
+* Install a file indexer: <code>emerge --ask sys-apps/mlocate</code>
 * Configure the ssh daemon: <code>rc-update add sshd default</code>
 * Install a shell completion tool: <code>emerge --ask app-shells/bash-completion</code>
 * Install a time synchronizaiton tool: <code>emerge --ask net-misc/chrony && rc-update add chronyd default</code>
