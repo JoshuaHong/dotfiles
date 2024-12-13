@@ -140,10 +140,10 @@ The Gentoo Linux environment.
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
   > 📝 **Note:** This is required to install the following packages.
-* Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
-  > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
+* Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
+  > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
