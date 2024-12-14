@@ -182,178 +182,38 @@ The Gentoo Linux environment.
 * Reboot the system: <code>reboot</code>
 * Remove the live image
 
-TOOD - Resume here
-
-### Configure users
-* Set the root password: <code>passwd</code>
-* Add a new user: <code>useradd --create-home --groups wheel <code><var>USERNAME</var></code></code>
-* Assign a password: <code>passwd <code><var>USERNAME</var></code></code>
-
-### Configure networking
-* Create the hostname file <code>/etc/hostname</code>:
-  <pre>
-  <code><var>HOSTNAME</var></code>
-  </pre>
-  > 💡 **Tip:** Choose a hostname to identify the machine on a network.
-* Add the entry to the hosts file <code>/etc/hosts</code>:
-  <pre>
-  127.0.0.1        localhost
-  ::1              localhost
-  127.0.1.1        <var>HOSTNAME</var>.localdomain  <var>HOSTNAME</var>
-  </pre>
-* Install a wireless daemon and a DNS framework: <code>pacman -S iwd-dinit openresolv</code>
-  > 📝 **Note:** Iwd manages networking without a network manager, and aims to replace wpa_supplicant.
-* Create the iwd configuration file <code>/etc/iwd/main.conf</code>:
-  <pre>
-  [General]
-  EnableNetworkConfiguration=true
-
-  [Network]
-  EnableIPv6=true
-  NameResolvingService=resolvconf
-  </pre>
-  > 📝 **Note:** <code>EnableNetworkConfiguration</code> allows networking through iwd directly without a network manager. \
-  > 📝 **Note:** <code>resolvconf</code> is required using <code>openresolv</code> for DNS management and networking.
-* Enable the networking service: <code>ln -s /etc/dinit.d/iwd /etc/dinit.d/boot.d</code>
-
-### Reboot
-* Exit the chroot environment: <code>exit</code>
-* Unmount the drive: <code>umount -R /mnt</code>
-* Reboot the system: <code>reboot</code>
-
 <br>
 
 # Post-installation
 
-### Connect to the internet
+### Configure users
+* Add a new user: <code>useradd --create-home --groups wheel <code><var>USERNAME</var></code></code>
+* Assign a password: <code>passwd <code><var>USERNAME</var></code></code>
+
+### Configure the network
+* Enable the wireless daemon: <code>rc-update add iwd default && rc-service iwd start</code>
+* Update the configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
   > 💡 **Tip:** List all device names: <code>iwctl device list</code> \
   > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
-* Verify the connection: <code>ping artixlinux.org</code>
+* Verify the connection: <code>ping -c 3 gentoo.org</code>
+
+### Install remaining packages
+* Install the remaining packages: <code>TODO</code>
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
+* Copy the configuration files: <code>TODO</code>
 
 ### Enable privilege elevation
 * Temporarily set the editor to use visudo: <code>export VISUAL=nvim</code>
 * Open the configuration file: <code>visudo</code>
-* Allow users in the <code>wheel</code> group to use <code>sudo</code> without a password by uncommenting the following line:
-  <pre>
-  %wheel ALL=(ALL:ALL) NOPASSWD: ALL
-  </pre>
+* Allow users in the wheel group to use sudo: <code>[/etc/sudoers](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/sudoers)</code>
 
-### Restrict root
-* Restrict root login: <code>passwd --lock root</code>
-* Require a user to be in the <code>wheel</code> group to use <code>su</code> by uncommenting the following line in <code>/etc/pam.d/su</code> and <code>/etc/pam.d/su-l</code>:
-  <pre>
-  auth required pam_wheel.so use_uid
-  </pre>
+### Disable root login
+* Disable SSH root login: <code>[/etc/ssh/sshd_config](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/ssh/sshd_config)</code>
+* Disable root login: <code>passwd --lock root</code>
 
-### Deny SSH login
-* Install openssh: <code>pacman -S openssh-dinit</code>
-* Deny SSH login by uncommenting <code>PermitRootLogin</code> and changing <code>prohibit-password</code> to <code>no</code> in <code>/etc/ssh/sshd_config</code>:
-  <pre>
-  PermitRootLogin no
-  </pre>
-
-### Configure Pacman
-* Uncomment the following configurations in <code>/etc/pacman.conf</code>:
-  <pre>
-  CheckSpace
-  Color
-  ILoveCandy
-  ParallelDownloads = 5
-  VerbosePkgLists
-  </pre>
-
-### Configure mirrors
-* Install artix-archlinux-support for Arch Linux packages: <code>pacman -S artix-archlinux-support</code>
-  > 📝 **Note:** This is needed because many common Arch Linux packages are missing from the Artix Linux repositories.
-* Add the Arch Linux mirrorlists **after** the Artix Linux mirrorlists in <code>/etc/pacman.conf</code>:
-  <pre>
-  [extra]
-  Include = /etc/pacman.d/mirrorlist-arch
-
-  [multilib]
-  Include = /etc/pacman.d/mirrorlist-arch
-  </pre>
-  > ❗ **Important:** The Arch mirrorlists must be listed after the Artix mirrorlists so that the Artix packages take precedence.
-* Update the keyring for Arch packages: <code>pacman-key --populate archlinux</code>
-* Install pacman-contrib for pacman tools: <code>pacman -S pacman-contrib</code>
-* Back up the mirrorlists: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup && cp /etc/pacman.d/mirrorlist-arch /etc/pacman.d/mirrorlist-arch.backup</code>
-* Create a hook to rank mirrors on artix-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors.hook</code>:
-  <pre>
-  [Trigger]
-  Operation = Upgrade
-  Type = Package
-  Target = artix-mirrorlist
-
-  [Action]
-  Description = Ranking artix-mirrorlist by speed
-  When = PostTransaction
-  Depends = pacman-contrib
-  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i -e 's/^#Server/Server/' -e '/^#/d' /etc/pacman.d/mirrorlist.pacnew && rankmirrors /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist && rm /etc/pacman.d/mirrorlist.pacnew"
-  </pre>
-* Create a hook to rank mirrors on archlinux-mirrorlist update in <code>/etc/pacman.d/hooks/rankmirrors-arch.hook</code>:
-  <pre>
-  [Trigger]
-  Operation = Upgrade
-  Type = Package
-  Target = archlinux-mirrorlist
-
-  [Action]
-  Description = Ranking archlinux-mirrorlist by speed
-  When = PostTransaction
-  Depends = pacman-contrib
-  Exec = /bin/sh -c "cp -f /etc/pacman.d/mirrorlist-arch.pacnew /etc/pacman.d/mirrorlist-arch.backup && sed -i -e 's/^#Server/Server/' -e '/^#/d' /etc/pacman.d/mirrorlist-arch.pacnew && rankmirrors /etc/pacman.d/mirrorlist-arch.pacnew > /etc/pacman.d/mirrorlist-arch && rm /etc/pacman.d/mirrorlist-arch.pacnew"
-  </pre>
-* Sync the Arch Linux repositories: <code>pacman -Syu</code>
-
-### Configure Makepkg
-* Automatically detect and enable safe architecture-specific optimizations in <code>/etc/makepkg.conf</code>:
-  * Remove any <code>-march</code> and <code>-mtune</code> C flags
-  * Add the <code>-march=native</code> C flag:
-    <pre>
-    CFLAGS="-march=native ..."
-    </pre>
-  * Uncomment the Rust flags
-  * Add the <code>-C target-cpu=native</code> Rust flag:
-    <pre>
-    RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
-    </pre>
-  * Uncomment the Make flags
-  * Use parallel compilation by replacing the Make flag <code>-j2</code> with <code>-j$(nproc)</code>:
-    <pre>
-    MAKEFLAGS="-j$(nproc)"
-    </pre>
-  * Use multiple cores on compression by adding <code>--threads=0</code> to XZ and Zstandard:
-    <pre>
-    COMPRESSXZ=(xz -c -z --threads=0 -)
-    COMPRESSZST=(zstd -c -z -q --threads=0 -)
-    </pre>
-
-### Install an AUR helper
-* Install Git: <code>pacman -S git-dinit</code>
-* Clone Paru: <code>git clone https://aur.archlinux.org/paru.git</code>
-  > 📝 **Note:** Paru is the latest AUR helper and a Rust rewrite of Yay.
-* Build Paru: <code>cd paru && makepkg -sir</code>
-  > 📝 **Note:** Select the rust cargo dependency.
-* Remove the directory: <code>cd .. && rm -rf paru</code>
-
-### Import GPG keys
-* Temporarily export the XDG_DATA_HOME environment variable: <code>export XDG_DATA_HOME=~/.local/share</code>
-* Create the GnuPG directory: <code>mkdir --parents ${XDG_DATA_HOME}/gnupg/private-keys-v1.d</code>
-* Import the public key: <code>gpg --import <code><var>PUBLIC-KEY</var></code>.gpg</code>
-* Import the private key: <code>gpg --import <code><var>PRIVATE-KEY</var></code>.gpg</code>
-* Import the revocation certificate: <code>cp <code><var>REVOCATION-CERTIFICATE</var></code>.gpg ${XDG_DATA_HOME}/gnupg/openpgp-revocs.d</code>
-* Set the permissions: <code>chown -R $(whoami) ${XDG_DATA_HOME}/gnupg && chmod 700 ${XDG_DATA_HOME}/gnupg && chmod 600 ${XDG_DATA_HOME}/gnupg/* && chmod 700 ${XDG_DATA_HOME}/gnupg/*.d</code>
-  > 📝 **Note:** This is needed for the gpg warning: <code>WARNING: unsafe permissions on homedir</code>.
-
-### Install the remaining packages
-* Install the remaining packages: <code>paru -S backlight_control foot man-db noto-fonts-emoji pass polkit river ttf-iosevka ttf-material-symbols-git ungoogled-chromium waylock wbg wl-clipboard yambar</code>
-  > 📝 **Note:** Install using the following dependencies: pipewire-jack, wireplumber.
-* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles</code>
-* Copy the configuration files: <code>rm ~/.* && cp -r .bash_profile .bashrc .config downloads .local .profile .trash ~ && rm ~/downloads/.gitkeep</code>
-
-### Reboot
-* Reboot: <code>reboot</code>
+### Reboot the system
+* Reboot the system: <code>reboot</code>
 
 <br>
 
