@@ -1,0 +1,4 @@
+# Below are explicit changes to be made to the configuration file.
+# The rest of the options should not be modified.
+
+PermitRootLogin no
