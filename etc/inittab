@@ -1,0 +1,5 @@
+# Below are explicit changes to be made to the configuration file.
+# The rest of the options should not be modified.
+
+# Remove the --noclear flag to clear the terminal before login.
+c1:12345:respawn:/sbin/agetty 38400 tty1 linux
