@@ -208,6 +208,9 @@ The Gentoo Linux environment.
 * Open the configuration file: <code>visudo</code>
 * Allow users in the wheel group to use sudo: <code>[/etc/sudoers](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/sudoers)</code>
 
+### Enable quiet boot
+* Clear the terminal before login: <code>[/etc/inittab](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/inittab)</code>
+
 ### Disable root login
 * Disable SSH root login: <code>[/etc/ssh/sshd_config](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/ssh/sshd_config)</code>
 * Disable root login: <code>passwd --lock root</code>
