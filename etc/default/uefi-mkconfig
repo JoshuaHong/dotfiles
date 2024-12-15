@@ -1,6 +1,6 @@
 # Add your kernel commandline arguments following "; "
 # KERNEL_CONFIG="%entry_id %linux_name Linux %kernel_version ; example=test kernel=test cmdline=test arguments=test"
-KERNEL_CONFIG="Gentoo Linux %kernel_version ; root=/dev/nvme0n1p3 resume=/dev/nvme0n1p2 rw quiet rd.udev.log_level=3 console=tty3"
+KERNEL_CONFIG="Gentoo Linux %kernel_version ; root=/dev/nvme0n1p3 resume=/dev/nvme0n1p2 rw quiet rd.udev.log_level=3 nomodeset"
 
 # Turn on to only add efi files of the latest kernel version
 ONLY_LATEST=true
