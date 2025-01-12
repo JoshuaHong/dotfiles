@@ -222,36 +222,23 @@ The Gentoo Linux environment.
 <br>
 
 # Packages
-List all installed packages that are not strict dependencies of other packages: <code>pacman -Qtt</code>
+List all directly installed packages: <code>cat /var/lib/portage/world</code>
 
-| Package                    | Justification                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| artix-archlinux-support    | Enables installing Arch Linux packages. Many common Arch Linux packages are missing from the Artix Linux repositories. |
-| backlight_control *        | Controls the backlight brightness. Extremely minimal and requires no permissions setup like other backlight utilities. |
-| base                       | Tools to install Artix Linux.                                                                                          |
-| base-devel                 | Tools to build Artix Linux packages.                                                                                   |
-| efibootmgr                 | Boots Linux without a bootloader by loading the kernel directly.                                                       |
-| foot                       | Terminal emulator. Fast, lightweight, minimalistic, and Wayland native.                                                |
-| git-dinit                  | Manages version control.                                                                                               |
-| intel-ucode                | Updates the firmware for system stability.                                                                             |
-| iwd-dinit                  | Manages networking without a full network manager.                                                                     |
-| linux                      | Linux kernel.                                                                                                          |
-| linux-firmware             | Linux firmware.                                                                                                        |
-| man-db                     | Reads man pages.                                                                                                       |
-| neovim                     | Text editor.                                                                                                           |
-| noto-fonts-emoji           | Emoji fonts.                                                                                                           |
-| openssh                    | Allows remote login with SSH.                                                                                          |
-| pacman-contrib             | Checks for updates, ranks mirrors, and manages .pacnew and .pacsave files.                                             |
-| paru *                     | Installs packages from the Arch User Repository. The latest AUR helper and Rust rewrite of Yay. Install using rust.    |
-| pass                       | Password manager. Simple and secure.                                                                                   |
-| polkit                     | Manages elevated permissions to run Wayland.                                                                           |
-| river                      | Window manager. Simple and fast tiling Wayland compositor.                                                             |
-| ttf-iosevka *              | Typeface family. An aesthetic, open-source, monospace typeface family.                                                 |
-| ttf-material-symbols-git * | Emoji symbol outlines.                                                                                                 |
-| ungoogled-chromium         | Web browser. A spyware-free chromium engine. Install using pipewire-jack and wireplumber, the latest standards.        |
-| waylock                    | Screenlocker. A small and secure screenlocker for Wayland.                                                             |
-| wbg *                      | Sets the wallpaper for Wayland. Extremely minimal; does only one thing.                                                |
-| wl-clipboard               | Wayland clipboard manager. Used for copying passwords without printing to the terminal.                                |
-| yambar *                   | Status panel. Modular, configurable, and lightweight.                                                                  |
-
-\* AUR packages
+| Package                           | Justification                       |
+| --------------------------------- | ----------------------------------- |
+| app-admin/sudo                    | To enable privilege escalation.     |
+| app-admin/sysklogd                | To log system messages.             |
+| app-shells/bash-completion        | To enable shell completion.         |
+| net-misc/chrony                   | To synchronize the system clock.    |
+| net-misc/dhcpcd                   | To enable DHCP.                     |
+| net-wireless/iwd                  | To configure networking.            |
+| sys-apps/mlocate                  | To index the file system.           |
+| sys-block/io-scheduler-udev-rules | To customize kernel schedulers.     |
+| sys-firmware/intel-microcode      | To support the Intel CPU.           |
+| sys-firmware/sof-firmware         | To enable audio.                    |
+| sys-fs/xfsprogs                   | To use XFS filesystem utilities.    |
+| sys-kernel/gentoo-kernel-bin      | To use the Gentoo Linux kernel.     |
+| sys-kernel/gentoo-sources         | To provide the kernel source files. |
+| sys-kernel/installkernel          | To automaticaly install the kernel. |
+| sys-kernel/linux-firmware         | To support hardware devices.        |
+| sys-process/cronie                | To run scheduled tasks.             |
