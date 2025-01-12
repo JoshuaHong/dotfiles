@@ -192,6 +192,7 @@ The Gentoo Linux environment.
 
 ### Configure the network
 * Enable the wireless daemon: <code>rc-update add iwd default && rc-service iwd start</code>
+* Create the configuration directory: <code>mkdir /etc/iwd/</code>
 * Update the configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
   > 💡 **Tip:** List all device names: <code>iwctl device list</code> \
