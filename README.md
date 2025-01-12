@@ -105,7 +105,7 @@ The Gentoo Linux environment.
 * Change the primary prompt: <code>export PS1="(chroot) ${PS1}"</code>
 
 ### Configure Portage
-* Update the make configuration file: <code>[/mnt/gentoo/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
+* Update the make configuration file: <code>[/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
   > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 * Install the ebuild repository: <code>emerge-webrsync</code>
 * Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
