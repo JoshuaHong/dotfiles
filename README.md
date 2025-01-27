@@ -108,7 +108,7 @@ The Gentoo Linux environment.
 * Update the make configuration file: <code>[/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
   > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 * Install the ebuild repository: <code>emerge-webrsync</code>
-* Update the make configuration mirrors: <code>emerge --ask --oneshot --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
+* Update the make configuration mirrors: <code>emerge --ask --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
   > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && cpuid2cpuflags >> /etc/portage/make.conf</code>
@@ -228,6 +228,7 @@ List all directly installed packages: <code>cat /var/lib/portage/world</code>
 | --------------------------------- | ----------------------------------- |
 | app-admin/sudo                    | To enable privilege escalation.     |
 | app-admin/sysklogd                | To log system messages.             |
+| app-portage/mirrorselect          | To update Gentoo source mirrors.    |
 | app-shells/bash-completion        | To enable shell completion.         |
 | net-misc/chrony                   | To synchronize the system clock.    |
 | net-misc/dhcpcd                   | To enable DHCP.                     |
