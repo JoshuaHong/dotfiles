@@ -9,7 +9,7 @@ The Gentoo Linux environment.
 
 # Programs
 * Operating system: [Gentoo Linux](https://www.gentoo.org)
-  > A highly flexible, source-based Linux distribution. 
+    > A highly flexible, source-based Linux distribution. 
 
 <br>
 
@@ -17,57 +17,57 @@ The Gentoo Linux environment.
 
 ### Install the ISO
 * [Download](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/) the latest minimal installation <code>.iso</code> CD and the corresponding <code>.iso.asc</code> PGP signature
-  > 📝 **Note:** In Gentoo, the keyword <code>amd64</code> refers to any 64-bit architecture, whether AMD or Intel.
+    > 📝 **Note:** In Gentoo, the keyword <code>amd64</code> refers to any 64-bit architecture, whether AMD or Intel.
 * Fetch the Gentoo Linux Release Engineering [key fingerprint](https://www.gentoo.org/downloads/signatures/): <code>gpg --keyserver hkps://keys.gentoo.org --recv-keys <code><var>KEY_FINGERPRINT</var></code></code>
 * Verify the ISO: <code>gpg --verify install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso.asc install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso</code>
 * Install the ISO to a drive: <code>dd if=install-amd64-minimal-<code><var>TIMESTAMP</var></code>.iso of=/dev/<code><var>DRIVE_NAME</var></code> bs=4096 status=progress && sync</code>
-  > 📝 **Note:** <code>dd</code> is the natural tool for working with raw images.
+    > 📝 **Note:** <code>dd</code> is the natural tool for working with raw images.
 
 ### Boot the installation medium
 * Use UEFI boot mode
-  > 📝 **Note:** UEFI is the newest standard, and most modern hardware does not support legacy BIOS boot.
+    > 📝 **Note:** UEFI is the newest standard, and most modern hardware does not support legacy BIOS boot.
 * Disable secure boot
-  > 📝 **Note:** Sometimes installation images do not support secure boot. Secure boot can be set up after installation.
+    > 📝 **Note:** Sometimes installation images do not support secure boot. Secure boot can be set up after installation.
 * Ensure that the boot order prioritizes the external bootable media over the internal disk devices
 * Boot into the live environment
 
 ### Configure the network
 * Disable the shell history: <code>set +o history</code>
-  > ⚠️ **Warning:** History is disabled to avoid storing the clear text password in history.
+    > ⚠️ **Warning:** History is disabled to avoid storing the clear text password in history.
 * Connect to the network: <code>wpa_supplicant -i <code><var>DEVICE_NAME</var></code> -c <(wpa_passphrase "<code><var>SSID</var></code>" "<code><var>PASSWORD</var></code>") &</code>
-  > 💡 **Tip:** List all device names: <code>ip link</code>.
+    > 💡 **Tip:** List all device names: <code>ip link</code>.
 * Enable the shell history: <code>set -o history</code>
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
 ### Partition the disks
 * Use fdisk: <code>fdisk /dev/<code><var>DISK_NAME</var></code></code>
-  * Delete all existing partitions and signatures
-    > ⚠️ **Warning:** This will wipe out the entire drive.
-  * Create a new empty GPT partition table
-    > 📝 **Note:** GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
-  * Create a 550M EFI System
-    > 📝 **Note:** The author of gdisk suggests 550M.
-  * Create a 30G Linux Swap
-    > 📝 **Note:** The rule of thumb is 2xRAM for hibernation.
-  * Create a 30G Linux root (x86-64)
-    > 📝 **Note:** 15G is the recommended minimum, so 30G should be enough.
-  * Create the rest for Linux home
+    * Delete all existing partitions and signatures
+        > ⚠️ **Warning:** This will wipe out the entire drive.
+    * Create a new empty GPT partition table
+        > 📝 **Note:** GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
+    * Create a 550M EFI System
+        > 📝 **Note:** The author of gdisk suggests 550M.
+    * Create a 30G Linux Swap
+        > 📝 **Note:** The rule of thumb is 2xRAM for hibernation.
+    * Create a 30G Linux root (x86-64)
+        > 📝 **Note:** 15G is the recommended minimum, so 30G should be enough.
+    * Create the rest for Linux home
 
 ### Format the partitions
 * Format the boot partition: <code>mkfs.fat -F 32 /dev/<code><var>BOOT_PARTITION</var></code></code>
-  > 📝 **Note:** The EFI system partition must be formatted as FAT32 on UEFI systems.
+    > 📝 **Note:** The EFI system partition must be formatted as FAT32 on UEFI systems.
 * Set the boot partition label name: <code>fatlabel /dev/<code><var>BOOT_PARTITION</var></code> BOOT</code>
-  > 💡 **Tip:** Assigning labels to partitions helps referring to them later without their numbers. \
-  > 📝 **Note:** FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
+    > 💡 **Tip:** Assigning labels to partitions helps referring to them later without their numbers. \
+    > 📝 **Note:** FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
 * Create the swap partition: <code>mkswap -L SWAP /dev/<code><var>SWAP_PARTITION</var></code></code>
-  > 💡 **Tip:** Any existing swap partitions may need to be removed in advance: <code>swapoff -a</code>.
+    > 💡 **Tip:** Any existing swap partitions may need to be removed in advance: <code>swapoff -a</code>.
 * Format the root partition: <code>mkfs.xfs -L ROOT /dev/<code><var>ROOT_PARTITION</var></code></code>
-  > 📝 **Note:** XFS is the Gentoo recommended all-purpose, all-platform filesystem.
+    > 📝 **Note:** XFS is the Gentoo recommended all-purpose, all-platform filesystem.
 * Format the home partition: <code>mkfs.xfs -L HOME /dev/<code><var>HOME_PARTITION</var></code></code>
 
 ### Mount the file systems
 * Mount the root partition: <code>mount --mkdir /dev/<code><var>ROOT_PARTITION</var></code> /mnt/gentoo</code>
-  > ⚠️ **Warning:** Gentoo mounts the live CD on <code>/mnt/livecd</code>; mounting anything on <code>/mnt</code> itself will break all commands.
+    > ⚠️ **Warning:** Gentoo mounts the live CD on <code>/mnt/livecd</code>; mounting anything on <code>/mnt</code> itself will break all commands.
 * Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/gentoo/efi</code>
 * Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/gentoo/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
@@ -76,8 +76,8 @@ The Gentoo Linux environment.
 * Change directories to the mount point: <code>cd /mnt/gentoo</code>
 * Update the system clock: <code>chronyd -q</code>
 * [Download](https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/) the latest stage 3 openrc <code>.tar.xz</code> file and associated <code>.tar.xz.CONTENTS.gz</code>, <code>.tar.xz.DIGESTS</code>, <code>.tar.xz.asc</code>, and <code>.tar.xz.sha256</code> files: <code>wget https\://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.<code><var>FILE_EXTENSION</var></code></code>
-  > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>. \
-  > 💡 **Tip:** If using links, press <code>Esc</code> to open the menu and use <code>File > Save as</code> to download the <code>.tar.xz.asc</code> text file.
+    > 💡 **Tip:** Alternatively, use a command-line browser to install the files: <code>links https\://www.gentoo.org/downloads/</code>. \
+    > 💡 **Tip:** If using links, press <code>Esc</code> to open the menu and use <code>File > Save as</code> to download the <code>.tar.xz.asc</code> text file.
 * Verify the SHA512 checksum: <code>openssl dgst -r -sha512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 * Verify the BLAKE2B512 checksum: <code>openssl dgst -r -blake2b512 stage3-amd64-openrc-<code><var>TIMESTAMP</var></code>.tar.xz</code>
 * Ensure that the above two hashes match the one in the <code>.tar.xz.DIGESTS</code> file
@@ -106,11 +106,11 @@ The Gentoo Linux environment.
 
 ### Configure Portage
 * Update the make configuration file: <code>[/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
-  > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
+    > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 * Install the ebuild repository: <code>emerge-webrsync</code>
 * Update the make configuration mirrors: <code>emerge --ask --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
-  > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
+    > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
 * Update the make configuration file CPU flags: <code>emerge --ask --oneshot --verbose app-portage/cpuid2cpuflags && cpuid2cpuflags >> /etc/portage/make.conf</code>
 * Format the make configuration file with the new CPU flags: <code>/etc/portage/make.conf</code>
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
@@ -119,31 +119,31 @@ The Gentoo Linux environment.
 * Purge the news: <code>eselect news purge</code>
 * Verify the profile: <code>eselect profile list</code>
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
-  > ⚠️ **Warning:** The recommended profile is the default profile.
+    > ⚠️ **Warning:** The recommended profile is the default profile.
 * Set up the necessary keyring for binary package verification: <code>getuto</code>
 * Update the @world set: <code>emerge --ask --verbose --update --deep --newuse --getbinpkg @world</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
 ### Configure the time zone and locales
 * Set the time zone: <code>[/etc/timezone](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/timezone)</code>
-  > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
+    > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
 * Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
 * Verify the locales are available: <code>locale -a</code>
 * List all locales: <code>eselect locale list</code>
 * Select the locale to set: <code>eselect locale set <code><var>LOCALE_NUMBER</var></code></code>
-  > 📝 **Note:** This sets the <code>LANG</code> variable in <code>/etc/env.d/02locale</code>. This is typically <code>en_US.utf8</code>.
+    > 📝 **Note:** This sets the <code>LANG</code> variable in <code>/etc/env.d/02locale</code>. This is typically <code>en_US.utf8</code>.
 * Reload the environment: <code>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</code>
 
 ### Install the kernel
 * Set the kernel installer keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
-  > 📝 **Note:** This is required to install the following packages.
+    > 📝 **Note:** This is required to install the following packages.
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
 * Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
-  > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
+    > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
 * Install the Linux firmware: <code>emerge --ask sys-kernel/linux-firmware</code>
 * Install the audio firmware: <code>emerge --ask sys-firmware/sof-firmware</code>
@@ -155,7 +155,7 @@ The Gentoo Linux environment.
 * Install the kernel sources: <code>emerge --ask sys-kernel/gentoo-sources</code>
 * List symlink targets: <code>eselect kernel list</code>
 * Create the symlink: <code>eselect kernel set <code><var>#</var></code></code>
-  > 📝 **Note:** The <code>-dist</code> suffix indicates a distribution kernel.
+    > 📝 **Note:** The <code>-dist</code> suffix indicates a distribution kernel.
 
 ### Configure the system
 * Update the fstab file: <code>[/etc/fstab](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/fstab)</code>
@@ -195,8 +195,8 @@ The Gentoo Linux environment.
 * Create the configuration directory: <code>mkdir /etc/iwd/</code>
 * Update the configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
-  > 💡 **Tip:** List all device names: <code>iwctl device list</code> \
-  > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
+    > 💡 **Tip:** List all device names: <code>iwctl device list</code> \
+    > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
 ### Install remaining packages
