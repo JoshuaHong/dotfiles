@@ -1,0 +1,6 @@
+# Seatd USE flags.
+
+# builtin - To use the seatd service.
+# server  - To use the seatd service.
+
+sys-auth/seatd builtin server

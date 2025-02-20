@@ -200,12 +200,18 @@ The Gentoo Linux environment.
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
 ### Install remaining packages
+* Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/head/master/etc/portage/package.use/seatd)</code>
 * Install the remaining packages: <code>TODO</code>
+* Remove obsolete packages: <code>emerge --ask --depclean</code>
+* Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
 * Copy the configuration files: <code>TODO</code>
 
+### Enable seat management
+* Add the user to the necessary groups: <code>gpasswd -a <code><var>USERNAME</var></code> seat && gpasswd -a <code><var>USERNAME</var></code> video</code>
+* Enable the service on startup: <code>rc-update add seatd default && rc-service seatd start</code>
+
 ### Enable privilege elevation
-* Temporarily set the editor to use visudo: <code>export VISUAL=nvim</code>
 * Open the configuration file: <code>visudo</code>
 * Allow users in the wheel group to use sudo: <code>[/etc/sudoers](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/sudoers)</code>
 
@@ -228,8 +234,10 @@ List all directly installed packages: <code>cat /var/lib/portage/world</code>
 | --------------------------------- | ----------------------------------- |
 | app-admin/sudo                    | To enable privilege escalation.     |
 | app-admin/sysklogd                | To log system messages.             |
+| app-editors/neovim                | To edit text.                       |
 | app-portage/mirrorselect          | To update Gentoo source mirrors.    |
 | app-shells/bash-completion        | To enable shell completion.         |
+| gui-wm/hyprland                   | To manage windows.                  |
 | net-misc/chrony                   | To synchronize the system clock.    |
 | net-misc/dhcpcd                   | To enable DHCP.                     |
 | net-wireless/iwd                  | To configure networking.            |
