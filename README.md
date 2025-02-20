@@ -212,6 +212,7 @@ The Gentoo Linux environment.
 * Enable the service on startup: <code>rc-update add seatd default && rc-service seatd start</code>
 
 ### Enable privilege elevation
+* Temporarily set the editor to use visudo: <code>export VISUAL=nvim</code>
 * Open the configuration file: <code>visudo</code>
 * Allow users in the wheel group to use sudo: <code>[/etc/sudoers](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/sudoers)</code>
 
