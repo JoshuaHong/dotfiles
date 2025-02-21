@@ -236,6 +236,7 @@ List all directly installed packages: <code>cat /var/lib/portage/world</code>
 | app-admin/sudo                    | To enable privilege escalation.     |
 | app-admin/sysklogd                | To log system messages.             |
 | app-editors/neovim                | To edit text.                       |
+| app-portage/gentoolkit            | To manage packages.                 |
 | app-portage/mirrorselect          | To update Gentoo source mirrors.    |
 | app-shells/bash-completion        | To enable shell completion.         |
 | gui-wm/hyprland                   | To manage windows.                  |
