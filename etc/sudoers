@@ -1,5 +1,8 @@
 # Below are explicit changes to be made to the configuration file.
 # The rest of the options should not be modified.
 
+# Set the authentication timeout to always require a password.
+Defaults timestamp_timeout=0
+
 # Allow members of group wheel to execute any command.
 %wheel ALL=(ALL:ALL) ALL
