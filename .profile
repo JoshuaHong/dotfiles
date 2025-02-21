@@ -52,7 +52,7 @@ exportVariables() {
 }
 
 startWayland() {
-    dbus-run-session Hyprland
+    dbus-run-session Hyprland > /dev/null 2>&1
 }
 
 isValidPath() {
