@@ -120,7 +120,7 @@ The Gentoo Linux environment.
 * Remove the make configuration file backup: <code>rm /etc/portage/make.conf.backup</code>
 * Read the news: <code>eselect news read | less</code>
 * Purge the news: <code>eselect news purge</code>
-* Verify the profile: <code>eselect profile list</code>
+* Verify the profile: <code>eselect profile list | less</code>
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
     > ⚠️ **Warning:** The recommended profile is the default profile.
 * Set up the necessary keyring for binary package verification: <code>getuto</code>
