@@ -108,10 +108,6 @@ The Gentoo Linux environment.
 * Update the make configuration file: <code>[/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
     > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
 * Install the ebuild repository: <code>emaint --auto sync</code>
-* Install git: <code>emerge --ask dev-vcs/git</code>
-* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
-* Delete the Portage tree: <code>rm -rf /var/db/repos/gentoo/*</code>
-* Reinstall the ebuild repository: <code>emaint --auto sync</code>
 * Update the make configuration mirrors: <code>emerge --ask app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
     > 💡 **Tip:** The default mirrors can be found by running: <code>grep "GENTOO_MIRRORS" /usr/share/portage/config/make.globals</code>.
@@ -209,6 +205,11 @@ The Gentoo Linux environment.
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
 * Copy the configuration files: <code>TODO</code>
+
+### Use Portage with Git
+* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
+* Delete the Portage tree: <code>rm -rf /var/db/repos/gentoo/*</code>
+* Reinstall the ebuild repository: <code>emaint --auto sync</code>
 
 ### Enable seat management
 * Add the user to the necessary groups: <code>gpasswd -a <code><var>USERNAME</var></code> seat && gpasswd -a <code><var>USERNAME</var></code> video</code>
