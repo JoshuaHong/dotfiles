@@ -107,7 +107,6 @@ The Gentoo Linux environment.
 ### Configure Portage
 * Update the make configuration file: <code>[/etc/portage/make.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf)</code>
     > 💡 **Tip:** Alternatively, download the file directly: <code>wget https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/make.conf</code>.
-* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
 * Install the ebuild repository: <code>emaint --auto sync</code>
 * Update the make configuration mirrors: <code>emerge --ask --verbose app-portage/mirrorselect && mirrorselect --blocksize 10 --servers 5</code>
 * Add the default mirrors to the end of the list of mirrors: <code>/etc/portage/make.conf</code>
@@ -121,6 +120,9 @@ The Gentoo Linux environment.
 * Change the profile, if necessary: <code>eselect profile set <code><var>PROFILE_NUMBER</var></code></code>
     > ⚠️ **Warning:** The recommended profile is the default profile.
 * Set up the necessary keyring for binary package verification: <code>getuto</code>
+* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
+* Delete the Portage tree: <code>rm -rf /var/db/repos/gentoo/*</code>
+* Reinstall the ebuild repository: <code>emaint --auto sync</code>
 * Update the @world set: <code>emerge --ask --verbose --update --deep --newuse --getbinpkg @world</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
