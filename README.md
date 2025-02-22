@@ -205,7 +205,8 @@ The Gentoo Linux environment.
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
 * Temporarily include hidden files in wildcard expansion: <code>shopt -s dotglob</code>
-* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
+* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/</code>
+* Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
 
 ### Use Portage with Git
@@ -230,12 +231,13 @@ The Gentoo Linux environment.
 * Disable root login: <code>passwd --lock root</code>
 
 ### Reboot the system
+* Clean the home directory: <code>rm --force --recursive ${HOME}/*</code>
 * Reboot the system: <code>reboot</code>
 
 <br>
 
 # Packages
-List all directly installed packages: <code>cat /var/lib/portage/world</code>
+List all directly installed packages (20): <code>cat /var/lib/portage/world</code>
 
 | Package                           | Justification                       |
 | --------------------------------- | ----------------------------------- |
