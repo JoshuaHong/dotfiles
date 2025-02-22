@@ -205,7 +205,8 @@ The Gentoo Linux environment.
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
 * Temporarily include hidden files in wildcard expansion: <code>shopt -s dotglob</code>
-* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
+* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
+* Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
 
 ### Use Portage with Git
 * Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
