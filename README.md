@@ -200,7 +200,7 @@ The Gentoo Linux environment.
 
 ### Install remaining packages
 * Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/seatd)</code>
-* Install the remaining packages: <code>TODO</code>
+* Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-wm/hyprland</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
