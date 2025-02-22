@@ -203,7 +203,7 @@ The Gentoo Linux environment.
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
 ### Install remaining packages
-* Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/head/master/etc/portage/package.use/seatd)</code>
+* Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/seatd)</code>
 * Install the remaining packages: <code>TODO</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
