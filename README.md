@@ -231,7 +231,7 @@ The Gentoo Linux environment.
 * Disable root login: <code>passwd --lock root</code>
 
 ### Reboot the system
-* Clean the home directory: <code>rm --force --recursive ${HOME}/*</code>
+* Clean the home directory: <code>rm --force --recursive "${HOME}/*"</code>
 * Reboot the system: <code>reboot</code>
 
 <br>
