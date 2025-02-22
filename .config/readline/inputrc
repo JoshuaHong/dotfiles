@@ -91,24 +91,24 @@ set vi-ins-mode-string "\1\e[6 q\2"
 set visible-stats on
 
 $if mode=vi
-  Control-e: clear-screen
-  set keymap vi-command
-  "i": vi-insertion-mode
-  "F": vi-append-mode
-  "a": beginning-of-line
-  "A": vi-insert-beg
-  "s": vi-prev-word
-  "d": vi-next-word
-  "f": end-of-line
-  "F": vi-append-eol
-  "j": backward-char
-  "k": next-history
-  "l": previous-history
-  ";": forward-char
-  "r": vi-change-char
-  "R": vi-replace
-  "e": vi-end-word
-  set keymap vi-insert
-  Control-n: previous-history
-  Control-N: next-history
+    Control-e: clear-screen
+    set keymap vi-command
+    "i": vi-insertion-mode
+    "F": vi-append-mode
+    "a": beginning-of-line
+    "A": vi-insert-beg
+    "s": vi-prev-word
+    "d": vi-next-word
+    "f": end-of-line
+    "F": vi-append-eol
+    "j": backward-char
+    "k": next-history
+    "l": previous-history
+    ";": forward-char
+    "r": vi-change-char
+    "R": vi-replace
+    "e": vi-end-word
+    set keymap vi-insert
+    Control-n: previous-history
+    Control-N: next-history
 $endif
