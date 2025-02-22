@@ -140,7 +140,7 @@ The Gentoo Linux environment.
 * Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
     > 📝 **Note:** This is required to install the following packages.
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
-* Set up the EFI directory: <code>mkdir -p /efi/EFI/Gentoo</code>
+* Set up the EFI directory: <code>mkdir --parents /efi/EFI/Gentoo</code>
 * Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
     > 📝 **Note:** This automatically generates a new UEFI configuration file using efibootmgr whenever a new kernel is installed.
 * Install the kernel: <code>emerge --ask sys-kernel/gentoo-kernel-bin</code>
@@ -177,7 +177,7 @@ The Gentoo Linux environment.
 
 ### Reboot the system
 * Exit the chrooted environment: <code>exit</code>
-* Unmount the mounted partitions: <code>cd && umount -l /mnt/gentoo/dev && umount -R /mnt/gentoo</code>
+* Unmount the mounted partitions: <code>cd && umount --lazy /mnt/gentoo/dev && umount --recursive /mnt/gentoo</code>
 * Reboot the system: <code>reboot</code>
 * Remove the live image
 
@@ -210,7 +210,7 @@ The Gentoo Linux environment.
 
 ### Use Portage with Git
 * Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
-* Delete the Portage tree: <code>rm -rf /var/db/repos/gentoo/*</code>
+* Delete the Portage tree: <code>rm --force --recursive /var/db/repos/gentoo/*</code>
 * Reinstall the ebuild repository: <code>emaint --auto sync</code>
 
 ### Enable seat management
