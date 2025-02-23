@@ -4,10 +4,6 @@
 # Contains commands to run each time a new Bash shell is launched.
 
 main() {
-    if ! isRunningInteractively; then
-        return
-    fi
-
     setAliases
     setOptions
     setPrompts
@@ -229,10 +225,6 @@ setPrompts() {
 
 disableFlowControl() {
     stty -ixon  # Don't allow `Ctrl+S` to disable terminal execution.
-}
-
-isRunningInteractively() {
-    [[ "${-}" == *i* ]]
 }
 
 main
