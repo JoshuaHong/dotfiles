@@ -143,8 +143,9 @@ The Gentoo Linux environment.
 ### Install the kernel
 * Set the kernel installer keywords: <code>[/etc/portage/package.accept_keywords/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.accept_keywords/installkernel)</code>
 * Set the kernel installer USE flags: <code>[/etc/portage/package.use/installkernel](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/installkernel)</code>
-* Accept required licenses: <code>[/etc/portage/package.license](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/portage/package.license)</code>
-    > 📝 **Note:** This is required to install the following packages.
+* Accept the intel-microcode license: <code>[/etc/portage/package.license/intel-microcode](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.license/intel-microcode)</code>
+* Accept the linux-firmware license: <code>[/etc/portage/package.license/linux-firmware](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.license/linux-firmware)</code>
+    > 📝 **Note:** These are required to install the following packages.
 * Install the kernel installer: <code>emerge --ask sys-kernel/installkernel</code>
 * Set up the EFI directory: <code>mkdir --parents /efi/EFI/Gentoo</code>
 * Update the UEFI configuration file: <code>[/etc/default/uefi-mkconfig](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/default/uefi-mkconfig)</code>
@@ -211,15 +212,14 @@ The Gentoo Linux environment.
 * Sync the repository: <code>emaint --auto sync</code>
 
 ### Install remaining packages
-* Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/seatd)</code>
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
+* Temporarily include hidden files in wildcard expansion: <code>shopt -s dotglob</code>
+* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && cp --recursive dotfiles/etc/portage/package.* /etc/portage/</code>
+* Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
+* Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland www-client/mullvad-browser-bin</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
-* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
-* Temporarily include hidden files in wildcard expansion: <code>shopt -s dotglob</code>
-* Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/</code>
-* Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
-* Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
 
 ### Enable seat management
 * Add the user to the necessary groups: <code>gpasswd --add <code><var>USERNAME</var></code> seat && gpasswd --add <code><var>USERNAME</var></code> video</code>
