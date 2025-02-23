@@ -9,7 +9,13 @@ The Gentoo Linux environment.
 
 # Programs
 * Operating system: [Gentoo Linux](https://www.gentoo.org)
-    > A highly flexible, source-based Linux distribution. 
+    > A highly flexible, source-based Linux distribution.
+* Compositor: [Hyprland](https://hyprland.org)
+    > An independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks. 
+* Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
+    > A fast, lightweight and minimalistic Wayland terminal emulator.
+* Browser: [Mullvad](https://mullvad.net/en/browser)
+    > A privacy-focused browser based on TOR.
 
 <br>
 
@@ -198,7 +204,7 @@ The Gentoo Linux environment.
     > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
-### Update Portage repositories
+### Configure Portage repositories
 * Delete the Portage tree: <code>rm --force --recursive /var/db/repos/gentoo/*</code>
 * Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
 * Configure GURU: <code>[/etc/portage/repos.conf/guru.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/guru.conf)</code>
@@ -206,7 +212,7 @@ The Gentoo Linux environment.
 
 ### Install remaining packages
 * Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/seatd)</code>
-* Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland</code>
+* Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland www-client/mullvad-browser-bin</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
