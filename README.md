@@ -198,9 +198,15 @@ The Gentoo Linux environment.
     > 💡 **Tip:** List all SSIDs: <code>iwctl station <code><var>DEVICE</var></code> get-networks</code>
 * Verify the connection: <code>ping -c 3 gentoo.org</code>
 
+### Update Portage repositories
+* Delete the Portage tree: <code>rm --force --recursive /var/db/repos/gentoo/*</code>
+* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
+* Configure GURU: <code>[/etc/portage/repos.conf/guru.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/guru.conf)</code>
+* Sync the repository: <code>emaint --auto sync</code>
+
 ### Install remaining packages
 * Enable seat management: <code>[/etc/portage/package.use/seatd](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/package.use/seatd)</code>
-* Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-wm/hyprland</code>
+* Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
@@ -208,11 +214,6 @@ The Gentoo Linux environment.
 * Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/</code>
 * Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
-
-### Use Portage with Git
-* Configure Portage with Git: <code>[/etc/portage/repos.conf/gentoo.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/portage/repos.conf/gentoo.conf)</code>
-* Delete the Portage tree: <code>rm --force --recursive /var/db/repos/gentoo/*</code>
-* Reinstall the ebuild repository: <code>emaint --auto sync</code>
 
 ### Enable seat management
 * Add the user to the necessary groups: <code>gpasswd --add <code><var>USERNAME</var></code> seat && gpasswd --add <code><var>USERNAME</var></code> video</code>
@@ -237,7 +238,7 @@ The Gentoo Linux environment.
 <br>
 
 # Packages
-List all directly installed packages (20): <code>cat /var/lib/portage/world</code>
+List all directly installed packages (22): <code>cat /var/lib/portage/world</code>
 
 | Package                           | Justification                       |
 | --------------------------------- | ----------------------------------- |
@@ -247,6 +248,7 @@ List all directly installed packages (20): <code>cat /var/lib/portage/world</cod
 | app-portage/gentoolkit            | To manage packages.                 |
 | app-portage/mirrorselect          | To update Gentoo source mirrors.    |
 | app-shells/bash-completion        | To enable shell completion.         |
+| gui-apps/foot                     | To use the terminal.                |
 | gui-wm/hyprland                   | To manage windows.                  |
 | net-misc/chrony                   | To synchronize the system clock.    |
 | net-misc/dhcpcd                   | To enable DHCP.                     |
@@ -261,3 +263,4 @@ List all directly installed packages (20): <code>cat /var/lib/portage/world</cod
 | sys-kernel/installkernel          | To automaticaly install the kernel. |
 | sys-kernel/linux-firmware         | To support hardware devices.        |
 | sys-process/cronie                | To run scheduled tasks.             |
+| www-client/mullvad-browser-bin    | To browse the internet.             |
