@@ -232,7 +232,7 @@ disableFlowControl() {
 }
 
 isRunningInteractively() {
-    tty --quiet
+    [[ "${-}" == *i* ]]
 }
 
 main
