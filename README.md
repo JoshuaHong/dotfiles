@@ -218,6 +218,7 @@ The Gentoo Linux environment.
 * Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
 * Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland www-client/mullvad-browser-bin</code>
+    > 💡 **Tip:** GTK+ with the X use flag may be needed for the Mullvad browser: <code>emerge --ask --oneshot x11-libs/gtk+</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
 
