@@ -8,7 +8,7 @@ The Gentoo Linux environment.
 <br>
 
 # Programs
-* Operating system: [Gentoo Linux](https://www.gentoo.org)
+* Operating system: [Gentoo](https://www.gentoo.org)
     > A highly flexible, source-based Linux distribution.
 * Compositor: [Hyprland](https://hyprland.org)
     > An independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks. 
