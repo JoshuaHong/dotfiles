@@ -20,7 +20,7 @@ exportLocalPath() {
 }
 
 exportPrograms() {
-    export BROWSER="/usr/bin/mullvad-browser"
+    export BROWSER="/usr/bin/mullvad-browser-bin"
     export EDITOR="/usr/bin/nvim"
     export PAGER="/usr/bin/less"
     export VISUAL="/usr/bin/nvim"
