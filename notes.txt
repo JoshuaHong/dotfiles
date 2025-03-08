@@ -20,3 +20,18 @@ gpg --gen-revoke --output revoke.key ${keyId}
 gpg --import public.key
 gpg --import secret.key
 gpg --import-ownertrust trust.txt
+
+# Archive.
+tar --create --file="${file}.tar.xz" --xattrs --xattrs-include="*" --xz ${file}
+gpg --cipher-algo AES256 --output ${file}.tar.xz.gpg --symmetric ${file}.tar.xz
+
+# Unarchive.
+gpg --decrypt --output ${file}.tar.xz ${file}.tar.xz.gpg
+tar --extract --file="${file}.tar.xz" --xattrs --xattrs-include="*" --xz
+
+# Network.
+iwctl station ${wlan} get-networks
+iwctl station ${wlan} connect ${name}
+iwctl station ${wlan} disconnect
+iwctl known-networks list
+iwctl known-netowkrs ${name} forget
