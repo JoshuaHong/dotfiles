@@ -215,7 +215,7 @@ The Gentoo Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git</code>
 * Temporarily include hidden files in wildcard expansion: <code>shopt -s dotglob</code>
 * Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && cp --recursive dotfiles/etc/portage/package.* /etc/portage/</code>
-* Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/</code>
+* Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/ && chmod 0700 /home/<code><var>USERNAME</var></code>/.local/share/gnupg/</code>
 * Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Install the remaining packages: <code>emerge --ask app-admin/sudo app-editors/neovim app-portage/gentoolkit gui-apps/foot gui-wm/hyprland www-client/mullvad-browser-bin</code>
     > 💡 **Tip:** GTK+ with the X use flag may be needed for the Mullvad browser: <code>emerge --ask --oneshot x11-libs/gtk+</code>
@@ -245,10 +245,11 @@ The Gentoo Linux environment.
 <br>
 
 # Packages
-List all directly installed packages (22): <code>cat /var/lib/portage/world</code>
+List all directly installed packages (23): <code>cat /var/lib/portage/world</code>
 
 | Package                           | Justification                       |
 | --------------------------------- | ----------------------------------- |
+| app-admin/pass                    | To manage passwords.                |
 | app-admin/sudo                    | To enable privilege escalation.     |
 | app-admin/sysklogd                | To log system messages.             |
 | app-editors/neovim                | To edit text.                       |

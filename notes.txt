@@ -1,0 +1,22 @@
+# Upgrade Portage.
+emaint --auto sync
+eselect news read
+eselect news purge
+emerge --ask --deep --newuse --update --verbose --with-bdeps=y @world
+dispatch-conf
+emerge --ask --depclean
+
+# Remove a package.
+emerge --deselect ${package}
+emerge --ask --depclean
+
+# Export GPG keys.
+gpg --export --output public.key ${keyId}
+gpg --export-secret-key --output secret.key ${keyId}
+gpg --export-ownertrust > trust.txt
+gpg --gen-revoke --output revoke.key ${keyId}
+
+# Import GPG keys.
+gpg --import public.key
+gpg --import secret.key
+gpg --import-ownertrust trust.txt

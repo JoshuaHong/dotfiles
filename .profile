@@ -59,6 +59,7 @@ exportXDGFiles() {
     export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
     export HISTFILE="${XDG_STATE_HOME}/bash/history"
     export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+    export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
     export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 }
 
