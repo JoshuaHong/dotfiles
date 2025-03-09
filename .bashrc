@@ -4,10 +4,16 @@
 # Contains commands to run each time a new Bash shell is launched.
 
 main() {
+    exportVariables
     setAliases
     setOptions
     setPrompts
     disableFlowControl
+}
+
+exportVariables() {
+    # Set the TTY for gpg-agent to direct input and output.
+    export GPG_TTY="$(tty)"
 }
 
 setAliases() {
@@ -224,7 +230,8 @@ setPrompts() {
 }
 
 disableFlowControl() {
-    stty -ixon  # Don't allow `Ctrl+S` to disable terminal execution.
+    # Don't allow `Ctrl+S` to disable terminal execution.
+    stty -ixon
 }
 
 main
