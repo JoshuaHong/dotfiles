@@ -3,3 +3,5 @@
 	email = hong.josh@protonmail.com
 [credential]
 	helper = cache --timeout=0
+[commit]
+	gpgsign = true
