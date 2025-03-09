@@ -91,7 +91,6 @@ set vi-ins-mode-string "\1\e[6 q\2"
 set visible-stats on
 
 $if mode=vi
-    Control-e: clear-screen
     set keymap vi-command
     "i": vi-insertion-mode
     "F": vi-append-mode
@@ -108,7 +107,7 @@ $if mode=vi
     "r": vi-change-char
     "R": vi-replace
     "e": vi-end-word
+    Control-e: clear-screen
     set keymap vi-insert
-    Control-n: previous-history
-    Control-N: next-history
+    Control-e: clear-screen
 $endif
