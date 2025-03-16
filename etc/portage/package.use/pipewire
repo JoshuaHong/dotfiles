@@ -1,0 +1,5 @@
+# PipeWire USE flags.
+
+# sound-server - To use PipeWire for sound.
+
+media-video/pipewire sound-server
