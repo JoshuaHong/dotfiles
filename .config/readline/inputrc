@@ -109,5 +109,8 @@ $if mode=vi
     "e": vi-end-word
     Control-e: clear-screen
     set keymap vi-insert
+    Control-l: previous-history
+    Control-k: next-history
+    Control-j: reverse-search-history
     Control-e: clear-screen
 $endif
