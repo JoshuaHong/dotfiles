@@ -25,7 +25,7 @@ set completion-prefix-display-length 0
 # Set the number of possible completions before asking the user to view all.
 set completion-query-items 100
 # Use escape as the `meta` prefix.
-set convert-meta on
+set convert-meta off
 # Disable word completion.
 set disable-completion off
 # Echo control characters generated from the keyboard.
@@ -50,7 +50,7 @@ set history-size -1
 # Allow scrolling the input horizontally instead of wrapping to a new line.
 set horizontal-scroll-mode off
 # Don't clear the eighth bit in the characters it reads.
-set input-meta off
+set input-meta on
 # Set the string of characters that should terminate an incremental search.
 set isearch-terminators "C-[ C-J"
 # Set the current readline keymap.
@@ -68,7 +68,7 @@ set match-hidden-files on
 # Show the full list of completions before cycling through the list.
 set menu-complete-display-prefix off
 # Display characters with the eighth bit set directly rather than escaped.
-set output-meta off
+set output-meta on
 # Use a pager to display a screenful of possible completions.
 set page-completions on
 # Sort matches horizontally in alphabetical order rather than vertically.
