@@ -1,5 +1,6 @@
 ignore-empty-password
 hide-keyboard-layout
+no-unlock-indicator
 
 color=303446
 bs-hl-color=f2d5cf
