@@ -133,18 +133,33 @@ bar:
                     <<: *decorations
                     conditions:
                         muted && type == "sink":
-                            string: {text: "Muted"}
+                            string: {text: "󰖁 0%"}
                         ~muted && type == "sink":
                             ramp:
                                 tag: cubic_volume
                                 items:
-                                    - string: {text: "{cubic_volume}%"}
-                                    - string: {text: "{cubic_volume}%"}
-                                    - string: {text: "{cubic_volume}%"}
+                                    - string: {text: "󰕿 {cubic_volume}%"}
+                                    - string: {text: "󰖀 {cubic_volume}%"}
+                                    - string: {text: "󰕾 {cubic_volume}%"}
         - backlight:
             name: intel_backlight
             foreground: *peach
-            content: {string: {text: "{percent}%", <<: *decorations}}
+            content:
+                ramp:
+                    <<: *decorations
+                    tag: percent
+                    items:
+                        - {string: {text: "󰛩 {percent}%"}}
+                        - {string: {text: "󱩎 {percent}%"}}
+                        - {string: {text: "󱩏 {percent}%"}}
+                        - {string: {text: "󱩐 {percent}%"}}
+                        - {string: {text: "󱩑 {percent}%"}}
+                        - {string: {text: "󱩒 {percent}%"}}
+                        - {string: {text: "󱩓 {percent}%"}}
+                        - {string: {text: "󱩔 {percent}%"}}
+                        - {string: {text: "󱩕 {percent}%"}}
+                        - {string: {text: "󱩖 {percent}%"}}
+                        - {string: {text: "󰛨 {percent}%"}}
         - battery:
             name: BAT1
             foreground: *yellow
@@ -154,19 +169,33 @@ bar:
                     <<: *decorations
                     conditions:
                         capacity == 100:
-                            string: {text: "{capacity}%"}
+                            string: {text: "󱟢 {capacity}%"}
                         state == "charging":
-                            string: {text: "{capacity}%"}
+                            string: {text: "󰂄 {capacity}%"}
                         state == "discharging":
-                            string: {text: "{capacity}%"}
+                            ramp:
+                                tag: capacity
+                                items:
+                                    - string: {text: "󱟩 {capacity}%"}
+                                    - string: {text: "󰁺 {capacity}%"}
+                                    - string: {text: "󰁺 {capacity}%"}
+                                    - string: {text: "󰁻 {capacity}%"}
+                                    - string: {text: "󰁼 {capacity}%"}
+                                    - string: {text: "󰁽 {capacity}%"}
+                                    - string: {text: "󰁾 {capacity}%"}
+                                    - string: {text: "󰁿 {capacity}%"}
+                                    - string: {text: "󰂀 {capacity}%"}
+                                    - string: {text: "󰂁 {capacity}%"}
+                                    - string: {text: "󰂂 {capacity}%"}
+                                    - string: {text: "󰁹 {capacity}%"}
         - clock:
             time-format: "%H:%M"
             foreground: *green
-            content: {string: {text: "{time}", <<: *decorations}}
+            content: {string: {text: "󱑍 {time}", <<: *decorations}}
         - clock:
             date-format: "%a %b %d"
             foreground: *blue
-            content: {string: {text: "{date}", <<: *decorations}}
+            content: {string: {text: "󰸘 {date}", <<: *decorations}}
         - network:
             poll-interval: 60000
             foreground: *mauve
@@ -175,6 +204,6 @@ bar:
                     <<: *decorations
                     conditions:
                         state == up:
-                            string: {text: "{ssid}"}
+                            string: {text: "󰖩 {ssid}"}
                         state == down:
-                            string: {text: "Disconnected"}
+                            string: {text: "󰖪 Disconnected"}
