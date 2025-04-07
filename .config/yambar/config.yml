@@ -1,0 +1,180 @@
+# The Yambar configuration file.
+
+rosewater: &rosewater f2d5cfe6
+flamingo: &flamingo eebebee6
+pink: &pink f4b8e4e6
+mauve: &mauve ca9ee6e6
+red: &red e78284e6
+maroon: &maroon ea999ce6
+peach: &peach ef9f76e6
+yellow: &yellow e5c890e6
+green: &green a6d189e6
+teal: &teal 81c8bee6
+sky: &sky 99d1dbe6
+sapphire: &sapphire 85c1dce6
+blue: &blue 8caaeee6
+lavender: &lavender babbf1e6
+text: &text c6d0f5e6
+subtext1: &subtext1 b5bfe2e6
+subtext0: &subtext0 a5adcee6
+overlay2: &overlay2 949cbbe6
+overlay1: &overlay1 838ba7e6
+overlay0: &overlay0 737994e6
+surface2: &surface2 626880e6
+surface1: &surface1 51576de6
+surface0: &surface0 414559e6
+base: &base 303446e6
+mantle: &mantle 292c3ce6
+crust: &crust 2326344d
+decoorations: &decorations
+    margin: 10
+    deco:
+        border:
+            color: *surface2
+            size: 1
+
+bar:
+    height: 40
+    location: top
+    background: *base
+    foreground: *text
+    font: Sans Mono:pixelsize=20
+    spacing: 5
+    border:
+        color: *crust
+        bottom-width: 3
+
+    left:
+        - script:
+            path: /home/josh/.config/yambar/scripts/hyprland-workspaces.sh
+            poll-interval: 500
+            anchors:
+                - active: &active
+                    margin: 15
+                    foreground: *base
+                    deco: {background: {color: *blue}}
+                - inactive: &inactive
+                    margin: 15
+                    foreground: *text
+                    deco: {background: {color: *surface0}}
+            content:
+                - map:
+                    conditions:
+                        isWorkspace1Active == true:
+                            string: {text: "0", <<: *active}
+                        isWorkspace1Active == false:
+                            string: {text: "0", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace2Active == true:
+                            string: {text: "1", <<: *active}
+                        isWorkspace2Active == false:
+                            string: {text: "1", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace3Active == true:
+                            string: {text: "2", <<: *active}
+                        isWorkspace3Active == false:
+                            string: {text: "2", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace4Active == true:
+                            string: {text: "3", <<: *active}
+                        isWorkspace4Active == false:
+                            string: {text: "3", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace5Active == true:
+                            string: {text: "4", <<: *active}
+                        isWorkspace5Active == false:
+                            string: {text: "4", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace6Active == true:
+                            string: {text: "5", <<: *active}
+                        isWorkspace6Active == false:
+                            string: {text: "5", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace7Active == true:
+                            string: {text: "6", <<: *active}
+                        isWorkspace7Active == false:
+                            string: {text: "6", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace8Active == true:
+                            string: {text: "7", <<: *active}
+                        isWorkspace8Active == false:
+                            string: {text: "7", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace9Active == true:
+                            string: {text: "8", <<: *active}
+                        isWorkspace9Active == false:
+                            string: {text: "8", <<: *inactive}
+                - map:
+                    conditions:
+                        isWorkspace10Active == true:
+                            string: {text: "9", <<: *active}
+                        isWorkspace10Active == false:
+                            string: {text: "9", <<: *inactive}
+
+    center:
+        - script:
+            path: /home/josh/.config/yambar/scripts/hyprland-window.sh
+            poll-interval: 500
+            content: {string: {text: "{windowName}"}}
+
+    right:
+        - pipewire:
+            foreground: *red
+            content:
+                map:
+                    <<: *decorations
+                    conditions:
+                        muted && type == "sink":
+                            string: {text: "Muted"}
+                        ~muted && type == "sink":
+                            ramp:
+                                tag: cubic_volume
+                                items:
+                                    - string: {text: "{cubic_volume}%"}
+                                    - string: {text: "{cubic_volume}%"}
+                                    - string: {text: "{cubic_volume}%"}
+        - backlight:
+            name: intel_backlight
+            foreground: *peach
+            content: {string: {text: "{percent}%", <<: *decorations}}
+        - battery:
+            name: BAT1
+            foreground: *yellow
+            poll-interval: 60000
+            content:
+                map:
+                    <<: *decorations
+                    conditions:
+                        capacity == 100:
+                            string: {text: "{capacity}%"}
+                        state == "charging":
+                            string: {text: "{capacity}%"}
+                        state == "discharging":
+                            string: {text: "{capacity}%"}
+        - clock:
+            time-format: "%H:%M"
+            foreground: *green
+            content: {string: {text: "{time}", <<: *decorations}}
+        - clock:
+            date-format: "%a %b %d"
+            foreground: *blue
+            content: {string: {text: "{date}", <<: *decorations}}
+        - network:
+            poll-interval: 60000
+            foreground: *mauve
+            content:
+                map:
+                    <<: *decorations
+                    conditions:
+                        state == up:
+                            string: {text: "{ssid}"}
+                        state == down:
+                            string: {text: "Disconnected"}
