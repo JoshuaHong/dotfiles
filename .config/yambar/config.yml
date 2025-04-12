@@ -126,8 +126,13 @@ bar:
             content: {string: {text: "{windowName}"}}
 
     right:
-        - pipewire:
+        - script:
+            path: /home/josh/.config/yambar/scripts/weather.sh
+            poll-interval: 3600000
             foreground: *red
+            content: {string: {text: "{weather}", <<: *decorations}}
+        - pipewire:
+            foreground: *peach
             content:
                 map:
                     <<: *decorations
@@ -143,7 +148,7 @@ bar:
                                     - string: {text: "󰕾 {cubic_volume}%"}
         - backlight:
             name: intel_backlight
-            foreground: *peach
+            foreground: *yellow
             content:
                 ramp:
                     <<: *decorations
@@ -162,7 +167,7 @@ bar:
                         - {string: {text: "󰛨 {percent}%"}}
         - battery:
             name: BAT1
-            foreground: *yellow
+            foreground: *green
             poll-interval: 60000
             content:
                 map:
@@ -190,7 +195,7 @@ bar:
                                     - string: {text: "󰁹 {capacity}%"}
         - clock:
             time-format: "%H:%M"
-            foreground: *green
+            foreground: *teal
             content: {string: {text: "󱑍 {time}", <<: *decorations}}
         - clock:
             date-format: "%a %b %d"
