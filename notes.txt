@@ -35,3 +35,13 @@ iwctl station ${wlan} connect ${name}
 iwctl station ${wlan} disconnect
 iwctl known-networks list
 iwctl known-netowkrs ${name} forget
+
+# Bluetooth.
+bluetoothctl
+    scan on
+    devices
+    pair device_mac_address
+    trust device_mac_address
+    connect device_mac_address
+    disconnect device_mac_address
+    remove device_mac_address

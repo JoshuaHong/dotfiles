@@ -1,5 +1,7 @@
 # PipeWire USE flags.
 
+# bluetooth    - To enable Bluetooth support.
+# dbus         - To enable Bluetooth support.
 # sound-server - To use PipeWire for sound.
 
-media-video/pipewire sound-server
+media-video/pipewire bluetooth dbus sound-server
