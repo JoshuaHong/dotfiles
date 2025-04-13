@@ -220,14 +220,14 @@ The Gentoo Linux environment.
 * Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/ && chmod 0700 /home/<code><var>USERNAME</var></code>/.local/share/gnupg/</code>
 * Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
 * Install the remaining packages: <code>emerge --ask app-admin/pass app-admin/sudo app-editors/neovim app-i18n/fcitx-hangul app-misc/brightnessctl app-portage/gentoolkit gui-apps/foot gui-apps/swaybg gui-apps/swayidle gui-apps/swaylock gui-apps/yambar gui-wm/hyprland media-fonts/noto media-fonts/noto-cjk media-fonts/noto-emoji media-fonts/symbols-nerd-font media-sound/playerctl net-wireless/bluez www-client/mullvad-browser-bin</code>
-    > 💡 **Tip:** GTK+ with the X use flag may be needed for the Mullvad browser: <code>emerge --ask --oneshot x11-libs/gtk+</code>
+    > 💡 **Tip:** GTK+ with the X use flag may be needed for the Mullvad browser: <code>emerge --ask --oneshot x11-libs/gtk+</code> \
     > 💡 **Tip:** Fcitx-configtool can be temporarily installed to set initial configurations: <code>emerge --ask --oneshot app-i18n/fcitx-configtool</code>
 * Enable services: <code>rc-update add bluetooth default</code>
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 * Update the eselect editor: <code>eselect editor set nvim</code>
 
 ### Enable fonts
-* List all fonts: <code>eselect fontconfig list<code>
+* List all fonts: <code>eselect fontconfig list</code>
 * Enable all Noto fonts: <code>eselect fontconfig enable <code><var>#</var></code></code>
 
 ### Enable seat management
