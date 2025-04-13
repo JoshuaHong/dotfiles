@@ -2,7 +2,18 @@
 #
 # Yambar script to display the active Hyprland window name.
 
-activeWindowJson="$(hyprctl activewindow -j)"
-windowName="$(echo ${activeWindowJson} | jq --raw-output ".class // empty")"
-echo "windowName|string|${windowName}"
-echo ""
+main() {
+    local -r windowName="$(getJsonClassNameOrEmpty "$(fetchActiveWindowJson)")"
+    echo -e "windowName|string|${windowName}\n"
+}
+
+fetchActiveWindowJson() {
+    hyprctl activewindow -j
+}
+
+getJsonClassNameOrEmpty() {
+    local -r json="${1}"
+    echo "${json}" | jq --raw-output ".class // empty"
+}
+
+main

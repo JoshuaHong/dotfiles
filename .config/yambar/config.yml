@@ -128,7 +128,7 @@ bar:
     right:
         - script:
             path: /home/josh/.config/yambar/scripts/weather.sh
-            poll-interval: 3600000
+            poll-interval: 1800000
             foreground: *red
             content: {string: {text: "{weather}", <<: *decorations}}
         - pipewire:

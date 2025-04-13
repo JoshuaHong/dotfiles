@@ -2,17 +2,42 @@
 #
 # Yambar script to display Hyprland workspaces.
 
-occupiedWorkspacesJson="$(hyprctl workspaces -j)"
-activeWorkspaceJson="$(hyprctl activeworkspace -j)"
-occupiedWorkspaceNums="$(echo ${occupiedWorkspacesJson} | jq ".[].id")"
-activeWorkspaceNum="$(echo ${activeWorkspaceJson} | jq ".id")"
+main() {
+    local -r occupiedWorkspaceIds="$(getJsonIdList "$(fetchOccupiedWorkspacesJson)")"
+    local -r activeWorkspaceId="$(getJsonId "$(fetchActiveWorkspaceJson)")"
+    printWorkspaces "${occupiedWorkspaceIds}" "${activeWorkspaceId}"
+}
 
-for occupiedWorkspaceNum in ${occupiedWorkspaceNums[@]}; do
-    isWorkspaceOccupied=false
-    if [[ "${occupiedWorkspaceNum}" == "${activeWorkspaceNum}" ]]; then
-        isWorkspaceOccupied=true
-    fi
-    echo "isWorkspace${occupiedWorkspaceNum}Active|string|${isWorkspaceOccupied}"
-done
+fetchOccupiedWorkspacesJson() {
+    hyprctl workspaces -j
+}
 
-echo ""
+fetchActiveWorkspaceJson() {
+    hyprctl activeworkspace -j
+}
+
+getJsonIdList() {
+    local -r json="${1}"
+    echo "${json}" | jq ".[].id"
+}
+
+getJsonId() {
+    local -r json="${1}"
+    echo "${json}" | jq ".id"
+}
+
+printWorkspaces() {
+    local -ar occupiedWorkspaceIds=("${1}")
+    local -r activeWorkspaceId="${2}"
+
+    for occupiedWorkspaceId in ${occupiedWorkspaceIds[@]}; do
+        local isWorkspaceOccupied=false
+        if [[ "${occupiedWorkspaceId}" == "${activeWorkspaceId}" ]]; then
+            isWorkspaceOccupied=true
+        fi
+        echo "isWorkspace${occupiedWorkspaceId}Active|string|${isWorkspaceOccupied}"
+    done
+    echo ""
+}
+
+main
