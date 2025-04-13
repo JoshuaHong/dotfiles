@@ -132,7 +132,7 @@ The Gentoo Linux environment.
 * Remove obsolete packages: <code>emerge --ask --depclean</code>
 
 ### Configure the time zone and locales
-* Set the time zone: <code>[/etc/timezone](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/timezone)</code>
+* Set the time zone: <code>ln -sf /usr/share/zoneinfo/<code><var>TIMEZONE</var></code> /etc/localtime</code>
     > 💡 **Tip:** All time zones can be found in <code>/usr/share/zoneinfo</code>.
 * Update the locale configuration file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
