@@ -137,8 +137,12 @@ bar:
                 map:
                     <<: *decorations
                     conditions:
+                        muted && (form_factor == "headset" || form_factor == "headphones") && type == "sink":
+                            string: {text: "󰟎 0%"}
                         muted && type == "sink":
                             string: {text: "󰖁 0%"}
+                        ~muted && (form_factor == "headset" || form_factor == "headphones") && type == "sink":
+                            string: {text: "󰋋 {cubic_volume}%"}
                         ~muted && type == "sink":
                             ramp:
                                 tag: cubic_volume
@@ -181,8 +185,8 @@ bar:
                             ramp:
                                 tag: capacity
                                 items:
-                                    - string: {text: "󱟩 {capacity}%"}
-                                    - string: {text: "󰁺 {capacity}%"}
+                                    - string: {text: "󱟩 {capacity}%", foreground: *red}
+                                    - string: {text: "󰁺 {capacity}%", foreground: *red}
                                     - string: {text: "󰁺 {capacity}%"}
                                     - string: {text: "󰁻 {capacity}%"}
                                     - string: {text: "󰁼 {capacity}%"}
