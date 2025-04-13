@@ -30,6 +30,7 @@ gpg --decrypt --output ${file}.tar.xz ${file}.tar.xz.gpg
 tar --extract --file="${file}.tar.xz" --xattrs --xattrs-include="*" --xz
 
 # Network.
+iwctl device list
 iwctl station ${wlan} get-networks
 iwctl station ${wlan} connect ${name}
 iwctl station ${wlan} disconnect
