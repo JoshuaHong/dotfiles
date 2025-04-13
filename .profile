@@ -72,8 +72,6 @@ exportVariables() {
     export HISTSIZE=-1
     # Disable the less history file.
     export LESSHISTFILE="-"
-    # Set the timezone to get the local date and time.
-    export TZ="$(</etc/timezone)"
     # Enable Korean input method with Fcifx.
     export XMODIFIERS="@im=fcitx"
 }
