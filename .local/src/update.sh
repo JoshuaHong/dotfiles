@@ -3,13 +3,14 @@
 # Update Gentoo packages.
 
 main() {
-    if ! isRoot; then
-        echoError "Error: Please run as root."
-        exit 1
-    fi
-
-    update
+    echo -e "Updating Gentoo packages."
+    callFunctionWithSudo "update"
     echo -e "\nDone."
+}
+
+callFunctionWithSudo() {
+    local -r function="${1}"
+    sudo --askpass bash -c "$(declare -f "${function}"); ${function}"
 }
 
 update() {
