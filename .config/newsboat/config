@@ -1,0 +1,33 @@
+# The Newsboat configuration file.
+
+# Colors
+color listnormal default default
+color listfocus default default reverse
+color listnormal_unread default default bold
+color listfocus_unread default default bold underline
+color info red black bold
+color article default default
+
+highlight feedlist "[║]" yellow default bold
+highlight feedlist "╠═.*" yellow default bold
+
+# Formats
+feedlist-format "%?T?║%3n %9u %t&╠══════════════════════════════════════════════════ %t? "
+articlelist-format "%4i  %f %D  %?T?|%-17T|  ?%t "
+selecttag-format "  %T (%n unread: %f/%u feeds)"
+datetime-format "%b %d %Y"
+
+# Macros
+bind-key n quit
+bind-key e down
+bind-key i up
+bind-key o open
+bind-key O open-all-unread-in-browser-and-mark-read
+bind-key ENTER open-in-browser-and-mark-read
+bind-key t toggle-article-read
+bind-key h next-unread
+bind-key H prev-unread
+bind-key a mark-feed-read
+bind-key r pagedown
+bind-key s pageup
+bind-key f set-tag
