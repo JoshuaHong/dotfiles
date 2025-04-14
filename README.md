@@ -18,6 +18,8 @@ The Gentoo Linux environment.
     > A privacy-focused browser based on TOR.
 * Status bar: [Yambar](https://codeberg.org/dnkl/yambar)
     > A modular status panel for Wayland.
+* App launcher: [Fuzzel](https://codeberg.org/dnkl/fuzzel)
+    > An application launcher and fuzzy finder for Wayland.
 
 <br>
 
