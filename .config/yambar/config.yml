@@ -127,6 +127,16 @@ bar:
 
     right:
         - script:
+            path: /home/josh/.config/yambar/scripts/news.sh
+            poll-interval: 3600000
+            foreground: *pink
+            content:
+                map:
+                    <<: *decorations
+                    conditions:
+                        news > 0:
+                            string: {text: "󰾱 {news}"}
+        - script:
             path: /home/josh/.config/yambar/scripts/weather.sh
             poll-interval: 1800000
             foreground: *red
