@@ -72,6 +72,7 @@ exportVariables() {
     export HISTSIZE=-1
     # Disable the less history file.
     export LESSHISTFILE="-"
+    export SUDO_ASKPASS="${HOME}/.local/bin/fuzzel-sudo"
     # Enable Korean input method with Fcifx.
     export XMODIFIERS="@im=fcitx"
 }

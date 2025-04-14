@@ -37,7 +37,7 @@ printWorkspaces() {
         fi
         echo "isWorkspace${occupiedWorkspaceId}Active|string|${isWorkspaceOccupied}"
     done
-    echo ""
+    echo
 }
 
 main
