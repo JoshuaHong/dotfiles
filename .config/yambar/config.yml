@@ -177,7 +177,7 @@ bar:
                 map:
                     <<: *decorations
                     conditions:
-                        capacity == 100:
+                        state == "full" || state == "not charging" || capacity == 100:
                             string: {text: "󱟢 {capacity}%"}
                         state == "charging":
                             string: {text: "󰂄 {capacity}%"}
