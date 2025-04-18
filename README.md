@@ -1,7 +1,7 @@
 <div align = center>
 
 # Dotfiles
-![screenshot](https://github.com/JoshuaHong/dotfiles/assets/35504995/2827b4a2-c767-427b-be73-fcfefdacefcb)
+![Screenshot](/assets/screenshot.png)
 The Gentoo Linux environment.
 </div>
 
