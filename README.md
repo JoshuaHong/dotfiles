@@ -18,6 +18,8 @@ The Gentoo Linux environment.
     > A privacy-focused browser based on TOR.
 * Status bar: [Yambar](https://codeberg.org/dnkl/yambar)
     > A modular status panel for Wayland.
+* Color scheme: [Catppuccin (Frappé)](https://github.com/catppuccin)
+    > A soothing pastel theme for the high-spirited.
 
 <br>
 
