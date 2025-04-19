@@ -1,8 +1,8 @@
 # Imv USE flags.
 
-# gif  - Enable GIF image format.
-# jpeg - Enable JPEG image format.
-# png  - Enable PNG image format.
-# svg  - Enable SVG image format.
+# gif  - To view GIF formats.
+# jpeg - To view JPEG formats.
+# png  - To view PNG formats.
+# svg  - To view SVG formats.
 
 media-gfx/imv gif jpeg png svg

@@ -1,8 +1,8 @@
 # Installkernel USE flags.
 
-# dracut   - Automatically generate an initramfs.
-# efistub  - Enable EFI stub.
-# -systemd - Dynamically update the UEFI configuration.
+# dracut   - To automatically generate an initramfs.
+# efistub  - To enable EFI stub.
+# -systemd - To dynamically update the UEFI configuration.
 #            When a new kernel version is installed, the UEFI configuration
 #            needs to be updated by running efibootmgr and passing the new
 #            kernel loader and initramfs. By disabling systemd, installkernel
