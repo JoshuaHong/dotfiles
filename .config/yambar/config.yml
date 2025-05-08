@@ -187,7 +187,7 @@ bar:
                 map:
                     <<: *decorations
                     conditions:
-                        state == "full" || state == "not charging" || capacity == 100:
+                        state == "full" || capacity == 100:
                             string: {text: "󱟢 {capacity}%"}
                         state == "charging":
                             string: {text: "󰂄 {capacity}%"}
@@ -222,7 +222,7 @@ bar:
                 map:
                     <<: *decorations
                     conditions:
-                        state == up:
+                        state == up && name == "wlan0":
                             string: {text: "󰖩 {ssid}"}
-                        state == down:
+                        state == down && name == "wlan0":
                             string: {text: "󰖪 Disconnected"}
