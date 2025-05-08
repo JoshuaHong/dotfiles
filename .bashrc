@@ -116,9 +116,9 @@ setOptions() {
     # Quote `$"str"` and `$'str'` in `${}`.
     # E.g., echo ${v:-$"foo bar"} -> foo bar.
     shopt -s extquote
-    # Fail if patterns don't match any filenames.
-    # E.g., touch foo* -> Error.
-    shopt -s failglob
+    # Don't fail if patterns don't match any filenames.
+    # E.g., touch foo* -/-> Error.
+    shopt -u failglob
     # Ignore `FIGNORE` suffixes even if they contain words that are the only
     # possible completions.
     shopt -s force_fignore
