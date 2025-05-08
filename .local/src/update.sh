@@ -15,11 +15,12 @@ callFunctionWithSudo() {
 
 update() {
     emaint --auto sync
+    emerge --ask --deep --newuse --update --verbose --with-bdeps=y @world
+    emerge --ask --depclean
+    emerge @preserved-rebuild
     eselect news read
     eselect news purge
-    emerge --ask --deep --newuse --update --verbose --with-bdeps=y @world
     dispatch-conf
-    emerge --ask --depclean
 }
 
 isRoot() {
