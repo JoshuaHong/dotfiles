@@ -221,7 +221,7 @@ The Gentoo Linux environment.
 * Copy the configuration files: <code>rm --force --recursive /home/<code><var>USERNAME</var></code>/* && cp --recursive dotfiles/* /home/<code><var>USERNAME</var></code>/ && cp --recursive dotfiles/etc/portage/package.* /etc/portage/</code>
 * Change ownership of files: <code>chown --recursive <code><var>USERNAME</var></code>:<code><var>USERNAME</var></code> /home/<code><var>USERNAME</var></code>/ && chmod 0700 /home/<code><var>USERNAME</var></code>/.local/share/gnupg/</code>
 * Clean the configuration fles: <code>find /home/<code><var>USERNAME</var></code>/ -name "*.gitkeep" -type f -delete && rm --force --recursive /home/<code><var>USERNAME</var></code>/.git/ /home/<code><var>USERNAME</var></code>/etc/ /home/<code><var>USERNAME</var></code>/README.md && rm --force --recursive dotfiles/</code>
-* Install the remaining packages: <code>emerge --ask app-admin/pass app-admin/sudo app-editors/neovim app-i18n/fcitx-hangul app-misc/brightnessctl app-portage/gentoolkit app-text/zathura app-text/zathura-meta gui-apps/foot gui-apps/fuzzel gui-apps/grim gui-apps/slurp gui-apps/swaybg gui-apps/swayidle gui-apps/swaylock gui-apps/yambar gui-apps/wf-recorder gui-wm/hyprland gui-libs/xdg-desktop-portal-wlr media-fonts/noto media-fonts/noto-cjk media-fonts/noto-emoji media-fonts/symbols-nerd-font media-gfx/imv media-sound/playerctl media-video/mpv net-misc/yt-dlp net-news/newsboat net-wireless/bluez www-client/mullvad-browser-bin</code>
+* Install the remaining packages: <code>emerge --ask app-admin/pass app-admin/sudo app-editors/neovim app-i18n/fcitx-hangul app-misc/brightnessctl app-portage/gentoolkit app-text/zathura app-text/zathura-meta gui-apps/foot gui-apps/fuzzel gui-apps/grim gui-apps/slurp gui-apps/swaybg gui-apps/swayidle gui-apps/swaylock gui-apps/yambar gui-apps/wf-recorder gui-wm/hyprland gui-libs/xdg-desktop-portal-wlr media-fonts/noto media-fonts/noto-cjk media-fonts/noto-emoji media-fonts/symbols-nerd-font media-gfx/imv media-sound/playerctl media-video/mpv net-misc/yt-dlp net-news/newsboat net-vpn/wireguard-tools net-wireless/bluez www-client/mullvad-browser-bin</code>
     > 💡 **Tip:** GTK+ with the X use flag may be needed for the Mullvad browser: <code>emerge --ask --oneshot x11-libs/gtk+</code> \
     > 💡 **Tip:** Fcitx-configtool can be temporarily installed to set initial configurations: <code>emerge --ask --oneshot app-i18n/fcitx-configtool</code>
 * Enable services: <code>rc-update add bluetooth default</code>
@@ -255,7 +255,7 @@ The Gentoo Linux environment.
 <br>
 
 # Packages
-List all directly installed packages (46): <code>cat /var/lib/portage/world</code>
+List all directly installed packages (47): <code>cat /var/lib/portage/world</code>
 
 | Package                           | Justification                       |
 | --------------------------------- | ----------------------------------- |
@@ -292,6 +292,7 @@ List all directly installed packages (46): <code>cat /var/lib/portage/world</cod
 | net-misc/dhcpcd                   | To enable DHCP.                     |
 | net-misc/yt-dlp                   | To download YouTube videos.         |
 | net-news/newsboat                 | To read RSS feeds.                  |
+| net-vpn/wireguard-tools           | To enable a VPN.                    |
 | net-wireless/bluez                | To enable Bluetooth.                |
 | net-wireless/iwd                  | To configure networking.            |
 | sys-apps/mlocate                  | To index the file system.           |

@@ -129,7 +129,7 @@ bar:
         - script:
             path: /home/josh/.config/yambar/scripts/news.sh
             poll-interval: 3600000
-            foreground: *pink
+            foreground: *rosewater
             content:
                 map:
                     <<: *decorations
@@ -226,3 +226,12 @@ bar:
                             string: {text: "󰖩 {ssid}"}
                         state == down && name == "wlan0":
                             string: {text: "󰖪 Disconnected"}
+        - script:
+            path: /home/josh/.config/yambar/scripts/vpn.sh
+            foreground: *pink
+            content:
+                map:
+                    <<: *decorations
+                    conditions:
+                        isConnected:
+                            string: {text: "󰦝 {region}"}

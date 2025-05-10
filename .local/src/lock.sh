@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # Lock the display.
+#
+# Usage:
+#     lock
 
 main() {
     playerctl --no-messages pause

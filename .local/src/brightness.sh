@@ -2,6 +2,9 @@
 #
 # Set the backlight brightness.
 #
+# Usage:
+#     brightness [up | down | restore]
+#
 # Arguments:
 #     up      - Raise the brightness by 1%.
 #     down    - Lower the brightness by 1%.

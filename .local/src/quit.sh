@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # Quit the system.
+#
+# Usage:
+#     quit
 
 declare -ar OPTIONS=("exit" "poweroff" "reboot")
 

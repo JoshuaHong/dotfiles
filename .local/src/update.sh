@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # Update Gentoo packages.
+#
+# Usage:
+#     update
 
 main() {
     echo -e "Updating Gentoo packages."
@@ -21,15 +24,6 @@ update() {
     eselect news read
     eselect news purge
     dispatch-conf
-}
-
-isRoot() {
-    [[ "${EUID}" -eq 0 ]]
-}
-
-echoError() {
-    local -r errorMessage="${1}"
-    echo -e "${errorMessage}" 1>&2
 }
 
 main

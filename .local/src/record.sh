@@ -5,6 +5,9 @@
 # Begin recording if no recording is in process.
 # Stop recording and exit otherwise.
 #
+# Usage:
+#     record [full | select]
+#
 # Arguments:
 #     full   - Record the full screen.
 #     select - Record a selection of the screen.
@@ -23,6 +26,7 @@ main() {
         recordPartialScreen
     else
         echoError "Error: Invalid operation."
+        exit 1
     fi
 }
 
