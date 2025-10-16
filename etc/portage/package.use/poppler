@@ -1,5 +1,0 @@
-# Poppler USE flags.
-
-# cairo - To install app-text/zathura-meta.
-
-app-text/poppler cairo

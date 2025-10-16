@@ -1,5 +1,0 @@
-# <fs>            <mountpoint>    <type>    <opts>              <dump>    <pass>
-/dev/nvme0n1p1    /efi            vfat      defaults            0         2
-/dev/nvme0n1p2    none            swap      sw                  0         0
-/dev/nvme0n1p3    /               xfs       defaults,noatime    0         1
-/dev/nvme0n1p4    /home           xfs       defaults,noatime    0         2

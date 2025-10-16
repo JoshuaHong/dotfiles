@@ -1,5 +1,0 @@
-# Hyprland USE flags.
-
-# -qtutils - To avoid installing Hyprland QT utility apps.
-
-gui-wm/hyprland -qtutils

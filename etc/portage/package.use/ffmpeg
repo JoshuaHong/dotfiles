@@ -1,5 +1,0 @@
-# FFmpeg USE flags.
-
-# x264 - To install gui-apps/wf-recorder.
-
-media-video/ffmpeg x264

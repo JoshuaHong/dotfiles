@@ -1,5 +1,0 @@
-# GTK+ USE flags.
-
-# X - To compile the Mullvad browser.
-
-x11-libs/gtk+ X

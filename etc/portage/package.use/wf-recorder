@@ -1,5 +1,0 @@
-# wf-recorder USE flags.
-
-# pipewire - To enable audio recordings.
-
-gui-apps/wf-recorder pipewire

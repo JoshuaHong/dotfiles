@@ -1,8 +1,0 @@
-# Imv USE flags.
-
-# gif  - To view GIF formats.
-# jpeg - To view JPEG formats.
-# png  - To view PNG formats.
-# svg  - To view SVG formats.
-
-media-gfx/imv gif jpeg png svg

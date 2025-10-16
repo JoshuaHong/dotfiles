@@ -1,5 +1,0 @@
-# Below are explicit changes to be made to the configuration file.
-# The rest of the options should not be modified.
-
-# Allow members of group wheel to execute any command.
-%wheel ALL=(ALL:ALL) ALL
