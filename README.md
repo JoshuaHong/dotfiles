@@ -25,6 +25,8 @@ The Arch Linux environment.
     > 📝 **Note**: Arch Linux does not support secure boot. Secure boot can be set up after installation.
 * Use UEFI boot mode
     > 📝 **Note**: UEFI is the newest standard, and most modern hardware does not support legacy BIOS boot.
+* Ensure that the boot order prioritizes the external bootable media over the internal disk devices
+* Boot into the live environment
 
 <br>
 
