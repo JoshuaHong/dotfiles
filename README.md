@@ -98,7 +98,7 @@ The Arch Linux environment.
 ### Configure the boot loader
 * Install the boot manager: <code>pacman -S efibootmgr</code>
     > 📝 Note: Use EFISTUB to boot the kernel directly without a bootloader.
-* Create a boot entry: <code>efibootmgr --create --disk /dev/<code><var>DISK</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=LABEL=ROOT resume=LABEL=SWAP rw quiet initrd=\\<code><var>CPU</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
+* Create the boot entry: <code>efibootmgr --create --disk /dev/<code><var>DISK</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=LABEL=ROOT resume=LABEL=SWAP rw quiet initrd=\\<code><var>CPU</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
     > 📝 **Note**: If for example the boot partition is on "/dev/nvme0n1p1", then the DISK is "nvme0n1" and the BOOT_PARTITION_NUMBER is "1". \
     > 📝 **Note**: The CPU is either "amd" or "intel".
 * Verify the entry: <code>efibootmgr --unicode</code>
@@ -108,6 +108,42 @@ The Arch Linux environment.
 * Exit the chroot environment: <code>exit</code>
 * Unmount the drive: <code>umount -R /mnt</code>
 * Reboot the machine: <code>reboot</code>
+
+# Post-installation
+
+### Configure the network
+* Create the iwd configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
+* Enable the iwd service: <code>systemctl enable --now iwd.service systemd-resolved.service</code>
+* Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
+    > 💡 **Tip**: Find the device name: <code>iwctl device list</code> \
+    > 💡 **Tip**: Find the SSID name: <code>iwctl station <code><var>DEVICE</code></var> get-networks</code>
+* Verify the connection: <code>ping -c 3 ping.archlinux.org</code>
+
+### Configure users
+* Create a new user: <code>useradd --create-home --groups wheel <code><var>USERNAME</var></code></code>
+* Assign a password: <code>passwd <code><var>USERNAME</var></code></code>
+
+### Enable privilege elevation
+* Install sudo: <code>pacman -S sudo</code>
+* Temporarily set the editor to use visudo: <code>export VISUAL=nvim</code>
+* Open the configuration file: <code>visudo</code>
+* Update the sudoers configuration file: <code>[/etc/sudoers](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/sudoers)</code>
+
+### Restrict root
+* Restrict root login: <code>passwd --lock root</code>
+* Update the su configuration file: <code>[/etc/pam.d/su](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pam.d/su)</code>
+* Update the su-l configuration file: <code>[/etc/pam.d/su-l](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pam.d/su-l)</code>
+* Install openssh: <code>pacman -S openssh</code>
+* Update the openssh configuration file: <code>[/etc/ssh/sshd_config](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/ssh/sshd_config)</code>
+
+### Configure pacman
+* Install pacman-contrib: <code>pacman -S pacman-contrib</code>
+* Update the pacman configuration file: <code>[/etc/pacman.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pacman.conf)</code>
+* Back up the mirrorlist: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup</code>
+* Uncomment every mirror: <code>sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup</code>
+* Rank the mirrors: <code>rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist</code>
+* Create the mirrors hook: <code>[/etc/pacman.d/hooks/mirrorupgrade.hook](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pacman.d/hooks/mirrorupgrade.hook)</code>
+* Update the makepkg configuration file: <code>[/etc/makepkg.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/makepkg.conf)</code>
 
 <br>
 
