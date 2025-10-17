@@ -25,6 +25,7 @@
 ### Import keys
 * `gpg --import public.key`
 * `gpg --import secret.key`
+* `gpg --import revoke.key`
 * `gpg --import-ownertrust trust.txt`
 
 ## Storage
