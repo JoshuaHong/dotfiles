@@ -76,7 +76,7 @@ The Arch Linux environment.
 # Installation
 
 ### Install essential packages
-* Install packages: <code>pacstrap -K /mnt base <code><var>CPU</var></code>-ucode iwd linux linux-firmware neovim</code>
+* Install packages: <code>pacstrap -K /mnt base base-devel <code><var>CPU</var></code>-ucode iwd linux linux-firmware neovim</code>
     > 📝 **Note**: The CPU is either "amd" or "intel". \
     > ⚠️ **Warning**: The wireless daemon is important for connecting to the internet after installation.
 
@@ -114,6 +114,7 @@ The Arch Linux environment.
 ### Configure the network
 * Create the iwd configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
 * Enable the iwd service: <code>systemctl enable --now iwd.service systemd-resolved.service</code>
+* Enable DNS: <code>ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</code>
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
     > 💡 **Tip**: Find the device name: <code>iwctl device list</code> \
     > 💡 **Tip**: Find the SSID name: <code>iwctl station <code><var>DEVICE</code></var> get-networks</code>
@@ -145,10 +146,40 @@ The Arch Linux environment.
 * Create the mirrors hook: <code>[/etc/pacman.d/hooks/mirrorupgrade.hook](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pacman.d/hooks/mirrorupgrade.hook)</code>
 * Update the makepkg configuration file: <code>[/etc/makepkg.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/makepkg.conf)</code>
 
+### Login as a user
+* Exit the root environment: <code>exit</code>
+* Login as a user
+
+### Install the AUR helper
+* Install git: <code>pacman -S git</code>
+* Clone the AUR helper: <code>git clone https://aur.archlinux.org/yay-bin.git</code>
+    > 📝 **Note**: Clone the binary package to avoid installing go and compiling the program.
+* Build the AUR helper: <code>cd yay-bin/ && makepkg -sir OPTIONS=-debug</code>
+    > 📝 **Note**: Avoids build the unnecessary debug package.
+* Remove the directory: <code>cd ../ && rm -rf yay-bin/</code>
+
+### Install the remaining packages
+* Install all the packages below
+    > 📝 Note: Install using the following dependencies: "pipewire-jack", "wireplumber".
+* Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
+* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~ && rm ~/downloads/.gitkeep ~/.cache/.gitkeep</code>
+
+### Import GPG keys
+* Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
+    > 📝 Note: Specific file permissions are needed for the gpg warning: "WARNING: unsafe permissions on homedir".
+* Temporarily set the GnuPG home: <code>export GNUPGHOME=~/.local/share/gnupg</code>
+* Import the public key: <code>gpg --import <code><var>PUBLIC</var></code>.key</code>
+* Import the secret key: <code>gpg --import <code><var>SECRET</var></code>.key</code>
+* Import the trust: <code>gpg --import-ownertrust <code><var>TRSUT</var></code>.txt</code>
+* Import the revocation certificate: <code>gpg --import <code><var>REVOKE</var></code>.key</code>
+
+### Reboot
+* Reboot: <code>reboot</code>
+
 <br>
 
 # Packages
-List all explicitly installed packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qentt</code>
+List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
 Count: 0
 
