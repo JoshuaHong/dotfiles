@@ -59,7 +59,7 @@ The Arch Linux environment.
 * Format the boot partition: <code>mkfs.fat -F 32 /dev/<code><var>BOOT_PARTITION</var></code></code>
     > 📝 **Note**: The EFI system partition must be formatted as FAT32 on UEFI systems.
 * Set the boot partition label name: <code>fatlabel /dev/<code><var>BOOT_PARTITION</var></code> BOOT</code>
-    > 💡 **Tip**: Assigning labels to partitions helps referring to them later without their numbers. \
+    > 📝 **Note**: Assigning labels to partitions helps referring to them later without their numbers. \
     > 📝 **Note**: FAT volume labels are stored in uppercase, and warns that lowercase labels may not work on some systems.
 * Create the swap partition: <code>mkswap -L SWAP /dev/<code><var>SWAP_PARTITION</var></code></code>
     > 💡 **Tip**: Any existing swap partitions may need to be removed in advance: <code>swapoff -a</code>.
@@ -72,6 +72,42 @@ The Arch Linux environment.
 * Mount the boot partition: <code>mount --mkdir /dev/<code><var>BOOT_PARTITION</var></code> /mnt/boot</code>
 * Mount the home partition: <code>mount --mkdir /dev/<code><var>HOME_PARTITION</var></code> /mnt/home</code>
 * Enable the swap volume: <code>swapon /dev/<code><var>SWAP_PARTITION</var></code></code>
+
+# Installation
+
+### Install essential packages
+* Install packages: <code>pacstrap -K /mnt base <code><var>CPU</var></code>-ucode iwd linux linux-firmware neovim</code>
+    > 📝 **Note**: The CPU is either "amd" or "intel". \
+    > ⚠️ **Warning**: The wireless daemon is important for connecting to the internet after installation.
+
+# Configuration
+
+### Configure the system
+* Generate the fstab file: <code>genfstab -L /mnt >> /mnt/etc/fstab</code>
+* Enter the new environment: <code>arch-chroot /mnt</code>
+* Set the time zone: <code>ln -sf /usr/share/zoneinfo/<code><var>REGION</var></code>/<code><var>CITY</var></code> /etc/localtime</code>
+    > 💡 **Tip**: All time zones can be found in <code>/usr/share/zoneinfo</code>.
+* Set the hardware clock: <code>hwclock --systohc</code>
+* Update the locale generation file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.gen)</code>
+* Generate the locales: <code>locale-gen</code>
+* Create the locale configuration file: <code>[/etc/locale.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.conf)</code>
+* Create the hostname file: <code>[/etc/hostname](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/hostname)</code>
+* Recreate the initramfs image: <code>mkinitcpio -P</code>
+* Set the root password: <code>passwd</code>
+
+### Configure the boot loader
+* Install the boot manager: <code>pacman -S efibootmgr</code>
+    > 📝 Note: Use EFISTUB to boot the kernel directly without a bootloader.
+* Create a boot entry: <code>efibootmgr --create --disk /dev/<code><var>DISK</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=LABEL=ROOT resume=LABEL=SWAP rw quiet initrd=\\<code><var>CPU</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
+    > 📝 **Note**: If for example the boot partition is on "/dev/nvme0n1p1", then the DISK is "nvme0n1" and the BOOT_PARTITION_NUMBER is "1". \
+    > 📝 **Note**: The CPU is either "amd" or "intel".
+* Verify the entry: <code>efibootmgr --unicode</code>
+    > 💡 **Tip**: The boot order can be changed: <code>efibootmgr --bootorder <code><var>####</var></code>,<code><var>####</var></code> --unicode</code>
+
+# Reboot
+* Exit the chroot environment: <code>exit</code>
+* Unmount the drive: <code>umount -R /mnt</code>
+* Reboot the machine: <code>reboot</code>
 
 <br>
 
