@@ -181,9 +181,20 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 0
+Count: 11
 
-| Package | Justification |
-| ------- | ------------- |
+| Package        | Justification                                                    |
+| -------------- | ---------------------------------------------------------------- |
+| amd-ucode      | Updates the firmware for system stability.                       |
+| base           | Minimal required tools for a basic system.                       |
+| base-devel     | Basic tools to build packages.                                   |
+| efibootmgr     | Boots Linux without a bootloader by loading the kernel directly. |
+| iwd            | Manages networking without a full network manager.               |
+| linux          | Linux kernel and modules.                                        |
+| linux-firmware | Linux firmware.                                                  |
+| neovim         | Lightweight configurable text editor.                            |
+| openssh        | Allows remote login with SSH.                                    |
+| pacman-contrib | Tools for Pacman systems.                                        |
+| yay-bin *      | Installs packages from the Arch User Repository.                 |
 
 \* AUR package
