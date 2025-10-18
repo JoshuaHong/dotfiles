@@ -160,13 +160,13 @@ The Arch Linux environment.
 
 ### Install the remaining packages
 * Install all the packages below
-    > 📝 Note: Install using the following dependencies: "pipewire-jack", "wireplumber".
+    > 📝 **Note**: Install using the following dependencies: "pipewire-jack", "wireplumber".
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~ && rm -rf ../dotfiles/</code>
 
 ### Import GPG keys
 * Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
-    > 📝 Note: Specific file permissions are needed for the gpg warning: "WARNING: unsafe permissions on homedir".
+    > 📝 **Note**: Specific file permissions are needed for the gpg warning: "WARNING: unsafe permissions on homedir".
 * Temporarily set the GnuPG home: <code>export GNUPGHOME=~/.local/share/gnupg</code>
 * Import the public key: <code>gpg --import <code><var>PUBLIC</var></code>.key</code>
 * Import the secret key: <code>gpg --import <code><var>SECRET</var></code>.key</code>
@@ -174,6 +174,8 @@ The Arch Linux environment.
 * Import the revocation certificate: <code>gpg --import <code><var>REVOKE</var></code>.key</code>
 
 ### Reboot
+* Unset the bash history file path: <code>unset HISTFILE</code>
+    > 📝 **Note**: Avoids creating a new bash history file in the home directory.
 * Reboot: <code>reboot</code>
 
 <br>
