@@ -151,7 +151,7 @@ The Arch Linux environment.
 * Login as a user
 
 ### Install the AUR helper
-* Install git: <code>pacman -S git</code>
+* Install git: <code>sudo pacman -S git</code>
 * Clone the AUR helper: <code>git clone https://aur.archlinux.org/yay-bin.git</code>
     > 📝 **Note**: Clone the binary package to avoid installing go and compiling the program.
 * Build the AUR helper: <code>cd yay-bin/ && makepkg -sir OPTIONS=-debug</code>
@@ -176,7 +176,7 @@ The Arch Linux environment.
 ### Reboot
 * Unset the bash history file path: <code>unset HISTFILE</code>
     > 📝 **Note**: Avoids creating a new bash history file in the home directory.
-* Reboot the machine: <code>reboot</code>
+* Reboot the machine: <code>sudo reboot</code>
 
 <br>
 
