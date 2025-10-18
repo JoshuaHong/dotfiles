@@ -160,7 +160,7 @@ The Arch Linux environment.
 
 ### Install the remaining packages
 * Install all the packages below
-    > 📝 **Note**: Install using the following dependencies: "pipewire-jack", "wireplumber".
+    > 📝 **Note**: Install the "xdg-desktop-portal-wlr" dependency to allow screensharing with minimal permissions.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~ && rm -rf ../dotfiles/</code>
 
@@ -183,7 +183,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 11
+Count: 13
 
 | Package        | Justification                                                    |
 | -------------- | ---------------------------------------------------------------- |
@@ -191,10 +191,12 @@ Count: 11
 | base           | Minimal required tools for a basic system.                       |
 | base-devel     | Basic tools to build packages.                                   |
 | efibootmgr     | Boots Linux without a bootloader by loading the kernel directly. |
+| foot           | Minimalistic Wayland terminal emulator.                          |
 | iwd            | Manages networking without a full network manager.               |
 | linux          | Linux kernel and modules.                                        |
 | linux-firmware | Linux firmware.                                                  |
 | neovim         | Lightweight configurable text editor.                            |
+| niri           | Tiling Wayland compositor.                                       |
 | openssh        | Allows remote login with SSH.                                    |
 | pacman-contrib | Tools for Pacman systems.                                        |
 | yay-bin *      | Installs packages from the Arch User Repository.                 |
