@@ -162,7 +162,7 @@ The Arch Linux environment.
 * Install all the packages below
     > 📝 Note: Install using the following dependencies: "pipewire-jack", "wireplumber".
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
-* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .cache/ .config/ .local/ .profile .trash/ ~</code>
+* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~</code>
 
 ### Import GPG keys
 * Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
