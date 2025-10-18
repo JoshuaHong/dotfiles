@@ -176,7 +176,7 @@ The Arch Linux environment.
 ### Reboot
 * Unset the bash history file path: <code>unset HISTFILE</code>
     > 📝 **Note**: Avoids creating a new bash history file in the home directory.
-* Reboot: <code>reboot</code>
+* Reboot the machine: <code>reboot</code>
 
 <br>
 
