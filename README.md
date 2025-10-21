@@ -178,6 +178,14 @@ The Arch Linux environment.
     > 📝 **Note**: Avoids creating a new bash history file in the home directory.
 * Reboot the machine: <code>sudo reboot</code>
 
+# Hardware specific configurations
+
+### Razer Blade
+* Set the "keep-max-bpc-unchanged" debug flag in Niri
+    > 📝 **Note**: This is required to avoid breaking displays driven by the AMD GPU.
+* Set the "Enable USB Charge Function" to "Disable" in the BIOS
+    > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adaptor is plugged in.
+
 <br>
 
 # Packages
