@@ -162,7 +162,6 @@ The Arch Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~ && rm -rf ../dotfiles/</code>
 * Install all the packages below
-    > 📝 **Note**: Install the "xdg-desktop-portal-wlr" dependency to allow screensharing with minimal permissions.
 
 ### Import GPG keys
 * Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
@@ -185,6 +184,8 @@ The Arch Linux environment.
     > 📝 **Note**: This is required to avoid breaking displays driven by the AMD GPU.
 * Set the "Enable USB Charge Function" to "Disable" in the BIOS
     > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adaptor is plugged in.
+* Set the graphics mode: <code>sudo envycontrol -s integrated</code>
+    > 📝 **Note**: Saves battery life by disabling the dedicated GPU.
 
 <br>
 
@@ -193,19 +194,20 @@ List all packages that are not direct dependencies (includes optional dependenci
 
 Count: 12
 
-| Package        | Justification                                                    |
-| -------------- | ---------------------------------------------------------------- |
-| amd-ucode      | Updates the firmware for system stability.                       |
-| base           | Minimal required tools for a basic system.                       |
-| base-devel     | Basic tools to build packages.                                   |
-| efibootmgr     | Boots Linux without a bootloader by loading the kernel directly. |
-| iwd            | Manages networking without a full network manager.               |
-| linux-firmware | Linux firmware.                                                  |
-| neovim         | Lightweight configurable text editor.                            |
-| niri           | Tiling Wayland compositor.                                       |
-| nvidia-open    | To enable the NVIDIA graphics card drivers.                      |
-| openssh        | Allows remote login with SSH.                                    |
-| pacman-contrib | Tools for Pacman systems.                                        |
-| yay-bin *      | Installs packages from the Arch User Repository.                 |
+| Package<br>(Dependency)          | Justification                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| amd-ucode                        | Updates the firmware for system stability.                                     |
+| base                             | Minimal required tools for a basic system.                                     |
+| base-devel                       | Basic tools to build packages.                                                 |
+| efibootmgr                       | Boots Linux without a bootloader by loading the kernel directly.               |
+| envycontrol *                    | Simple GPU switching for NVIDIA Optimus laptops.                               |
+| iwd                              | Manages networking without a full network manager.                             |
+| linux-firmware                   | Linux firmware.                                                                |
+| neovim                           | Lightweight configurable text editor.                                          |
+| niri<br>(xdg-desktop-portal-wlr) | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.) |
+| nvidia-open                      | To enable the NVIDIA graphics card drivers.                                    |
+| openssh                          | Allows remote login with SSH.                                                  |
+| pacman-contrib                   | Tools for Pacman systems.                                                      |
+| yay-bin *                        | Installs packages from the Arch User Repository.                               |
 
 \* AUR package
