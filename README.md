@@ -158,7 +158,7 @@ The Arch Linux environment.
 * Install git: <code>sudo pacman -S git</code>
 * Clone the AUR helper: <code>git clone https://aur.archlinux.org/yay-bin.git</code>
     > 📝 **Note**: Clone the binary package to avoid installing go and compiling the program.
-* Build the AUR helper: <code>cd yay-bin/ && makepkg -sir OPTIONS=-debug</code>
+* Build the AUR helper: <code>cd yay-bin/ && makepkg -sir</code>
     > 📝 **Note**: Avoids build the unnecessary debug package.
 * Remove the directory: <code>cd ../ && rm -rf yay-bin/</code>
 
