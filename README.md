@@ -8,7 +8,11 @@ The Arch Linux environment.
 
 # Programs
 * Operating system: [Arch Linux](https://www.archlinux.org)
-    > Provides more simplicity and configurability than any other distribution.
+    > A lightweight and flexible Linux distribution.
+* Window manager: [Niri](https://github.com/YaLTeR/niri)
+    > A scrollable tiling Wayland compositor.
+* Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
+    > A fast and minimal Wayland terminal emulator.
 
 <br>
 
@@ -192,22 +196,26 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 12
+Count: 17
 
 | Package<br>(Dependency)          | Justification                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------------ |
 | amd-ucode                        | Updates the firmware for system stability.                                     |
-| base                             | Minimal required tools for a basic system.                                     |
-| base-devel                       | Basic tools to build packages.                                                 |
+| base                             | Provides minimal required tools for a basic installation system.               |
+| base-devel                       | Provides basic tools to build AUR packages.                                    |
 | efibootmgr                       | Boots Linux without a bootloader by loading the kernel directly.               |
-| envycontrol *                    | Simple GPU switching for NVIDIA Optimus laptops.                               |
+| envycontrol *                    | Allows simple GPU switching for NVIDIA Optimus laptops.                        |
+| foot                             | Lightweight Wayland terminal emulator.                                         |
 | iwd                              | Manages networking without a full network manager.                             |
-| linux-firmware                   | Linux firmware.                                                                |
+| linux-firmware                   | Provides functionality for hardware devices.                                   |
 | neovim                           | Lightweight configurable text editor.                                          |
 | niri<br>(xdg-desktop-portal-wlr) | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.) |
-| nvidia-open                      | To enable the NVIDIA graphics card drivers.                                    |
+| noto-fonts                       | Provides full Unicode coverage.                                                |
+| noto-fonts-cjk                   | Provides Chinese, Japanese, and Korean fonts.                                  |
+| noto-fonts-emoji                 | Provides emoji fonts in color.                                                 |
+| nvidia-open                      | Enables the NVIDIA graphics card drivers.                                      |
 | openssh                          | Allows remote login with SSH.                                                  |
-| pacman-contrib                   | Tools for Pacman systems.                                                      |
-| yay-bin *                        | Installs packages from the Arch User Repository.                               |
+| pacman-contrib                   | Provides tools for Pacman systems.                                             |
+| yay-bin *                        | Enables installing packages from the Arch User Repository.                     |
 
 \* AUR package
