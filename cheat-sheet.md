@@ -78,3 +78,9 @@
 ### Forget a device
 * <code>bluetoothctl</code>
     * <code>remove <code><var>MAC_ADDRESS</var></code></code>
+
+## Graphics
+
+### Run a program with the dedicated GPU
+* <code>DRI_PRIME=1 <code><var>COMMAND</var></code></code>
+    > 📝 **Note**: System must be set to hybrid mode: <code>sudo envycontrol -s hybrid</code>
