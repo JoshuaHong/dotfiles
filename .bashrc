@@ -20,7 +20,7 @@ useGpgKeyAsSshKey() {
     # Set the TTY for gpg-agent to direct input and output.
     export GPG_TTY="$(tty)"
     # Switch the display to the current terminal.
-    gpg-connect-agent updatestartuptty /bye > /dev/null
+    gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
 }
 
 setAliases() {
