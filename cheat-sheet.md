@@ -25,7 +25,7 @@
     * <code>Toggle the sign capability</code>
     * <code>Finished</code>
 * <code>echo <code><var>KEY_GRIP</var></code> > "${GNUPGHOME}/sshcontrol"</code>
-    > 💡 **Tip**: The key grip can be found by running: <code>gpg --list-keys --with-keygrip</code>
+    > 💡 **Tip**: The key grip can be found by running: <code>gpg --list-keys --with-keygrip</code> \
     > 📝 **Note**: This is needed to use the GPG key as the SSH key.
 
 ### Export keys
@@ -34,7 +34,7 @@
 * <code>gpg --export-ownertrust > trust.txt</code>
 * <code>gpg --gen-revoke --output revoke.key <code><var>KEY_ID</var></code></code>
 * <code>gpg --export-ssh-key <code><var>KEY_ID</var></code></code>
-    > 📝 **Note**: This exports the SSH public key.
+    > 📝 **Note**: This exports the SSH public key. \
     > 📝 **Note**: This sub-key is automatically imported when the main key is imported.
 
 ### Import keys
