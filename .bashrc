@@ -4,16 +4,23 @@
 # Contains commands to run each time a new Bash shell is launched.
 
 main() {
-    exportVariables
+    useGpgKeyAsSshKey
     setAliases
     setOptions
     setPrompts
     disableFlowControl
 }
 
-exportVariables() {
+useGpgKeyAsSshKey() {
+    # Use gpg-agent instead of ssh-agent.
+    unset SSH_AGENT_PID
+    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    fi
     # Set the TTY for gpg-agent to direct input and output.
     export GPG_TTY="$(tty)"
+    # Switch the display to the current terminal.
+    gpg-connect-agent updatestartuptty /bye > /dev/null
 }
 
 setAliases() {
