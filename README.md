@@ -164,7 +164,7 @@ The Arch Linux environment.
 
 ### Install the remaining packages
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
-* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .trash/ ~ && rm -rf ../dotfiles/</code>
+* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/</code>
 * Install all the packages below
 
 ### Import GPG keys
