@@ -79,7 +79,7 @@ exportVariables() {
 }
 
 startWayland() {
-    niri-session -l
+    niri-session -l > /dev/null 2>&1
 }
 
 isValidPath() {
