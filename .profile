@@ -79,7 +79,7 @@ exportVariables() {
 }
 
 startWayland() {
-    dbus-run-session Hyprland > /dev/null 2>&1
+    niri-session -l
 }
 
 isValidPath() {
