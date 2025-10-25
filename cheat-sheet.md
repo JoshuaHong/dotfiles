@@ -73,7 +73,7 @@
 * <code>iwctl known-networks list</code>
 
 ### Forget a network
-* <code>iwctl known-netowkrs <code><var>SSID</var></code> forget</code>
+* <code>iwctl known-networks <code><var>SSID</var></code> forget</code>
 
 ## Bluetooth
 
