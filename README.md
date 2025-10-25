@@ -196,7 +196,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 17
+Count: 18
 
 | Package<br>(Dependency)          | Justification                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------------ |
@@ -208,9 +208,10 @@ Count: 17
 | foot                             | Lightweight Wayland terminal emulator.                                         |
 | iwd                              | Manages networking without a full network manager.                             |
 | linux-firmware                   | Provides functionality for hardware devices.                                   |
+| man-db                           | Utility for reading manual pages.                                              |      
 | neovim                           | Lightweight configurable text editor.                                          |
 | niri<br>(xdg-desktop-portal-wlr) | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.) |
-| noto-fonts                       | Provides full Unicode coverage.                                                |
+| firefox<br>(noto-fonts)          | Open-source web browser.<br>(Provides full Unicode coverage.)                  |
 | noto-fonts-cjk                   | Provides Chinese, Japanese, and Korean fonts.                                  |
 | noto-fonts-emoji                 | Provides emoji fonts in color.                                                 |
 | nvidia-open                      | Enables the NVIDIA graphics card drivers.                                      |
