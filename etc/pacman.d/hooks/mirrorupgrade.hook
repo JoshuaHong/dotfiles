@@ -4,7 +4,7 @@ Type = Package
 Target = pacman-mirrorlist
 
 [Action]
-Description = Ranking pacman-mirrorlist by speed
+Description = Ranking pacman-mirrorlist by speed...
 When = PostTransaction
 Depends = pacman-contrib
-Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup && rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist"
+Exec = /bin/sh -c "mv -f /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup && sed -i -e '/^#/d' -e '/^$/d' /etc/pacman.d/mirrorlist.backup && rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist"
