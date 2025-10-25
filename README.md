@@ -186,10 +186,12 @@ The Arch Linux environment.
 ### Razer Blade
 * Set the "keep-max-bpc-unchanged" debug flag in Niri
     > 📝 **Note**: This is required to avoid breaking displays driven by the AMD GPU.
-* Set the "Enable USB Charge Function" to "Disable" in the BIOS
-    > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adaptor is plugged in.
 * Set the graphics mode: <code>sudo envycontrol -s integrated</code>
     > 📝 **Note**: Saves battery life by disabling the dedicated GPU.
+* Create the NVIDIA modprobe file: <code>[/etc/modprobe.d/nvidia-custom.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/modprobe.d/nvidia-custom.conf)</code>
+    > 📝 **Note**: Enable dynamic power management on the NVIDIA GPU and prevent freezing when idle.
+* Set the "Enable USB Charge Function" to "Disable" in the BIOS
+    > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adaptor is plugged in.
 
 <br>
 
