@@ -202,25 +202,26 @@ List all packages that are not direct dependencies (includes optional dependenci
 
 Count: 18
 
-| Package<br>(Dependency)               | Justification                                                                  |
-| ------------------------------------- | ------------------------------------------------------------------------------ |
-| amd-ucode                             | Updates the firmware for system stability.                                     |
-| base                                  | Provides minimal required tools for a basic installation system.               |
-| base-devel                            | Provides basic tools to build AUR packages.                                    |
-| efibootmgr                            | Boots Linux without a bootloader by loading the kernel directly.               |
-| envycontrol *                         | Allows simple GPU switching for NVIDIA Optimus laptops.                        |
-| foot                                  | Lightweight Wayland terminal emulator.                                         |
-| iwd                                   | Manages networking without a full network manager.                             |
-| linux-firmware                        | Provides functionality for hardware devices.                                   |
-| man-db                                | Utility for reading manual pages.                                              |      
-| mullvad-browser-bin *<br>(noto-fonts) | Privacy-focused web browser.<br>(Provides full Unicode coverage.)              |
-| neovim                                | Lightweight configurable text editor.                                          |
-| niri<br>(xdg-desktop-portal-wlr)      | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.) |
-| noto-fonts-cjk                        | Provides Chinese, Japanese, and Korean fonts.                                  |
-| noto-fonts-emoji                      | Provides emoji fonts in color.                                                 |
-| nvidia-open                           | Enables the NVIDIA graphics card drivers.                                      |
-| openssh                               | Allows remote login with SSH.                                                  |
-| pacman-contrib                        | Provides tools for Pacman systems.                                             |
-| yay-bin *                             | Enables installing packages from the Arch User Repository.                     |
+| Package<br>(Dependency)                                   | Justification                                                                                                          |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| amd-ucode                                                 | Updates the firmware for system stability.                                                                             |
+| base                                                      | Provides minimal required tools for a basic installation system.                                                       |
+| base-devel                                                | Provides basic tools to build AUR packages.                                                                            |
+| efibootmgr                                                | Boots Linux without a bootloader by loading the kernel directly.                                                       |
+| envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
+| foot                                                      | Lightweight Wayland terminal emulator.                                                                                 |
+| iwd                                                       | Manages networking without a full network manager.                                                                     |
+| linux-firmware                                            | Provides functionality for hardware devices.                                                                           |
+| man-db                                                    | Utility for reading manual pages.                                                                                      |
+| mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | Privacy-focused web browser.<br>(Provides full Unicode coverage.)<br>(Provides simplicity using the newest standards.) |
+| neovim                                                    | Lightweight configurable text editor.                                                                                  |
+| niri<br>(xdg-desktop-portal-wlr)                          | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.)                                         |
+| noto-fonts-cjk                                            | Provides Chinese, Japanese, and Korean fonts.                                                                          |
+| noto-fonts-emoji                                          | Provides emoji fonts in color.                                                                                         |
+| nvidia-open                                               | Enables the NVIDIA graphics card drivers.                                                                              |
+| openssh                                                   | Allows remote login with SSH.                                                                                          |
+| pacman-contrib                                            | Provides tools for Pacman systems.                                                                                     |
+| pipewire-pulse                                            | Enables audio on the Mullvad Browser.                                                                                  |
+| yay-bin \*                                                | Enables installing packages from the Arch User Repository.                                                             |
 
 \* AUR package
