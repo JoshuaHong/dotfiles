@@ -4,6 +4,8 @@
 
 ### Upgrade all packages
 * <code>pacman -Syu</code>
+* <code>pacdiff -s</code>
+    > 📝 **Note**: Use sudo to manage the files.
 
 ### Install a package
 * <code>pacman -S <code><var>PACKAGE</var></code></code>

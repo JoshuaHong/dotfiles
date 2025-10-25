@@ -21,6 +21,7 @@ exportLocalPath() {
 
 exportPrograms() {
     export BROWSER="/usr/bin/firefox"
+    export DIFFPROG="/usr/bin/nvim -d"
     export EDITOR="/usr/bin/nvim"
     export PAGER="/usr/bin/less"
     export VISUAL="/usr/bin/nvim"
