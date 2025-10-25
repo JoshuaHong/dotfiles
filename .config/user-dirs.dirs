@@ -1,1 +1,2 @@
+# Set the Firefox download location and don't create the Downloads directory.
 XDG_DOWNLOAD_DIR="$HOME/"
