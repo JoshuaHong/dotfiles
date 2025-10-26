@@ -103,6 +103,6 @@
 * Use hybrid GPUs: <code>sudo envycontrol -s hybrid</code>
 * Use the dedicated GPU: <code>sudo envycontrol -s nvidia</code>
 
-### Using GPUs
-* Run a program using the dedicated GPU in hybrid mode: <code>DRI_PRIME=1 <code><var>COMMAND</var></code></code>
+### Use GPUs
+* Run a program using the dedicated GPU: <code>DRI_PRIME=1 <code><var>COMMAND</var></code></code>
     > 📝 **Note**: The system must be set to hybrid mode.
