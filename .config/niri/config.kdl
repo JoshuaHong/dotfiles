@@ -1,0 +1,147 @@
+// The Niri configuration file.
+
+spawn-at-startup "waybar"
+
+screenshot-path "~/%FT%T%z.png"
+prefer-no-csd
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+layout {
+    gaps 20
+    default-column-width {
+        proportion 1.0
+    }
+    focus-ring {
+        width 3
+        active-gradient from="red" to="orange" angle=45 in="oklch longer hue"
+    }
+    shadow {
+         on
+    }
+    tab-indicator {
+        width 3
+        gap 10
+        length total-proportion=0.75
+        position "top"
+        place-within-column
+    }
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+    opacity 0.9
+    draw-border-with-background false
+}
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Shift+Q { quit; }
+    Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+C repeat=false { close-window; }
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    Mod+O repeat=false { toggle-overview; }
+    Mod+E { fullscreen-window; }
+    Mod+W { toggle-column-tabbed-display; }
+    Mod+m { center-column; }
+    Mod+Space { switch-focus-between-floating-and-tiling; }
+    Mod+Shift+Space { toggle-window-floating; }
+
+    Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
+    Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
+    Print { screenshot-screen; }
+    Shift+Print { screenshot; }
+
+    XF86AudioRaiseVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute        allow-when-locked=true  { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute     allow-when-locked=true  { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86MonBrightnessUp allow-when-locked=true   { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    Mod+Left      { focus-column-left; }
+    Mod+Down      { focus-window-or-workspace-down; }
+    Mod+Up        { focus-window-or-workspace-up; }
+    Mod+Right     { focus-column-right; }
+    Mod+J         { focus-column-left; }
+    Mod+K         { focus-window-or-workspace-down; }
+    Mod+L         { focus-window-or-workspace-up; }
+    Mod+Semicolon { focus-column-right; }
+
+    Mod+Shift+Left      { move-column-left; }
+    Mod+Shift+Down      { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up        { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Right     { move-column-right; }
+    Mod+Shift+J         { move-column-left; }
+    Mod+Shift+K         { move-window-down-or-to-workspace-down; }
+    Mod+Shift+L         { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Semicolon { move-column-right; }
+
+    Mod+Ctrl+Left      { focus-monitor-left; }
+    Mod+Ctrl+Down      { focus-monitor-down; }
+    Mod+Ctrl+Up        { focus-monitor-up; }
+    Mod+Ctrl+Right     { focus-monitor-right; }
+    Mod+Ctrl+J         { focus-monitor-left; }
+    Mod+Ctrl+K         { focus-monitor-down; }
+    Mod+Ctrl+L         { focus-monitor-up; }
+    Mod+Ctrl+Semicolon { focus-monitor-right; }
+
+    Mod+Shift+Ctrl+Left      { move-window-to-monitor-left; }
+    Mod+Shift+Ctrl+Down      { move-window-to-monitor-down; }
+    Mod+Shift+Ctrl+Up        { move-window-to-monitor-up; }
+    Mod+Shift+Ctrl+Right     { move-window-to-monitor-right; }
+    Mod+Shift+Ctrl+J         { move-window-to-monitor-left; }
+    Mod+Shift+Ctrl+K         { move-window-to-monitor-down; }
+    Mod+Shift+Ctrl+L         { move-window-to-monitor-up; }
+    Mod+Shift+Ctrl+Semicolon { move-window-to-monitor-right; }
+
+    Mod+Tab     { focus-workspace-previous; }
+    Mod+1       { focus-workspace 1; }
+    Mod+2       { focus-workspace 2; }
+    Mod+3       { focus-workspace 3; }
+    Mod+4       { focus-workspace 4; }
+    Mod+5       { focus-workspace 5; }
+    Mod+6       { focus-workspace 6; }
+    Mod+7       { focus-workspace 7; }
+    Mod+8       { focus-workspace 8; }
+    Mod+9       { focus-workspace 9; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
+
+    Mod+Shift+Comma        { consume-or-expel-window-left; }
+    Mod+Shift+Period       { consume-or-expel-window-right; }
+
+    Mod+Shift+A { set-column-width "-10%"; }
+    Mod+Shift+F { set-column-width "+10%"; }
+    Mod+Shift+S { set-window-height "-10%"; }
+    Mod+Shift+D { set-window-height "+10%"; }
+    Mod+A       { switch-preset-column-width; }
+    Mod+S       { switch-preset-window-height; }
+    Mod+F       { maximize-column; }
+    Mod+D       { reset-window-height; }
+}
+
+switch-events {
+    lid-close { spawn "waylock"; }
+}
+
+debug {
+    keep-max-bpc-unchanged
+}
