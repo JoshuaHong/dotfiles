@@ -200,13 +200,14 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 19
+Count: 20
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | amd-ucode                                                 | Updates the firmware for system stability.                                                                             |
 | base                                                      | Provides minimal required tools for a basic installation system.                                                       |
 | base-devel                                                | Provides basic tools to build AUR packages.                                                                            |
+| brightnessctl                                             | Lightweight brightness control tool that saves brightness.                                                             |
 | efibootmgr                                                | Boots Linux without a bootloader by loading the kernel directly.                                                       |
 | envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
 | foot                                                      | Lightweight Wayland terminal emulator.                                                                                 |
