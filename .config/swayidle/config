@@ -1,2 +1,2 @@
-timeout 600 "brightnessctl --save && brightnessctl set 1%" resume "brightnessctl --restore"
+timeout 600 "brightnessctl --save && brightnessctl set 10%" resume "brightnessctl --restore"
 timeout 660 "lock"
