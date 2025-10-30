@@ -1,5 +1,7 @@
 // The Niri configuration file.
 
+spawn-at-startup "swaybg" "--image" "/home/josh/.local/share/backgrounds/wallpaper.png" "--mode" "fill"
+spawn-at-startup "swayidle"
 spawn-at-startup "waybar"
 
 screenshot-path "~/%FT%T%z.png"
@@ -39,8 +41,13 @@ layout {
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
-    opacity 0.9
+    opacity 1.0
     draw-border-with-background false
+}
+
+window-rule {
+    match app-id="foot"
+    opacity 0.9
 }
 
 binds {
