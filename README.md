@@ -200,7 +200,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 20
+Count: 22
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -223,6 +223,8 @@ Count: 20
 | openssh                                                   | Allows remote login with SSH.                                                                                          |
 | pacman-contrib                                            | Provides tools for Pacman systems.                                                                                     |
 | pipewire-pulse                                            | Enables audio on the Mullvad Browser.                                                                                  |
+| swayidle                                                  | Manages idle events.                                                                                                   |
+| swaylock                                                  | Locks the screen.                                                                                                      |
 | yay-bin \*                                                | Enables installing packages from the Arch User Repository.                                                             |
 
 \* AUR package
