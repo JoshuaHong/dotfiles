@@ -1,7 +1,6 @@
 [user]
     name = Joshua Hong
     email = hong.josh@protonmail.com
-    signingkey = hong.josh@protonmail.com
 [commit]
     gpgsign = true
 [tag]
