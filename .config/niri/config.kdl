@@ -78,6 +78,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
     Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
+    Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
