@@ -22,6 +22,12 @@ layout {
     default-column-width {
         proportion 1.0
     }
+    preset-window-heights {
+        proportion 0.5
+    }
+    preset-column-widths {
+        proportion 0.5
+    }
     focus-ring {
         width 3
         active-gradient from="red" to="orange" angle=45 in="oklch longer hue"
@@ -66,6 +72,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
     Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
+    Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
