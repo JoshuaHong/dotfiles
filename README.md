@@ -97,13 +97,14 @@ The Arch Linux environment.
 * Update the locale generation file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
 * Create the locale configuration file: <code>[/etc/locale.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.conf)</code>
+* Update the environment file: <code>[/etc/environment](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/environment)</code>
 * Create the hostname file: <code>[/etc/hostname](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/hostname)</code>
 * Recreate the initramfs image: <code>mkinitcpio -P</code>
 * Set the root password: <code>passwd</code>
 
 ### Configure the boot loader
 * Install the boot manager: <code>pacman -S efibootmgr</code>
-    > 📝 Note: Use EFISTUB to boot the kernel directly without a bootloader.
+    > 📝 **Note**: Use EFISTUB to boot the kernel directly without a bootloader.
 * Create the boot entry: <code>efibootmgr --create --disk /dev/<code><var>DISK</var></code> --part <code><var>BOOT_PARTITION_NUMBER</var></code> --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=LABEL=ROOT resume=LABEL=SWAP rw quiet initrd=\\<code><var>CPU</var></code>-ucode.img initrd=\initramfs-linux.img'</code>
     > 📝 **Note**: If for example the boot partition is on "/dev/nvme0n1p1", then the DISK is "nvme0n1" and the BOOT_PARTITION_NUMBER is "1". \
     > 📝 **Note**: The CPU is either "amd" or "intel".
@@ -200,7 +201,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 26
+Count: 27
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -210,6 +211,7 @@ Count: 26
 | brightnessctl                                             | Lightweight brightness control tool that saves brightness.                                                             |
 | efibootmgr                                                | Boots Linux without a bootloader by loading the kernel directly.                                                       |
 | envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
+| fcitx5-hangul                                             | Enables Korean language input.                                                                                         |
 | foot                                                      | Lightweight Wayland terminal emulator.                                                                                 |
 | imv                                                       | Simple Wayland image viewer.                                                                                           |
 | iwd                                                       | Manages networking without a full network manager.                                                                     |

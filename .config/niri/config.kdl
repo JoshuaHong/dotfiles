@@ -11,6 +11,12 @@ hotkey-overlay {
 }
 
 input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "caps:swapescape, ctrl:swap_lalt_lctl, korean:rctrl_hanja"
+        }
+    }
     touchpad {
         tap
         natural-scroll
