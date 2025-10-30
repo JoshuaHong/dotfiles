@@ -59,8 +59,6 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
     Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
-    Print { screenshot-screen; }
-    Shift+Print { screenshot; }
 
     XF86AudioRaiseVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
@@ -68,6 +66,16 @@ binds {
     XF86AudioMicMute     allow-when-locked=true  { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86MonBrightnessUp allow-when-locked=true   { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    Print { screenshot-screen; }
+    Shift+Print { screenshot; }
+    F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+    F4 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    F12 { screenshot-screen; }
+    Shift+F12 { screenshot; }
 
     Mod+Left      { focus-column-left; }
     Mod+Down      { focus-window-or-workspace-down; }
