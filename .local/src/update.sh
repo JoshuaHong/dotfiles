@@ -5,6 +5,7 @@
 # Usage:
 #     update
 
+echo "Updating packages..."
 yay
 pacdiff --sudo
 

@@ -10,7 +10,7 @@ declare -ar OPTIONS=("exit" "reboot" "poweroff" "suspend" "hybrid-sleep" "hibern
 main() {
     local -r option="$(selectOption)"
     if [[ "${option}" == "exit" ]]; then
-        niri msg action quit
+        niri msg action quit --skip-confirmation
     elif arrayContains OPTIONS "${option}"; then
         systemctl "${option}"
     fi
