@@ -206,7 +206,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 33
+Count: 34
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -229,7 +229,7 @@ Count: 33
 | mpv                                                       | To watch videos.                                                                                                       |
 | mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To use audio with the newest standards.) |
 | neovim                                                    | To edit text.                                                                                                          |
-| niri<br>(xdg-desktop-portal-wlr)                          | To use Wayland.<br>(To enable screensharing with minimal permissions.)                                                 |
+| niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                                  |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                        |
 | noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                      |
 | nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                            |
@@ -241,6 +241,7 @@ Count: 33
 | swaylock                                                  | To lock the screen.                                                                                                    |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
 | waybar                                                    | To provide the Wayland bar.                                                                                            |
+| wf-recorder                                               | To record the screen.                                                                                                  |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                           |
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                                    |
 

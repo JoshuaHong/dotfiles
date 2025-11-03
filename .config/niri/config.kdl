@@ -84,15 +84,17 @@ binds {
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
     Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
-    F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- --limit 1.0"; }
-    F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ --limit 1.0"; }
-    Shift+F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    Shift+F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.05- --limit 1.0"; }
-    Shift+F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.05+ --limit 1.0"; }
-    F5 allow-when-locked=true {spawn-sh "playerctl previous"; }
-    F6 allow-when-locked=true {spawn-sh "playerctl play-pause"; }
-    F7 allow-when-locked=true {spawn-sh "playerctl next"; }
+    F1 allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    Shift+F1 allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    F2 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-" "--limit" "1.0"; }
+    Shift+F2 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "0.05-" "--limit" "1.0"; }
+    F3 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "--limit" "1.0"; }
+    Shift+F3 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "0.05+" "--limit" "1.0"; }
+    F4 { spawn "record" "full"; }
+    Shift+F4 { spawn "record" "select"; }
+    F5 allow-when-locked=true {spawn "playerctl" "previous"; }
+    F6 allow-when-locked=true {spawn "playerctl" "play-pause"; }
+    F7 allow-when-locked=true {spawn "playerctl" "next"; }
     F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
     F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
     F12 { screenshot-screen; }

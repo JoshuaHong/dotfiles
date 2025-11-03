@@ -84,6 +84,10 @@ button:hover {
     margin-left: 20px;
 }
 
+#privacy {
+    margin-right: 2px;
+}
+
 #bluetooth,
 #wireplumber,
 #backlight,

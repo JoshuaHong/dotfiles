@@ -11,6 +11,7 @@
         "niri/window"
     ],
     "modules-right": [
+        "privacy",
         "bluetooth",
         "wireplumber",
         "wireplumber#source",
@@ -24,6 +25,28 @@
     ],
     "niri/window": {
         "format": "{app_id}"
+    },
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 12
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 12
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 12
+            }
+        ]
     },
     "bluetooth": {
         "format": "",

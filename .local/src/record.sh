@@ -12,6 +12,9 @@
 #     full   - Record the full screen.
 #     select - Record a selection of the screen.
 
+# Select the audio device from: `pactl list sources | grep Name`
+declare -a AUDIO_DEVICE="alsa_output.pci-0000_c5_00.6.HiFi__Speaker__sink.monitor"
+
 main() {
     local -r operation="${1}"
 
@@ -39,11 +42,11 @@ stopRecording() {
 }
 
 recordFullScreen() {
-    wf-recorder --audio -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    wf-recorder --audio="${AUDIO_DEVICE}" -f "${HOME}/$(date --iso-8601="seconds").mkv"
 }
 
 recordPartialScreen() {
-    wf-recorder --audio --geometry "$(slurp)" -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    wf-recorder --audio="${AUDIO_DEVICE}" --geometry "$(slurp)" -f "${HOME}/$(date --iso-8601="seconds").mkv"
 }
 
 echoError() {
