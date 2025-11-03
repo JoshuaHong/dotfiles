@@ -64,7 +64,7 @@ window-rule {
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+Shift+Q { quit; }
+    Mod+Shift+Q hotkey-overlay-title="Exit Niri" { spawn "power"; }
     Mod+Shift+P { power-off-monitors; }
     Mod+Shift+C repeat=false { close-window; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
@@ -81,7 +81,7 @@ binds {
     Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
     Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
-    Alt+Space hotkey-overlay-title="Switch the language" { spawn-sh "language"; }
+    Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
     F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- --limit 1.0"; }

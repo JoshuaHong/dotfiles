@@ -3,16 +3,16 @@
 # Quit the system.
 #
 # Usage:
-#     quit
+#     power
 
-declare -ar OPTIONS=("exit" "poweroff" "reboot")
+declare -ar OPTIONS=("exit" "reboot" "poweroff" "suspend" "hybrid-sleep" "hibernate")
 
 main() {
     local -r option="$(selectOption)"
     if [[ "${option}" == "exit" ]]; then
-        hyprctl dispatch exit
+        niri msg action quit
     elif arrayContains OPTIONS "${option}"; then
-        sudo --askpass "${option}"
+        "${option}"
     fi
 }
 
