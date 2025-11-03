@@ -3,6 +3,7 @@
 spawn-at-startup "swaybg" "--image" "/home/josh/.local/share/backgrounds/wallpaper.png" "--mode" "fill"
 spawn-at-startup "swayidle"
 spawn-at-startup "waybar"
+spawn-at-startup "foot" "update"
 
 screenshot-path "~/%FT%T%z.png"
 prefer-no-csd
