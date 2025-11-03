@@ -1,0 +1,110 @@
+// The Waybar configuration file.
+
+{
+    "layer": "top",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": [
+        "niri/workspaces"
+    ],
+    "modules-center": [
+        "niri/window"
+    ],
+    "modules-right": [
+        "bluetooth",
+        "wireplumber",
+        "wireplumber#source",
+        "backlight",
+        "battery",
+        "clock",
+        "clock#calendar",
+        "network",
+        "niri/language",
+        "idle_inhibitor"
+    ],
+    "niri/window": {
+        "format": "{app_id}"
+    },
+    "bluetooth": {
+        "format": "",
+        "format-connected": "󰂯 {device_battery_percentage}%",
+        "tooltip-format": "{device_alias}"
+    },
+    "backlight": {
+        "device": "amd_backlight",
+        "interval": 60,
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰸈 {volume}%",
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "󰍬 {volume}%",
+        "format-muted": "󰍭 {volume}%",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 15,
+            "critical": 5
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-full": "󱟢 {capacity}%",
+        "format-discharging-warning": "󰂎 {capacity}%",
+        "format-discharging-critical": "󱉞 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "clock": {
+        "interval": 60,
+        "format": "󱑍 {:%R}",
+        "tooltip-format": "󱑍 {:%R}"
+    },
+    "clock#calendar": {
+        "interval": 60,
+        "format": "󰃭 {:%a %b %d}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "format": {
+                "months": "<span color='#ca9ee6'><b>{}</b></span>",
+                "weekdays": "<span color='#e5c890'><b>{}</b></span>",
+                "days": "<span color='#c6d0f5'><b>{}</b></span>",
+                "today": "<span color='#e78284'><b>{}</b></span>"
+            }
+        }
+    },
+    "network": {
+        "interval": 60,
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰖪 Disconnected",
+        "tooltip-format-wifi": "󰖩 {signalStrength}%",
+        "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "󰖪 Disconnected",
+        "max-length": 20
+    },
+    "niri/language": {
+        "format": "󰥻 {short}",
+        "on-click": "fcitx5-remote -t && niri msg action switch-layout next",
+        "tooltip-format": "󰥻 {short}"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰛐",
+            "deactivated": "󰛑"
+        },
+        "tooltip-format-activated": "Activated",
+        "tooltip-format-deactivated": "Deactivated"
+    }
+}

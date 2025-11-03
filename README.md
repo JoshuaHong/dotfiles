@@ -11,6 +11,8 @@ The Arch Linux environment.
     > A lightweight and flexible Linux distribution.
 * Window manager: [Niri](https://github.com/YaLTeR/niri)
     > A scrollable tiling Wayland compositor.
+* Bar: [Waybar](https://github.com/Alexays/Waybar)
+    > A highly customizable Wayland bar.
 * Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
     > A fast and minimal Wayland terminal emulator.
 * Web browser: [Mullvad Browser](https://mullvad.net/en/browser)
@@ -93,6 +95,7 @@ The Arch Linux environment.
 * Enter the new environment: <code>arch-chroot /mnt</code>
 * Set the time zone: <code>ln -sf /usr/share/zoneinfo/<code><var>REGION</var></code>/<code><var>CITY</var></code> /etc/localtime</code>
     > 💡 **Tip**: All time zones can be found in <code>/usr/share/zoneinfo</code>.
+* Enable time synchronization: <code>timedatectl set-ntp true</code>
 * Set the hardware clock: <code>hwclock --systohc</code>
 * Update the locale generation file: <code>[/etc/locale.gen](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.gen)</code>
 * Generate the locales: <code>locale-gen</code>
@@ -169,6 +172,7 @@ The Arch Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/</code>
 * Install all the packages below
+* Enable requierd services: <code>systemctl enable --now bluetooth.service</code>
 
 ### Import GPG keys
 * Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
@@ -201,13 +205,15 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 27
+Count: 30
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | amd-ucode                                                 | Updates the firmware for system stability.                                                                             |
 | base                                                      | Provides minimal required tools for a basic installation system.                                                       |
 | base-devel                                                | Provides basic tools to build AUR packages.                                                                            |
+| bluez                                                     | To enable Bluetooth.                                                                                                   |
+| bluez-utils                                               | To manage Bluetooth devices.                                                                                           |
 | brightnessctl                                             | Lightweight brightness control tool that saves brightness.                                                             |
 | efibootmgr                                                | Boots Linux without a bootloader by loading the kernel directly.                                                       |
 | envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
@@ -227,10 +233,11 @@ Count: 27
 | openssh                                                   | Allows remote login with SSH.                                                                                          |
 | pacman-contrib                                            | Provides tools for Pacman systems.                                                                                     |
 | pipewire-pulse                                            | Enables audio on the Mullvad Browser.                                                                                  |
-| playerctl                                                 | Media player controller.                                                                                               |
 | swaybg                                                    | Displays the background image.                                                                                         |
 | swayidle                                                  | Manages idle events.                                                                                                   |
 | swaylock                                                  | Locks the screen.                                                                                                      |
+| ttf-nerd-fonts-symbols                                    | Provides symbol fonts.                                                                                                 |
+| waybar                                                    | Customizable Wayland bar.                                                                                              |
 | yay-bin \*                                                | Enables installing packages from the Arch User Repository.                                                             |
 
 \* AUR package

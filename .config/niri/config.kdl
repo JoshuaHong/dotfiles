@@ -13,7 +13,7 @@ hotkey-overlay {
 input {
     keyboard {
         xkb {
-            layout "us"
+            layout "us,kr"
             options "caps:swapescape, ctrl:swap_lalt_lctl, korean:rctrl_hanja"
         }
     }
@@ -72,7 +72,8 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     Mod+E { fullscreen-window; }
     Mod+W { toggle-column-tabbed-display; }
-    Mod+m { center-column; }
+    Mod+M { center-column; }
+    Mod+R { expand-column-to-available-width; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
     Mod+Shift+Space { toggle-window-floating; }
 
@@ -81,20 +82,14 @@ binds {
     Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true  { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true  { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true  { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    XF86MonBrightnessUp allow-when-locked=true   { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-    Print { screenshot-screen; }
-    Shift+Print { screenshot; }
     F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    F4 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- --limit 1.0"; }
+    F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ --limit 1.0"; }
+    Shift+F1 allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    Shift+F2 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.05- --limit 1.0"; }
+    Shift+F3 allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.05+ --limit 1.0"; }
+    F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
+    F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
     F12 { screenshot-screen; }
     Shift+F12 { screenshot; }
 
@@ -168,7 +163,7 @@ binds {
 }
 
 switch-events {
-    lid-close { spawn "waylock"; }
+    lid-close { spawn "lock"; }
 }
 
 debug {
