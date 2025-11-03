@@ -210,37 +210,37 @@ Count: 32
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| amd-ucode                                                 | Updates the firmware for system stability.                                                                             |
-| base                                                      | Provides minimal required tools for a basic installation system.                                                       |
-| base-devel                                                | Provides basic tools to build AUR packages.                                                                            |
-| bash-completion                                           | Adds auto-complete to Bash.                                                                                            |
+| amd-ucode                                                 | To update the firmware for system stability.                                                                           |
+| base                                                      | To provide minimal required tools for a basic installation system.                                                     |
+| base-devel                                                | To provide basic tools to build AUR packages.                                                                          |
+| bash-completion                                           | To add auto-completion to Bash.                                                                                        |
 | bluez                                                     | To enable Bluetooth.                                                                                                   |
 | bluez-utils                                               | To manage Bluetooth devices.                                                                                           |
-| brightnessctl                                             | Lightweight brightness control tool that saves brightness.                                                             |
-| efibootmgr                                                | Boots Linux without a bootloader by loading the kernel directly.                                                       |
-| envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
-| fcitx5-hangul                                             | Enables Korean language input.                                                                                         |
-| foot                                                      | Lightweight Wayland terminal emulator.                                                                                 |
-| fuzzel                                                    | Wayland application launcher.                                                                                          |
-| imv                                                       | Simple Wayland image viewer.                                                                                           |
-| iwd                                                       | Manages networking without a full network manager.                                                                     |
-| linux-firmware                                            | Provides functionality for hardware devices.                                                                           |
-| man-db                                                    | Utility for reading manual pages.                                                                                      |
-| mpv                                                       | Open source media player.                                                                                              |
-| mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | Privacy-focused web browser.<br>(Provides full Unicode coverage.)<br>(Provides simplicity using the newest standards.) |
-| neovim                                                    | Lightweight configurable text editor.                                                                                  |
-| niri<br>(xdg-desktop-portal-wlr)                          | Tiling Wayland compositor.<br>(Allows screensharing with minimal permissions.)                                         |
-| noto-fonts-cjk                                            | Provides Chinese, Japanese, and Korean fonts.                                                                          |
-| noto-fonts-emoji                                          | Provides emoji fonts in color.                                                                                         |
-| nvidia-open                                               | Enables the NVIDIA graphics card drivers.                                                                              |
-| openssh                                                   | Allows remote login with SSH.                                                                                          |
-| pacman-contrib                                            | Provides tools for Pacman systems.                                                                                     |
-| pipewire-pulse                                            | Enables audio on the Mullvad Browser.                                                                                  |
-| swaybg                                                    | Displays the background image.                                                                                         |
-| swayidle                                                  | Manages idle events.                                                                                                   |
-| swaylock                                                  | Locks the screen.                                                                                                      |
-| ttf-nerd-fonts-symbols                                    | Provides symbol fonts.                                                                                                 |
-| waybar                                                    | Customizable Wayland bar.                                                                                              |
-| yay-bin \*                                                | Enables installing packages from the Arch User Repository.                                                             |
+| brightnessctl                                             | To control the backlight brightness and automatically save the brightness on reboot.                                   |
+| efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                                     |
+| envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                                    |
+| fcitx5-hangul                                             | To enable Korean language inputs.                                                                                      |
+| foot                                                      | To use the terminal.                                                                                                   |
+| fuzzel                                                    | To launch Wayland applications.                                                                                        |
+| imv                                                       | To view Wayland images.                                                                                                |
+| iwd                                                       | To manage networking without a full network manager.                                                                   |
+| linux-firmware                                            | To provide functionality for hardware devices.                                                                         |
+| man-db                                                    | To read manual pages.                                                                                                  |
+| mpv                                                       | To watch videos.                                                                                                       |
+| mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To use audio with the newest standards.) |
+| neovim                                                    | To edit text.                                                                                                          |
+| niri<br>(xdg-desktop-portal-wlr)                          | To use Wayland.<br>(To enable screensharing with minimal permissions.)                                                 |
+| noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                        |
+| noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                      |
+| nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                            |
+| openssh                                                   | To remote login with SSH.                                                                                              |
+| pacman-contrib                                            | To use tools for Pacman systems.                                                                                       |
+| pipewire-pulse                                            | To enable audio on the Mullvad Browser.                                                                                |
+| swaybg                                                    | To display the background image.                                                                                       |
+| swayidle                                                  | To manage idle events.                                                                                                 |
+| swaylock                                                  | To lock the screen.                                                                                                    |
+| ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
+| waybar                                                    | To provide the Wayland bar.                                                                                            |
+| yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                           |
 
 \* AUR package
