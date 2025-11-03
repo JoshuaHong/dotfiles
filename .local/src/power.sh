@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Quit the system.
+# Manage the system power.
 #
 # Usage:
 #     power
