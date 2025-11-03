@@ -206,7 +206,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 32
+Count: 33
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -242,5 +242,6 @@ Count: 32
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
 | waybar                                                    | To provide the Wayland bar.                                                                                            |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                           |
+| zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                                    |
 
 \* AUR package
