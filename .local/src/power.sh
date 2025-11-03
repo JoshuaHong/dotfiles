@@ -12,7 +12,7 @@ main() {
     if [[ "${option}" == "exit" ]]; then
         niri msg action quit
     elif arrayContains OPTIONS "${option}"; then
-        "${option}"
+        systemctl "${option}"
     fi
 }
 

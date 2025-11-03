@@ -102,6 +102,7 @@ The Arch Linux environment.
 * Create the locale configuration file: <code>[/etc/locale.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/locale.conf)</code>
 * Update the environment file: <code>[/etc/environment](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/environment)</code>
 * Create the hostname file: <code>[/etc/hostname](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/hostname)</code>
+* Update the initramfs configuration file: <code>[/etc/mkinitcpio.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/mkinitcpio.conf)</code>
 * Recreate the initramfs image: <code>mkinitcpio -P</code>
 * Set the root password: <code>passwd</code>
 
