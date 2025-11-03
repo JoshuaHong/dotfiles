@@ -206,13 +206,14 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 30
+Count: 32
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | amd-ucode                                                 | Updates the firmware for system stability.                                                                             |
 | base                                                      | Provides minimal required tools for a basic installation system.                                                       |
 | base-devel                                                | Provides basic tools to build AUR packages.                                                                            |
+| bash-completion                                           | Adds auto-complete to Bash.                                                                                            |
 | bluez                                                     | To enable Bluetooth.                                                                                                   |
 | bluez-utils                                               | To manage Bluetooth devices.                                                                                           |
 | brightnessctl                                             | Lightweight brightness control tool that saves brightness.                                                             |
@@ -220,6 +221,7 @@ Count: 30
 | envycontrol \*                                            | Allows simple GPU switching for NVIDIA Optimus laptops.                                                                |
 | fcitx5-hangul                                             | Enables Korean language input.                                                                                         |
 | foot                                                      | Lightweight Wayland terminal emulator.                                                                                 |
+| fuzzel                                                    | Wayland application launcher.                                                                                          |
 | imv                                                       | Simple Wayland image viewer.                                                                                           |
 | iwd                                                       | Manages networking without a full network manager.                                                                     |
 | linux-firmware                                            | Provides functionality for hardware devices.                                                                           |
