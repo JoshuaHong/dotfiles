@@ -95,7 +95,7 @@
     },
     "niri/language": {
         "format": "󰥻 {short}",
-        "on-click": "fcitx5-remote -t && niri msg action switch-layout next",
+        "on-click": "language",
         "tooltip-format": "󰥻 {short}"
     },
     "idle_inhibitor": {
