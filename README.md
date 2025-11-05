@@ -236,11 +236,11 @@ Count: 34
 | openssh                                                   | To remote login with SSH.                                                                                              |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                       |
 | pipewire-pulse                                            | To enable audio on the Mullvad Browser.                                                                                |
-| swaybg                                                    | To display the background image.                                                                                       |
 | swayidle                                                  | To manage idle events.                                                                                                 |
 | swaylock                                                  | To lock the screen.                                                                                                    |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
 | waybar                                                    | To provide the Wayland bar.                                                                                            |
+| wbg \*                                                    | To display the background image.                                                                                       |
 | wf-recorder                                               | To record the screen.                                                                                                  |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                           |
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                                    |
