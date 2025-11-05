@@ -206,7 +206,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 34
+Count: 36
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -220,11 +220,13 @@ Count: 34
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                                     |
 | envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                                    |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                      |
+| fnott                                                     | To display notifications.                                                                                              |
 | foot                                                      | To use the terminal.                                                                                                   |
 | fuzzel                                                    | To launch Wayland applications.                                                                                        |
 | imv                                                       | To view Wayland images.                                                                                                |
 | iwd                                                       | To manage networking without a full network manager.                                                                   |
 | linux-firmware                                            | To provide functionality for hardware devices.                                                                         |
+| libnotify                                                 | To send notifications.                                                                                                 |
 | man-db                                                    | To read manual pages.                                                                                                  |
 | mpv                                                       | To watch videos.                                                                                                       |
 | mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To use audio with the newest standards.) |
