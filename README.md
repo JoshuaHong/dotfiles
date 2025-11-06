@@ -205,7 +205,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 36
+Count: 38
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -227,6 +227,8 @@ Count: 36
 | linux-firmware                                            | To provide functionality for hardware devices.                                                                         |
 | libnotify                                                 | To send notifications.                                                                                                 |
 | man-db                                                    | To read manual pages.                                                                                                  |
+| mpc                                                       | To control music.                                                                                                      |
+| mpd                                                       | To play music.                                                                                                         |
 | mpv                                                       | To watch videos.                                                                                                       |
 | mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To use audio with the newest standards.) |
 | neovim                                                    | To edit text.                                                                                                          |

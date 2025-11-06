@@ -1,10 +1,13 @@
 // The Niri configuration file.
 
 spawn-at-startup "fnott"
+spawn-at-startup "mpd"
 spawn-at-startup "swayidle"
 spawn-at-startup "waybar"
 spawn-at-startup "wbg" "--stretch" "/home/josh/.local/share/backgrounds/wallpaper.png"
+
 spawn-at-startup "foot" "update"
+spawn-at-startup "foot" "music"
 
 screenshot-path "~/%FT%T%z.png"
 prefer-no-csd
@@ -93,9 +96,9 @@ binds {
     Shift+F3 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "0.05+" "--limit" "1.0"; }
     F4 { spawn "record" "full"; }
     Shift+F4 { spawn "record" "select"; }
-    F5 allow-when-locked=true {spawn "playerctl" "previous"; }
-    F6 allow-when-locked=true {spawn "playerctl" "play-pause"; }
-    F7 allow-when-locked=true {spawn "playerctl" "next"; }
+    F5 allow-when-locked=true {spawn "mpc" "prev"; }
+    F6 allow-when-locked=true {spawn "mpc" "toggle"; }
+    F7 allow-when-locked=true {spawn "mpc" "next"; }
     F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
     F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
     F12 { screenshot-screen; }

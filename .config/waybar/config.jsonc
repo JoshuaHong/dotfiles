@@ -5,7 +5,8 @@
     "height": 30,
     "spacing": 4,
     "modules-left": [
-        "niri/workspaces"
+        "niri/workspaces",
+        "mpd"
     ],
     "modules-center": [
         "niri/window"
@@ -23,6 +24,30 @@
         "niri/language",
         "idle_inhibitor"
     ],
+    "mpd": {
+        "format": "󰝚  {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) {stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
+        "format-disconnected": "",
+        "format-stopped": "",
+        "interval": 10,
+        "consume-icons": {
+            "on": " 󰆐"
+        },
+        "random-icons": {
+            "off": " 󰒞",
+            "on": " 󰒟"
+        },
+        "repeat-icons": {
+            "on": " 󰑖"
+        },
+        "single-icons": {
+            "on": " 󰑘"
+        },
+        "state-icons": {
+            "paused": " 󰏤",
+            "playing": " 󰐊"
+        },
+        "tooltip-format": "{album}"
+    },
     "niri/window": {
         "format": "{app_id}"
     },
