@@ -122,23 +122,23 @@ binds {
     Mod+Shift+L         { move-window-up-or-to-workspace-up; }
     Mod+Shift+Semicolon { move-column-right; }
 
-    Mod+Ctrl+Left      { focus-monitor-left; }
-    Mod+Ctrl+Down      { focus-monitor-down; }
-    Mod+Ctrl+Up        { focus-monitor-up; }
-    Mod+Ctrl+Right     { focus-monitor-right; }
-    Mod+Ctrl+J         { focus-monitor-left; }
-    Mod+Ctrl+K         { focus-monitor-down; }
-    Mod+Ctrl+L         { focus-monitor-up; }
-    Mod+Ctrl+Semicolon { focus-monitor-right; }
+    Mod+Alt+Left      { focus-monitor-left; }
+    Mod+Alt+Down      { focus-monitor-down; }
+    Mod+Alt+Up        { focus-monitor-up; }
+    Mod+Alt+Right     { focus-monitor-right; }
+    Mod+Alt+J         { focus-monitor-left; }
+    Mod+Alt+K         { focus-monitor-down; }
+    Mod+Alt+L         { focus-monitor-up; }
+    Mod+Alt+Semicolon { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+Left      { move-window-to-monitor-left; }
-    Mod+Shift+Ctrl+Down      { move-window-to-monitor-down; }
-    Mod+Shift+Ctrl+Up        { move-window-to-monitor-up; }
-    Mod+Shift+Ctrl+Right     { move-window-to-monitor-right; }
-    Mod+Shift+Ctrl+J         { move-window-to-monitor-left; }
-    Mod+Shift+Ctrl+K         { move-window-to-monitor-down; }
-    Mod+Shift+Ctrl+L         { move-window-to-monitor-up; }
-    Mod+Shift+Ctrl+Semicolon { move-window-to-monitor-right; }
+    Mod+Shift+Alt+Left      { move-window-to-monitor-left; }
+    Mod+Shift+Alt+Down      { move-window-to-monitor-down; }
+    Mod+Shift+Alt+Up        { move-window-to-monitor-up; }
+    Mod+Shift+Alt+Right     { move-window-to-monitor-right; }
+    Mod+Shift+Alt+J         { move-window-to-monitor-left; }
+    Mod+Shift+Alt+K         { move-window-to-monitor-down; }
+    Mod+Shift+Alt+L         { move-window-to-monitor-up; }
+    Mod+Shift+Alt+Semicolon { move-window-to-monitor-right; }
 
     Mod+Tab     { focus-workspace-previous; }
     Mod+1       { focus-workspace 1; }
