@@ -5,8 +5,18 @@
 # Usage:
 #     update
 
-echo "Updating packages..."
-yay
-pacdiff --sudo
+main() {
+    echo "Updating packages..."
 
-${SHELL}
+    if hasUpdates; then
+        yay
+        pacdiff --sudo
+        ${SHELL}
+    fi
+}
+
+hasUpdates() {
+    checkupdates
+}
+
+main "${@}"
