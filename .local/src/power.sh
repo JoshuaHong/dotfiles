@@ -2,6 +2,9 @@
 #
 # Manage the system power.
 #
+# References:
+#     ${XDG_CONFIG_HOME}/niri/config.kdl
+#
 # Usage:
 #     power
 
@@ -26,4 +29,4 @@ arrayContains() {
     [[ " ${array[*]} " =~ " ${value} " ]]
 }
 
-main
+main "${@}"

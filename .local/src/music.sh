@@ -2,6 +2,9 @@
 #
 # Initialize the music player.
 #
+# References:
+#     ${XDG_CONFIG_HOME}/niri/config.kdl
+#
 # Usage:
 #     music
 

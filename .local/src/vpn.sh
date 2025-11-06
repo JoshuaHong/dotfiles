@@ -2,6 +2,9 @@
 #
 # Connect to the VPN.
 #
+# References:
+#     none
+#
 # Usage:
 #     vpn [connect [CONFIGURATION | REGION] | disconnect | toggle]
 #

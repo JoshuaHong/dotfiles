@@ -5,6 +5,9 @@
 # Begin recording if no recording is in process.
 # Stop recording and exit otherwise.
 #
+# References:
+#     ${XDG_CONFIG_HOME}/niri/config.kdl
+#
 # Usage:
 #     record [full | select]
 #
