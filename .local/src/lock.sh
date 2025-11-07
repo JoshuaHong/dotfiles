@@ -11,7 +11,7 @@
 main() {
     playerctl --no-messages pause
     mpc pause
-    swaylock --image "${XDG_DATA_HOME}/backgrounds/lockscreen.png"
+    swaylock --image "${XDG_DATA_HOME}/assets/backgrounds/lockscreen.png"
 }
 
 main "${@}"

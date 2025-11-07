@@ -17,6 +17,7 @@
 
 # Select the audio device from: `pactl list sources | grep Name`
 declare -a AUDIO_DEVICE="alsa_output.pci-0000_c5_00.6.HiFi__Speaker__sink.monitor"
+declare -a ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
 
 main() {
     local -r operation="${1}"
@@ -45,11 +46,26 @@ stopRecording() {
 }
 
 recordFullScreen() {
-    wf-recorder --audio="${AUDIO_DEVICE}" -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    notify "Full screen recording started."
+    wf-recorder --audio="${AUDIO_DEVICE}" \
+            -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    notify "Screen recording saved."
 }
 
 recordPartialScreen() {
-    wf-recorder --audio="${AUDIO_DEVICE}" --geometry "$(slurp)" -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    local -r region="$(slurp)"
+    notify "Partial screen recording started."
+    wf-recorder --audio="${AUDIO_DEVICE}" --geometry "${region}" \
+            -f "${HOME}/$(date --iso-8601="seconds").mkv"
+    notify "Screen recording saved."
+}
+
+notify() {
+    local -r description="${1}"
+
+    notify-send --hint="string:x-canonical-private-synchronous:record" \
+            --icon="${ICONS_DIRECTORY}/record.svg" \
+            "Recording" "${description}"
 }
 
 echoError() {

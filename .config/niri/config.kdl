@@ -4,7 +4,7 @@ spawn-at-startup "fnott"
 spawn-at-startup "mpd"
 spawn-at-startup "swayidle"
 spawn-at-startup "waybar"
-spawn-at-startup "wbg" "--stretch" "/home/josh/.local/share/backgrounds/wallpaper.png"
+spawn-at-startup "wbg" "--stretch" "/home/josh/.local/share/assets/backgrounds/wallpaper.png"
 
 spawn-at-startup "foot" "update"
 spawn-at-startup "foot" "music"
@@ -88,19 +88,19 @@ binds {
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
     Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
-    F1 allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    Shift+F1 allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    F2 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-" "--limit" "1.0"; }
-    Shift+F2 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "0.05-" "--limit" "1.0"; }
-    F3 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "--limit" "1.0"; }
-    Shift+F3 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "0.05+" "--limit" "1.0"; }
+    F1 allow-when-locked=true { spawn "volume" "sink" "toggle"; }
+    Shift+F1 allow-when-locked=true { spawn "volume" "source" "toggle"; }
+    F2 allow-when-locked=true { spawn "volume" "sink" "down"; }
+    Shift+F2 allow-when-locked=true { spawn "volume" "source" "down"; }
+    F3 allow-when-locked=true { spawn "volume" "sink" "up"; }
+    Shift+F3 allow-when-locked=true { spawn "volume" "source" "up"; }
     F4 { spawn "record" "full"; }
     Shift+F4 { spawn "record" "select"; }
     F5 allow-when-locked=true {spawn "mpc" "prev"; }
     F6 allow-when-locked=true {spawn "mpc" "toggle"; }
     F7 allow-when-locked=true {spawn "mpc" "next"; }
-    F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
-    F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
+    F8 allow-when-locked=true { spawn "brightness" "down"; }
+    F9 allow-when-locked=true { spawn "brightness" "up"; }
     F12 { screenshot-screen; }
     Shift+F12 { screenshot; }
 

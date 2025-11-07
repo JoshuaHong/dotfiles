@@ -78,13 +78,15 @@ toggle() {
 }
 
 connectRandom() {
-    local -r randomConfiguration="$(ls ${CONFIGURATION_PATH}/ | shuf --head-count=1)"
+    local -r randomConfiguration="$(ls ${CONFIGURATION_PATH}/ \
+        | shuf --head-count=1)"
     wg-quick up "${CONFIGURATION_PATH}/${randomConfiguration}"
 }
 
 connectRegion() {
     local -r region="${1}"
-    local -r randomConfiguration="$(ls ${CONFIGURATION_PATH}/wg-${region}-* | shuf --head-count=1)"
+    local -r randomConfiguration="$(ls ${CONFIGURATION_PATH}/wg-${region}-* \
+        | shuf --head-count=1)"
     wg-quick up "${CONFIGURATION_PATH}/${randomConfiguration}"
 }
 
