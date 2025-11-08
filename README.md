@@ -205,7 +205,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 38
+Count: 40
 
 | Package<br>(Dependency)                                   | Justification                                                                                                          |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -219,6 +219,7 @@ Count: 38
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                                     |
 | envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                                    |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                      |
+| ffmpeg-compat-55 \* \*\*                                  | To play MP4 videos on Mullvad Browser by adding AAC codec support.                                                     |
 | fnott                                                     | To display notifications.                                                                                              |
 | foot                                                      | To use the terminal.                                                                                                   |
 | fuzzel                                                    | To launch Wayland applications.                                                                                        |
@@ -238,7 +239,8 @@ Count: 38
 | nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                            |
 | openssh                                                   | To remote login with SSH.                                                                                              |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                       |
-| pipewire-pulse                                            | To enable audio on the Mullvad Browser.                                                                                |
+| pass                                                      | To manage passwords.                                                                                                   |
+| pipewire-pulse \*\*                                       | To enable audio on the Mullvad Browser.                                                                                |
 | swayidle                                                  | To manage idle events.                                                                                                 |
 | swaylock                                                  | To lock the screen.                                                                                                    |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
@@ -249,3 +251,4 @@ Count: 38
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                                    |
 
 \* AUR package
+\*\* Custom build package
