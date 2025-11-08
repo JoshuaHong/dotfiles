@@ -207,48 +207,48 @@ List all packages that are not direct dependencies (includes optional dependenci
 
 Count: 40
 
-| Package<br>(Dependency)                                   | Justification                                                                                                          |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| amd-ucode                                                 | To update the firmware for system stability.                                                                           |
-| base                                                      | To provide minimal required tools for a basic installation system.                                                     |
-| base-devel                                                | To provide basic tools to build AUR packages.                                                                          |
-| bash-completion                                           | To add auto-completion to Bash.                                                                                        |
-| bluez                                                     | To enable Bluetooth.                                                                                                   |
-| bluez-utils                                               | To manage Bluetooth devices.                                                                                           |
-| brightnessctl                                             | To control the backlight brightness and automatically save the brightness on reboot.                                   |
-| efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                                     |
-| envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                                    |
-| fcitx5-hangul                                             | To enable Korean language inputs.                                                                                      |
-| ffmpeg-compat-55 \* \*\*                                  | To play MP4 videos on Mullvad Browser by adding AAC codec support.                                                     |
-| fnott                                                     | To display notifications.                                                                                              |
-| foot                                                      | To use the terminal.                                                                                                   |
-| fuzzel                                                    | To launch Wayland applications.                                                                                        |
-| imv                                                       | To view Wayland images.                                                                                                |
-| iwd                                                       | To manage networking without a full network manager.                                                                   |
-| linux-firmware                                            | To provide functionality for hardware devices.                                                                         |
-| libnotify                                                 | To send notifications.                                                                                                 |
-| man-db                                                    | To read manual pages.                                                                                                  |
-| mpc                                                       | To control music.                                                                                                      |
-| mpd                                                       | To play music.                                                                                                         |
-| mpv                                                       | To watch videos.                                                                                                       |
-| mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To use audio with the newest standards.) |
-| neovim                                                    | To edit text.                                                                                                          |
-| niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                                  |
-| noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                        |
-| noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                      |
-| nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                            |
-| openssh                                                   | To remote login with SSH.                                                                                              |
-| pacman-contrib                                            | To use tools for Pacman systems.                                                                                       |
-| pass                                                      | To manage passwords.                                                                                                   |
-| pipewire-pulse \*\*                                       | To enable audio on the Mullvad Browser.                                                                                |
-| swayidle                                                  | To manage idle events.                                                                                                 |
-| swaylock                                                  | To lock the screen.                                                                                                    |
-| ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                              |
-| waybar                                                    | To provide the Wayland bar.                                                                                            |
-| wbg \*                                                    | To display the background image.                                                                                       |
-| wf-recorder                                               | To record the screen.                                                                                                  |
-| yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                           |
-| zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                                    |
+| Package<br>(Dependency)                                   | Justification                                                                                                    |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| amd-ucode                                                 | To update the firmware for system stability.                                                                     |
+| base                                                      | To provide minimal required tools for a basic installation system.                                               |
+| base-devel                                                | To provide basic tools to build AUR packages.                                                                    |
+| bash-completion                                           | To add auto-completion to Bash.                                                                                  |
+| bluez                                                     | To enable Bluetooth.                                                                                             |
+| bluez-utils                                               | To manage Bluetooth devices.                                                                                     |
+| brightnessctl                                             | To control the backlight brightness and automatically save the brightness on reboot.                             |
+| efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
+| envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
+| fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |
+| ffmpeg4.4 \*\*                                            | To play MP4 videos on Mullvad Browser.                                                                           |
+| fnott                                                     | To display notifications.                                                                                        |
+| foot                                                      | To use the terminal.                                                                                             |
+| fuzzel                                                    | To launch Wayland applications.                                                                                  |
+| imv                                                       | To view Wayland images.                                                                                          |
+| iwd                                                       | To manage networking without a full network manager.                                                             |
+| libnotify                                                 | To send notifications.                                                                                           |
+| linux-firmware                                            | To provide functionality for hardware devices.                                                                   |
+| man-db                                                    | To read manual pages.                                                                                            |
+| mpc                                                       | To control music.                                                                                                |
+| mpd                                                       | To play music.                                                                                                   |
+| mpv                                                       | To watch videos.                                                                                                 |
+| mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To process audio with simplicity.) |
+| neovim                                                    | To edit text.                                                                                                    |
+| niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
+| noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
+| noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |
+| nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                      |
+| pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
+| pass                                                      | To manage passwords.                                                                                             |
+| pipewire-pulse \*\*                                       | To enable audio on the Mullvad Browser.                                                                          |
+| slurp                                                     | To select a region for screen capture.                                                                           |
+| swayidle                                                  | To manage idle events.                                                                                           |
+| swaylock                                                  | To lock the screen.                                                                                              |
+| ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
+| waybar                                                    | To provide the Wayland bar.                                                                                      |
+| wbg \*                                                    | To display the background image.                                                                                 |
+| wf-recorder                                               | To record the screen.                                                                                            |
+| yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                     |
+| zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                              |
 
-\* AUR package
+\* AUR package \
 \*\* Custom build package
