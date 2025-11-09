@@ -216,7 +216,7 @@ Count: 40
 | bash-completion                                           | To add auto-completion to Bash.                                                                                  |
 | bluez                                                     | To enable Bluetooth.                                                                                             |
 | bluez-utils                                               | To manage Bluetooth devices.                                                                                     |
-| brightnessctl                                             | To control the backlight brightness and automatically save the brightness on reboot.                             |
+| brightnessctl                                             | To control the backlight brightness and save the brightness on reboot.                                           |
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
 | envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |

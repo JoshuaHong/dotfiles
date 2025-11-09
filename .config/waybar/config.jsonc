@@ -25,9 +25,8 @@
         "idle_inhibitor"
     ],
     "mpd": {
-        "format": "󰝚  {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) {stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
-        "format-disconnected": "",
-        "format-stopped": "",
+        "format": "󰝚  {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%T}) {stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
+        "format-stopped": "󰝛  Artist - Title (00:00/00:00:00) 󰓛",
         "interval": 10,
         "consume-icons": {
             "on": " 󰆐"
