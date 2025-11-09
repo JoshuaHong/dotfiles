@@ -1,6 +1,7 @@
 <div align = center>
 
 # Dotfiles
+![Screenshot](https://github.com/user-attachments/assets/7e258b63-0800-40b9-9cdb-f591f4c4260b)
 The Arch Linux environment.
 </div>
 
