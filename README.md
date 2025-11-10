@@ -206,7 +206,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 40
+Count: 41
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -240,7 +240,7 @@ Count: 40
 | nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
-| pipewire-pulse \*\*                                       | To enable audio on the Mullvad Browser.                                                                          |
+| pipewire-pulse \*\*                                       | To enable audio on Mullvad Browser.                                                                              |
 | slurp                                                     | To select a region for screen capture.                                                                           |
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
@@ -248,6 +248,7 @@ Count: 40
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
 | wf-recorder                                               | To record the screen.                                                                                            |
+| wl-clipboard                                              | To manage copying to the clipboard.                                                                              |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                     |
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                              |
 
