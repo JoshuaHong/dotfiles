@@ -86,6 +86,7 @@ binds {
     Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
     Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
+    Mod+P hotkey-overlay-title="Copy a password" { spawn "password"; }
     Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
     F1 allow-when-locked=true { spawn "volume" "sink" "toggle"; }
