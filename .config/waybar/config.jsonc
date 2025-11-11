@@ -6,13 +6,13 @@
     "spacing": 4,
     "modules-left": [
         "niri/workspaces",
-        "mpd"
+        "mpd",
+        "privacy"
     ],
     "modules-center": [
         "niri/window"
     ],
     "modules-right": [
-        "privacy",
         "bluetooth",
         "wireplumber",
         "wireplumber#source",
