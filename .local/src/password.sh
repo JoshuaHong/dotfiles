@@ -11,11 +11,11 @@
 main() {
     local -r password="$(selectPassword)"
 
-    if $(hasCachedPassword); then
-        pass show --clip "${password}"
-    else
-        foot pass show --clip "${password}"
+    if ! hasCachedPassword; then
+        enterPassword "${password}"
     fi
+
+    pass show --clip "${password}"
 }
 
 selectPassword() {
@@ -33,6 +33,11 @@ parsePasswords() {
 
 hasCachedPassword() {
     echo "test" | gpg --pinentry-mode error --sign -o /dev/null
+}
+
+enterPassword() {
+    local -r password="${1}"
+    foot pass show "${password}"
 }
 
 main "${@}"
