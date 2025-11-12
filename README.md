@@ -152,10 +152,10 @@ The Arch Linux environment.
 ### Configure pacman
 * Install pacman-contrib: <code>pacman -S pacman-contrib</code>
 * Update the pacman configuration file: <code>[/etc/pacman.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pacman.conf)</code>
-* Back up the mirrorlist: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup</code>
-* Uncomment every mirror: <code>sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup</code>
-* Rank the mirrors: <code>rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist</code>
 * Create the mirrors hook: <code>[/etc/pacman.d/hooks/mirrorupgrade.hook](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/pacman.d/hooks/mirrorupgrade.hook)</code>
+* Back up the mirrorlist: <code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew</code>
+* Rank the mirrors: <code>pacman -S pacman-mirrorlist</code>
+    > 📝 **Note**: The program should be reinstalled to trigger the hook and rank the mirrors.
 * Update the makepkg configuration file: <code>[/etc/makepkg.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/makepkg.conf)</code>
 
 ### Login as a user
