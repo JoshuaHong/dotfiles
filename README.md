@@ -56,8 +56,8 @@ The Arch Linux environment.
         > ⚠️ **Warning**: This will wipe out the entire drive.
     * Create a new empty GPT partition table
         > 📝 **Note**: GPT is the latest and recommended standard allowing more partitions and handles larger disk sizes.
-    * Create a 550M EFI System
-        > 📝 **Note**: The author of gdisk suggests 550M.
+    * Create a 1G EFI System
+        > 📝 **Note**: The author of gdisk suggests 550M, so 1G should be sufficient.
     * Create a RAMx2GB Linux Swap
         > 📝 **Note**: The rule of thumb is 2xRAM for hibernation.
     * Create a 30G Linux root (x86-64)
