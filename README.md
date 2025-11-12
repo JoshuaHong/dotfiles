@@ -172,18 +172,20 @@ The Arch Linux environment.
 
 ### Install the remaining packages
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
-* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/</code>
+* Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/ && cd</code>
 * Install all the packages below
 * Enable requierd services: <code>systemctl enable --now bluetooth.service</code>
 
 ### Import GPG keys
+* Remove the previous gnupg home: <code>rm -rf .gnupg/</code>
 * Create the gnupg home: <code>mkdir -m 700 ~/.local/share/gnupg/</code>
     > 📝 **Note**: Specific file permissions are needed for the gpg warning: "WARNING: unsafe permissions on homedir".
 * Temporarily set the GnuPG home: <code>export GNUPGHOME=~/.local/share/gnupg</code>
 * Import the public key: <code>gpg --import <code><var>PUBLIC</var></code>.key</code>
 * Import the secret key: <code>gpg --import <code><var>SECRET</var></code>.key</code>
 * Import the trust: <code>gpg --import-ownertrust <code><var>TRSUT</var></code>.txt</code>
-* Import the revocation certificate: <code>gpg --import <code><var>REVOKE</var></code>.key</code>
+* Import passwords: <code>cp pass/ ~/.local/share/</code>
+    > 💡 **Tip**: The above should all be imported from an external backup source.
 
 ### Reboot
 * Unset the bash history file path: <code>unset HISTFILE</code>
