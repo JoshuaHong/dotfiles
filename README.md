@@ -184,8 +184,11 @@ The Arch Linux environment.
 * Import the public key: <code>gpg --import <code><var>PUBLIC</var></code>.key</code>
 * Import the secret key: <code>gpg --import <code><var>SECRET</var></code>.key</code>
 * Import the trust: <code>gpg --import-ownertrust <code><var>TRSUT</var></code>.txt</code>
+    > 💡 **Tip**: These keys should all be imported from an external backup source.
+* Enable the GPG subkey for SSH authentication: <code>echo <code><var>KEYGRIP</var></code> >> ~/.local/share/gnupg/sshcontrol</code>
+    > 💡 **Tip**: The keygrip can be found by running: <code>gpg --list-keys --with-keygrip</code>
 * Import passwords: <code>cp pass/ ~/.local/share/</code>
-    > 💡 **Tip**: The above should all be imported from an external backup source.
+    > 💡 **Tip**: These passwords should all be GPG encrypted and imported from an external backup source.
 
 ### Reboot
 * Unset the bash history file path: <code>unset HISTFILE</code>
