@@ -1,0 +1,17 @@
+# The Newsboat urls file.
+#
+# To add a new YouTube entry, view page source and search for the HTML link with
+#     type="application/rss+xml".
+
+YouTube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCr3cBLTYmIK9kY0F_OdFWFQ "~Casually Explained" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCRijo3ddMTht_IHyNSNXpNQ "~Dude Perfect" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCAlxwHEm1bWWYoe5VCSQYEg "~EroldStory" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "~Mental Outlaw" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCeiYXex_fwgYDonaTcSIk6w "~MinuteEarth" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCA0g3liRXdpqyhxiQiE55tA "~MinuteFood" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUHW94eEFW7hkUMVaZz4eDg "~minutephysics" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC6MFZAOHXlKK1FI7V0XQVeA "~ProZD" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC4G10tk3AHFuyMIuD3rHOBA "~RDCworld1" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUKi4zY5ETSqrKAjTBgjM-g "~Swoozie" youtube
