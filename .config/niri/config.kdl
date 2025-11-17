@@ -87,7 +87,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     Mod+E { fullscreen-window; }
     Mod+W { toggle-column-tabbed-display; }
-    Mod+M { center-column; }
+    Mod+C { center-column; }
     Mod+R { expand-column-to-available-width; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
     Mod+Shift+Space { toggle-window-floating; }
@@ -97,7 +97,8 @@ binds {
     Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
     Mod+P hotkey-overlay-title="Copy a password" { spawn "password"; }
-    Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat"; }
+    Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat" "--refresh-on-start"; }
+    Mod+M hotkey-overlay-title="Read mail" { spawn "foot" "aerc"; }
     Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
     F1 allow-when-locked=true { spawn "volume" "sink" "toggle"; }
@@ -111,8 +112,8 @@ binds {
     F5 allow-when-locked=true {spawn "mpc" "prev"; }
     F6 allow-when-locked=true {spawn "mpc" "toggle"; }
     F7 allow-when-locked=true {spawn "mpc" "next"; }
-    F8 allow-when-locked=true { spawn "brightness" "down"; }
-    F9 allow-when-locked=true { spawn "brightness" "up"; }
+    F8 { spawn "brightness" "down"; }
+    F9 { spawn "brightness" "up"; }
     F12 { screenshot-screen; }
     Shift+F12 { screenshot; }
 
