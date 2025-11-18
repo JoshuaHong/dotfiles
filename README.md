@@ -212,16 +212,18 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 41
+Count: 44
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| aerc                                                      | To read mail.                                                                                                    |
 | amd-ucode                                                 | To update the firmware for system stability.                                                                     |
 | base                                                      | To provide minimal required tools for a basic installation system.                                               |
 | base-devel                                                | To provide basic tools to build AUR packages.                                                                    |
 | bash-completion                                           | To add auto-completion to Bash.                                                                                  |
 | bluez                                                     | To enable Bluetooth.                                                                                             |
 | bluez-utils                                               | To manage Bluetooth devices.                                                                                     |
+| brave-bin \*                                              | To browse the web with privacy.                                                                                  |
 | brightnessctl                                             | To control the backlight brightness and save the brightness on reboot.                                           |
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
 | envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
@@ -240,6 +242,7 @@ Count: 41
 | mpv                                                       | To watch videos.                                                                                                 |
 | mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To process audio with simplicity.) |
 | neovim                                                    | To edit text.                                                                                                    |
+| newsboat                                                  | To read news.                                                                                                    |
 | niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
 | noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |

@@ -93,10 +93,13 @@ binds {
     Mod+Shift+Space { toggle-window-floating; }
 
     Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
-    Mod+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser"; }
-    Mod+Shift+I hotkey-overlay-title="Open the browser" { spawn "mullvad-browser" "--private-window"; }
+    Mod+I hotkey-overlay-title="Open the Mullvad browser" { spawn "mullvad-browser"; }
+    Mod+Shift+I hotkey-overlay-title="Open the Mullvad browser in private mode" { spawn "mullvad-browser" "--private-window"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
     Mod+P hotkey-overlay-title="Copy a password" { spawn "password"; }
+    Mod+B hotkey-overlay-title="Open the Brave browser" { spawn "brave"; }
+    Mod+Shift+B hotkey-overlay-title="Open the Brave browser in private mode" { spawn "brave" "--incognito"; }
+    Mod+T hotkey-overlay-title="Open the Brave browser in Tor" { spawn "brave" "--tor"; }
     Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat" "--refresh-on-start"; }
     Mod+M hotkey-overlay-title="Read mail" { spawn "foot" "aerc"; }
     Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
