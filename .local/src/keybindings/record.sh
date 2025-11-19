@@ -46,8 +46,9 @@ stopRecording() {
 }
 
 recordFullScreen() {
+    local -r output="$(selectOutput)"
     notify "Full screen recording started."
-    wf-recorder --audio="${AUDIO_DEVICE}" \
+    wf-recorder --audio="${AUDIO_DEVICE}" --output="${output}" \
             -f "${HOME}/$(date --iso-8601="seconds").mkv"
     notify "Screen recording saved."
 }
@@ -58,6 +59,11 @@ recordPartialScreen() {
     wf-recorder --audio="${AUDIO_DEVICE}" --geometry "${region}" \
             -f "${HOME}/$(date --iso-8601="seconds").mkv"
     notify "Screen recording saved."
+}
+
+selectOutput() {
+    local -r output="$(wf-recorder --list-output | fuzzel --dmenu)"
+    echo "${output##* }"
 }
 
 notify() {
