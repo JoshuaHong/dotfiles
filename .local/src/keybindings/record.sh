@@ -16,8 +16,8 @@
 #     select - Record a selection of the screen.
 
 # Select the audio device from: `pactl list sources | grep Name`
-declare -a AUDIO_DEVICE="alsa_output.pci-0000_c5_00.6.HiFi__Speaker__sink.monitor"
-declare -a ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
+declare -gr AUDIO_DEVICE="alsa_output.pci-0000_c5_00.6.HiFi__Speaker__sink.monitor"
+declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
 
 main() {
     local -r operation="${1}"

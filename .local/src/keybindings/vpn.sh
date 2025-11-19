@@ -18,8 +18,8 @@
 #     REGION        - The region to which to connect using a random server.
 #                         One of: [JP | NL | US].
 
-declare -a CONFIGURATION_PATH="/etc/wireguard"
-declare -ar REGIONS=("JP" "NL" "US")
+declare -gr CONFIGURATION_PATH="/etc/wireguard"
+declare -agr REGIONS=("JP" "NL" "US")
 
 main() {
     local -r operation="${1}"

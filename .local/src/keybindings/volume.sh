@@ -15,7 +15,7 @@
 #     down   - Lower the volume.
 #     toggle - Toggle the volume mute.
 
-declare -a ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
+declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
 
 main() {
     local -r node="${1}"

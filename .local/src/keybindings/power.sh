@@ -8,7 +8,7 @@
 # Usage:
 #     power
 
-declare -ar OPTIONS=("exit" "reboot" "poweroff" "suspend" "hybrid-sleep" "hibernate")
+declare -agr OPTIONS=("exit" "reboot" "poweroff" "suspend" "hybrid-sleep" "hibernate")
 
 main() {
     local -r option="$(selectOption)"

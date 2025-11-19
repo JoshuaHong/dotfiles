@@ -174,7 +174,8 @@ The Arch Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/ && cd</code>
 * Install all the packages below
-* Enable requierd services: <code>systemctl enable --now bluetooth.service</code>
+* Enable requierd services: <code>systemctl enable --now bluetooth.service cronie.service</code>
+* Update the crontab: <code>[crontab -e](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/crontab)</code>
 
 ### Import GPG keys
 * Remove the previous gnupg home: <code>rm -rf .gnupg/</code>
@@ -212,7 +213,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 44
+Count: 46
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -225,8 +226,10 @@ Count: 44
 | bluez-utils                                               | To manage Bluetooth devices.                                                                                     |
 | brave-bin \*                                              | To browse the web with privacy.                                                                                  |
 | brightnessctl                                             | To control the backlight brightness and save the brightness on reboot.                                           |
+| cronie                                                    | To manage cron jobs.                                                                                             |
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
-| envycontrol \*                                            | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
+| entr                                                      | To run commands when files change.                                                                               |
+| envycontrol \* \*\*                                       | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |
 | ffmpeg4.4 \*\*                                            | To play MP4 videos on Mullvad Browser.                                                                           |
 | fnott                                                     | To display notifications.                                                                                        |
@@ -246,7 +249,7 @@ Count: 44
 | niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
 | noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |
-| nvidia-open                                               | To enable the NVIDIA graphics card drivers.                                                                      |
+| nvidia-open \*\*                                          | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
 | pipewire-pulse \*\*                                       | To enable audio on Mullvad Browser.                                                                              |

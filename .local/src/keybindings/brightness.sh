@@ -12,7 +12,7 @@
 #     up     - Raise the brightness.
 #     down   - Lower the brightness.
 
-declare -a ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
+declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
 
 main() {
     local -r action="${1}"
