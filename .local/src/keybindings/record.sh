@@ -62,7 +62,7 @@ recordPartialScreen() {
 }
 
 selectOutput() {
-    local -r output="$(wf-recorder --list-output | fuzzel --dmenu)"
+    local -r output="$(wf-recorder --list-output | fuzzel --dmenu --width 75)"
     echo "${output##* }"
 }
 
