@@ -231,7 +231,6 @@ Count: 46
 | entr                                                      | To run commands when files change.                                                                               |
 | envycontrol \* \*\*                                       | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |
-| ffmpeg4.4 \*\*                                            | To play MP4 videos on Mullvad Browser.                                                                           |
 | fnott                                                     | To display notifications.                                                                                        |
 | foot                                                      | To use the terminal.                                                                                             |
 | fuzzel                                                    | To launch Wayland applications.                                                                                  |
