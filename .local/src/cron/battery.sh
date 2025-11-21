@@ -38,7 +38,7 @@ notify() {
     notify-send --hint="string:x-canonical-private-synchronous:battery" \
         --icon="${ICONS_DIRECTORY}/battery-${icon}.svg" \
         --urgency="${urgency}" \
-	"${title}" "$(getBattery)% remaining."
+    "${title}" "$(getBattery)% remaining."
 }
 
 main "${@}"
