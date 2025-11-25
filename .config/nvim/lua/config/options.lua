@@ -1,7 +1,5 @@
 -- Neovim options.
 
--- Set the colorscheme.
--- vim.cmd.colorscheme "catppuccin"
 -- Set the leader key.
 vim.g.mapleader = " "
 -- Set the local leader key.
