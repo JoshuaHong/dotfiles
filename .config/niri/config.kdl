@@ -102,7 +102,7 @@ binds {
     Mod+T hotkey-overlay-title="Open the Brave browser in Tor" { spawn "brave" "--tor"; }
     Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat" "--refresh-on-start"; }
     Mod+M hotkey-overlay-title="Read mail" { spawn "foot" "aerc"; }
-    Alt+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
+    Ctrl+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
     F1 allow-when-locked=true { spawn "volume" "sink" "toggle"; }
     Shift+F1 allow-when-locked=true { spawn "volume" "source" "toggle"; }
