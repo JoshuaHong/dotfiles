@@ -213,7 +213,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 45
+Count: 47
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -252,9 +252,11 @@ Count: 45
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
 | pipewire-pulse \*\*                                       | To enable audio on Mullvad Browser.                                                                              |
+| rtorrent                                                  | To download torrents.                                                                                            |
 | slurp                                                     | To select a region for screen capture.                                                                           |
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
+| tmux                                                      | To enable session persistence.                                                                                   |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
