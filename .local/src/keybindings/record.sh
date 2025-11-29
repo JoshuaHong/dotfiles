@@ -47,6 +47,9 @@ stopRecording() {
 
 recordFullScreen() {
     local -r output="$(selectOutput)"
+    if [[ ! ${output} ]]; then
+        exit
+    fi
     notify "Full screen recording started."
     wf-recorder --audio="${AUDIO_DEVICE}" --output="${output}" \
             -f "${HOME}/$(date --iso-8601="seconds").mkv"
@@ -62,7 +65,8 @@ recordPartialScreen() {
 }
 
 selectOutput() {
-    local -r output="$(wf-recorder --list-output | fuzzel --dmenu --width 75)"
+    local -r output="$(wf-recorder --list-output \
+            | fuzzel --auto-select --dmenu --width 75)"
     echo "${output##* }"
 }
 
