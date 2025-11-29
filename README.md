@@ -18,6 +18,8 @@ The Arch Linux environment.
     > A fast and minimal Wayland terminal emulator.
 * Web browser: [Mullvad Browser](https://mullvad.net/en/browser)
     > A privacy-focused web browser.
+* Color scheme: [Catppuccin](https://github.com/catppuccin)
+    > A soothing pastel theme.
 
 <br>
 
