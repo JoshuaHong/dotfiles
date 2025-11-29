@@ -9,7 +9,7 @@
 #     lock
 
 main() {
-    playerctl --no-messages pause
+    playerctl --all-players --no-messages stop
     mpc pause
     swaylock --image "${XDG_DATA_HOME}/assets/backgrounds/lockscreen.png"
 }
