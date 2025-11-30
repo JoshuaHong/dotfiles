@@ -215,11 +215,10 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 47
+Count: 46
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| aerc                                                      | To read mail.                                                                                                    |
 | amd-ucode                                                 | To update the firmware for system stability.                                                                     |
 | base                                                      | To provide minimal required tools for a basic installation system.                                               |
 | base-devel                                                | To provide basic tools to build AUR packages.                                                                    |

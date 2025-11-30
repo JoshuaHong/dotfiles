@@ -87,7 +87,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     Mod+E { fullscreen-window; }
     Mod+W { toggle-column-tabbed-display; }
-    Mod+C { center-column; }
+    Mod+M { center-column; }
     Mod+R { expand-column-to-available-width; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
     Mod+Shift+Space { toggle-window-floating; }
@@ -101,7 +101,6 @@ binds {
     Mod+Shift+B hotkey-overlay-title="Open the Brave browser in private mode" { spawn "brave" "--incognito"; }
     Mod+T hotkey-overlay-title="Open the Brave browser in Tor" { spawn "brave" "--tor"; }
     Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat" "--refresh-on-start"; }
-    Mod+M hotkey-overlay-title="Read mail" { spawn "foot" "aerc"; }
     Ctrl+Space hotkey-overlay-title="Switch the language" { spawn "language"; }
 
     F1 allow-when-locked=true { spawn "volume" "sink" "toggle"; }
