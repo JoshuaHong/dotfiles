@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # Notify on low battery.
+#
+# Usage:
+#     battery.sh
 
 declare -gr BATTERY_DIRECTORY="/sys/class/power_supply/BAT0"
 declare -gr CAPACITY_FILE="${BATTERY_DIRECTORY}/capacity"
