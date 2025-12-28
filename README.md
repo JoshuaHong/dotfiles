@@ -223,7 +223,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 46
+Count: 47
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -272,6 +272,7 @@ Count: 46
 | wf-recorder                                               | To record the screen.                                                                                            |
 | wl-clipboard                                              | To manage copying to the clipboard.                                                                              |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                     |
+| yt-dlp                                                    | To download YouTube videos.                                                                                      |
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                              |
 
 \* AUR package \
