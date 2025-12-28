@@ -1,5 +1,13 @@
 # Below are explicit changes to be made to the configuration file.
 # The rest of the options should not be modified.
 
-# Disable root login
+# Disable root login.
 PermitRootLogin no
+
+# Enable SFTP.
+Match group sshusers
+    ChrootDirectory %h
+    X11Forwarding no
+    AllowTcpForwarding no
+    PasswordAuthentication yes
+    ForceCommand internal-sftp -d /sftp

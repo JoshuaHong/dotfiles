@@ -193,6 +193,14 @@ The Arch Linux environment.
 * Import passwords: <code>cp pass/ ~/.local/share/</code>
     > 💡 **Tip**: These passwords should all be GPG encrypted and imported from an external backup source.
 
+### Set up the SFTP server
+* Create the directory: <code>sudo mkdir --parents /var/lib/jail/sftp</code>
+* Create the user: <code>sudo useradd -g sshusers -d /var/lib/jail sftp</code>
+* Set the password: <code>sudo passwd sftp</code>
+* Change the ownership: <code>sudo chown :sshusers /var/lib/jail/sftp</code>
+* Change the permissions: <code>sudo chmod 770 /var/lib/jail/sftp</code>
+* Enable the service: <code>sudo systemctl enable --now sshd.service</code>
+
 ### Reboot
 * Unset the bash history file path: <code>unset HISTFILE</code>
     > 📝 **Note**: Avoids creating a new bash history file in the home directory.
