@@ -13,8 +13,9 @@ declare -gr MEDIA_DIRECTORY="/home/josh/storage/media/photos"
 declare -gr RECEIPTS_DIRECTORY="/home/josh/storage/finance/receipts"
 
 main() {
-    sudo chown josh:josh "${SFTP_DIRECTORY}"/*
+    isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
 
+    sudo chown josh:josh "${SFTP_DIRECTORY}"/*
     for file in "${SFTP_DIRECTORY}"/*; do
         if ! isValidFile "${file}"; then
             echoError "Error: Invalid file: ${file}."
@@ -115,6 +116,11 @@ isYesNoVariableSet() {
 isVariableSet() {
     local -r variable="${1}"
     [[ -n "${1}" ]]
+}
+
+isEmptyDirectory() {
+    local -r directory="${1}"
+    [[ -z "$(ls -A "${directory}")" ]]
 }
 
 echoError() {
