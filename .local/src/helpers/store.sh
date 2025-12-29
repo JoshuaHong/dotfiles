@@ -13,6 +13,10 @@ main() {
     sudo chown josh:josh "${SFTP_DIRECTORY}"/*
 
     for file in "${SFTP_DIRECTORY}"/*; do
+        if ! isValidFile "${file}"; then
+            echoError "Error: Invalid file: ${file}."
+            continue
+        fi
         viewFile "${file}" &
         addDescription "${file}"
         moveToStorage "${file}"
@@ -64,10 +68,24 @@ getDirectory() {
 
 getSubDirectory() {
     local -r file="${1}"
+    name="${file#*_}"  # Remove the first underscore and everything before it.
 
-    name="${file#*_}"
-    name="${name%%_*}"
+    # Add a slash between dates to get YYYY/mm/dd format and omit the rest.
     echo "${name:0:4}"/"${name:4:2}"/"${name:6:2}"
+}
+
+isValidFile() {
+    local -r file="${1}"
+    local -r subDirectory="$(getSubDirectory "${file}")"
+
+    isValidDate "${subDirectory}" && (isPhoto "${file}" || isVideo "${file}")
+}
+
+isValidDate() {
+    local -r subDirectory="${1}"
+    # Check that the date is in YYYY/mm/dd format and is an actual calendar day.
+    [[ "${subDirectory}" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]] && \
+            date -d "${subDirectory}" "+%Y/%m/%d" > /dev/null 2>&1
 }
 
 isPhoto() {
