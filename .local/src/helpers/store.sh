@@ -2,6 +2,9 @@
 #
 # Store files from SFTP to storage.
 #
+# Files must be valid images or videos in the following format: *_YYYYmmdd*
+# For example: IMG_20251229_foo_bar.png or Screencast_20251229_1.mp4.
+#
 # Usage:
 #     store
 
