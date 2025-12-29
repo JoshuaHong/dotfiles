@@ -102,14 +102,14 @@ isVideo() {
     file --brief --mime "$file" | grep --extended-regexp --quiet "video"
 }
 
-isYesNoVariableSet() {
-    local -r isReceipt="${1}"
-    [[ "${isReceipt}" == "y" || "${isReceipt}" == "n" ]]
-}
-
 isReceipt() {
     local -r isReceipt="${1}"
     [[ "${isReceipt}" == "y" ]]
+}
+
+isYesNoVariableSet() {
+    local -r isReceipt="${1}"
+    [[ "${isReceipt}" == "y" || "${isReceipt}" == "n" ]]
 }
 
 isVariableSet() {
