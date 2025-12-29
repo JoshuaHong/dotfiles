@@ -21,23 +21,24 @@ main() {
     if isCompressedFile "${file}"; then
         extract "${file}"
     else
-        store "${file}"
+        archive "${file}"
     fi
 }
 
-store() {
-    local -r name="${1}"
+archive() {
+    local -r file="${1}"
+    local -r name="${file%/}"  # Remove trailing slash if exists.
 
     tar --create --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz \
             "${name}"
-    gpg --cipher-algo "AES256" --output "${name}.tar.xz.gpg" --symmetric \
-            "${name}.tar.xz"
+    gpg --cipher-algo "AES256" --digest-algo "SHA512" \
+            --output "${name}.tar.xz.gpg" --sign --symmetric "${name}.tar.xz"
     rm "${name}.tar.xz"
 }
 
 extract() {
     local -r file="${1}"
-    local -r name="${file%".tar.xz.gpg"}"
+    local -r name="${file%".tar.xz.gpg"}"  # Remove the file extension.
 
     gpg --decrypt --output "${name}.tar.xz" "${name}.tar.xz.gpg"
     tar --extract --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz
