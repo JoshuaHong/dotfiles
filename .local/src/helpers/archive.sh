@@ -27,7 +27,7 @@ main() {
 
 archive() {
     local -r file="${1}"
-    local -r name="${file%/}"  # Remove trailing slash if exists.
+    local -r name="${file%/}"  # Remove the trailing slash if it exists.
 
     tar --create --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz \
             "${name}"
