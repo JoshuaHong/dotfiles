@@ -198,7 +198,7 @@ The Arch Linux environment.
 * Create the user: <code>sudo useradd -g sshusers -d /var/lib/jail sftp</code>
 * Set the password: <code>sudo passwd sftp</code>
 * Change the ownership: <code>sudo chown :sshusers /var/lib/jail/sftp</code>
-* Change the permissions: <code>sudo chmod 770 /var/lib/jail/sftp</code>
+* Change the permissions: <code>sudo chmod 775 /var/lib/jail/sftp</code>
 * Enable the service: <code>sudo systemctl enable --now sshd.service</code>
 
 ### Reboot
