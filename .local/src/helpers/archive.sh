@@ -1,61 +1,53 @@
 #!/bin/bash
 #
-# Archive files.
+# Compress and encrypt or decrypt and decompress a file.
 #
 # Usage:
-#     archive [compress | extract] file
+#     archive file
 #
 # Arguments:
-#     compress - Archive the file.
-#     extract  - Unarchive the file.
+#     file  - The file to decrypt and decompress if it is properly compressed
+#             and encrypted and contains the ".tar.xz.gpg" file extension;
+#             the file to compress and encrypt otherwise.
 
 main() {
-    local -r action="${1}"
-    local -r file="${2}"
+    local -r file="${1}"
 
     if ! fileExists "${file}"; then
         echoError "Error: File does not exist."
         exit 1
     fi
 
-    if [[ "${action}" == "compress" ]]; then
-        compress "${file}"
-    elif [[ "${action}" == "extract" ]]; then
+    if isCompressedFile "${file}"; then
         extract "${file}"
     else
-        echoError "Error: Invalid operation."
-        exit 1
+        store "${file}"
     fi
 }
 
-compress() {
-    local -r file="${1}"
+store() {
+    local -r name="${1}"
 
-    tar --create --file="${file}.tar.xz" --xattrs --xattrs-include="*" --xz \
-            "${file}"
-    gpg --cipher-algo "AES256" --output "${file}.tar.xz.gpg" --symmetric \
-            "${file}.tar.xz"
-    rm "${file}.tar.xz"
+    tar --create --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz \
+            "${name}"
+    gpg --cipher-algo "AES256" --output "${name}.tar.xz.gpg" --symmetric \
+            "${name}.tar.xz"
+    rm "${name}.tar.xz"
 }
 
 extract() {
-    local file="${1}"
+    local -r file="${1}"
+    local -r name="${file%".tar.xz.gpg"}"
 
-    if ! isCompressedFile "${file}"; then
-        echoError "Error: Invalid file format."
-        exit 1
-    fi
-
-    file="${file%".tar.xz.gpg"}"
-    gpg --decrypt --output "${file}.tar.xz" "${file}.tar.xz.gpg"
-    tar --extract --file="${file}.tar.xz" --xattrs --xattrs-include="*" --xz
-    rm "${file}.tar.xz"
+    gpg --decrypt --output "${name}.tar.xz" "${name}.tar.xz.gpg"
+    tar --extract --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz
+    rm "${name}.tar.xz"
 }
 
 fileExists() {
     local -r file="${1}"
 
-    [[ -f "${file}" ]]
+    [[ -e "${file}" ]]
 }
 
 isCompressedFile() {
