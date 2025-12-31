@@ -2,7 +2,7 @@
 
 -- Set diagnostics.
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = true
 })
 -- Set the leader key.
 vim.g.mapleader = " "
@@ -28,5 +28,7 @@ vim.opt.shiftwidth = 4
 vim.opt.smartcase = true
 -- Set the number of columns a tab character uses.
 vim.opt.tabstop = 4
+-- Set the update time for the cursor hold event.
+vim.opt.updatetime = 250
 -- Set the floating window border.
 vim.opt.winborder = "rounded"
