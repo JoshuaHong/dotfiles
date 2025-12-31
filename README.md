@@ -223,7 +223,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies), consolidating specified package groups: <code>comm -23 <({ pacman -Qqtt; echo texlive; } | sort) <(pacman -Qqg texlive | sort)</code>
 
-Count: 48
+Count: 49
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -267,6 +267,7 @@ Count: 48
 | swaylock                                                  | To lock the screen.                                                                                              |
 | texlive \*\*                                              | To write LaTeX.                                                                                                  |
 | tmux                                                      | To enable session persistence.                                                                                   |
+| tree-sitter-cli                                           | To use nvim-treesitter.                                                                                          |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
