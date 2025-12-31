@@ -24,3 +24,5 @@ vim.opt.shiftwidth = 4
 vim.opt.smartcase = true
 -- Set the number of columns a tab character uses.
 vim.opt.tabstop = 4
+-- Set the floating window border.
+vim.opt.winborder = "rounded"

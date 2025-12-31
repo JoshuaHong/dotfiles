@@ -1,16 +1,7 @@
 -- The treesitter configuration file.
 
-function getTreesitterLanguages()
-    return "bash", "latex", "lua", "markdown", "markdown_inline"
-end
+require("config.helpers")
 
-return {{
-    'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    build = ':TSUpdate',
-    config = function()
-        require'nvim-treesitter'.install {
-            getTreesitterLanguages()
-        }
-    end,
-}}
+require('nvim-treesitter').install {
+    getTreesitterLanguages()
+}
