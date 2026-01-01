@@ -4,6 +4,7 @@ require("config.helpers")
 
 -- Update all plugins on startup.
 vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("Update plugins", { clear = true }),
     callback = function()
         vim.pack.update({}, {force = "true"})
         pcall(vim.cmd, 'TSUpdate')
@@ -12,6 +13,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Enable treesitter features for specified filetypes.
 vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup("Enable treesitter", { clear = true }),
     pattern = { getTreesitterLanguages() },
     callback = function()
         -- Enable highlighting.
@@ -23,6 +25,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Show diagnostics on hover.
 vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+    group = vim.api.nvim_create_augroup("Show diagnostics", { clear = true }),
     callback = function()
         vim.diagnostic.open_float({}, { focus = false })
     end
@@ -33,6 +36,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = { "*.tex" },
     group = vim.api.nvim_create_augroup("Compile LaTeX", { clear = true }),
     callback = function()
-        vim.fn.system("latexmk -pdf test.tex && latexmk -c test.tex")
+        local filename = vim.fn.expand("%")
+        vim.fn.system("latexmk -pdf " .. filename ..
+                " && latexmk -c " .. filename)
     end
 })
