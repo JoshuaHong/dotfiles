@@ -1,18 +1,12 @@
 -- Neovim helper functions.
 
--- Get the list of treesitter languages.
-function getTreesitterLanguages()
-    return
-        "bash",
-        "latex",
-        "lua",
-        "markdown",
-        "markdown_inline"
-end
+local helpers = {}
 
 -- Map vim commands.
-function map(mode, shortcut, command)
+function helpers.map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {
         noremap = true, silent = true
     })
 end
+
+return helpers

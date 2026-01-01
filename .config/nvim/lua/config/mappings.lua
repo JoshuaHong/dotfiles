@@ -1,38 +1,38 @@
 -- Neovim mappings.
 
-require("config.helpers")
+local helpers = require("config.helpers")
 
 -- Clear highlighting on escape.
-map("n", "<Esc>", "<Esc>:noh<CR>")
+helpers.map("n", "<Esc>", "<Esc>:noh<CR>")
 
 -- Map write and quit.
-map("n", "<Leader>w", ":update<CR>")
-map("n", "<Leader>q", ":quit<CR>")
-map("n", "<Leader>Q", ":quit!<CR>")
+helpers.map("n", "<Leader>w", ":update<CR>")
+helpers.map("n", "<Leader>q", ":quit<CR>")
+helpers.map("n", "<Leader>Q", ":quit!<CR>")
 
 -- Map movement keys.
-map("n", "j", "h")
-map("n", "k", "j")
-map("n", "l", "k")
-map("n", ";", "l")
-map("v", "j", "h")
-map("v", "k", "j")
-map("v", "l", "k")
-map("v", ";", "l")
+helpers.map("n", "j", "h")
+helpers.map("n", "k", "j")
+helpers.map("n", "l", "k")
+helpers.map("n", ";", "l")
+helpers.map("v", "j", "h")
+helpers.map("v", "k", "j")
+helpers.map("v", "l", "k")
+helpers.map("v", ";", "l")
 
 -- Don't override the clipboard on delete.
-map("n", "d", "\"1d")
-map("n", "D", "0\"1d$")
-map("n", "c", "\"1c")
-map("n", "C", "0\"1c$")
-map("n", "<Del>", "\"1d<Right>")
-map("v", "d", "\"1d")
-map("v", "D", "0\"1d$")
-map("v", "c", "\"1c")
-map("v", "C", "0\"1c$")
-map("v", "<Del>", "\"1d<Right>")
-map("x", "p", "\"_dP")
+helpers.map("n", "d", "\"1d")
+helpers.map("n", "D", "0\"1d$")
+helpers.map("n", "c", "\"1c")
+helpers.map("n", "C", "0\"1c$")
+helpers.map("n", "<Del>", "\"1d<Right>")
+helpers.map("v", "d", "\"1d")
+helpers.map("v", "D", "0\"1d$")
+helpers.map("v", "c", "\"1c")
+helpers.map("v", "C", "0\"1c$")
+helpers.map("v", "<Del>", "\"1d<Right>")
+helpers.map("x", "p", "\"_dP")
 
 -- Keep visual highlighting after shifting.
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+helpers.map("v", "<", "<gv")
+helpers.map("v", ">", ">gv")

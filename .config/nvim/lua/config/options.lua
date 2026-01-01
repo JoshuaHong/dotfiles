@@ -1,9 +1,7 @@
 -- Neovim options.
 
 -- Set diagnostics.
-vim.diagnostic.config({
-    virtual_text = true
-})
+vim.diagnostic.config({ virtual_text = true })
 -- Set the leader key.
 vim.g.mapleader = " "
 -- Set the local leader key.

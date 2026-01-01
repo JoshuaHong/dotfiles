@@ -1,7 +1,7 @@
 -- The treesitter configuration file.
 
-require("config.helpers")
+local constants = require("config.constants")
 
-require('nvim-treesitter').install {
-    getTreesitterLanguages()
-}
+require('nvim-treesitter').install(
+    constants.TREESITTER_LANGUAGES
+)
