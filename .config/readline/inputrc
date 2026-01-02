@@ -93,13 +93,13 @@ set visible-stats on
 $if mode=vi
     set keymap vi-command
     "i": vi-insertion-mode
-    "F": vi-append-mode
+    "A": vi-append-mode
     "a": beginning-of-line
-    "A": vi-insert-beg
-    "s": vi-prev-word
-    "d": vi-next-word
+    "I": vi-insert-beg
+    "b": vi-prev-word
+    "w": vi-next-word
     "f": end-of-line
-    "F": vi-append-eol
+    "A": vi-append-eol
     "j": backward-char
     "k": next-history
     "l": previous-history
