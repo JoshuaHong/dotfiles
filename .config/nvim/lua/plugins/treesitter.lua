@@ -2,6 +2,6 @@
 
 local constants = require("config.constants")
 
-require('nvim-treesitter').install(
+require("nvim-treesitter").install(
     constants.TREESITTER_LANGUAGES
 )

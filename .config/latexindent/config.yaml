@@ -1,0 +1,7 @@
+# The Latexindent configuration file.
+
+# Use spaces for indentation instead of tabs.
+defaultIndent: "    "
+modifyLineBreaks:
+    textWrapOptions:
+        columns: 80

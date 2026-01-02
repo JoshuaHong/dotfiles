@@ -3,7 +3,7 @@
 local constants = {}
 
 -- The list of treesitter languages.
-constants.TREESITTER_LANGUAGES  = {
+constants.TREESITTER_LANGUAGES = {
     "bash",
     "latex",
     "lua",

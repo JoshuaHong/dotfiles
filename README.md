@@ -223,7 +223,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies), consolidating specified package groups: <code>comm -23 <({ pacman -Qqtt; echo texlive; } | sort) <(pacman -Qqg texlive | sort)</code>
 
-Count: 49
+Count: 51
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -260,6 +260,8 @@ Count: 49
 | nvidia-open \*\*\*                                        | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
+| perl-file-homedir                                         | To use latexindent.                                                                                              |
+| perl-yaml-tiny                                            | To use latexindent.                                                                                              |
 | pipewire-pulse \*\*\*                                     | To enable audio on Mullvad Browser.                                                                              |
 | rtorrent                                                  | To download torrents.                                                                                            |
 | slurp                                                     | To select a region for screen capture.                                                                           |
