@@ -27,7 +27,7 @@ vim.opt.number = true
 -- Set the number of spaces per tab.
 vim.opt.shiftwidth = 4
 -- Set the break indent character.
-vim.opt.showbreak = ">>"
+vim.opt.showbreak = "↳"
 -- Use case-sensitive search for capital letters.
 vim.opt.smartcase = true
 -- Set the number of columns a tab character uses.
