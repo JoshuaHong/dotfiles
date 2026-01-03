@@ -11,15 +11,13 @@ vim.lsp.config("lua_ls", {
     }
 })
 
-vim.lsp.config("texlab", {
+vim.lsp.config("tinymist", {
     settings = {
-        texlab = {
-            latexFormatter = "latexindent",
-            latexindent = {
-                -- Set the latexindent configuration file.
-                ["local"] = "/home/josh/.config/latexindent/config.yaml",
-                modifyLineBreaks = true
-            },
-        },
-    },
+        formatterMode = "typstyle",
+        exportPdf = "onType",
+        semanticTokens = "disable",
+        formatterProseWrap = true,
+        formatterPrintWidth = 80,
+        formatterIndentSize = 4,
+    }
 })

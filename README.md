@@ -221,9 +221,9 @@ The Arch Linux environment.
 <br>
 
 # Packages
-List all packages that are not direct dependencies (includes optional dependencies), consolidating specified package groups: <code>comm -23 <({ pacman -Qqtt; echo texlive; } | sort) <(pacman -Qqg texlive | sort)</code>
+List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 51
+Count: 49
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -238,7 +238,7 @@ Count: 51
 | cronie                                                    | To manage cron jobs.                                                                                             |
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
 | entr                                                      | To run commands when files change.                                                                               |
-| envycontrol \* \*\*\*                                     | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
+| envycontrol \* \*\*                                       | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |
 | fnott                                                     | To display notifications.                                                                                        |
 | foot                                                      | To use the terminal.                                                                                             |
@@ -257,20 +257,18 @@ Count: 51
 | niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
 | noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |
-| nvidia-open \*\*\*                                        | To enable the NVIDIA graphics card drivers.                                                                      |
+| nvidia-open \*\*                                          | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
-| perl-file-homedir                                         | To use latexindent.                                                                                              |
-| perl-yaml-tiny                                            | To use latexindent.                                                                                              |
-| pipewire-pulse \*\*\*                                     | To enable audio on Mullvad Browser.                                                                              |
+| pipewire-pulse \*\*                                       | To enable audio on Mullvad Browser.                                                                              |
 | rtorrent                                                  | To download torrents.                                                                                            |
 | slurp                                                     | To select a region for screen capture.                                                                           |
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
-| texlive \*\*                                              | To write LaTeX.                                                                                                  |
 | tmux                                                      | To enable session persistence.                                                                                   |
 | tree-sitter-cli                                           | To use nvim-treesitter.                                                                                          |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
+| typst                                                     | To use Typst.                                                                                                    |
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
 | wf-recorder                                               | To record the screen.                                                                                            |
@@ -280,5 +278,4 @@ Count: 51
 | zathura-pdf-mupdf<br>(tesseract-data-eng)                 | To view PDF images.<br>(To recognize English text.)                                                              |
 
 \* AUR package \
-\*\* Package group \
-\*\*\* Custom build package
+\*\* Custom build package

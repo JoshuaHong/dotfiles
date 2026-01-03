@@ -5,16 +5,16 @@ local constants = {}
 -- The list of treesitter languages.
 constants.TREESITTER_LANGUAGES = {
     "bash",
-    "latex",
     "lua",
     "markdown",
-    "markdown_inline"
+    "markdown_inline",
+    "typst"
 }
 
 -- The list of LSPs.
 constants.LSPS = {
     "lua_ls",
-    "texlab"
+    "tinymist"
 }
 
 return constants
