@@ -1,38 +1,41 @@
 -- Neovim mappings.
 
-local helpers = require("config.helpers")
-
 -- Clear highlighting on escape.
-helpers.map("n", "<Esc>", "<Esc>:noh<CR>")
+vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
 
 -- Map write and quit.
-helpers.map("n", "<Leader>w", ":update<CR>")
-helpers.map("n", "<Leader>q", ":quit<CR>")
-helpers.map("n", "<Leader>Q", ":quit!<CR>")
+vim.keymap.set("n", "<C-w>", ":update<CR>")
+vim.keymap.set("n", "<CS-w>", ":write<CR>")
+vim.keymap.set("n", "<C-q>", ":quit<CR>")
+vim.keymap.set("n", "<CS-q>", ":quit!<CR>")
 
 -- Map movement keys.
-helpers.map("n", "j", "h")
-helpers.map("n", "k", "j")
-helpers.map("n", "l", "k")
-helpers.map("n", ";", "l")
-helpers.map("v", "j", "h")
-helpers.map("v", "k", "j")
-helpers.map("v", "l", "k")
-helpers.map("v", ";", "l")
+vim.keymap.set("n", "j", "h")
+vim.keymap.set("n", "k", "j")
+vim.keymap.set("n", "l", "k")
+vim.keymap.set("n", ";", "l")
+vim.keymap.set("v", "j", "h")
+vim.keymap.set("v", "k", "j")
+vim.keymap.set("v", "l", "k")
+vim.keymap.set("v", ";", "l")
 
 -- Don't override the clipboard on delete.
-helpers.map("n", "d", "\"1d")
-helpers.map("n", "D", "0\"1d$")
-helpers.map("n", "c", "\"1c")
-helpers.map("n", "C", "0\"1c$")
-helpers.map("n", "<Del>", "\"1d<Right>")
-helpers.map("v", "d", "\"1d")
-helpers.map("v", "D", "0\"1d$")
-helpers.map("v", "c", "\"1c")
-helpers.map("v", "C", "0\"1c$")
-helpers.map("v", "<Del>", "\"1d<Right>")
-helpers.map("x", "p", "\"_dP")
+vim.keymap.set("n", "d", "\"1d")
+vim.keymap.set("n", "D", "0\"1d$")
+vim.keymap.set("n", "c", "\"1c")
+vim.keymap.set("n", "C", "0\"1c$")
+vim.keymap.set("n", "<Del>", "\"1d<Right>")
+vim.keymap.set("v", "d", "\"1d")
+vim.keymap.set("v", "D", "0\"1d$")
+vim.keymap.set("v", "c", "\"1c")
+vim.keymap.set("v", "C", "0\"1c$")
+vim.keymap.set("v", "<Del>", "\"1d<Right>")
+vim.keymap.set("x", "p", "\"_dP")
 
 -- Keep visual highlighting after shifting.
-helpers.map("v", "<", "<gv")
-helpers.map("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+-- Toggle commenting the selected text.
+vim.keymap.set("n", "<C-;>", "gcc", { remap = true })
+vim.keymap.set("v", "<C-;>", "gc", { remap = true })
