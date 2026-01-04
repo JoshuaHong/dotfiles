@@ -5,12 +5,20 @@ require("blink.cmp").setup({
         implementation = "lua"
     },
     keymap = {
-        ["<C-i>"] = { "show" },
+        preset = "none",
+        ["<C-i>"] = { "show", "fallback", },
         ["<C-k>"] = { "select_next", "fallback" },
         ["<C-l>"] = { "select_prev", "fallback" },
-        ["<CR>"] = { "accept", "fallback" }
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = { "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" }
     },
     signature = {
-        enabled = true,
+        enabled = true
+    },
+    completion = {
+        ghost_text = {
+            enabled = true
+        }
     }
 })
