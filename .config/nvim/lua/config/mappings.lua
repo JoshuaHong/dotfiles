@@ -1,5 +1,7 @@
 -- Neovim mappings.
 
+local telescope = require("telescope.builtin")
+
 -- Clear highlighting on escape.
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
 
@@ -39,3 +41,12 @@ vim.keymap.set("v", ">", ">gv")
 -- Toggle commenting the selected text.
 vim.keymap.set("n", "<C-;>", "gcc", { remap = true })
 vim.keymap.set("v", "<C-;>", "gc", { remap = true })
+
+-- Telescope key mappings.
+vim.keymap.set("n", "<C-f>", telescope.find_files)
+vim.keymap.set("n", "<C-g>", telescope.live_grep)
+vim.keymap.set("n", "<C-b>", telescope.buffers)
+vim.keymap.set("n", "<C-m>", telescope.marks)
+vim.keymap.set("n", "<C-r>", telescope.lsp_references)
+vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
+vim.keymap.set("n", "<C-s>", telescope.git_status)
