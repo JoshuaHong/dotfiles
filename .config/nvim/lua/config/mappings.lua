@@ -62,7 +62,7 @@ vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
 -- Gitsigns key mappings.
 vim.keymap.set("n", "<C-h>", gitsigns.preview_hunk)
 vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
-vim.keymap.set("n", "<C-i>", gitsigns.blame)
+vim.keymap.set("n", "<C-p>", gitsigns.blame)
 
 -- Tree key mappings.
 vim.keymap.set("n", "<C-t>", tree.tree.change_root_to_node)

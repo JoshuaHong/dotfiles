@@ -1,7 +1,8 @@
 -- Neovim autocommands.
 
 local constants = require("config.constants")
-local tree = require("nvim-tree.utils")
+local treeUtils = require("nvim-tree.utils")
+local treeApi = require("nvim-tree.api").tree
 
 -- Update all plugins and open the tree on startup.
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -9,7 +10,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         vim.pack.update({}, { force = "true" })
         pcall(vim.cmd, "TSUpdate")
-        require("nvim-tree.api").tree.toggle({ focus = false })
+        treeApi.toggle({ focus = false })
     end
 })
 
@@ -46,7 +47,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("Exit Neovim", { clear = true }),
     callback = function()
-        if #vim.api.nvim_list_wins() == 1 and tree.is_nvim_tree_buf() then
+        if #vim.api.nvim_list_wins() == 1 and treeUtils.is_nvim_tree_buf() then
             vim.cmd "quit"
         end
     end

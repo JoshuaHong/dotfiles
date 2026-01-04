@@ -1,4 +1,4 @@
--- The Telescope configuration file.
+-- The telescope configuration file.
 
 require("telescope").setup({
     defaults = {

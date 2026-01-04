@@ -1,6 +1,8 @@
 -- The Pack configuration file.
 
 vim.pack.add({
+    -- To add automatic completion.
+    { src = "https://github.com/saghen/blink.cmp" },
     -- To view Git chagnes.
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     -- To install LSP servers.
@@ -19,10 +21,11 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     -- To search files.
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
-    -- To use Telescope.
+    -- To use telescope.
     { src = "https://github.com/nvim-lua/plenary.nvim" },
 })
 
+require("plugins.blink")
 require("plugins.catppuccin")
 require("plugins.lspconfig")
 require("plugins.mason")

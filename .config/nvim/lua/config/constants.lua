@@ -2,7 +2,7 @@
 
 local constants = {}
 
--- The list of Treesitter languages.
+-- The list of treesitter languages.
 constants.TREESITTER_LANGUAGES = {
     "bash",
     "lua",
@@ -11,7 +11,7 @@ constants.TREESITTER_LANGUAGES = {
     "typst"
 }
 
--- The list of Mason packages.
+-- The list of mason packages.
 constants.MASON_PACKAGES = {
     "bashls",
     "lua_ls",
