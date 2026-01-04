@@ -5,6 +5,8 @@ vim.pack.add({
     { src = "https://github.com/saghen/blink.cmp" },
     -- To view Git chagnes.
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    -- To configure the status line.
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
     -- To install LSP servers.
     { src = "https://github.com/mason-org/mason.nvim" },
     -- To enable LSP servers automatically.
@@ -28,6 +30,7 @@ vim.pack.add({
 require("plugins.blink")
 require("plugins.catppuccin")
 require("plugins.lspconfig")
+require("plugins.lualine")
 require("plugins.mason")
 require("plugins.mason-lspconfig")
 require("plugins.mason-tool-installer")
