@@ -52,10 +52,10 @@ vim.keymap.set("v", "<CS-/>", "gc", { remap = true })
 
 -- Telescope key mappings.
 vim.keymap.set("n", "<C-f>", telescope.find_files)
-vim.keymap.set("n", "<C-g>", telescope.live_grep)
+vim.keymap.set("n", "<C-s>", telescope.live_grep)
 vim.keymap.set("n", "<C-b>", telescope.buffers)
 vim.keymap.set("n", "<C-m>", telescope.marks)
-vim.keymap.set("n", "<C-s>", telescope.git_status)
+vim.keymap.set("n", "<C-g>", telescope.git_status)
 vim.keymap.set("n", "<C-a>", telescope.lsp_references)
 vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
 
@@ -65,5 +65,10 @@ vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
 vim.keymap.set("n", "<C-i>", gitsigns.blame)
 
 -- Tree key mappings.
-vim.keymap.set("n", "<C-Tab>", tree.tree.toggle)
 vim.keymap.set("n", "<C-t>", tree.tree.change_root_to_node)
+vim.keymap.set("n", "<C-Tab>", function()
+    tree.tree.toggle { focus = false }
+end)
+
+-- Jump to the next diagnostic message.
+vim.keymap.set("n", "<C-n>", vim.diagnostic.goto_next)
