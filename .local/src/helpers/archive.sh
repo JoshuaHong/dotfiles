@@ -29,10 +29,12 @@ archive() {
     local -r file="${1}"
     local -r name="${file%/}"  # Remove the trailing slash if it exists.
 
+    local -r password="$(getPassword)"
     tar --create --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz \
             "${name}"
-    gpg --cipher-algo "AES256" --digest-algo "SHA512" \
-            --output "${name}.tar.xz.gpg" --sign --symmetric "${name}.tar.xz"
+    gpg --batch --cipher-algo "AES256" --digest-algo "SHA512" \
+            --output "${name}.tar.xz.gpg" --passphrase "${password}" --sign \
+            --symmetric "${name}.tar.xz"
     rm "${name}.tar.xz"
 }
 
@@ -41,8 +43,26 @@ extract() {
     local -r name="${file%".tar.xz.gpg"}"  # Remove the file extension.
 
     gpg --decrypt --output "${name}.tar.xz" "${name}.tar.xz.gpg"
-    tar --extract --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz
+    tar --backup="numbered" --extract --file="${name}.tar.xz" --xattrs \
+            --xattrs-include="*" --xz
     rm "${name}.tar.xz"
+}
+
+getPassword() {
+    local prompt="Enter password: "
+    while true; do
+        local password="$(enterPassword "${prompt}")"
+        local passwordReentry="$(enterPassword "Confirm password: ")"
+        [[ "${password}" == "${passwordReentry}" ]] && break
+        prompt="Enter password (try again): "
+    done
+
+    echo "${password}"
+}
+
+enterPassword() {
+    local -r prompt="${1}"
+    fuzzel --dmenu --prompt="${prompt}" --password --width=40
 }
 
 fileExists() {
