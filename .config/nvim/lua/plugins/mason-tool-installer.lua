@@ -3,6 +3,6 @@
 local constants = require("config.constants")
 
 require("mason-tool-installer").setup({
-    ensure_installed = constants.LSPS,
+    ensure_installed = constants.MASON_PACKAGES,
     auto_update = true
 })
