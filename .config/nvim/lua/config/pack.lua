@@ -1,6 +1,8 @@
 -- The Pack configuration file.
 
 vim.pack.add({
+    -- To view Git chagnes.
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
     -- To install LSP servers.
     { src = "https://github.com/mason-org/mason.nvim" },
     -- To enable LSP servers automatically.

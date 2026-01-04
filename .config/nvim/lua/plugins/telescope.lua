@@ -10,6 +10,9 @@ require("telescope").setup({
         }
     },
     pickers = {
+        buffers = {
+            theme = "ivy"
+        },
         find_files = {
             theme = "ivy"
         },

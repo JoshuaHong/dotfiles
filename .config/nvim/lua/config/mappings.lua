@@ -1,5 +1,6 @@
 -- Neovim mappings.
 
+local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
 
 -- Clear highlighting on escape.
@@ -47,6 +48,11 @@ vim.keymap.set("n", "<C-f>", telescope.find_files)
 vim.keymap.set("n", "<C-g>", telescope.live_grep)
 vim.keymap.set("n", "<C-b>", telescope.buffers)
 vim.keymap.set("n", "<C-m>", telescope.marks)
-vim.keymap.set("n", "<C-r>", telescope.lsp_references)
-vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
 vim.keymap.set("n", "<C-s>", telescope.git_status)
+vim.keymap.set("n", "<C-a>", telescope.lsp_references)
+vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
+
+-- Gitsigns key mappings.
+vim.keymap.set("n", "<C-h>", gitsigns.preview_hunk)
+vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
+vim.keymap.set("n", "<C-l>", gitsigns.blame)
