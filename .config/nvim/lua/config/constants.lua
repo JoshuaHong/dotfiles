@@ -15,6 +15,7 @@ constants.TREESITTER_LANGUAGES = {
 constants.MASON_PACKAGES = {
     "bashls",
     "lua_ls",
+    "marksman",
     "shellcheck",
     "tinymist"
 }
