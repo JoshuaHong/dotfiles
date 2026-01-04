@@ -12,7 +12,7 @@ The Arch Linux environment.
     > A lightweight and flexible Linux distribution.
 * Window manager: [Niri](https://github.com/YaLTeR/niri)
     > A scrollable tiling Wayland compositor.
-* Bar: [Waybar](https://github.com/Alexays/Waybar)
+* Status bar: [Waybar](https://github.com/Alexays/Waybar)
     > A highly customizable Wayland bar.
 * Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
     > A fast and minimal Wayland terminal emulator.
