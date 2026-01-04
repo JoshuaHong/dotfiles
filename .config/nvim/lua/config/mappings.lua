@@ -2,6 +2,7 @@
 
 local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
+local tree = require("nvim-tree.api")
 
 -- Clear highlighting on escape.
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
@@ -22,6 +23,12 @@ vim.keymap.set("v", "k", "j")
 vim.keymap.set("v", "l", "k")
 vim.keymap.set("v", ";", "l")
 
+-- Map buffer movement keys.
+vim.keymap.set("n", "<C-j>", ":wincmd h<CR>")
+vim.keymap.set("n", "<C-k>", ":wincmd j<CR>")
+vim.keymap.set("n", "<C-l>", ":wincmd k<CR>")
+vim.keymap.set("n", "<C-;>", ":wincmd l<CR>")
+
 -- Don't override the clipboard on delete.
 vim.keymap.set("n", "d", "\"1d")
 vim.keymap.set("n", "D", "0\"1d$")
@@ -40,8 +47,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- Toggle commenting the selected text.
-vim.keymap.set("n", "<C-;>", "gcc", { remap = true })
-vim.keymap.set("v", "<C-;>", "gc", { remap = true })
+vim.keymap.set("n", "<CS-/>", "gcc", { remap = true })
+vim.keymap.set("v", "<CS-/>", "gc", { remap = true })
 
 -- Telescope key mappings.
 vim.keymap.set("n", "<C-f>", telescope.find_files)
@@ -55,4 +62,8 @@ vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
 -- Gitsigns key mappings.
 vim.keymap.set("n", "<C-h>", gitsigns.preview_hunk)
 vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
-vim.keymap.set("n", "<C-l>", gitsigns.blame)
+vim.keymap.set("n", "<C-i>", gitsigns.blame)
+
+-- Tree key mappings.
+vim.keymap.set("n", "<C-Tab>", tree.tree.toggle)
+vim.keymap.set("n", "<C-t>", tree.tree.change_root_to_node)

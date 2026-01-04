@@ -13,6 +13,8 @@ vim.pack.add({
     { src = "https://github.com/catppuccin/nvim" },
     -- To use the latest LSP configuration files automatically.
     { src = "https://github.com/neovim/nvim-lspconfig" },
+    -- To view the file explorer.
+    { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     -- To parse code.
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     -- To search files.
@@ -26,5 +28,6 @@ require("plugins.lspconfig")
 require("plugins.mason")
 require("plugins.mason-lspconfig")
 require("plugins.mason-tool-installer")
+require("plugins.tree")
 require("plugins.telescope")
 require("plugins.treesitter")
