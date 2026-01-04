@@ -72,3 +72,4 @@ end)
 
 -- Jump to the next diagnostic message.
 vim.keymap.set("n", "<C-n>", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<CS-n>", vim.diagnostic.goto_prev)
