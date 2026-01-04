@@ -223,7 +223,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 49
+Count: 50
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -257,6 +257,7 @@ Count: 49
 | niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
 | noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |
+| npm                                                       | To use the Bash LSP.                                                                                             |
 | nvidia-open \*\*                                          | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
 | pass                                                      | To manage passwords.                                                                                             |
