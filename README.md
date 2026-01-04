@@ -223,7 +223,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 51
+Count: 50
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -237,7 +237,6 @@ Count: 51
 | brightnessctl                                             | To control the backlight brightness and save the brightness on reboot.                                           |
 | cronie                                                    | To manage cron jobs.                                                                                             |
 | efibootmgr                                                | To boot Linux without a bootloader by loading the kernel directly.                                               |
-| entr                                                      | To run commands when files change.                                                                               |
 | envycontrol \* \*\*                                       | To easily switch the GPU on NVIDIA Optimus laptops.                                                              |
 | fcitx5-hangul                                             | To enable Korean language inputs.                                                                                |
 | fnott                                                     | To display notifications.                                                                                        |
