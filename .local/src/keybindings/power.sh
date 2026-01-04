@@ -26,7 +26,7 @@ selectOption() {
 arrayContains() {
     local -nr array="${1}"
     local -r value="${2}"
-    [[ " ${array[*]} " =~ " ${value} " ]]
+    [[ " ${array[*]} " =~ ${value} ]]
 }
 
 main "${@}"
