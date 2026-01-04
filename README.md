@@ -16,6 +16,8 @@ The Arch Linux environment.
     > A highly customizable Wayland bar.
 * Terminal emulator: [Foot](https://codeberg.org/dnkl/foot)
     > A fast and minimal Wayland terminal emulator.
+* Text editor: [Neovim](https://neovim.io)
+    > A hyperextensible Vim-based text editor.
 * Web browser: [Brave Browser](https://brave.com)
     > A fast, private, and secure web browser.
 * Color scheme: [Catppuccin](https://github.com/catppuccin)
