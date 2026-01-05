@@ -42,7 +42,7 @@ viewFile() {
 addDescription() {
     local -r file="${1}"
 
-    read -pr "Description: " description
+    read -rp "Description: " description
     if isVariableSet "${description}"; then
         setfattr --name="user.description" --value="${description}" "${file}"
     fi
@@ -61,7 +61,7 @@ getDirectory() {
     local -r subDirectory="$(getSubDirectory "${file}")"
 
     while ! isYesNoVariableSet "${isReceipt}"; do
-        read -pr "Receipt (y/n)? " isReceipt
+        read -rp "Receipt (y/n)? " isReceipt
     done
     if isReceipt "${isReceipt}"; then
         echo "${RECEIPTS_DIRECTORY}/${subDirectory}"
