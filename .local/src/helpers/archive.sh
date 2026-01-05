@@ -28,8 +28,9 @@ main() {
 archive() {
     local -r file="${1}"
     local -r name="${file%/}"  # Remove the trailing slash if it exists.
-
     local -r password="$(getPassword)"
+
+    cachePassword || exit 1
     tar --create --file="${name}.tar.xz" --xattrs --xattrs-include="*" --xz \
             "${name}"
     gpg --batch --cipher-algo "AES256" --digest-algo "SHA512" \
@@ -63,6 +64,10 @@ getPassword() {
 enterPassword() {
     local -r prompt="${1}"
     fuzzel --dmenu --prompt="${prompt}" --password --width=40
+}
+
+cachePassword() {
+    echo | gpg --sign > /dev/null 2>&1
 }
 
 fileExists() {
