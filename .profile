@@ -44,7 +44,8 @@ exportXDGBaseDirectories() {
 
 exportXDGRuntimeDir() {
     if isStringNull "${XDG_RUNTIME_DIR}"; then
-        export XDG_RUNTIME_DIR="/tmp/${UID}-runtime-dir"
+        uid="$(getUserId)"
+        export XDG_RUNTIME_DIR="/tmp/${uid}-runtime-dir"
         createXDGRuntimeDir
     fi
 }
@@ -80,6 +81,10 @@ exportVariables() {
 
 startWayland() {
     niri-session -l > /dev/null 2>&1
+}
+
+getUserId() {
+    id --user
 }
 
 isValidPath() {
