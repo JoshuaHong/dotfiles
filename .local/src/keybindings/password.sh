@@ -32,7 +32,7 @@ parsePasswords() {
 }
 
 hasCachedPassword() {
-    echo "test" | gpg --pinentry-mode error --sign -o /dev/null
+    echo | gpg --pinentry-mode error --sign > /dev/null 2>&1
 }
 
 enterPassword() {
