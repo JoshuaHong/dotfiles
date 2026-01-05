@@ -2,7 +2,8 @@
 
 local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
-local tree = require("nvim-tree.api")
+local treeApi = require("nvim-tree.api").tree
+local treeUtils = require("nvim-tree.utils")
 
 -- Clear highlighting on escape.
 vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
@@ -10,8 +11,15 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
 -- Map write and quit.
 vim.keymap.set("n", "<C-w>", ":update<CR>")
 vim.keymap.set("n", "<CS-w>", ":write<CR>")
-vim.keymap.set("n", "<C-q>", ":quit<CR>")
-vim.keymap.set("n", "<CS-q>", ":quit!<CR>")
+vim.keymap.set("n", "<C-q>", function()
+    vim.cmd "quit"
+    if #vim.api.nvim_list_wins() == 1 and treeUtils.is_nvim_tree_buf() then
+        vim.cmd "quit"
+    end
+end)
+vim.keymap.set("n", "<CS-q>", function()
+    vim.cmd "qall!"
+end)
 
 -- Map movement keys.
 vim.keymap.set("n", "j", "h")
@@ -65,9 +73,9 @@ vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
 vim.keymap.set("n", "<C-p>", gitsigns.blame)
 
 -- Tree key mappings.
-vim.keymap.set("n", "<C-t>", tree.tree.change_root_to_node)
+vim.keymap.set("n", "<C-t>", treeApi.change_root_to_node)
 vim.keymap.set("n", "<C-Tab>", function()
-    tree.tree.toggle { focus = false }
+    treeApi.toggle { focus = false }
 end)
 
 -- Jump to the next diagnostic message.

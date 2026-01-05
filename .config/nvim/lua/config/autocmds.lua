@@ -10,7 +10,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         vim.pack.update({}, { force = "true" })
         pcall(vim.cmd, "TSUpdate")
-        treeApi.toggle({ focus = false })
+        if not treeUtils.is_nvim_tree_buf() then
+            treeApi.toggle({ focus = false })
+        end
     end
 })
 
@@ -41,14 +43,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         -- Set async to false to ensure the file is formatted before saving it.
         vim.lsp.buf.format { async = false }
     end,
-})
-
--- Exit Neovim if the tree is the last buffer remaining.
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("Exit Neovim", { clear = true }),
-    callback = function()
-        if #vim.api.nvim_list_wins() == 1 and treeUtils.is_nvim_tree_buf() then
-            vim.cmd "quit"
-        end
-    end
 })
