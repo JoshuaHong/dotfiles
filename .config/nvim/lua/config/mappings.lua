@@ -13,8 +13,8 @@ vim.keymap.set("n", "<C-w>", ":update<CR>")
 vim.keymap.set("n", "<CS-w>", ":write<CR>")
 vim.keymap.set("n", "<C-q>", function()
     vim.cmd "quit"
-    if #vim.api.nvim_list_wins() == 1 and treeUtils.is_nvim_tree_buf() then
-        vim.cmd "quit"
+    if #vim.api.nvim_list_wins() <= 2 and treeUtils.is_nvim_tree_buf() then
+        vim.cmd "qall"
     end
 end)
 vim.keymap.set("n", "<CS-q>", function()
