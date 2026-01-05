@@ -17,9 +17,7 @@ vim.keymap.set("n", "<C-q>", function()
         vim.cmd "qall"
     end
 end)
-vim.keymap.set("n", "<CS-q>", function()
-    vim.cmd "qall!"
-end)
+vim.keymap.set("n", "<CS-q>", ":qall!<CR>")
 
 -- Map movement keys.
 vim.keymap.set("n", "j", "h")
