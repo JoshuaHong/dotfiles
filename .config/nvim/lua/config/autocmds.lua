@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     group = vim.api.nvim_create_augroup("Update plugins", { clear = true }),
     callback = function()
         vim.pack.update({}, { force = "true" })
-        pcall(vim.cmd, "TSUpdate")
+        vim.cmd("TSUpdate")
         if not treeUtils.is_nvim_tree_buf() then
             treeApi.toggle({ focus = false })
         end

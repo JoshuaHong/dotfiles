@@ -12,6 +12,16 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.config("tinymist", {
+    on_attach = function(client, bufnr)
+        if not vim.g.hasFirstBufferBeenOpened then
+            client:exec_cmd({
+                title = "Tinymist pin main to first buffer opened",
+                command = "tinymist.pinMain",
+                arguments = { vim.api.nvim_buf_get_name(0) },
+            }, { bufnr = bufnr })
+            vim.g.hasFirstBufferBeenOpened = 1
+        end
+    end,
     settings = {
         formatterMode = "typstyle",
         exportPdf = "onType",
