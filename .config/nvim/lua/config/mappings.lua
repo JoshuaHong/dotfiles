@@ -12,9 +12,17 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
 vim.keymap.set("n", "<C-w>", ":update<CR>")
 vim.keymap.set("n", "<CS-w>", ":write<CR>")
 vim.keymap.set("n", "<C-q>", function()
-    vim.cmd "quit"
-    if #vim.api.nvim_list_wins() <= 2 and treeUtils.is_nvim_tree_buf() then
-        vim.cmd "qall"
+    local hasUnsavedBuffers = pcall(vim.cmd, "bmodified 1")
+    if hasUnsavedBuffers then
+        vim.notify("No write since last change for buffer: \"" ..
+            vim.fn.fnamemodify(vim.api.nvim_buf_get_name(
+                vim.api.nvim_get_current_buf()), ":t") .. "\"\n",
+            vim.log.levels.ERROR)
+    else
+        vim.cmd("quit")
+        if treeUtils.is_nvim_tree_buf() then
+            vim.cmd("quit")
+        end
     end
 end)
 vim.keymap.set("n", "<CS-q>", ":qall!<CR>")
