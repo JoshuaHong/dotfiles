@@ -25,6 +25,8 @@ vim.pack.add({
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     -- To use telescope.
     { src = "https://github.com/nvim-lua/plenary.nvim" },
+    -- To view markdown.
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }
 })
 
 require("plugins.blink")
@@ -37,3 +39,4 @@ require("plugins.mason-tool-installer")
 require("plugins.tree")
 require("plugins.telescope")
 require("plugins.treesitter")
+require("plugins.render-markdown")
