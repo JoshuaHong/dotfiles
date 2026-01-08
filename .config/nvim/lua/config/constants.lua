@@ -14,10 +14,12 @@ constants.TREESITTER_LANGUAGES = {
 -- The list of mason packages.
 constants.MASON_PACKAGES = {
     "bashls",
+    "harper-ls",
     "lua_ls",
     "marksman",
     "shellcheck",
-    "tinymist"
+    "tinymist",
+    "typos-lsp"
 }
 
 return constants
