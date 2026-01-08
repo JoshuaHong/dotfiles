@@ -178,7 +178,7 @@ The Arch Linux environment.
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/ && cd</code>
 * Install all the packages below
-* Enable requierd services: <code>systemctl enable --now bluetooth.service cronie.service</code>
+* Enable required services: <code>systemctl enable --now bluetooth.service cronie.service</code>
 * Update the crontab: <code>[crontab -e](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/crontab)</code>
 
 ### Import GPG keys
@@ -188,7 +188,7 @@ The Arch Linux environment.
 * Temporarily set the GnuPG home: <code>export GNUPGHOME=~/.local/share/gnupg</code>
 * Import the public key: <code>gpg --import <code><var>PUBLIC</var></code>.key</code>
 * Import the secret key: <code>gpg --import <code><var>SECRET</var></code>.key</code>
-* Import the trust: <code>gpg --import-ownertrust <code><var>TRSUT</var></code>.txt</code>
+* Import the trust: <code>gpg --import-ownertrust <code><var>TRUST</var></code>.txt</code>
     > 💡 **Tip**: These keys should all be imported from an external backup source.
 * Enable the GPG subkey for SSH authentication: <code>echo <code><var>KEYGRIP</var></code> >> ~/.local/share/gnupg/sshcontrol</code>
     > 💡 **Tip**: The keygrip can be found by running: <code>gpg --list-keys --with-keygrip</code>
@@ -218,7 +218,7 @@ The Arch Linux environment.
 * Create the NVIDIA modprobe file: <code>[/etc/modprobe.d/nvidia-custom.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/modprobe.d/nvidia-custom.conf)</code>
     > 📝 **Note**: Enable dynamic power management on the NVIDIA GPU and prevent freezing when idle.
 * Set the "Enable USB Charge Function" to "Disable" in the BIOS
-    > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adaptor is plugged in.
+    > 📝 **Note**: Saves battery life, but does not allow USB ports to charge devices unless the power adapter is plugged in.
 
 <br>
 

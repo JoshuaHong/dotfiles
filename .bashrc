@@ -156,14 +156,14 @@ setOptions() {
     shopt -s hostcomplete
     # Send `SIGHUP` to all jobs when an interactive login shell exits.
     shopt -s huponexit
-    # Enable command substitution proceses to also use the `errexit` option.
+    # Enable command substitution processes to also use the `errexit` option.
     shopt -s inherit_errexit
     # Enable comments beginning with `#`.
     shopt -s interactive_comments
     # In the current shell, run the last command of a pipe that isn't executed.
     shopt -s lastpipe
     # If `cmdhist` is enabled, save multiline commands in the history file with
-    # embedded newlines instaed of semicolons.
+    # embedded newlines instead of semicolons.
     shopt -s lithist
     # Don't allow local variables to inherit the value and attributes of a
     # variable of the same name that exists at a previous scope.

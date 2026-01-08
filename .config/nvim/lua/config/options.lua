@@ -2,9 +2,7 @@
 
 -- Set diagnostics.
 vim.diagnostic.config({
-    float = {
-        focusable = false
-    },
+    float = { focusable = false },
     virtual_text = true
 })
 -- Set the leader key.

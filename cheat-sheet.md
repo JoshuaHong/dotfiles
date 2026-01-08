@@ -49,11 +49,11 @@
 
 ### Archive files
 * Compress a file: <code>tar --create --file="<code><var>FILE</var></code>.tar.xz" --xattrs --xattrs-include="*" --xz <code><var>FILE</var></code></code>
-* Encrypt a file: <code>gpg --cipher-algo AES256 --output <code><var>FILE</var></code>.tar.xz.gpg --symmetric <code><var>FILE</var></code>.tar.xz</code>
+* Encrypt a file: <code>gpg --cipher-algo AES256 --output <code><var>FILE</var></code>.tar.xz.gpg --sign --symmetric <code><var>FILE</var></code>.tar.xz</code>
 
 ### Unarchive files
 * Unencrypt a file: <code>gpg --decrypt --output <code><var>FILE</var></code>.tar.xz <code><var>FILE</var></code>.tar.xz.gpg</code>
-* Decompress a file: <code>tar --extract --file="<code><var>FILE</var></code>.tar.xz" --xattrs --xattrs-include="*" --xz</code>
+* Decompress a file: <code>tar --backup="numbered" --extract --file="<code><var>FILE</var></code>.tar.xz" --xattrs --xattrs-include="*" --xz</code>
 
 ## Networking
 
