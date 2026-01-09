@@ -35,6 +35,8 @@ vim.opt.showbreak = "↳"
 vim.opt.smartcase = true
 -- Set the number of columns a tab character uses.
 vim.opt.tabstop = 4
+-- Set the maximum line length.
+vim.opt.textwidth = 80
 -- Set the update time for the cursor hold event.
 vim.opt.updatetime = 250
 -- Set the floating window border.

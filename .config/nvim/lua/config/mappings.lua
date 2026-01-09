@@ -36,6 +36,8 @@ vim.keymap.set("v", "j", "h")
 vim.keymap.set("v", "k", "j")
 vim.keymap.set("v", "l", "k")
 vim.keymap.set("v", ";", "l")
+vim.keymap.set("n", "gk", "gj")
+vim.keymap.set("n", "gl", "gk")
 vim.keymap.set("n", "<CR>", "<CR>")
 
 -- Map buffer movement keys.

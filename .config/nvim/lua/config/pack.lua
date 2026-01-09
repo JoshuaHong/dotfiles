@@ -3,7 +3,7 @@
 vim.pack.add({
     -- To add automatic completion.
     { src = "https://github.com/saghen/blink.cmp" },
-    -- To view Git chagnes.
+    -- To view Git changes.
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     -- To configure the status line.
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
