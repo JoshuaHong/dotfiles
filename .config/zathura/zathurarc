@@ -32,3 +32,8 @@ set render-loading-fg         rgba(198,208,245,1)
 set highlight-color           rgba(148,156,187,0.3)
 set highlight-fg              rgba(198,208,245,1)
 set highlight-active-color    rgba(202,158,230,0.3)
+
+map k scroll down
+map l scroll up
+map <C-k> navigate next
+map <C-l> navigate previous
