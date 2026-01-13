@@ -10,7 +10,7 @@ vim.keymap.set("n", "<Esc>", "<Esc>:noh<CR>", { silent = true })
 
 -- Map write and quit.
 vim.keymap.set("n", "<C-w>", ":update<CR>")
-vim.keymap.set("n", "<CS-w>", ":write<CR>")
+vim.keymap.set("n", "<CS-w>", ":wall<CR>")
 vim.keymap.set("n", "<C-q>", function()
     local hasUnsavedBuffers = pcall(vim.cmd, "bmodified 1")
     if hasUnsavedBuffers then
