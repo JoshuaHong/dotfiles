@@ -17,11 +17,7 @@ main() {
 
     sudo chown josh:josh "${SFTP_DIRECTORY}"/*
     for file in "${SFTP_DIRECTORY}"/*; do
-        if ! isValidFile "${file}"; then
-            echoError "Error: Invalid file: ${file}."
-            continue
-        fi
-        viewFile "${file}" &
+        viewFile "${file}"
         addDescription "${file}"
         moveToStorage "${file}"
     done
@@ -31,11 +27,11 @@ viewFile() {
     local -r file="${1}"
 
     if isPhoto "${file}"; then
-        imv "${file}" > /dev/null
+        imv "${file}" > /dev/null &
     elif isVideo "${file}"; then
-        mpv --keep-open=yes "${file}" > /dev/null
+        mpv --keep-open=yes "${file}" > /dev/null &
     else
-        echoError "Error: Invalid file: ${file}."
+        echoError "Error: Invalid file format. Cannot open: ${file}."
     fi
 }
 
@@ -50,15 +46,19 @@ addDescription() {
 
 moveToStorage() {
     local -r file="${1}"
-    local -r directory="$(getDirectory "${file}")"
+    if ! canGetDate "${file}"; then
+        echoError "Error: Invalid file name. Cannot move: ${file}."
+        return
+    fi
 
+    local -r directory="$(getDirectory "${file}")"
     mkdir --parents "${directory}"
     mv "${file}" "${directory}"
 }
 
 getDirectory() {
     local -r file="${1}"
-    local -r subDirectory="$(getSubDirectory "${file}")"
+    local -r subDirectory="$(getDate "${file}")"
 
     while ! isYesNoVariableSet "${isReceipt}"; do
         read -rp "Receipt (y/n)? " isReceipt
@@ -70,7 +70,7 @@ getDirectory() {
     fi
 }
 
-getSubDirectory() {
+getDate() {
     local -r file="${1}"
     name="${file#*_}"  # Remove the first underscore and everything before it.
 
@@ -78,18 +78,17 @@ getSubDirectory() {
     echo "${name:0:4}"/"${name:4:2}"/"${name:6:2}"
 }
 
-isValidFile() {
+canGetDate() {
     local -r file="${1}"
-    local -r subDirectory="$(getSubDirectory "${file}")"
-
-    isValidDate "${subDirectory}" && (isPhoto "${file}" || isVideo "${file}")
+    local -r date="$(getDate "${file}")"
+    isValidDate "${date}"
 }
 
 isValidDate() {
-    local -r subDirectory="${1}"
+    local -r date="${1}"
     # Check that the date is in YYYY/mm/dd format and is an actual calendar day.
-    [[ "${subDirectory}" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]] && \
-            date -d "${subDirectory}" "+%Y/%m/%d" > /dev/null 2>&1
+    [[ "${date}" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]] && \
+            date -d "${date}" "+%Y/%m/%d" > /dev/null 2>&1
 }
 
 isPhoto() {
