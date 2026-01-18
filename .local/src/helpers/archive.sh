@@ -50,8 +50,9 @@ extract() {
     local -r name="${file%".tar.xz.gpg"}"  # Remove the file extension.
 
     gpg --batch --decrypt --output "${name}.tar.xz" --passphrase "${password}" \
-            "${name}.tar.xz.gpg" > /dev/null 2>&1 \
-            || { echoError "Error: Incorrect password."; exit 1; }
+            "${name}.tar.xz.gpg" > /dev/null 2>&1 || {
+            echoError "Error: Incorrect password. Failed to extract: ${file}.";
+            return; }
     tar --backup="numbered" --extract --file="${name}.tar.xz" --xattrs \
             --xattrs-include="*" --xz
     rm "${name}.tar.xz"
