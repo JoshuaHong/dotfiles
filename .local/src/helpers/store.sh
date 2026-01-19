@@ -10,7 +10,7 @@
 
 declare -gr SFTP_DIRECTORY="/var/lib/jail/sftp"
 declare -Agr BASE_DIRECTORIES=(
-        ["/home/josh"]=""
+        ["${HOME}"]=""
         ["/mnt/sda"]="/dev/sda"
         ["/mnt/sdb"]="/dev/sdb")
 declare -gr MEDIA_DIRECTORY="storage/media/photos"
@@ -18,7 +18,7 @@ declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
 
 main() {
     isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
-    sudo chown josh:josh "${SFTP_DIRECTORY}"/* || exit 1
+    sudo chown "${USER}:${USER}" "${SFTP_DIRECTORY}"/* || exit 1
     mountStorageDirectories
     storeFiles
     unmountStorageDirectories
