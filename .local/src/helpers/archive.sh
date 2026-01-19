@@ -3,7 +3,7 @@
 # Compress and encrypt or decrypt and decompress a file.
 #
 # Usage:
-#     archive [file ...]
+#     archive [file...]
 #
 # Arguments:
 #     file  - The file to decrypt and decompress if it is properly compressed

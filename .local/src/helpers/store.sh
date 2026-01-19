@@ -9,17 +9,49 @@
 #     store
 
 declare -gr SFTP_DIRECTORY="/var/lib/jail/sftp"
-declare -gr MEDIA_DIRECTORY="/home/josh/storage/media/photos"
-declare -gr RECEIPTS_DIRECTORY="/home/josh/storage/finance/receipts"
+declare -Agr BASE_DIRECTORIES=(
+        ["/home/josh"]=""
+        ["/mnt/sda"]="/dev/sda"
+        ["/mnt/sdb"]="/dev/sdb")
+declare -gr MEDIA_DIRECTORY="storage/media/photos"
+declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
 
 main() {
     isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
+    sudo chown josh:josh "${SFTP_DIRECTORY}"/* || exit 1
+    mountStorageDirectories
+    storeFiles
+    unmountStorageDirectories
+}
 
-    sudo chown josh:josh "${SFTP_DIRECTORY}"/*
+mountStorageDirectories() {
+    for directory in "${!BASE_DIRECTORIES[@]}"; do
+        local device="${BASE_DIRECTORIES["${directory}"]}"
+        sudo mkdir --parents "${directory}"
+        if isVariableSet "${device}"; then
+            sudo mount "${device}" "${directory}" || exit 1
+        fi
+    done
+}
+
+storeFiles() {
     for file in "${SFTP_DIRECTORY}"/*; do
+        if ! isRegularFile "${file}"; then
+            echoError "Error: Invalid file: ${file}."
+            continue
+        fi
         viewFile "${file}"
         addDescription "${file}"
         moveToStorage "${file}"
+    done
+}
+
+unmountStorageDirectories() {
+    for directory in "${!BASE_DIRECTORIES[@]}"; do
+        local device="${BASE_DIRECTORIES["${directory}"]}"
+        if isVariableSet "${device}"; then
+            sudo umount "${device}"
+        fi
     done
 }
 
@@ -30,8 +62,10 @@ viewFile() {
         imv "${file}" > /dev/null &
     elif isVideo "${file}"; then
         mpv --keep-open=yes "${file}" > /dev/null &
+    elif isPdf "${file}"; then
+        zathura "${file}" > /dev/null &
     else
-        echoError "Error: Invalid file format. Cannot open: ${file}."
+        foot --hold bash -c "cat ${file}" > /dev/null 2>&1 &
     fi
 }
 
@@ -51,29 +85,39 @@ moveToStorage() {
         return
     fi
 
-    local -r directory="$(getDirectory "${file}")"
-    mkdir --parents "${directory}"
-    mv "${file}" "${directory}"
+    local -r isReceipt="$(getIsReceipt)"
+    for baseDirectory in "${!BASE_DIRECTORIES[@]}"; do
+        local directory="$(getDirectory "${baseDirectory}" "${file}" \
+                "${isReceipt}")"
+        mkdir --parents "${directory}"
+        cp --archive "${file}" "${directory}" || exit 1
+    done
+    rm "${file}"
 }
 
 getDirectory() {
-    local -r file="${1}"
-    local -r subDirectory="$(getDate "${file}")"
+    local -r baseDirectory="${1}"
+    local -r file="${2}"
+    local -r isReceipt="${3}"
+    local -r dateDirectory="$(getDate "${file}")"
 
+    if isReceipt "${isReceipt}"; then
+        echo "${baseDirectory}/${RECEIPTS_DIRECTORY}/${dateDirectory}"
+    else
+        echo "${baseDirectory}/${MEDIA_DIRECTORY}/${dateDirectory}"
+    fi
+}
+
+getIsReceipt() {
     while ! isYesNoVariableSet "${isReceipt}"; do
         read -rp "Receipt (y/n)? " isReceipt
     done
-    if isReceipt "${isReceipt}"; then
-        echo "${RECEIPTS_DIRECTORY}/${subDirectory}"
-    else
-        echo "${MEDIA_DIRECTORY}/${subDirectory}"
-    fi
+    echo "${isReceipt}"
 }
 
 getDate() {
     local -r file="${1}"
     name="${file#*_}"  # Remove the first underscore and everything before it.
-
     # Add a slash between dates to get YYYY/mm/dd format and omit the rest.
     echo "${name:0:4}"/"${name:4:2}"/"${name:6:2}"
 }
@@ -99,7 +143,12 @@ isPhoto() {
 
 isVideo() {
     local -r file="${1}"
-    file --brief --mime "$file" | grep --extended-regexp --quiet "video"
+    file --brief --mime "${file}" | grep --extended-regexp --quiet "video"
+}
+
+isPdf() {
+    local -r file="${1}"
+    file --brief --mime "${file}" | grep --extended-regexp --quiet "pdf"
 }
 
 isReceipt() {
@@ -120,6 +169,11 @@ isVariableSet() {
 isEmptyDirectory() {
     local -r directory="${1}"
     [[ -z "$(ls -A "${directory}")" ]]
+}
+
+isRegularFile() {
+    local -r file="${1}"
+    [[ -f "${file}" ]]
 }
 
 echoError() {
