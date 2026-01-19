@@ -1,1 +1,1 @@
-* * * * * /home/josh/.local/src/cron/battery.sh
+* * * * * ${HOME}/.local/src/cron/battery.sh
