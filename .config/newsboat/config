@@ -1,5 +1,8 @@
 # The Newsboat configuration file.
 
+# Options
+cleanup-on-quit yes
+
 # Colors
 color listnormal default default
 color listfocus default default reverse
