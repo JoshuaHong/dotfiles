@@ -49,6 +49,14 @@ lower() {
     notify
 }
 
+save() {
+    brightnessctl --class="backlight" --device="${DEVICE}" --save
+}
+
+restore() {
+    brightnessctl --class="backlight" --device="${DEVICE}" --restore
+}
+
 set() {
     local -r value="${1}"
     if ! isVariableSet "${value}"; then
@@ -57,14 +65,6 @@ set() {
     fi
 
     brightnessctl --class="backlight" --device="${DEVICE}" set "${value}"
-}
-
-save() {
-    brightnessctl --class="backlight" --device="${DEVICE}" --save
-}
-
-restore() {
-    brightnessctl --class="backlight" --device="${DEVICE}" --restore
 }
 
 notify() {
