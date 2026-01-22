@@ -17,7 +17,7 @@
 
 # Select the audio device from: `pactl list sources | grep Name`
 declare -gr AUDIO_DEVICE="alsa_output.pci-0000_c5_00.6.HiFi__Speaker__sink.monitor"
-declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
+declare -gr RECORD_ICON="${XDG_DATA_HOME}/assets/icons/record.svg"
 
 main() {
     local -r operation="${1}"
@@ -74,8 +74,7 @@ notify() {
     local -r description="${1}"
 
     notify-send --hint="string:x-canonical-private-synchronous:record" \
-            --icon="${ICONS_DIRECTORY}/record.svg" \
-            "Recording" "${description}"
+            --icon="${RECORD_ICON}" "Recording" "${description}"
 }
 
 echoError() {

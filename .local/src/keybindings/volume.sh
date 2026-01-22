@@ -15,6 +15,7 @@
 #     down   - Lower the volume.
 #     toggle - Toggle the volume mute.
 
+declare -gr INCREMENT="5%"
 declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
 
 main() {
@@ -23,9 +24,9 @@ main() {
 
     local -r id="$(getId "${node}")"
     if [[ "${action}" == "up" ]]; then
-        wpctl set-volume "${id}" 5%+ --limit 1.0
+        wpctl set-volume "${id}" "${INCREMENT}+" --limit 1.0
     elif [[ "${action}" == "down" ]]; then
-        wpctl set-volume "${id}" 5%- --limit 1.0
+        wpctl set-volume "${id}" "${INCREMENT}-" --limit 1.0
     elif [[ "${action}" == "toggle" ]]; then
         wpctl set-mute "${id}" toggle
     else
@@ -53,9 +54,9 @@ notify() {
     local -r node="${1}"
     local -r id="${2}"
 
-    local -r result="$(wpctl get-volume "${id}")"
-    local -ir volume="$(parseVolume "${result}")"
-    local -r muteStatus="$(parseMute "${result}")"
+    local -r volumeInfo="$(wpctl get-volume "${id}")"
+    local -ir volume="$(parseVolume "${volumeInfo}")"
+    local -r muteStatus="$(parseMute "${volumeInfo}")"
     notify-send --hint="string:x-canonical-private-synchronous:volume" \
             --hint="int:value:${volume}" \
             --icon="${ICONS_DIRECTORY}/volume-${node}-${muteStatus}.svg" \
@@ -63,9 +64,9 @@ notify() {
 }
 
 parseVolume() {
-    local -ar result="(${1})"
+    local -ar volumeInfo="(${1})"
 
-    local -r value="${result[1]}"
+    local -r value="${volumeInfo[1]}"
     if [[ "${value:0:1}" == "1" ]]; then
         echo "100"
     else
@@ -74,9 +75,9 @@ parseVolume() {
 }
 
 parseMute() {
-    local -ar result="(${1})"
+    local -ar volumeInfo="(${1})"
 
-    if [[ "${result[2]}" ]]; then
+    if [[ "${volumeInfo[2]}" ]]; then
         echo "muted"
     else
         echo "unmuted"

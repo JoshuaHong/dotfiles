@@ -17,7 +17,7 @@
 
 declare -gr DEVICE="amdgpu_bl1"
 declare -gr INCREMENT="5%"
-declare -gr ICONS_DIRECTORY="${XDG_DATA_HOME}/assets/icons"
+declare -gr BRIGHTNESS_ICON="${XDG_DATA_HOME}/assets/icons/brightness.svg"
 
 main() {
     local -r action="${1}"
@@ -73,8 +73,7 @@ notify() {
     local -r value="$(( "${brightness}" * 100 / "${maxBrightness}" ))"
 
     notify-send --hint="string:x-canonical-private-synchronous:brightness" \
-            --hint="int:value:${value}" \
-            --icon="${ICONS_DIRECTORY}/brightness.svg" \
+            --hint="int:value:${value}" --icon="${BRIGHTNESS_ICON}" \
             "Brightness" "${value}%"
 }
 

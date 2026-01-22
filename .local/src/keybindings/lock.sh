@@ -8,10 +8,12 @@
 # Usage:
 #     lock
 
+declare -gr LOCKSCREEN="${XDG_DATA_HOME}/assets/backgrounds/lockscreen.png"
+
 main() {
     playerctl --all-players --no-messages stop
     mpc pause
-    swaylock --image "${XDG_DATA_HOME}/assets/backgrounds/lockscreen.png"
+    swaylock --image "${LOCKSCREEN}"
 }
 
 main "${@}"
