@@ -35,5 +35,5 @@ set highlight-active-color    rgba(202,158,230,0.3)
 
 map k scroll down
 map l scroll up
-map <C-k> navigate next
-map <C-l> navigate previous
+map K navigate next
+map L navigate previous
