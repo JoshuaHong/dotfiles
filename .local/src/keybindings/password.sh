@@ -9,6 +9,7 @@
 #     password
 
 main() {
+    wl-copy --clear
     local -r password="$(selectPassword)"
 
     if ! hasCachedPassword; then
