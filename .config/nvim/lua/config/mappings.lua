@@ -1,6 +1,7 @@
 -- Neovim mappings.
 
 local gitsigns = require("gitsigns")
+local neoscroll = require("neoscroll")
 local telescope = require("telescope.builtin")
 local telescopeUtils = require("telescope.utils")
 local tree = require("nvim-tree.api").tree
@@ -29,14 +30,18 @@ end)
 vim.keymap.set("n", "<CS-q>", ":qall!<CR>")
 
 -- Map buffer movement keys.
-vim.keymap.set("n", "<C-j>", ":wincmd h<CR>")
-vim.keymap.set("n", "<C-k>", ":wincmd j<CR>")
-vim.keymap.set("n", "<C-l>", ":wincmd k<CR>")
-vim.keymap.set("n", "<C-;>", ":wincmd l<CR>")
+-- vim.keymap.set("n", "<C-j>", ":wincmd h<CR>")
+-- vim.keymap.set("n", "<C-k>", ":wincmd j<CR>")
+-- vim.keymap.set("n", "<C-l>", ":wincmd k<CR>")
+-- vim.keymap.set("n", "<C-;>", ":wincmd l<CR>")
 
 -- Map page scrolling keys.
-vim.keymap.set("n", "<C-k>", "<C-d>")
-vim.keymap.set("n", "<C-l>", "<C-u>")
+vim.keymap.set("n", "<C-k>", function()
+    neoscroll.scroll(vim.wo.scroll, { duration = 300 })
+end)
+vim.keymap.set("n", "<C-l>", function()
+    neoscroll.scroll(-vim.wo.scroll, { duration = 300 })
+end)
 
 -- Don't override the clipboard on delete.
 vim.keymap.set("n", "d", "\"1d")
