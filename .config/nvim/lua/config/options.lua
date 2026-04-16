@@ -21,6 +21,8 @@ vim.opt.colorcolumn = "81"
 vim.opt.expandtab = true
 -- Allow case-insensitive search.
 vim.opt.ignorecase = true
+-- Set the key mapping.
+vim.opt.langmap = "jkl\\;;hjkl"
 -- Display the following hidden characters.
 vim.opt.list = true
 -- Set the list of hidden characters.

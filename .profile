@@ -73,6 +73,8 @@ exportVariables() {
     export HISTSIZE=-1
     # Disable the less history file.
     export LESSHISTFILE="-"
+    # Use Neovim for viewing manual pages.
+    export MANPAGER='nvim +Man!'
     # Use Fuzzel to enter sudo passwords using `sudo --askpass`.
     export SUDO_ASKPASS="${HOME}/.local/bin/fuzzel-sudo"
     # Enable Korean input method with Fcifx.
