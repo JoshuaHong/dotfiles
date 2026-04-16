@@ -30,10 +30,10 @@ end)
 vim.keymap.set("n", "<CS-q>", ":qall!<CR>")
 
 -- Map buffer movement keys.
--- vim.keymap.set("n", "<C-j>", ":wincmd h<CR>")
--- vim.keymap.set("n", "<C-k>", ":wincmd j<CR>")
--- vim.keymap.set("n", "<C-l>", ":wincmd k<CR>")
--- vim.keymap.set("n", "<C-;>", ":wincmd l<CR>")
+vim.keymap.set("n", "<C-e>", ":wincmd w<CR>")
+vim.keymap.set("n", "<CS-e>", ":wincmd W<CR>")
+vim.keymap.set("n", "<C-tab>", ":tabnext<CR>")
+vim.keymap.set("n", "<CS-tab>", ":tabprev<CR>")
 
 -- Map page scrolling keys.
 vim.keymap.set("n", "<C-k>", function()
@@ -72,7 +72,7 @@ vim.keymap.set("n", "<C-s>", function()
     telescope.live_grep({ cwd = telescopeUtils.buffer_dir() })
 end)
 vim.keymap.set("n", "<C-b>", telescope.buffers)
-vim.keymap.set("n", "<C-m>", telescope.marks)
+vim.keymap.set("n", "<C-i>", telescope.marks)
 vim.keymap.set("n", "<C-g>", telescope.git_status)
 vim.keymap.set("n", "<C-a>", telescope.lsp_references)
 vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
@@ -95,8 +95,7 @@ vim.keymap.set("n", "<C-o>", gitsigns.diffthis)
 vim.keymap.set("n", "<C-p>", gitsigns.blame)
 
 -- Tree key mappings.
-vim.keymap.set("n", "<C-t>", tree.change_root_to_node)
-vim.keymap.set("n", "<C-Tab>", function()
+vim.keymap.set("n", "<C-t>", function()
     tree.toggle { focus = false }
 end)
 

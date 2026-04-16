@@ -13,6 +13,8 @@ vim.pack.add({
     { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
     -- To install and update LSP packages automatically.
     { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+    -- To enable smooth scrolling.
+    { src = "https://github.com/karb94/neoscroll.nvim" },
     -- To add a colorscheme.
     { src = "https://github.com/catppuccin/nvim" },
     -- To use the latest LSP configuration files automatically.
@@ -21,12 +23,12 @@ vim.pack.add({
     { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     -- To parse code.
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-    -- To search files.
-    { src = "https://github.com/nvim-telescope/telescope.nvim" },
     -- To use telescope.
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     -- To view markdown.
-    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+    -- To search files.
+    { src = "https://github.com/nvim-telescope/telescope.nvim" }
 })
 
 require("plugins.blink")
@@ -36,7 +38,8 @@ require("plugins.lualine")
 require("plugins.mason")
 require("plugins.mason-lspconfig")
 require("plugins.mason-tool-installer")
-require("plugins.tree")
-require("plugins.telescope")
-require("plugins.treesitter")
+require("plugins.neoscroll")
 require("plugins.render-markdown")
+require("plugins.telescope")
+require("plugins.tree")
+require("plugins.treesitter")
