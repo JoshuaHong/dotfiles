@@ -2,7 +2,8 @@
 
 local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
-local treeApi = require("nvim-tree.api").tree
+local telescopeUtils = require("telescope.utils")
+local tree = require("nvim-tree.api").tree
 local treeUtils = require("nvim-tree.utils")
 
 -- Clear highlighting on escape.
@@ -27,24 +28,15 @@ vim.keymap.set("n", "<C-q>", function()
 end)
 vim.keymap.set("n", "<CS-q>", ":qall!<CR>")
 
--- Map movement keys.
-vim.keymap.set("n", "j", "h")
-vim.keymap.set("n", "k", "j")
-vim.keymap.set("n", "l", "k")
-vim.keymap.set("n", ";", "l")
-vim.keymap.set("v", "j", "h")
-vim.keymap.set("v", "k", "j")
-vim.keymap.set("v", "l", "k")
-vim.keymap.set("v", ";", "l")
-vim.keymap.set("n", "gk", "gj")
-vim.keymap.set("n", "gl", "gk")
-vim.keymap.set("n", "<CR>", "<CR>")
-
 -- Map buffer movement keys.
 vim.keymap.set("n", "<C-j>", ":wincmd h<CR>")
 vim.keymap.set("n", "<C-k>", ":wincmd j<CR>")
 vim.keymap.set("n", "<C-l>", ":wincmd k<CR>")
 vim.keymap.set("n", "<C-;>", ":wincmd l<CR>")
+
+-- Map page scrolling keys.
+vim.keymap.set("n", "<C-k>", "<C-d>")
+vim.keymap.set("n", "<C-l>", "<C-u>")
 
 -- Don't override the clipboard on delete.
 vim.keymap.set("n", "d", "\"1d")
@@ -68,8 +60,12 @@ vim.keymap.set("n", "<CS-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<CS-/>", "gc", { remap = true })
 
 -- Telescope key mappings.
-vim.keymap.set("n", "<C-f>", telescope.find_files)
-vim.keymap.set("n", "<C-s>", telescope.live_grep)
+vim.keymap.set("n", "<C-f>", function()
+    telescope.find_files({ cwd = telescopeUtils.buffer_dir() })
+end)
+vim.keymap.set("n", "<C-s>", function()
+    telescope.live_grep({ cwd = telescopeUtils.buffer_dir() })
+end)
 vim.keymap.set("n", "<C-b>", telescope.buffers)
 vim.keymap.set("n", "<C-m>", telescope.marks)
 vim.keymap.set("n", "<C-g>", telescope.git_status)
@@ -77,14 +73,26 @@ vim.keymap.set("n", "<C-a>", telescope.lsp_references)
 vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
 
 -- Gitsigns key mappings.
-vim.keymap.set("n", "<C-h>", gitsigns.preview_hunk)
+vim.keymap.set("n", "<C-h>", function()
+    gitsigns.nav_hunk("next")
+    vim.defer_fn(function()
+        gitsigns.preview_hunk_inline()
+    end, 10)
+end)
+vim.keymap.set("n", "<CS-h>", function()
+    gitsigns.nav_hunk("prev")
+    vim.defer_fn(function()
+        gitsigns.preview_hunk_inline()
+    end, 10)
+end)
 vim.keymap.set("n", "<CS-r>", gitsigns.reset_hunk)
+vim.keymap.set("n", "<C-o>", gitsigns.diffthis)
 vim.keymap.set("n", "<C-p>", gitsigns.blame)
 
 -- Tree key mappings.
-vim.keymap.set("n", "<C-t>", treeApi.change_root_to_node)
+vim.keymap.set("n", "<C-t>", tree.change_root_to_node)
 vim.keymap.set("n", "<C-Tab>", function()
-    treeApi.toggle { focus = false }
+    tree.toggle { focus = false }
 end)
 
 -- Jump to the next diagnostic message.
