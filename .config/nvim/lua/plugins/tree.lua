@@ -9,7 +9,7 @@ require("nvim-tree").setup({
         vim.keymap.set("n", "<CR>", treeApi.node.open.edit, opts)
         vim.keymap.set("n", "<C-n>", treeApi.tree.change_root_to_node, opts)
         vim.keymap.set("n", "<C-r>", treeApi.fs.rename_sub, opts)
-        vim.keymap.set("n", "C-t>", treeApi.node.open.tab_drop, opts)
+        vim.keymap.set("n", "<C-t>", treeApi.node.open.tab_drop, opts)
         vim.keymap.set("n", "<C-v>", treeApi.node.open.vertical, opts)
         vim.keymap.set("n", "<C-x>", treeApi.node.open.horizontal, opts)
         vim.keymap.set("n", "<C-d>", treeApi.fs.remove, opts)
