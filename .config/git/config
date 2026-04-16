@@ -5,3 +5,9 @@
     gpgsign = true
 [tag]
     gpgSign = true
+[diff]
+    tool = nvimdiff
+[merge]
+    tool = nvimdiff
+[difftool]
+    prompt = false
