@@ -8,7 +8,8 @@ require("telescope").setup({
             i = {
                 ["<Esc>"] = actions.close,
                 ["<C-k>"] = "move_selection_next",
-                ["<C-l>"] = "move_selection_previous"
+                ["<C-l>"] = "move_selection_previous",
+                ["<C-d>"] = actions.delete_buffer
             }
         }
     },
