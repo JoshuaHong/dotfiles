@@ -177,7 +177,8 @@ The Arch Linux environment.
 ### Install the remaining packages
 * Clone the configuration files: <code>git clone https://github.com/JoshuaHong/dotfiles.git && cd dotfiles/</code>
 * Copy the configuration files: <code>rm -rf ~/.* && cp -r .bashrc .config/ .local/ .profile .ssh/ .trash/ ~ && rm -rf ../dotfiles/ && cd</code>
-* Install all the packages below
+* Install all the packages below: <code>yay -S <code><var>PACKAGES</var></code></code>
+* Remove orphaned packages: <code>pacman -Qdtq | pacman -Rns -</code>
 * Enable required services: <code>systemctl enable --now bluetooth.service cronie.service</code>
 * Update the crontab: <code>[crontab -e](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/crontab)</code>
 
