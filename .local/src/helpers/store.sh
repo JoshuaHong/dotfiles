@@ -2,8 +2,9 @@
 #
 # Store files from SFTP to storage.
 #
-# Files must be valid images or videos in the following format: *_YYYYmmdd*
-# For example: IMG_20251229_foo_bar.png or Screencast_20251229_1.mp4.
+# File names must be the following to be sorted by date: /^[^_]*_(yyyyMMdd.*)$/g
+# For example, IMG_20251229_foo_bar.png or Screencast_20251229_1.mp4 will be
+# stored in the 2025/12/29 directory; otherwise, they will be renamed manually.
 #
 # Usage:
 #     store
@@ -80,26 +81,42 @@ addDescription() {
 
 moveToStorage() {
     local -r file="${1}"
-    if ! canGetDate "${file}"; then
-        echoError "Error: Invalid file name. Cannot move: ${file}."
-        return
-    fi
+    local -r name="$(renameFile "${file}")"
 
     local -r isReceipt="$(getIsReceipt)"
     for baseDirectory in "${!BASE_DIRECTORIES[@]}"; do
-        local directory="$(getDirectory "${baseDirectory}" "${file}" \
+        local directory="$(getDirectory "${baseDirectory}" "${name}" \
                 "${isReceipt}")"
         mkdir --parents "${directory}"
-        cp --archive "${file}" "${directory}" || exit 1
+        cp --archive --backup="numbered" "${SFTP_DIRECTORY}/${name}" \
+                "${directory}" || exit 1
     done
-    rm "${file}"
+    rm "${SFTP_DIRECTORY}/${name}"
+}
+
+renameFile() {
+    local -r file="${1}"
+    local -r name="$(basename "${file}")"
+    local -r extension="${file#*.}"
+
+    if isValidDate "$(getDate "${name}")"; then
+        echo "${name}"
+        return
+    fi
+
+    while ! isValidDate "${date}"; do
+        read -rp "Date (yyyy/MM/dd): " date
+    done
+    local -r date="${date:0:4}${date:5:2}${date:8:2}"  # Remove the slashes.
+    mv --backup="numbered" "${file}" "${SFTP_DIRECTORY}/${date}.${extension}"
+    echo "${date}.${extension}"
 }
 
 getDirectory() {
     local -r baseDirectory="${1}"
-    local -r file="${2}"
+    local -r name="${2}"
     local -r isReceipt="${3}"
-    local -r dateDirectory="$(getDate "${file}")"
+    local -r dateDirectory="$(getDate "${name}")"
 
     if isReceipt "${isReceipt}"; then
         echo "${baseDirectory}/${RECEIPTS_DIRECTORY}/${dateDirectory}"
@@ -116,21 +133,15 @@ getIsReceipt() {
 }
 
 getDate() {
-    local -r file="${1}"
-    name="${file#*_}"  # Remove the first underscore and everything before it.
-    # Add a slash between dates to get YYYY/mm/dd format and omit the rest.
+    local name="${1}"
+    name="${name#*_}"  # Remove the first underscore and everything before it.
+    # Add a slash between dates to get yyyy/MM/dd format and omit the rest.
     echo "${name:0:4}"/"${name:4:2}"/"${name:6:2}"
-}
-
-canGetDate() {
-    local -r file="${1}"
-    local -r date="$(getDate "${file}")"
-    isValidDate "${date}"
 }
 
 isValidDate() {
     local -r date="${1}"
-    # Check that the date is in YYYY/mm/dd format and is an actual calendar day.
+    # Check that the date is in yyyy/MM/dd format and is an actual calendar day.
     [[ "${date}" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]] && \
             date -d "${date}" "+%Y/%m/%d" > /dev/null 2>&1
 }
