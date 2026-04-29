@@ -2,9 +2,11 @@
 #
 # Store files from SFTP to storage.
 #
-# File names must be the following to be sorted by date: /^[^_]*_(yyyyMMdd.*)$/g
-# For example, IMG_20251229_foo_bar.png or Screencast_20251229_1.mp4 will be
-# stored in the 2025/12/29 directory; otherwise, they will be renamed manually.
+# Files must be named with the date yyyyMMdd immediately following the first
+# underscore if it exists, or the date at the start of the line otherwise.
+# Regex: ^[^_]*_?yyyyMMdd.*$
+# For example, IMG_20251229_foo_bar.png or 20251229_screencast.mp4 will be
+# stored in the 2025/12/29 directory. Invalid file names will be renamed.
 #
 # Usage:
 #     store
@@ -14,8 +16,11 @@ declare -Agr BASE_DIRECTORIES=(
         ["${HOME}"]=""
         ["/mnt/sda"]="/dev/sda"
         ["/mnt/sdb"]="/dev/sdb")
-declare -gr MEDIA_DIRECTORY="storage/media/photos"
+declare -gr PHOTOS_DIRECTORY="storage/media/photos"
+declare -gr VIDEOS_DIRECTORY="storage/media/videos"
 declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
+declare -gr SKIP="SKIP"
+declare -agr fileTypes=("p" "v" "r" "s")
 
 main() {
     isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
@@ -66,7 +71,7 @@ viewFile() {
     elif isPdf "${file}"; then
         zathura "${file}" > /dev/null &
     else
-        foot --hold bash -c "cat ${file}" > /dev/null 2>&1 &
+        foot --hold bash -c "less ${file}" > /dev/null 2>&1 &
     fi
 }
 
@@ -83,10 +88,13 @@ moveToStorage() {
     local -r file="${1}"
     local -r name="$(renameFile "${file}")"
 
-    local -r isReceipt="$(getIsReceipt)"
+    local -r fileType="$(getFileType)"
     for baseDirectory in "${!BASE_DIRECTORIES[@]}"; do
         local directory="$(getDirectory "${baseDirectory}" "${name}" \
-                "${isReceipt}")"
+                "${fileType}")"
+        if [[ "${directory}" == "${SKIP}" ]]; then
+            return
+        fi
         mkdir --parents "${directory}"
         cp --archive --backup="numbered" "${SFTP_DIRECTORY}/${name}" \
                 "${directory}" || exit 1
@@ -97,7 +105,6 @@ moveToStorage() {
 renameFile() {
     local -r file="${1}"
     local -r name="$(basename "${file}")"
-    local -r extension="${file#*.}"
 
     if isValidDate "$(getDate "${name}")"; then
         echo "${name}"
@@ -108,28 +115,42 @@ renameFile() {
         read -rp "Date (yyyy/MM/dd): " date
     done
     local -r date="${date:0:4}${date:5:2}${date:8:2}"  # Remove the slashes.
-    mv --backup="numbered" "${file}" "${SFTP_DIRECTORY}/${date}.${extension}"
-    echo "${date}.${extension}"
+
+    if hasExtension "${name}"; then
+        local -r extension="${file#*.}"
+    fi
+    mv --backup="numbered" "${file}" \
+            "${SFTP_DIRECTORY}/${date}${extension:+.${extension}}"
+    echo "${date}${extension:+.${extension}}"
 }
 
 getDirectory() {
     local -r baseDirectory="${1}"
     local -r name="${2}"
-    local -r isReceipt="${3}"
+    local -r fileType="${3}"
     local -r dateDirectory="$(getDate "${name}")"
 
-    if isReceipt "${isReceipt}"; then
-        echo "${baseDirectory}/${RECEIPTS_DIRECTORY}/${dateDirectory}"
-    else
-        echo "${baseDirectory}/${MEDIA_DIRECTORY}/${dateDirectory}"
-    fi
+    case "${fileType}" in
+        "p")
+            echo "${baseDirectory}/${PHOTOS_DIRECTORY}/${dateDirectory}"
+            ;;
+        "v")
+            echo "${baseDirectory}/${VIDEOS_DIRECTORY}/${dateDirectory}"
+            ;;
+        "r")
+            echo "${baseDirectory}/${RECEIPTS_DIRECTORY}/${dateDirectory}"
+            ;;
+        *)
+            echo "${SKIP}"
+            ;;
+    esac
 }
 
-getIsReceipt() {
-    while ! isYesNoVariableSet "${isReceipt}"; do
-        read -rp "Receipt (y/n)? " isReceipt
+getFileType() {
+    while ! isValidFileType "${fileType}"; do
+        read -rp "File type [photo (p) / video (v) / receipt (r) / skip (s)]: " fileType
     done
-    echo "${isReceipt}"
+    echo "${fileType}"
 }
 
 getDate() {
@@ -144,6 +165,11 @@ isValidDate() {
     # Check that the date is in yyyy/MM/dd format and is an actual calendar day.
     [[ "${date}" =~ ^[0-9]{4}/[0-9]{2}/[0-9]{2}$ ]] && \
             date -d "${date}" "+%Y/%m/%d" > /dev/null 2>&1
+}
+
+isValidFileType() {
+    local -r fileType="${1}"
+    [[ " ${fileTypes[*]} " =~ " ${fileType} " ]]
 }
 
 isPhoto() {
@@ -162,16 +188,6 @@ isPdf() {
     file --brief --mime "${file}" | grep --extended-regexp --quiet "pdf"
 }
 
-isReceipt() {
-    local -r isReceipt="${1}"
-    [[ "${isReceipt}" == "y" ]]
-}
-
-isYesNoVariableSet() {
-    local -r isReceipt="${1}"
-    [[ "${isReceipt}" == "y" || "${isReceipt}" == "n" ]]
-}
-
 isVariableSet() {
     local -r variable="${1}"
     [[ -n "${variable}" ]]
@@ -185,6 +201,11 @@ isEmptyDirectory() {
 isRegularFile() {
     local -r file="${1}"
     [[ -f "${file}" ]]
+}
+
+hasExtension() {
+    local -r file="${1}"
+    [[ "${file}" == *.* ]]
 }
 
 echoError() {
