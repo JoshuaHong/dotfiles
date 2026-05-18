@@ -19,7 +19,7 @@ declare -Agr BASE_DIRECTORIES=(
 declare -gr GALLERY_DIRECTORY="storage/media/gallery"
 declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
 declare -gr SKIP="SKIP"
-declare -agr fileTypes=("p" "v" "r" "s")
+declare -agr fileTypes=("g" "r" "s")
 
 main() {
     isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
