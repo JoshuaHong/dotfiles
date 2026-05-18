@@ -1,6 +1,8 @@
 [user]
     name = Joshua Hong
     email = hong.josh@protonmail.com
+[pull]
+    rebase = true
 [commit]
     gpgsign = true
 [tag]
