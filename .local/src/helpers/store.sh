@@ -16,8 +16,7 @@ declare -Agr BASE_DIRECTORIES=(
         ["${HOME}"]=""
         ["/mnt/sda"]="/dev/sda"
         ["/mnt/sdb"]="/dev/sdb")
-declare -gr PHOTOS_DIRECTORY="storage/media/photos"
-declare -gr VIDEOS_DIRECTORY="storage/media/videos"
+declare -gr GALLERY_DIRECTORY="storage/media/gallery"
 declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
 declare -gr SKIP="SKIP"
 declare -agr fileTypes=("p" "v" "r" "s")
@@ -131,11 +130,8 @@ getDirectory() {
     local -r dateDirectory="$(getDate "${name}")"
 
     case "${fileType}" in
-        "p")
-            echo "${baseDirectory}/${PHOTOS_DIRECTORY}/${dateDirectory}"
-            ;;
-        "v")
-            echo "${baseDirectory}/${VIDEOS_DIRECTORY}/${dateDirectory}"
+        "g")
+            echo "${baseDirectory}/${GALLERY_DIRECTORY}/${dateDirectory}"
             ;;
         "r")
             echo "${baseDirectory}/${RECEIPTS_DIRECTORY}/${dateDirectory}"
@@ -148,7 +144,7 @@ getDirectory() {
 
 getFileType() {
     while ! isValidFileType "${fileType}"; do
-        read -rp "File type [photo (p) / video (v) / receipt (r) / skip (s)]: " fileType
+        read -rp "File type [gallery (g) / receipt (r) / skip (s)]: " fileType
     done
     echo "${fileType}"
 }
