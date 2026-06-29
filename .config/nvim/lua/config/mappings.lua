@@ -95,8 +95,8 @@ vim.keymap.set("n", "<C-o>", gitsigns.diffthis)
 vim.keymap.set("n", "<C-p>", gitsigns.blame)
 
 -- Tree key mappings.
-vim.keymap.set("n", "<C-t>", tree.change_root_to_node)
-vim.keymap.set("n", "<C-y>", function()
+vim.keymap.set("n", "<C-y>", tree.change_root_to_node)
+vim.keymap.set("n", "<C-t>", function()
     tree.toggle { focus = false }
 end)
 
