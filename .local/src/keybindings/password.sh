@@ -9,36 +9,15 @@
 #     password
 
 main() {
-    wl-copy --clear
-    local -r password="$(selectPassword)"
-
-    if ! hasCachedPassword; then
-        enterPassword "${password}"
-    fi
-
-    pass show --clip "${password}"
+    local -r selection="$(selectPassword)"
+    pass show --clip "${selection}"
 }
 
 selectPassword() {
-    local -a passwords
-    parsePasswords passwords
-    printf '%s\n' "${passwords[@]}" | fuzzel --dmenu "${@}"
-}
-
-parsePasswords() {
-    local -n passwordFiles="${1}"
-    passwordFiles=( "${PASSWORD_STORE_DIR}"**/*.gpg )
-    passwordFiles=( "${passwords[@]#"${PASSWORD_STORE_DIR}"/}" )
-    passwordFiles=( "${passwords[@]%.gpg}" )
-}
-
-hasCachedPassword() {
-    echo | gpg --pinentry-mode error --sign > /dev/null 2>&1
-}
-
-enterPassword() {
-    local -r password="${1}"
-    foot pass show "${password}"
+    mapfile -t passwords < <(find "${PASSWORD_STORE_DIR}" -name "*.gpg" -type f)
+    passwords=( "${passwords[@]#"${PASSWORD_STORE_DIR}"/}" )
+    passwords=( "${passwords[@]%.gpg}" )
+    printf "%s\n" "${passwords[@]}" | sort | fuzzel --dmenu
 }
 
 main "${@}"
