@@ -16,7 +16,8 @@ while read -r stdin; do
             echo "OK"
             ;;
         *GETPIN*)
-            PASS_INPUT="$(DISPLAY=:0 fuzzel --dmenu --password --prompt-only "Password: ")"
+            PASS_INPUT="$(DISPLAY=:0 \
+                    fuzzel --dmenu --password --prompt-only "Password: ")"
             if [[ -n "${PASS_INPUT}" ]] ; then
                 echo "D ${PASS_INPUT}"
                 echo "OK"
