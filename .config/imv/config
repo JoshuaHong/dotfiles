@@ -1,0 +1,7 @@
+# The Imv configuration file.
+
+[options]
+overlay = true
+overlay_font = Noto Sans:10
+overlay_position_bottom = true
+overlay_text = "$(printf "%s\n%s\n" "${imv_current_file}" "$(getfattr --name="user.description" --only-values "${imv_current_file}")")"
