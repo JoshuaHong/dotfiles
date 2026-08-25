@@ -131,6 +131,8 @@ The Arch Linux environment.
 * Create the iwd configuration file: <code>[/etc/iwd/main.conf](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/iwd/main.conf)</code>
 * Enable the iwd service: <code>systemctl enable --now iwd.service systemd-resolved.service</code>
 * Enable DNS: <code>ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</code>
+* Install wireless-regdb: <code>sudo pacman -S wireless-regdb</code>
+* Enable 6G networks: <code>[/etc/conf.d/wireless-regdom](https://raw.githubusercontent.com/JoshuaHong/dotfiles/refs/heads/master/etc/conf.d/wireless-regdom)</code>
 * Connect to the internet: <code>iwctl station <code><var>DEVICE</var></code> connect <code><var>SSID</var></code></code>
     > 💡 **Tip**: Find the device name: <code>iwctl device list</code> \
     > 💡 **Tip**: Find the SSID name: <code>iwctl station <code><var>DEVICE</code></var> get-networks</code>
@@ -269,13 +271,13 @@ Count: 50
 | slurp                                                     | To select a region for screen capture.                                                                           |
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
-| tmux                                                      | To enable session persistence.                                                                                   |
 | tree-sitter-cli                                           | To use nvim-treesitter.                                                                                          |
 | ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
 | typst                                                     | To use Typst.                                                                                                    |
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
 | wf-recorder                                               | To record the screen.                                                                                            |
+| wireless-regdb                                            | To connect to Wi-Fi 6G networks.                                                                                 |
 | wl-clipboard                                              | To manage copying to the clipboard.                                                                              |
 | yay-bin \*                                                | To enable installing packages from the Arch User Repository.                                                     |
 | yt-dlp                                                    | To download YouTube videos.                                                                                      |
