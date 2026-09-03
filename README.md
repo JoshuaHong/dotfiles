@@ -260,7 +260,7 @@ Count: 50
 | newsboat                                                  | To read news.                                                                                                    |
 | niri<br>(xdg-desktop-portal-gnome)                        | To use Wayland.<br>(To enable screensharing on Niri.)                                                            |
 | noto-fonts-cjk                                            | To provide Chinese, Japanese, and Korean fonts.                                                                  |
-| noto-fonts-emoji                                          | To provides emoji fonts in color.                                                                                |
+| noto-fonts-emoji                                          | To provide emoji fonts in color.                                                                                 |
 | npm                                                       | To use the Bash LSP.                                                                                             |
 | nvidia-open \*\*                                          | To enable the NVIDIA graphics card drivers.                                                                      |
 | pacman-contrib                                            | To use tools for Pacman systems.                                                                                 |
@@ -272,7 +272,7 @@ Count: 50
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
 | tree-sitter-cli                                           | To use nvim-treesitter.                                                                                          |
-| ttf-nerd-fonts-symbols                                    | To provides symbol fonts.                                                                                        |
+| ttf-nerd-fonts-symbols                                    | To provide symbol fonts.                                                                                         |
 | typst                                                     | To use Typst.                                                                                                    |
 | waybar                                                    | To provide the Wayland bar.                                                                                      |
 | wbg \*                                                    | To display the background image.                                                                                 |
