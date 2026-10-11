@@ -19,7 +19,11 @@ main() {
 }
 
 hasUpdates() {
-    checkupdates
+    while checkupdates; local status="${?}"; [[ "${status}" -eq 1 ]]; do
+        sleep 5
+    done
+
+    return "${status}"
 }
 
 main "${@}"
