@@ -12,7 +12,7 @@ main() {
     echo "Updating packages..."
 
     if hasUpdates; then
-        yay
+        yay --noconfirm
         pacdiff --sudo
         ${SHELL}
     fi
