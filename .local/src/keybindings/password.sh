@@ -8,9 +8,33 @@
 # Usage:
 #     password
 
+declare -gr CLIPBOARD_DELAY_SECS=45
+
 main() {
+    local -r clipboard="$(getClipboard)"
+    clearClipboard
+    copyPassword
+    restoreClipboard "${clipboard}"
+}
+
+getClipboard() {
+    wl-paste
+}
+
+clearClipboard() {
+    wl-copy --clear
+}
+
+copyPassword() {
     local -r selection="$(selectPassword)"
     pass show --clip "${selection}"
+}
+
+restoreClipboard() {
+    local -r clipboard="${1}"
+
+    sleep "${CLIPBOARD_DELAY_SECS}"
+    wl-copy "${clipboard}"
 }
 
 selectPassword() {
