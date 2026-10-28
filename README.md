@@ -228,7 +228,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 50
+Count: 51
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -268,6 +268,7 @@ Count: 50
 | pipewire-pulse \*\*                                       | To enable audio on Mullvad Browser.                                                                              |
 | ripgrep                                                   | To search text using telescope.nvim.                                                                             |
 | rtorrent                                                  | To download torrents.                                                                                            |
+| simple-mtpfs                                              | To transfer files to and from phones.                                                                            |
 | slurp                                                     | To select a region for screen capture.                                                                           |
 | swayidle                                                  | To manage idle events.                                                                                           |
 | swaylock                                                  | To lock the screen.                                                                                              |
