@@ -107,8 +107,8 @@ button:hover {
 }
 
 #bluetooth {
-    color: @sapphire;
-    border-color: @sapphire;
+    color: @pink;
+    border-color: @pink;
 }
 
 #wireplumber {
