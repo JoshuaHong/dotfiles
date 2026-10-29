@@ -32,6 +32,10 @@ main() {
 mountStorageDirectories() {
     for directory in "${!BASE_DIRECTORIES[@]}"; do
         local device="${BASE_DIRECTORIES["${directory}"]}"
+        if isMounted "${device}"; then
+            echoError "Error: Device already mounted: ${device}."
+            exit 1
+        fi
         sudo mkdir --parents "${directory}"
         if isVariableSet "${device}"; then
             sudo mount "${device}" "${directory}" || exit 1
@@ -56,6 +60,7 @@ unmountStorageDirectories() {
         local device="${BASE_DIRECTORIES["${directory}"]}"
         if isVariableSet "${device}"; then
             sudo umount "${device}"
+            sudo rmdir "${directory}"
         fi
     done
 }
@@ -154,6 +159,11 @@ getDate() {
     name="${name#*_}"  # Remove the first underscore and everything before it.
     # Add a slash between dates to get yyyy/MM/dd format and omit the rest.
     echo "${name:0:4}"/"${name:4:2}"/"${name:6:2}"
+}
+
+isMounted() {
+    local -r device="${1}"
+    findmnt --source "${device}" > /dev/null
 }
 
 isValidDate() {
