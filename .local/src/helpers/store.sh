@@ -33,6 +33,18 @@ prepareStorage() {
     mountStorageDirectories
 }
 
+storeFiles() {
+    for file in "${INPUT_DIRECTORY}"/*; do
+        if ! isRegularFile "${file}"; then
+            echoError "Error: Invalid file: ${file}."
+            continue
+        fi
+        viewFile "${file}"
+        addDescription "${file}"
+        moveToStorage "${file}"
+    done
+}
+
 mountStorageDirectories() {
     for directory in "${!OUTPUT_DIRECTORIES[@]}"; do
         local device="${OUTPUT_DIRECTORIES["${directory}"]}"
@@ -44,18 +56,6 @@ mountStorageDirectories() {
         if isVariableSet "${device}"; then
             sudo mount "${device}" "${directory}" || exit 1
         fi
-    done
-}
-
-storeFiles() {
-    for file in "${INPUT_DIRECTORY}"/*; do
-        if ! isRegularFile "${file}"; then
-            echoError "Error: Invalid file: ${file}."
-            continue
-        fi
-        viewFile "${file}"
-        addDescription "${file}"
-        moveToStorage "${file}"
     done
 }
 
