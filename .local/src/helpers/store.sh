@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Store files from SFTP to storage.
+# Store files to storage.
 #
 # Files must be named with the date yyyyMMdd immediately following the first
 # underscore if it exists, or the date at the start of the line otherwise.
@@ -11,8 +11,8 @@
 # Usage:
 #     store
 
-declare -gr SFTP_DIRECTORY="/var/lib/jail/sftp"
-declare -Agr BASE_DIRECTORIES=(
+declare -gr INPUT_DIRECTORY="/var/lib/jail/sftp"
+declare -Agr OUTPUT_DIRECTORIES=(
         ["${HOME}"]=""
         ["/mnt/sda"]="/dev/sda"
         ["/mnt/sdb"]="/dev/sdb")
@@ -22,16 +22,20 @@ declare -gr SKIP="SKIP"
 declare -agr fileTypes=("g" "r" "s")
 
 main() {
-    isEmptyDirectory "${SFTP_DIRECTORY}" && exit 0
-    sudo chown "${USER}:${USER}" "${SFTP_DIRECTORY}"/* || exit 1
-    mountStorageDirectories
+    prepareStorage
     storeFiles
-    unmountStorageDirectories
+}
+
+prepareStorage() {
+    isEmptyDirectory "${INPUT_DIRECTORY}" && exit 0
+    sudo chown "${USER}:${USER}" "${INPUT_DIRECTORY}"/* || exit 1
+    trap unmountStorageDirectories EXIT
+    mountStorageDirectories
 }
 
 mountStorageDirectories() {
-    for directory in "${!BASE_DIRECTORIES[@]}"; do
-        local device="${BASE_DIRECTORIES["${directory}"]}"
+    for directory in "${!OUTPUT_DIRECTORIES[@]}"; do
+        local device="${OUTPUT_DIRECTORIES["${directory}"]}"
         if isMounted "${device}"; then
             echoError "Error: Device already mounted: ${device}."
             exit 1
@@ -44,7 +48,7 @@ mountStorageDirectories() {
 }
 
 storeFiles() {
-    for file in "${SFTP_DIRECTORY}"/*; do
+    for file in "${INPUT_DIRECTORY}"/*; do
         if ! isRegularFile "${file}"; then
             echoError "Error: Invalid file: ${file}."
             continue
@@ -56,8 +60,8 @@ storeFiles() {
 }
 
 unmountStorageDirectories() {
-    for directory in "${!BASE_DIRECTORIES[@]}"; do
-        local device="${BASE_DIRECTORIES["${directory}"]}"
+    for directory in "${!OUTPUT_DIRECTORIES[@]}"; do
+        local device="${OUTPUT_DIRECTORIES["${directory}"]}"
         if isVariableSet "${device}"; then
             sudo umount "${device}"
             sudo rmdir "${directory}"
@@ -93,17 +97,17 @@ moveToStorage() {
     local -r name="$(renameFile "${file}")"
 
     local -r fileType="$(getFileType)"
-    for baseDirectory in "${!BASE_DIRECTORIES[@]}"; do
+    for baseDirectory in "${!OUTPUT_DIRECTORIES[@]}"; do
         local directory="$(getDirectory "${baseDirectory}" "${name}" \
                 "${fileType}")"
         if [[ "${directory}" == "${SKIP}" ]]; then
             return
         fi
         mkdir --parents "${directory}"
-        cp --archive --backup="numbered" "${SFTP_DIRECTORY}/${name}" \
+        cp --archive --backup="numbered" "${INPUT_DIRECTORY}/${name}" \
                 "${directory}" || exit 1
     done
-    rm "${SFTP_DIRECTORY}/${name}"
+    rm "${INPUT_DIRECTORY}/${name}"
 }
 
 renameFile() {
@@ -124,7 +128,7 @@ renameFile() {
         local -r extension="${file#*.}"
     fi
     mv --backup="numbered" "${file}" \
-            "${SFTP_DIRECTORY}/${date}${extension:+.${extension}}"
+            "${INPUT_DIRECTORY}/${date}${extension:+.${extension}}"
     echo "${date}${extension:+.${extension}}"
 }
 
