@@ -79,16 +79,16 @@ button:hover {
     background-color: @red;
 }
 
-#window {
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
 #privacy {
     margin-left: 5px;
 }
 
-#mpd,
+#window {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#mpris,
 #bluetooth,
 #wireplumber,
 #backlight,
@@ -102,7 +102,7 @@ button:hover {
     border-radius: 8px;
 }
 
-#mpd {
+#mpris {
     color: @lavender;
     border-color: @lavender;
 }

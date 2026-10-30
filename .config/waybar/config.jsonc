@@ -6,7 +6,7 @@
     "spacing": 4,
     "modules-left": [
         "niri/workspaces",
-        "mpd",
+        "mpris",
         "privacy"
     ],
     "modules-center": [
@@ -24,28 +24,25 @@
         "niri/language",
         "idle_inhibitor"
     ],
-    "mpd": {
-        "format": "󰝚  {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) {stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
+    "niri/workspaces": {
+        "hide-empty": true,
+        "cursor": true
+    },
+    "mpris": {
+        "cursor": false,
+        "on-click": "",
+        "artist-len": 30,
+        "album-len": 30,
+        "title-len": 30,
+        "ignore-null": false,
+        "format": "󰝚  {dynamic} ({position}/{length}) {status_icon}",
         "format-stopped": "󰝛  Artist - Title (00:00/00:00) 󰓛",
-        "interval": 10,
-        "consume-icons": {
-            "on": " 󰆐"
-        },
-        "random-icons": {
-            "off": " 󰒞",
-            "on": " 󰒟"
-        },
-        "repeat-icons": {
-            "on": " 󰑖"
-        },
-        "single-icons": {
-            "on": " 󰑘"
-        },
-        "state-icons": {
+        "dynamic-order": ["artist", "title"],
+        "status-icons": {
+            "playing": " 󰐊",
             "paused": " 󰏤",
-            "playing": " 󰐊"
-        },
-        "tooltip-format": "{album}"
+            "stopped": " 󰓛"
+        }
     },
     "niri/window": {
         "format": "{app_id}"
