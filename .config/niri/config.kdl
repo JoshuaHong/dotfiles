@@ -19,7 +19,7 @@ input {
     keyboard {
         xkb {
             layout "us,kr"
-            options "caps:swapescape, ctrl:swap_lalt_lctl, korean:rctrl_hanja"
+            options "caps:swapescape, ctrl:swap_lalt_lctl, korean:ralt_hanja"
         }
     }
     touchpad {

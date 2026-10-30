@@ -10,6 +10,7 @@
 
 main() {
     fcitx5-remote -t
+    niri msg action switch-layout next
 }
 
 main "${@}"

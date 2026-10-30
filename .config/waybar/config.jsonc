@@ -21,6 +21,7 @@
         "clock",
         "clock#calendar",
         "network",
+        "niri/language",
         "idle_inhibitor"
     ],
     "mpd": {
@@ -138,6 +139,10 @@
         "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "󰖪 Disconnected",
         "max-length": 20
+    },
+    "niri/language": {
+        "format": "󰥻 {short}",
+        "tooltip-format": "󰥻 {short}"
     },
     "idle_inhibitor": {
         "format": "{icon}",

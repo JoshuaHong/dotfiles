@@ -95,6 +95,7 @@ button:hover {
 #battery,
 #clock,
 #network,
+#language,
 #idle_inhibitor {
     padding: 0 10px;
     border: 1px solid;
@@ -107,8 +108,8 @@ button:hover {
 }
 
 #bluetooth {
-    color: @pink;
-    border-color: @pink;
+    color: @sapphire;
+    border-color: @sapphire;
 }
 
 #wireplumber {
@@ -155,6 +156,11 @@ button:hover {
 #network {
     color: @mauve;
     border-color: @mauve;
+}
+
+#language {
+    color: @pink;
+    border-color: @pink;
 }
 
 #idle_inhibitor {
