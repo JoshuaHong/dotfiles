@@ -6,6 +6,7 @@
     "spacing": 4,
     "modules-left": [
         "niri/workspaces",
+        "wlr/taskbar",
         "mpris",
         "privacy"
     ],
@@ -27,6 +28,11 @@
     "niri/workspaces": {
         "hide-empty": true,
         "cursor": true
+    },
+    "wlr/taskbar": {
+        "on-click": "activate",
+        "cursor": true,
+        "icon-size": 18
     },
     "mpris": {
         "cursor": false,
