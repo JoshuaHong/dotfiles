@@ -82,8 +82,8 @@ button:hover {
     color: @text;
     border-radius: 8px;
     padding: 0px 5px 0px 5px;
-    margin: 0px 0px 0px 5px;
-    border: 0px solid @overlay0;
+    margin: 0px 0px 0px 0px;
+    border-width: 0px;
 }
 
 #taskbar button:hover {
@@ -99,7 +99,7 @@ button:hover {
 #mpris {
     color: @lavender;
     border-color: @lavender;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 #privacy {
