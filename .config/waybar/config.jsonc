@@ -5,8 +5,8 @@
     "height": 30,
     "spacing": 4,
     "modules-left": [
-        "niri/workspaces",
-        "wlr/taskbar",
+        "niri/workspaces#workspaces",
+        "niri/workspaces#taskbar",
         "mpris",
         "privacy"
     ],
@@ -25,14 +25,17 @@
         "niri/language",
         "idle_inhibitor"
     ],
-    "niri/workspaces": {
+    "niri/workspaces#workspaces": {
         "hide-empty": true,
         "cursor": true
     },
-    "wlr/taskbar": {
-        "on-click": "activate",
+    "niri/workspaces#taskbar": {
+        "current-only": true,
         "cursor": true,
-        "icon-size": 18
+        "workspace-taskbar": {
+            "enable": true,
+            "icon-size": 18
+        }
     },
     "mpris": {
         "cursor": false,

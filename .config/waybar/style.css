@@ -55,45 +55,43 @@ button:hover {
     background: inherit;
 }
 
-#workspaces button {
+#workspaces.workspaces button {
+    all: unset;
     color: @text;
     border-radius: 8px;
-    padding: 0px 5px 0px 5px;
+    padding: 0px 10px;
     margin: 0px 5px 0px 0px;
     border: 1px solid @overlay0;
 }
 
-#workspaces button:hover {
-    background: @overlay0;
-    color: @text;
-}
-
-#workspaces button.active {
+#workspaces.workspaces button.active {
     color: @crust;
     background: @overlay2;
-    border-color: @overlay2; 
+    border-color: @overlay2;
 }
 
-#workspaces button.urgent {
+#workspaces.workspaces button.urgent {
     background-color: @red;
 }
 
-#taskbar button {
-    color: @text;
-    border-radius: 8px;
-    padding: 0px 5px 0px 5px;
-    margin: 0px 0px 0px 0px;
+#workspaces.workspaces button:not(.active):hover {
+    background: @overlay0;
+}
+
+#workspaces.taskbar button {
+    padding: 0px 5px;
+    margin: 0px;
     border-width: 0px;
 }
 
-#taskbar button:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-#taskbar button.active {
-    background-color: rgba(0, 0, 0, 0.5);
+#workspaces.taskbar button.niri-taskbar-btn.focused {
+    background-color: rgba(35, 38, 52, 0.7);
     border-radius: 0px;
     border-bottom: 1px solid @text;
+}
+
+#workspaces.taskbar button:not(.focused):hover {
+    background-color: rgba(35, 38, 52, 0.5); 
 }
 
 #mpris {
@@ -190,4 +188,9 @@ button:hover {
     color: @crust;
     background: @overlay2;
     border-color: @overlay2;
+}
+
+#idle_inhibitor:hover,
+#idle_inhibitor.activated:hover {
+    background: @overlay0;
 }
