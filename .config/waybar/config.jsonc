@@ -3,7 +3,7 @@
 {
     "layer": "top",
     "height": 30,
-    "spacing": 4,
+    "spacing": 5,
     "modules-left": [
         "niri/workspaces#workspaces",
         "niri/workspaces#taskbar",

@@ -64,6 +64,10 @@ button:hover {
     border: 1px solid @overlay0;
 }
 
+#workspaces.workspaces button:last-child {
+    margin: 0;
+}
+
 #workspaces.workspaces button.active {
     color: @crust;
     background: @overlay2;
@@ -98,11 +102,6 @@ button:hover {
 #mpris {
     color: @lavender;
     border-color: @lavender;
-    margin-left: 5px;
-}
-
-#privacy {
-    margin-left: 5px;
 }
 
 #window {
