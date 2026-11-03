@@ -25,6 +25,10 @@ input {
     }
 }
 
+output "HDMI-A-1" {
+    scale 2.5
+}
+
 layout {
     gaps 20
     default-column-width {
@@ -108,9 +112,9 @@ binds {
     Shift+F3 allow-when-locked=true { spawn "volume" "source" "up"; }
     F4 { spawn "record" "full"; }
     Shift+F4 { spawn "record" "select"; }
-    F5 allow-when-locked=true {spawn "mpc" "prev"; }
-    F6 allow-when-locked=true {spawn "mpc" "toggle"; }
-    F7 allow-when-locked=true {spawn "mpc" "next"; }
+    F5 allow-when-locked=true {spawn "playerctl" "prev"; }
+    F6 allow-when-locked=true {spawn "playerctl" "play-pause"; }
+    F7 allow-when-locked=true {spawn "playerctl" "next"; }
     F8 { spawn "brightness" "down"; }
     F9 { spawn "brightness" "up"; }
     F12 { screenshot-screen; }
