@@ -1,13 +1,10 @@
 // The Niri configuration file.
 
 spawn-at-startup "fnott"
-spawn-at-startup "mpd"
 spawn-at-startup "swayidle"
 spawn-at-startup "waybar"
 spawn-at-startup "wbg" "--stretch" "/home/josh/.local/share/assets/backgrounds/wallpaper.png"
-
 spawn-at-startup "foot" "update"
-spawn-at-startup "foot" "music"
 
 screenshot-path "~/%FT%T%z.png"
 prefer-no-csd

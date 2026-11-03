@@ -1,6 +1,12 @@
 #!/bin/bash
 #
-# Use Fuzzel for GPG pinentry.
+# Use a custom program for GPG pinentry.
+#
+# References:
+#     ${XDG_DATA_HOME}/gnupg/gpg_agent.conf
+#
+# Usage:
+#     pinentry
 
 echo "OK"
 while read -r stdin; do

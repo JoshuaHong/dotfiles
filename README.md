@@ -228,7 +228,7 @@ The Arch Linux environment.
 # Packages
 List all packages that are not direct dependencies (includes optional dependencies): <code>pacman -Qtt</code>
 
-Count: 51
+Count: 49
 
 | Package<br>(Dependency)                                   | Justification                                                                                                    |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -252,8 +252,6 @@ Count: 51
 | libnotify                                                 | To send notifications.                                                                                           |
 | linux-firmware                                            | To provide functionality for hardware devices.                                                                   |
 | man-db                                                    | To read manual pages.                                                                                            |
-| mpc                                                       | To control music.                                                                                                |
-| mpd                                                       | To play music.                                                                                                   |
 | mpv                                                       | To watch videos.                                                                                                 |
 | mullvad-browser-bin \*<br>(noto-fonts)<br>(pipewire-jack) | To browse the web with privacy.<br>(To view full Unicode coverage fonts.)<br>(To process audio with simplicity.) |
 | neovim                                                    | To edit text.                                                                                                    |

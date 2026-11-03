@@ -11,8 +11,7 @@
 declare -gr LOCKSCREEN="${XDG_DATA_HOME}/assets/backgrounds/lockscreen.png"
 
 main() {
-    playerctl --all-players --no-messages stop
-    mpc pause
+    playerctl --all-players --no-messages pause
     swaylock --image "${LOCKSCREEN}"
 }
 
