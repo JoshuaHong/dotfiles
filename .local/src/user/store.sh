@@ -60,6 +60,7 @@ mountStorageDirectories() {
 }
 
 unmountStorageDirectories() {
+    echo
     for directory in "${!OUTPUT_DIRECTORIES[@]}"; do
         local device="${OUTPUT_DIRECTORIES["${directory}"]}"
         if isVariableSet "${device}"; then
