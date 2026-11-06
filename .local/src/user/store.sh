@@ -11,6 +11,12 @@
 # Usage:
 #     store
 
+# Set default Bash options.
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Define global variables.
 declare -gr INPUT_DIRECTORY="/var/lib/jail/sftp"
 declare -Agr OUTPUT_DIRECTORIES=(
         ["${HOME}"]=""

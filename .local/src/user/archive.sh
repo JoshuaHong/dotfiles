@@ -10,6 +10,11 @@
 #             and encrypted and contains the ".tar.xz.gpg" file extension;
 #             the file to compress and encrypt otherwise.
 
+# Set default Bash options.
+set -o errexit
+set -o nounset
+set -o pipefail
+
 main() {
     local -ar files=("${@}")
     local -r password="$(getPassword)"
