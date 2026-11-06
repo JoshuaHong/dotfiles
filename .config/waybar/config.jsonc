@@ -121,7 +121,7 @@
     "clock": {
         "interval": 60,
         "format": "󱑍 {:%R}",
-        "tooltip-format": "󱑍 {:%R}"
+        "tooltip-format": "󰇧 {:%Z}"
     },
     "clock#calendar": {
         "interval": 60,
@@ -141,8 +141,8 @@
         "format-wifi": "󰖩 {essid}",
         "format-ethernet": "󰈀 {ifname}",
         "format-disconnected": "󰖪 Disconnected",
-        "tooltip-format-wifi": "󰖩 {signalStrength}%",
-        "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "󰁅 {rxBitrate}  󰁝 {txBitrate}",
+        "tooltip-format-ethernet": "󰈀 {linkSpeed}",
         "tooltip-format-disconnected": "󰖪 Disconnected",
         "max-length": 20
     },
