@@ -25,7 +25,7 @@ declare -Agr OUTPUT_DIRECTORIES=(
 declare -gr GALLERY_DIRECTORY="storage/media/gallery"
 declare -gr RECEIPTS_DIRECTORY="storage/finance/receipts"
 declare -gr SKIP="SKIP"
-declare -agr fileTypes=("g" "r" "s")
+declare -agr FILE_TYPES=("g" "r" "s")
 
 main() {
     prepareStorage
@@ -126,7 +126,7 @@ renameFile() {
         return
     fi
 
-    while ! isValidDate "${date}"; do
+    while ! isValidDate "${date:-}"; do
         read -rp "Date (yyyy/MM/dd): " date
     done
     local -r date="${date:0:4}${date:5:2}${date:8:2}"  # Remove the slashes.
@@ -186,7 +186,7 @@ isValidDate() {
 
 isValidFileType() {
     local -r fileType="${1}"
-    [[ " ${fileTypes[*]} " =~ " ${fileType} " ]]
+    [[ " ${FILE_TYPES[*]} " =~ " ${fileType} " ]]
 }
 
 isPhoto() {
