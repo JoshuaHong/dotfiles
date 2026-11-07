@@ -48,8 +48,8 @@ selectPassword() {
     mapfile -t passwords < <(find "${PASSWORD_STORE_DIR}" -name "*.gpg" -type f)
     passwords=( "${passwords[@]#"${PASSWORD_STORE_DIR}"/}" )
     passwords=( "${passwords[@]%.gpg}" )
-    printf "%s\n" "${passwords[@]}" | sort | fuzzel --dmenu --placeholder \
-            "$(getPlaceholder "${hasUsernameFlag}")"
+    printf "%s\n" "${passwords[@]}" | sort | \
+            fuzzel --dmenu --mesg "$(getMesg "${hasUsernameFlag}")"
 }
 
 getLineNumber() {
@@ -62,13 +62,13 @@ getLineNumber() {
     fi
 }
 
-getPlaceholder() {
+getMesg() {
     local -r hasUsernameFlag="${1}"
 
     if [[ "${hasUsernameFlag}" == "true" ]]; then
-        echo "Username"
+        echo "Select a username"
     else
-        echo "Password"
+        echo "Select a password"
     fi
 }
 
