@@ -155,7 +155,7 @@
         "max-length": 20
     },
     "niri/language": {
-        "format": "󰥻 {short}"
+        "format": "󰥻 {shortDescription}"
     },
     "idle_inhibitor": {
         "signal": 2,
