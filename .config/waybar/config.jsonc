@@ -158,6 +158,7 @@
         "format": "󰥻 {short}"
     },
     "idle_inhibitor": {
+        "signal": 2,
         "format": "{icon}",
         "format-icons": {
             "activated": "󰛐",

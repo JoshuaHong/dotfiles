@@ -95,6 +95,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open the terminal" { spawn "foot"; }
     Mod+T hotkey-overlay-title="Open the Brave browser in Tor" { spawn "brave" "--tor"; }
+    Mod+Y hotkey-overlay-title="Toggle the idle inhibitor" { spawn "toggle-idle"; }
     Mod+U hotkey-overlay-title="Lock the screen" { spawn "lock"; }
     Mod+I hotkey-overlay-title="Open the Brave browser" { spawn "brave"; }
     Mod+Shift+I hotkey-overlay-title="Open the Brave browser in incognito" { spawn "brave" "--incognito"; }
