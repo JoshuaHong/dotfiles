@@ -100,7 +100,7 @@ binds {
     Mod+I hotkey-overlay-title="Open the Brave browser" { spawn "brave"; }
     Mod+Shift+I hotkey-overlay-title="Open the Brave browser in incognito" { spawn "brave" "--incognito"; }
     Mod+P hotkey-overlay-title="Copy a password" { spawn "password"; }
-    Mod+Shift+P hotkey-overlay-title="Copy a username" { spawn "password --username"; }
+    Mod+Shift+P hotkey-overlay-title="Copy a username" { spawn "password" "--username"; }
     Mod+N hotkey-overlay-title="Read news" { spawn "foot" "newsboat" "--refresh-on-start"; }
     Mod+M hotkey-overlay-title="Open the Mullvad browser" { spawn "mullvad-browser"; }
     Mod+Shift+M hotkey-overlay-title="Open the Brave browser in private mode" { spawn "mullvad-browser" "--private-window"; }
