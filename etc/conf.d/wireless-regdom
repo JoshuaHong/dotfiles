@@ -2,4 +2,4 @@
 # The rest of the options should not be modified.
 
 # Uncomment the following domains.
-WIRELESS_REGDOM="US"
+WIRELESS_REGDOM="CA"

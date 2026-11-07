@@ -2,6 +2,6 @@
 # The rest of the options should not be modified.
 
 # Uncomment the following locales.
-en_US.UTF-8 UTF-8
-en_US ISO-8859-1
+en_CA.UTF-8 UTF-8
+en_CA ISO-8859-1
 ko_KR.UTF-8 UTF-8
