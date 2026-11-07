@@ -13,17 +13,17 @@
 
 # Define global variables.
 declare -gr USERNAME_FLAG="--username"
-declare -gir USERNAME_LINE_NUMBER=1
-declare -gir PASSWORD_LINE_NUMBER=2
+declare -gir PASSWORD_LINE_NUMBER=1
+declare -gir USERNAME_LINE_NUMBER=2
 
 main() {
-    local -r usernameFlag="${1}"
-    if [[ "${usernameFlag}" == "${USERNAME_FLAG}" ]]; then
-        local -r hasUsernameFlag="true"
-    elif  [[ -z "${usernameFlag}" ]]; then
+    local -r flag="${1}"
+    if [[ -z "${flag}" ]]; then
         local -r hasUsernameFlag="false"
+    elif  [[ "${flag}" == "${USERNAME_FLAG}" ]]; then
+        local -r hasUsernameFlag="true"
     else
-        echoError "ERROR: Invalid parameter \"${usernameFlag}\""
+        echoError "ERROR: Invalid flag \"${flag}\""
         exit 1
     fi
 
@@ -38,15 +38,18 @@ clearClipboard() {
 copyPassword() {
     local -r hasUsernameFlag="${1}"
 
-    local -r selection="$(selectPassword)"
+    local -r selection="$(selectPassword "${hasUsernameFlag}")"
     pass show --clip="$(getLineNumber "${hasUsernameFlag}")" "${selection}"
 }
 
 selectPassword() {
+    local -r hasUsernameFlag="${1}"
+
     mapfile -t passwords < <(find "${PASSWORD_STORE_DIR}" -name "*.gpg" -type f)
     passwords=( "${passwords[@]#"${PASSWORD_STORE_DIR}"/}" )
     passwords=( "${passwords[@]%.gpg}" )
-    printf "%s\n" "${passwords[@]}" | sort | fuzzel --dmenu
+    printf "%s\n" "${passwords[@]}" | sort | fuzzel --dmenu --placeholder \
+            "$(getPlaceholder "${hasUsernameFlag}")"
 }
 
 getLineNumber() {
@@ -56,6 +59,16 @@ getLineNumber() {
         echo "${USERNAME_LINE_NUMBER}"
     else
         echo "${PASSWORD_LINE_NUMBER}"
+    fi
+}
+
+getPlaceholder() {
+    local -r hasUsernameFlag="${1}"
+
+    if [[ "${hasUsernameFlag}" == "true" ]]; then
+        echo "Username"
+    else
+        echo "Password"
     fi
 }
 
