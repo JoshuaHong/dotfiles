@@ -159,7 +159,7 @@ getDirectory() {
 }
 
 getFileType() {
-    while ! isValidFileType "${fileType}"; do
+    while ! isValidFileType "${fileType:-}"; do
         read -rp "File type [gallery (g) / receipt (r) / skip (s)]: " fileType
     done
     echo "${fileType}"
