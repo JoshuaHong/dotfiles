@@ -14,6 +14,7 @@
         "niri/window"
     ],
     "modules-right": [
+        "custom/updates",
         "bluetooth",
         "wireplumber",
         "wireplumber#source",
@@ -77,6 +78,13 @@
                 "tooltip-icon-size": 12
             }
         ]
+    },
+    "custom/updates": {
+        "exec": "checkupdates | wc -l",
+        "exec-if": "[[ -n $(checkupdates) ]]",
+        "interval": 86400,
+        "signal": 1,
+        "format": "󰇚 {text}"
     },
     "bluetooth": {
         "format": "",
@@ -147,8 +155,7 @@
         "max-length": 20
     },
     "niri/language": {
-        "format": "󰥻 {short}",
-        "tooltip-format": "󰥻 {short}"
+        "format": "󰥻 {short}"
     },
     "idle_inhibitor": {
         "format": "{icon}",

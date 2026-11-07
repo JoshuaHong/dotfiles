@@ -8,11 +8,20 @@
 # Usage:
 #     update
 
+# Set default Bash options.
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Define global variables.
+declare -gir WAYBAR_SIGNAL_UPDATES=1
+
 main() {
     echo "Updating packages..."
 
     if hasUpdates; then
         yay --noconfirm
+        pkill -SIGRTMIN+"${WAYBAR_SIGNAL_UPDATES}" waybar
         pacdiff --sudo
         ${SHELL}
     fi
