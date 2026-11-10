@@ -9,10 +9,10 @@
 #     toggle_idle
 
 # Define global variables.
-declare -gir WAYBAR_SIGNAL_IDLE=2
+declare -gir WAYBAR_IDLE_SIGNAL=2
 
 main() {
-    pkill -SIGRTMIN+"${WAYBAR_SIGNAL_IDLE}" waybar
+    pkill -SIGRTMIN+"${WAYBAR_IDLE_SIGNAL}" waybar
 }
 
 main "${@}"

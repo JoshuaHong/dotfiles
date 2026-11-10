@@ -4,9 +4,13 @@
 #
 # References:
 #     ${XDG_CONFIG_HOME}/niri/config.kdl
+#     ${XDG_CONFIG_HOME}/waybar/config.jsonc
 #
 # Usage:
-#     update
+#     update [--list]
+#
+# Arguments:
+#     --list - List all available updates.
 
 # Set default Bash options.
 set -o errexit
@@ -14,25 +18,42 @@ set -o nounset
 set -o pipefail
 
 # Define global variables.
-declare -gir WAYBAR_SIGNAL_UPDATES=1
+declare -gir WAYBAR_UPDATES_SIGNAL=1
+declare -gir RETRY_DELAY_SECS=5
+declare -gr LIST_FLAG="--list"
 
 main() {
-    echo "Updating packages..."
+    local -r flag="${1:-}"
 
-    if hasUpdates; then
+    if [[ -z "${flag}" ]]; then
+        update
+    elif [[ "${flag}" == "${LIST_FLAG}" ]]; then
+        listUpdates
+    else
+        echoError "ERROR: Invalid flag \"${flag}\""
+        exit 1
+    fi
+}
+
+update() {
+    echo "Updating packages..."
+    if [[ -n "$(listUpdates)" ]]; then
         yay --noconfirm
-        pkill -SIGRTMIN+"${WAYBAR_SIGNAL_UPDATES}" waybar
+        pkill -SIGRTMIN+"${WAYBAR_UPDATES_SIGNAL}" waybar
         pacdiff --sudo
         ${SHELL}
     fi
 }
 
-hasUpdates() {
+listUpdates() {
     while checkupdates; local status="${?}"; [[ "${status}" -eq 1 ]]; do
-        sleep 5
+        sleep "${RETRY_DELAY_SECS}"
     done
+}
 
-    return "${status}"
+echoError() {
+    local -r errorMessage="${1}"
+    echo -e "${errorMessage}" 1>&2
 }
 
 main "${@}"
