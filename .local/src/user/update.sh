@@ -37,7 +37,10 @@ main() {
 
 update() {
     echo "Updating packages..."
-    if [[ -n "$(listUpdates)" ]]; then
+    local -r updates="$(listUpdates)"
+
+    if [[ -n "${updates}" ]]; then
+        echo "${updates}"
         yay --noconfirm
         pkill -SIGRTMIN+"${WAYBAR_UPDATES_SIGNAL}" waybar
         pacdiff --sudo
