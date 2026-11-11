@@ -36,7 +36,7 @@ main() {
 }
 
 update() {
-    echo "Updating packages..."
+    echo "Fetching updates..."
     local -r updates="$(listUpdates)"
 
     if [[ -n "${updates}" ]]; then
