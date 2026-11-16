@@ -213,6 +213,10 @@ setOptions() {
 }
 
 setPrompts() {
+    updateCwd() {
+        echo -ne "\033]7;file://$PWD\007"
+    }
+
     local red="\[\e[31m\]"
     local green="\[\e[32m\]"
     local yellow="\[\e[33m\]"
@@ -232,8 +236,9 @@ setPrompts() {
 
     # Set the primary prompt.
     PS1="${lbrace}${username}${at}${hostname}${space}${pwd}${rbrace}${dollar}${space}${reset}"
+
     # Update the Bash history for new terminals but keep current history intact.
-    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+    PROMPT_COMMAND="history -a; updateCwd $PROMPT_COMMAND"
 }
 
 disableFlowControl() {
