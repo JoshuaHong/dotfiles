@@ -66,13 +66,16 @@ vim.keymap.set("v", "<CS-/>", "gc", { remap = true })
 
 -- Telescope key mappings.
 vim.keymap.set("n", "<C-f>", function()
-    telescope.find_files({ cwd = telescopeUtils.buffer_dir() })
+    telescope.find_files({ cwd = telescopeUtils.buffer_dir(), hidden = true })
 end)
 vim.keymap.set("n", "<C-s>", function()
-    telescope.live_grep({ cwd = telescopeUtils.buffer_dir() })
+    telescope.live_grep({
+        cwd = telescopeUtils.buffer_dir(),
+        additional_args = { "--hidden" }
+    })
 end)
 vim.keymap.set("n", "<C-b>", telescope.buffers)
-vim.keymap.set("n", "<C-i>", telescope.marks)
+vim.keymap.set("n", "<C-m>", telescope.marks)
 vim.keymap.set("n", "<C-g>", telescope.git_status)
 vim.keymap.set("n", "<C-a>", telescope.lsp_references)
 vim.keymap.set("n", "<C-d>", telescope.lsp_definitions)
