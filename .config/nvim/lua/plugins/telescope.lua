@@ -15,6 +15,8 @@ require("telescope").setup({
     },
     pickers = {
         buffers = {
+            sort_mru = true,
+            ignore_current_buffer = true,
             theme = "ivy"
         },
         find_files = {
