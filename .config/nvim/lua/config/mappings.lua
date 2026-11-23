@@ -64,6 +64,10 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<CS-/>", "gcc", { remap = true })
 vim.keymap.set("v", "<CS-/>", "gc", { remap = true })
 
+-- Map command history keys.
+vim.keymap.set("c", "<C-l>", "<C-p>")
+vim.keymap.set("c", "<C-k>", "<C-n>")
+
 -- Telescope key mappings.
 vim.keymap.set("n", "<C-f>", function()
     telescope.find_files({ cwd = telescopeUtils.buffer_dir(), hidden = true })
