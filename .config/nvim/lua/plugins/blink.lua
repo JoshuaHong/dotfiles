@@ -11,8 +11,8 @@ require("blink.cmp").setup({
         ["<C-l>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
-        ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
-        ["<S-Tab>"] = { "accept", "snippet_backward", "fallback" }
+        ["<Tab>"] = { "select_and_accept", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_and_accept", "snippet_backward", "fallback" }
     },
     signature = {
         enabled = true
